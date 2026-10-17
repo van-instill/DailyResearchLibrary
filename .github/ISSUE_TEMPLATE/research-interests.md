@@ -11,134 +11,94 @@ assignees: ''
   "sources": [
     { "type": "arxiv", "name": "arXiv" }
   ],
-  "conference_sources": {
-    "enabled": true,
-    "include_default_venues": false,
-    "current_year": 2026,
-    "lookback_years": 2,
-    "venues": [
-      {
-        "id": "isca",
-        "name": "ISCA",
-        "enabled": true,
-        "group": "computer architecture",
-        "dblp_toc_patterns": ["db/conf/isca/isca{year}.bht"]
-      },
-      {
-        "id": "micro",
-        "name": "MICRO",
-        "enabled": true,
-        "group": "computer architecture",
-        "dblp_toc_patterns": ["db/conf/micro/micro{year}.bht"]
-      },
-      {
-        "id": "hpca",
-        "name": "HPCA",
-        "enabled": true,
-        "group": "computer architecture",
-        "dblp_toc_patterns": ["db/conf/hpca/hpca{year}.bht"]
-      },
-      {
-        "id": "asplos",
-        "name": "ASPLOS",
-        "enabled": true,
-        "group": "computer architecture",
-        "dblp_toc_patterns": [
-          "db/conf/asplos/asplos{year}-1.bht",
-          "db/conf/asplos/asplos{year}-2.bht",
-          "db/conf/asplos/asplos{year}-3.bht",
-          "db/conf/asplos/asplos{year}-4.bht"
-        ]
-      },
-      {
-        "id": "mlsys",
-        "name": "MLSys",
-        "enabled": true,
-        "group": "systems for machine learning",
-        "dblp_toc_patterns": ["db/conf/mlsys/mlsys{year}.bht"]
-      },
-      {
-        "id": "eurosys",
-        "name": "EuroSys",
-        "enabled": true,
-        "group": "systems",
-        "dblp_toc_patterns": ["db/conf/eurosys/eurosys{year}.bht"]
-      }
-    ]
-  },
   "topics": [
     {
-      "id": "llm_low_precision_quantization",
-      "name": "大模型低精度量化",
-      "description": "关注大语言模型低比特量化、混合精度、量化感知训练、后训练量化、权重量化、激活量化、KV cache 量化以及量化对推理性能和精度的影响。",
+      "id": "volatility_highfreq",
+      "name": "波动率建模与高频计量",
+      "description": "关注已实现波动率、GARCH 与随机波动率模型、跳跃与微观结构噪声、日内高频数据建模、波动率预测和期权隐含波动率。",
       "keywords": [
-        "large language model quantization",
-        "LLM quantization",
-        "low-bit quantization",
-        "post-training quantization",
-        "weight-only quantization",
-        "activation quantization",
-        "mixed precision",
-        "FP8",
-        "INT4",
-        "INT8",
-        "KV cache quantization"
+        "realized volatility",
+        "GARCH",
+        "stochastic volatility",
+        "high-frequency data",
+        "jump detection",
+        "volatility forecasting",
+        "market microstructure",
+        "limit order book",
+        "implied volatility",
+        "realized kernel"
       ],
-      "arxiv_categories": ["cs.CL", "cs.LG", "cs.AI", "cs.DC"]
+      "arxiv_categories": ["q-fin.ST", "q-fin.TR", "econ.EM"]
     },
     {
-      "id": "tensor_compute_unit_architecture",
-      "name": "张量计算单元结构",
-      "description": "关注 GPU/NPU/TPU 张量计算单元、矩阵乘加阵列、数据流架构、片上存储层次、低精度张量核、AI 加速器微架构和算子映射。",
+      "id": "timeseries_causal",
+      "name": "时间序列与因果识别",
+      "description": "关注单位根与协整、VAR 与局部投影、双重差分、合成控制、工具变量、面板数据、结构突变检验和高维稀疏估计等计量识别方法。",
       "keywords": [
-        "tensor processing unit",
-        "tensor core",
-        "matrix multiply unit",
-        "systolic array",
-        "AI accelerator architecture",
-        "NPU architecture",
-        "GPU tensor core",
-        "low precision tensor compute",
-        "dataflow architecture",
-        "on-chip memory hierarchy"
+        "cointegration",
+        "vector autoregression",
+        "local projections",
+        "difference-in-differences",
+        "synthetic control",
+        "instrumental variable",
+        "structural break",
+        "high-dimensional regression",
+        "regression discontinuity",
+        "event study"
       ],
-      "arxiv_categories": ["cs.AR", "cs.DC", "cs.LG", "cs.PF"]
+      "arxiv_categories": ["econ.EM", "stat.ME", "stat.AP"]
     },
     {
-      "id": "llm_inference_cluster_communication",
-      "name": "大模型推理集群通信优化",
-      "description": "关注分布式大模型推理、prefill/decode 分离、张量并行、流水并行、专家并行、跨节点通信、调度、负载均衡和 serving 系统吞吐延迟优化。",
+      "id": "asset_pricing",
+      "name": "资产定价与因子实证",
+      "description": "关注因子模型、横截面收益异象、风险溢价与收益可预测性、期权定价、期限结构以及投资组合选择。",
       "keywords": [
-        "LLM inference serving",
-        "distributed inference",
-        "inference cluster",
-        "tensor parallelism",
-        "pipeline parallelism",
-        "expert parallelism",
-        "all-reduce",
-        "collective communication",
-        "prefill decode disaggregation",
-        "serving scheduler"
+        "asset pricing",
+        "factor model",
+        "cross-section of stock returns",
+        "anomaly",
+        "risk premium",
+        "return predictability",
+        "option pricing",
+        "term structure",
+        "portfolio choice"
       ],
-      "arxiv_categories": ["cs.DC", "cs.PF", "cs.CL", "cs.LG"]
+      "arxiv_categories": ["q-fin.PM", "q-fin.GN", "q-fin.EC"]
     },
     {
-      "id": "kvcache_compression_storage_scheduling",
-      "name": "KV cache 压缩与存储调度",
-      "description": "关注大模型推理中的 KV cache 压缩、淘汰、分页、卸载、预取、层级存储、显存管理和长上下文推理效率优化。",
+      "id": "financial_ml_text",
+      "name": "金融机器学习与文本数据",
+      "description": "关注机器学习与深度学习在收益预测和风险管理中的应用、文本与情绪分析、大语言模型在金融中的用法、双重机器学习与因果森林。",
       "keywords": [
-        "KV cache compression",
-        "KV cache eviction",
-        "KV cache scheduling",
-        "paged attention",
-        "attention cache",
-        "long context inference",
-        "memory offloading",
-        "GPU memory management",
-        "cache prefetching",
-        "LLM serving memory"
+        "machine learning asset pricing",
+        "stock return prediction",
+        "financial text",
+        "earnings call",
+        "financial sentiment",
+        "large language model finance",
+        "double machine learning",
+        "causal forest",
+        "alternative data",
+        "deep learning finance"
       ],
-      "arxiv_categories": ["cs.CL", "cs.LG", "cs.DC", "cs.PF"]
+      "arxiv_categories": ["q-fin.ST", "q-fin.CP", "econ.EM"]
+    },
+    {
+      "id": "risk_extreme",
+      "name": "风险测度与尾部风险",
+      "description": "关注在险价值与预期损失、极值理论、尾部与系统性风险、Copula 相依结构、信用风险与违约预测。",
+      "keywords": [
+        "value at risk",
+        "expected shortfall",
+        "extreme value",
+        "tail risk",
+        "systemic risk",
+        "copula",
+        "credit risk",
+        "default prediction",
+        "drawdown"
+      ],
+      "arxiv_categories": ["q-fin.RM", "q-fin.ST", "stat.AP"]
     }
   ]
 }

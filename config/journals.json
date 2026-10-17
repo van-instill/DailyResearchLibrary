@@ -1,0 +1,123 @@
+{
+  "enabled": true,
+  "lookback_days": 150,
+  "per_venue_results": 100,
+  "keywords_per_query": 12,
+  "venues": [
+    {
+      "id": "jf",
+      "name": "Journal of Finance",
+      "group": "金融顶刊",
+      "issn": [
+        "0022-1082"
+      ],
+      "openalex_source_id": "S5353659"
+    },
+    {
+      "id": "jfe",
+      "name": "Journal of Financial Economics",
+      "group": "金融顶刊",
+      "issn": [
+        "0304-405X"
+      ],
+      "openalex_source_id": "S149240962"
+    },
+    {
+      "id": "rfs",
+      "name": "Review of Financial Studies",
+      "group": "金融顶刊",
+      "issn": [
+        "0893-9454"
+      ],
+      "openalex_source_id": "S170137484"
+    },
+    {
+      "id": "jfqa",
+      "name": "Journal of Financial and Quantitative Analysis",
+      "group": "金融顶刊",
+      "issn": [
+        "0022-1090",
+        "1756-6916"
+      ],
+      "openalex_source_id": "S193228710"
+    },
+    {
+      "id": "joe",
+      "name": "Journal of Econometrics",
+      "group": "计量顶刊",
+      "issn": [
+        "0304-4076"
+      ],
+      "openalex_source_id": "S127742747"
+    },
+    {
+      "id": "econometrica",
+      "name": "Econometrica",
+      "group": "计量顶刊",
+      "issn": [
+        "0012-9682",
+        "1468-0262"
+      ],
+      "openalex_source_id": "S95464858"
+    },
+    {
+      "id": "restat",
+      "name": "Review of Economics and Statistics",
+      "group": "计量顶刊",
+      "issn": [
+        "0034-6535",
+        "1530-9142"
+      ],
+      "openalex_source_id": "S180061323"
+    },
+    {
+      "id": "jbes",
+      "name": "Journal of Business & Economic Statistics",
+      "group": "计量期刊",
+      "issn": [
+        "0735-0015",
+        "1537-2707"
+      ],
+      "openalex_source_id": "S18095783"
+    },
+    {
+      "id": "jae",
+      "name": "Journal of Applied Econometrics",
+      "group": "计量期刊",
+      "issn": [
+        "0883-7252",
+        "1099-1255"
+      ],
+      "openalex_source_id": "S85739584"
+    },
+    {
+      "id": "jbf",
+      "name": "Journal of Banking & Finance",
+      "group": "金融期刊",
+      "issn": [
+        "0378-4266"
+      ],
+      "openalex_source_id": "S2876017"
+    },
+    {
+      "id": "jef",
+      "name": "Journal of Empirical Finance",
+      "group": "金融期刊",
+      "issn": [
+        "0927-5398"
+      ],
+      "openalex_source_id": "S145875555"
+    },
+    {
+      "id": "qf",
+      "name": "Quantitative Finance",
+      "group": "金融期刊",
+      "issn": [
+        "1469-7688",
+        "1469-7696"
+      ],
+      "openalex_source_id": "S182689569"
+    }
+  ],
+  "max_pages": 1
+}

@@ -1421,9 +1421,9 @@ def lexical_overlap_score(topic: Topic, paper: dict[str, Any]) -> float:
 
 
 def match_level(score: float) -> str:
-    if score >= 0.72:
+    if score >= 0.40:
         return "high"
-    if score >= 0.42:
+    if score >= 0.30:
         return "medium"
     return "low"
 
@@ -1433,6 +1433,10 @@ def score_paper(topic: Topic, paper: dict[str, Any]) -> dict[str, Any]:
     c_score = category_score(topic, paper)
     l_score = lexical_overlap_score(topic, paper)
     base_score = round(0.50 * k_score + 0.25 * c_score + 0.25 * l_score, 3)
+    level = match_level(base_score)
+    # 只命中一个关键词的论文不进 high，避免宽泛词（如 causal inference）误判
+    if level == "high" and len(hits) < 2:
+        level = "medium"
     reason_parts = []
     if hits:
         reason_parts.append("关键词命中：" + "、".join(hits))
@@ -1444,7 +1448,7 @@ def score_paper(topic: Topic, paper: dict[str, Any]) -> dict[str, Any]:
         "topic_id": topic.id,
         "topic_name": topic.name,
         "score": base_score,
-        "level": match_level(base_score),
+        "level": level,
         "reason": "；".join(reason_parts),
         "keyword_hits": hits,
     }

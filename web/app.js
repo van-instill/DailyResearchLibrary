@@ -166,7 +166,7 @@ function matchesView(paper) {
   if (state.filters.view === "week") return inRange(collectedAt, startOfWeek(date), endOfWeek(date));
   if (state.filters.view === "month") return inRange(collectedAt, startOfMonth(date), endOfMonth(date));
   if (state.filters.view === "highlights") {
-    return inRange(collectedAt, startOfWeek(date), endOfWeek(date)) && scoreOf(paper) >= 0.42;
+    return inRange(collectedAt, startOfWeek(date), endOfWeek(date)) && scoreOf(paper) >= 0.4;
   }
   return true;
 }
@@ -242,7 +242,7 @@ function viewLabels() {
   const weekEnd = formatDate(weekEndDate.toISOString());
   const monthLabel = `${date.getFullYear()} 年 ${String(date.getMonth() + 1).padStart(2, "0")} 月`;
   return {
-    all: [state.filters.collection === "conference" ? "顶会精品" : "全部论文", "全部已收录论文"],
+    all: [state.filters.collection === "conference" ? "顶刊精选" : "全部论文", "全部已收录论文"],
     daily: ["当日论文", dayLabel],
     week: ["本周论文", `${weekStart} - ${weekEnd}`],
     month: ["月度论文", monthLabel],
@@ -379,11 +379,24 @@ function updateUpdatedAt(message = "") {
   const data = activeData();
   const stats = data.stats || {};
   const mode = stats.collection_mode === "incremental" ? "增量" : "初始化";
-  const kind = state.filters.collection === "conference" ? "顶会精品" : "每日新论文";
+  const kind = state.filters.collection === "conference" ? "顶刊精选" : "每日新论文";
   nodes.updatedAt.textContent = `${kind} · 更新于 ${formatDate(data.generated_at_iso)} · ${mode} · ${stats.llm_enabled ? "LLM" : "基础"}`;
 }
 
+function resolveRepoLinks() {
+  const match = location.hostname.match(/^([^.]+)\.github\.io$/);
+  const settingsLink = document.querySelector(".repo-settings-link");
+  const actionsLink = document.querySelector(".repo-actions-link");
+  if (!match || !settingsLink || !actionsLink) return;
+  const parts = location.pathname.split("/").filter(Boolean);
+  const repo = parts[0] || `${match[1]}.github.io`;
+  const base = `https://github.com/${match[1]}/${repo}`;
+  settingsLink.href = `${base}/issues`;
+  actionsLink.href = `${base}/actions`;
+}
+
 async function main() {
+  resolveRepoLinks();
   applyTheme(storedTheme());
   bindEvents();
   try {

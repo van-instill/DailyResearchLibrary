@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
     inputs:
       lookback_days:
-        description: "首次初始化要回看最近几天的论文"
+        description: "首次初始化要回看最近几天的 arXiv 论文"
         required: false
         default: "7"
       clear_cache:
@@ -65,42 +65,31 @@ jobs:
             cp .paper-cache/conference_papers.json web/data/conference_papers.json
           fi
 
-      - name: Collect papers
+      - name: Collect arXiv papers
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           CONFIG_ISSUE_TITLE: Research Interests
           LOOKBACK_DAYS: ${{ github.event_name == 'workflow_dispatch' && inputs.lookback_days || vars.LOOKBACK_DAYS || '1' }}
-          MAX_PER_TOPIC: ${{ vars.MAX_PER_TOPIC || '10' }}
+          MAX_PER_TOPIC: ${{ vars.MAX_PER_TOPIC || '15' }}
           MAX_SUMMARIES: ${{ vars.MAX_SUMMARIES || '20' }}
           MAX_NEW_PAPERS: ${{ vars.MAX_NEW_PAPERS || '50' }}
           MAX_STORED_PAPERS: ${{ vars.MAX_STORED_PAPERS || '50' }}
-          MAX_NEW_CONFERENCE_PAPERS: ${{ vars.MAX_NEW_CONFERENCE_PAPERS || '50' }}
-          MAX_STORED_CONFERENCE_PAPERS: ${{ vars.MAX_STORED_CONFERENCE_PAPERS || '300' }}
           MAX_DATA_BYTES: ${{ vars.MAX_DATA_BYTES || '8388608' }}
           RECENT_HISTORY_DAYS: ${{ vars.RECENT_HISTORY_DAYS || '45' }}
-          PAPER_SOURCES: ${{ vars.PAPER_SOURCES || '' }}
+          PAPER_SOURCES: ${{ vars.PAPER_SOURCES || 'arxiv' }}
           CONTACT_EMAIL: ${{ vars.CONTACT_EMAIL || '' }}
           CROSSREF_EMAIL: ${{ vars.CROSSREF_EMAIL || '' }}
-          OPENALEX_EMAIL: ${{ vars.OPENALEX_EMAIL || '' }}
+          OPENALEX_EMAIL: ${{ vars.OPENALEX_EMAIL || vars.CONTACT_EMAIL || '' }}
           SOURCE_DELAY_SECONDS: ${{ vars.SOURCE_DELAY_SECONDS || '3' }}
-          DBLP_DELAY_SECONDS: ${{ vars.DBLP_DELAY_SECONDS || '5' }}
-          DBLP_PATTERN_DELAY_SECONDS: ${{ vars.DBLP_PATTERN_DELAY_SECONDS || '3' }}
-          DBLP_RETRIES: ${{ vars.DBLP_RETRIES || '3' }}
-          MAX_PER_CONFERENCE: ${{ vars.MAX_PER_CONFERENCE || '1000' }}
-          ARXIV_QUERY_MODE: ${{ vars.ARXIV_QUERY_MODE || 'keyword' }}
+          ARXIV_QUERY_MODE: ${{ vars.ARXIV_QUERY_MODE || 'strict' }}
           ARXIV_SORT_BY: ${{ vars.ARXIV_SORT_BY || 'lastUpdatedDate' }}
           ARXIV_EXPAND_CATEGORY_SEARCH: ${{ vars.ARXIV_EXPAND_CATEGORY_SEARCH || 'false' }}
           ARXIV_CATEGORY_MAX_RESULTS: ${{ vars.ARXIV_CATEGORY_MAX_RESULTS || vars.MAX_PER_TOPIC || '10' }}
           ARXIV_IN_TOPIC_DELAY_SECONDS: ${{ vars.ARXIV_IN_TOPIC_DELAY_SECONDS || '3' }}
           MIN_DAILY_PAPERS: ${{ vars.MIN_DAILY_PAPERS || '8' }}
           DAILY_BACKFILL_DAYS: ${{ vars.DAILY_BACKFILL_DAYS || '14' }}
-          MAX_CONFERENCE_ABSTRACT_ENRICHMENTS: ${{ vars.MAX_CONFERENCE_ABSTRACT_ENRICHMENTS || vars.MAX_CONFERENCE_ARXIV_ENRICHMENTS || '50' }}
-          CONFERENCE_ABSTRACT_SOURCES: ${{ vars.CONFERENCE_ABSTRACT_SOURCES || 'arxiv,openalex,crossref' }}
-          CONFERENCE_ABSTRACT_DELAY_SECONDS: ${{ vars.CONFERENCE_ABSTRACT_DELAY_SECONDS || vars.CONFERENCE_ARXIV_DELAY_SECONDS || '3' }}
-          CONFERENCE_ABSTRACT_SEARCH_RESULTS: ${{ vars.CONFERENCE_ABSTRACT_SEARCH_RESULTS || vars.CONFERENCE_ARXIV_SEARCH_RESULTS || '5' }}
-          MAX_CONFERENCE_ARXIV_ENRICHMENTS: ${{ vars.MAX_CONFERENCE_ARXIV_ENRICHMENTS || '50' }}
-          CONFERENCE_ARXIV_DELAY_SECONDS: ${{ vars.CONFERENCE_ARXIV_DELAY_SECONDS || '3' }}
-          CONFERENCE_ARXIV_SEARCH_RESULTS: ${{ vars.CONFERENCE_ARXIV_SEARCH_RESULTS || '5' }}
+          MIN_PAPER_SCORE: ${{ vars.MIN_PAPER_SCORE || '0.08' }}
+          MIN_TITLE_ONLY_SCORE: ${{ vars.MIN_TITLE_ONLY_SCORE || '0.18' }}
           ENABLE_SEMANTIC_SCHOLAR: ${{ vars.ENABLE_SEMANTIC_SCHOLAR || 'false' }}
           SEMANTIC_SCHOLAR_API_KEY: ${{ secrets.SEMANTIC_SCHOLAR_API_KEY }}
           SERPAPI_API_KEY: ${{ secrets.SERPAPI_API_KEY }}
@@ -114,7 +103,34 @@ jobs:
           LLM_MODEL: ${{ vars.LLM_MODEL || secrets.LLM_MODEL }}
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
-        run: python scripts/collect_papers.py
+        run: |
+          # 顶刊数据由下一步的 OpenAlex 脚本负责，这里把会议输出写到缓存目录避免覆盖
+          python scripts/collect_papers.py --conference-output .paper-cache/conference_unused.json
+
+      - name: Collect journal papers
+        env:
+          CONTACT_EMAIL: ${{ vars.CONTACT_EMAIL || '' }}
+          OPENALEX_EMAIL: ${{ vars.OPENALEX_EMAIL || vars.CONTACT_EMAIL || '' }}
+          OPENALEX_API_KEY: ${{ secrets.OPENALEX_API_KEY }}
+          JOURNAL_LOOKBACK_DAYS: ${{ vars.JOURNAL_LOOKBACK_DAYS || '150' }}
+          JOURNAL_MAX_PAGES: ${{ vars.JOURNAL_MAX_PAGES || '2' }}
+          JOURNAL_PER_VENUE_RESULTS: ${{ vars.JOURNAL_PER_VENUE_RESULTS || '100' }}
+          JOURNAL_VENUE_DELAY_SECONDS: ${{ vars.JOURNAL_VENUE_DELAY_SECONDS || '1' }}
+          JOURNAL_RETENTION_DAYS: ${{ vars.JOURNAL_RETENTION_DAYS || '400' }}
+          MAX_NEW_JOURNAL_PAPERS: ${{ vars.MAX_NEW_JOURNAL_PAPERS || '40' }}
+          MAX_JOURNAL_SUMMARIES: ${{ vars.MAX_JOURNAL_SUMMARIES || '30' }}
+          MAX_STORED_JOURNAL_PAPERS: ${{ vars.MAX_STORED_JOURNAL_PAPERS || '300' }}
+          MAX_JOURNAL_PER_VENUE: ${{ vars.MAX_JOURNAL_PER_VENUE || '6' }}
+          MIN_JOURNAL_SCORE: ${{ vars.MIN_JOURNAL_SCORE || '0.18' }}
+          MAX_DATA_BYTES: ${{ vars.MAX_DATA_BYTES || '8388608' }}
+          CLEAR_PAPER_CACHE: ${{ github.event_name == 'workflow_dispatch' && inputs.clear_cache || vars.CLEAR_PAPER_CACHE || 'false' }}
+          LLM_CONCURRENCY: ${{ vars.LLM_CONCURRENCY || '2' }}
+          LLM_API_KEY: ${{ secrets.LLM_API_KEY }}
+          LLM_BASE_URL: ${{ vars.LLM_BASE_URL || secrets.LLM_BASE_URL }}
+          LLM_MODEL: ${{ vars.LLM_MODEL || secrets.LLM_MODEL }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+        run: python scripts/collect_journals.py
 
       - name: Stage paper data cache
         run: |
