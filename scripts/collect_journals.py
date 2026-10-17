@@ -171,9 +171,37 @@ def work_year(value: str | None) -> int:
     return int(match.group(1)) if match else dt.datetime.now(dt.timezone.utc).year
 
 
+NOISE_TITLE_PATTERNS = (
+    "frontmatter",
+    "backmatter",
+    "issue information",
+    "editorial board",
+    "table of contents",
+    "index to volume",
+    "call for papers",
+)
+
+
+def is_noise_title(title: str) -> bool:
+    """Drop issue furniture (front/back matter, TOC) that carries no research content."""
+    lowered = normalize_space(title).lower()
+    return any(pattern in lowered for pattern in NOISE_TITLE_PATTERNS)
+
+
+def widen_from_date(from_date: str) -> str:
+    """Relax the window to Jan 1 of the current year.
+
+    Some publishers (e.g. Wiley for Econometrica) only deposit the year, so their
+    records carry a ``YYYY-01-01`` date and are filtered out by a mid-year
+    ``from_publication_date``. Falling back to the start of the year recovers them.
+    """
+    year_start = f"{dt.date.today().year}-01-01"
+    return year_start if year_start < from_date else from_date
+
+
 def paper_from_work(work: dict[str, Any], venue: dict[str, Any]) -> dict[str, Any] | None:
     title = normalize_space(str(work.get("title") or ""))
-    if not title:
+    if not title or is_noise_title(title):
         return None
     openalex_id = str(work.get("id") or "")
     short_id = openalex_id.rsplit("/", 1)[-1] if openalex_id else ""
@@ -278,7 +306,7 @@ def paper_from_crossref(item: dict[str, Any], venue: dict[str, Any]) -> dict[str
     titles = item.get("title") or []
     title = normalize_space(html_lib.unescape(str(titles[0]))) if titles else ""
     doi = str(item.get("DOI") or "")
-    if not title or not doi:
+    if not title or not doi or is_noise_title(title):
         return None
 
     authors = []
@@ -588,12 +616,20 @@ def collect(
             try:
                 source_id = resolve_source_id(venue)
                 works = fetch_venue_works(venue, source_id, from_date, per_page, max_pages)
+                stats = {"type": "openalex_journal", "source_id": source_id, "fetched": len(works)}
+                if not works:
+                    widened = widen_from_date(from_date)
+                    if widened != from_date:
+                        print(
+                            f"Notice: {name} returned 0 since {from_date}; retrying from {widened}",
+                            flush=True,
+                        )
+                        works = fetch_venue_works(venue, source_id, widened, per_page, max_pages)
+                        stats.update({"fetched": len(works), "from_date": widened})
+                        if works:
+                            stats["type"] = "openalex_journal_widened"
                 candidates.extend(works)
-                source_stats[name] = {
-                    "type": "openalex_journal",
-                    "source_id": source_id,
-                    "fetched": len(works),
-                }
+                source_stats[name] = stats
                 continue
             except Exception as exc:  # noqa: BLE001
                 print(f"Warning: OpenAlex failed for {name}: {exc}", file=sys.stderr, flush=True)
@@ -604,8 +640,18 @@ def collect(
         print(f"Fetching Crossref journal works: {name}", flush=True)
         try:
             works = fetch_venue_crossref(venue, from_date, per_page)
+            stats = {"type": "crossref_fallback", "fetched": len(works)}
+            if not works:
+                widened = widen_from_date(from_date)
+                if widened != from_date:
+                    print(
+                        f"Notice: {name} returned 0 on Crossref since {from_date}; retrying from {widened}",
+                        flush=True,
+                    )
+                    works = fetch_venue_crossref(venue, widened, per_page)
+                    stats.update({"fetched": len(works), "from_date": widened})
             candidates.extend(works)
-            source_stats[name] = {"type": "crossref_fallback", "fetched": len(works)}
+            source_stats[name] = stats
         except Exception as exc:  # noqa: BLE001
             source_stats[name] = {"type": "crossref_fallback", "fetched": 0, "error": str(exc)}
             print(f"Warning: journal fetch failed for {name}: {exc}", file=sys.stderr, flush=True)

@@ -5,3 +5,4 @@ __pycache__/
 site/
 .paper-cache/
 .DS_Store
+.workbuddy/
