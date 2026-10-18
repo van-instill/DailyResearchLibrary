@@ -71,7 +71,7 @@ jobs:
           CONFIG_ISSUE_TITLE: Research Interests
           LOOKBACK_DAYS: ${{ github.event_name == 'workflow_dispatch' && inputs.lookback_days || vars.LOOKBACK_DAYS || '1' }}
           MAX_PER_TOPIC: ${{ vars.MAX_PER_TOPIC || '20' }}
-          MAX_SUMMARIES: ${{ vars.MAX_SUMMARIES || '30' }}
+          MAX_SUMMARIES: ${{ vars.MAX_SUMMARIES || '60' }}
           MAX_NEW_PAPERS: ${{ vars.MAX_NEW_PAPERS || '50' }}
           MAX_STORED_PAPERS: ${{ vars.MAX_STORED_PAPERS || '50' }}
           MAX_DATA_BYTES: ${{ vars.MAX_DATA_BYTES || '8388608' }}
@@ -132,7 +132,7 @@ jobs:
           JOURNAL_VENUE_DELAY_SECONDS: ${{ vars.JOURNAL_VENUE_DELAY_SECONDS || '1' }}
           JOURNAL_RETENTION_DAYS: ${{ vars.JOURNAL_RETENTION_DAYS || '400' }}
           MAX_NEW_JOURNAL_PAPERS: ${{ vars.MAX_NEW_JOURNAL_PAPERS || '60' }}
-          MAX_JOURNAL_SUMMARIES: ${{ vars.MAX_JOURNAL_SUMMARIES || '40' }}
+          MAX_JOURNAL_SUMMARIES: ${{ vars.MAX_JOURNAL_SUMMARIES || '150' }}
           MAX_STORED_JOURNAL_PAPERS: ${{ vars.MAX_STORED_JOURNAL_PAPERS || '500' }}
           MAX_JOURNAL_PER_VENUE: ${{ vars.MAX_JOURNAL_PER_VENUE || '4' }}
           MIN_JOURNAL_SCORE: ${{ vars.MIN_JOURNAL_SCORE || '0.18' }}

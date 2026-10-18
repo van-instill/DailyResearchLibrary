@@ -2207,13 +2207,25 @@ def collect(
         key=lambda p: (p["best_match"]["score"], paper_activity_datetime(p)),
         reverse=True,
     )
+    from llm_screen import is_real_summary, load_summary_cache, save_summary_cache, store_summary
+
     summaries_by_id: dict[str, tuple[dict[str, str], dict[str, Any]]] = {}
+    summary_cache = load_summary_cache()
     llm_jobs = []
+    summary_cache_hits = 0
     for paper in recent_papers[:max_summaries]:
         if not should_summarize_paper_with_llm(paper):
             continue
+        paper_id = str(paper.get("id", ""))
+        cached_summary = summary_cache.get(paper_id)
+        if is_real_summary(cached_summary):
+            summaries_by_id[paper_id] = (cached_summary, dict(paper["best_match"]))
+            summary_cache_hits += 1
+            continue
         best_topic = next(topic for topic in topics if topic.id == paper["best_match"]["topic_id"])
         llm_jobs.append((best_topic, paper))
+    if summary_cache_hits:
+        print(f"Summary cache hit: {summary_cache_hits} papers", flush=True)
 
     if llm_enabled() and llm_jobs:
         concurrency = max(1, int(os.getenv("LLM_CONCURRENCY", "2")))
@@ -2223,11 +2235,15 @@ def collect(
             for future in concurrent.futures.as_completed(futures):
                 paper_id, summary, adjusted_match = future.result()
                 summaries_by_id[paper_id] = (summary, adjusted_match)
+                store_summary(summary_cache, paper_id, summary)
                 print(f"Finished summary: {paper_id}", flush=True)
     else:
         for topic, paper in llm_jobs:
             summary, adjusted_match = summarize_with_llm(topic, paper, paper["best_match"])
-            summaries_by_id[str(paper.get("id", ""))] = (summary, adjusted_match)
+            paper_id = str(paper.get("id", ""))
+            summaries_by_id[paper_id] = (summary, adjusted_match)
+            store_summary(summary_cache, paper_id, summary)
+    save_summary_cache(summary_cache)
 
     for index, paper in enumerate(recent_papers):
         paper_id = str(paper.get("id", ""))

@@ -348,6 +348,63 @@ def screen_papers(
     return verdicts
 
 
+SUMMARY_CACHE_PATH = Path(".paper-cache/summary_cache.json")
+SUMMARY_FIELDS = ("problem", "method", "innovation", "evidence", "limitations", "why_relevant")
+
+
+def _summary_cache_path() -> Path:
+    return Path(os.getenv("SUMMARY_CACHE_PATH", str(SUMMARY_CACHE_PATH)))
+
+
+def load_summary_cache() -> dict[str, Any]:
+    path = _summary_cache_path()
+    if not path.exists():
+        return {}
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+    except Exception:  # noqa: BLE001
+        return {}
+    entries = data.get("entries")
+    return entries if isinstance(entries, dict) else {}
+
+
+def save_summary_cache(entries: dict[str, Any]) -> None:
+    path = _summary_cache_path()
+    try:
+        path.parent.mkdir(parents=True, exist_ok=True)
+        if len(entries) > CACHE_KEEP_ENTRIES:
+            ordered = sorted(
+                entries.items(), key=lambda item: str(item[1].get("at") or ""), reverse=True
+            )[:CACHE_KEEP_ENTRIES]
+            entries = dict(ordered)
+        path.write_text(
+            json.dumps({"version": 1, "entries": entries}, ensure_ascii=False), encoding="utf-8"
+        )
+    except Exception as exc:  # noqa: BLE001
+        print(f"Warning: cannot write summary cache: {exc}", file=sys.stderr, flush=True)
+
+
+def is_real_summary(summary: Any) -> bool:
+    """True only for a model-written six-field summary, not a placeholder."""
+    if not isinstance(summary, dict):
+        return False
+    problem = str(summary.get("problem") or "")
+    if len(problem) < 15:
+        return False
+    placeholders = ("未配置模型", "尚未配置", "没有提供足够摘要", "出版商未向开放索引", "DBLP")
+    return not any(marker in problem for marker in placeholders)
+
+
+def store_summary(entries: dict[str, Any], paper_id: str, summary: Any) -> None:
+    if not paper_id or not is_real_summary(summary):
+        return
+    entries[paper_id] = {
+        **{key: str(summary.get(key) or "") for key in SUMMARY_FIELDS},
+        "model": os.getenv("LLM_MODEL", "deepseek-chat"),
+        "at": dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds"),
+    }
+
+
 def apply_verdict(paper: dict[str, Any], verdict: dict[str, Any], topics: list[Any]) -> None:
     """Overwrite the mechanical match with the model verdict, keeping a trace of both."""
     match = dict(paper.get("best_match") or {})

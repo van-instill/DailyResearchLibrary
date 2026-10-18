@@ -486,17 +486,27 @@ def journal_fallback_summary(paper: dict[str, Any]) -> dict[str, str]:
 
 def apply_summaries(papers: list[dict[str, Any]], topics: list[Topic], max_summaries: int) -> dict[str, Any]:
     topics_by_id = {topic.id: topic for topic in topics}
+    from llm_screen import is_real_summary, load_summary_cache, save_summary_cache, store_summary
+
+    summary_cache = load_summary_cache()
     jobs = []
+    cache_hits = 0
     for paper in papers:
         if not has_meaningful_summary(paper):
             continue
+        paper_id = str(paper.get("id") or "")
+        cached_summary = summary_cache.get(paper_id)
+        if is_real_summary(cached_summary):
+            paper["chinese_summary"] = cached_summary
+            cache_hits += 1
+            continue
         if len(jobs) >= max_summaries:
-            break
+            continue
         topic = topics_by_id.get(str((paper.get("best_match") or {}).get("topic_id")))
         if topic:
             jobs.append((topic, paper))
 
-    stats = {"summary_jobs": len(jobs), "summary_succeeded": 0, "summary_failed": 0}
+    stats = {"summary_jobs": len(jobs), "summary_succeeded": 0, "summary_failed": 0, "summary_cache_hits": cache_hits}
     if not llm_enabled() or not jobs:
         return stats
 
@@ -518,6 +528,7 @@ def apply_summaries(papers: list[dict[str, Any]], topics: list[Topic], max_summa
                 print(f"Warning: journal summary failed: {exc}", file=sys.stderr, flush=True)
                 continue
             stats["summary_succeeded"] += 1
+            store_summary(summary_cache, paper_id, summary)
             paper = by_id.get(paper_id)
             if not paper:
                 continue
@@ -527,6 +538,7 @@ def apply_summaries(papers: list[dict[str, Any]], topics: list[Topic], max_summa
                 adjusted if match.get("topic_id") == adjusted.get("topic_id") else match
                 for match in paper.get("matches", [])
             ]
+    save_summary_cache(summary_cache)
     return stats
 
 
@@ -726,11 +738,6 @@ def collect(
     if max_papers > 0:
         scored = scored[:max_papers]
 
-    summary_stats = apply_summaries(scored, topics, max_summaries)
-    for paper in scored:
-        if "chinese_summary" not in paper:
-            paper["chinese_summary"] = journal_fallback_summary(paper)
-
     existing: dict[str, Any] = {}
     if not clear_cache and output_path.exists():
         try:
@@ -749,6 +756,13 @@ def collect(
         canonical_venues,
     )
     merged = sort_papers(merge_papers(scored, retained, now))
+    # 摘要放在合并之后：历史里一直没生成过六段内容的论文也能被补上（有缓存，重复论文不花钱）
+    from llm_screen import is_real_summary
+
+    summary_stats = apply_summaries(merged, topics, max_summaries)
+    for paper in merged:
+        if not is_real_summary(paper.get("chinese_summary")):
+            paper["chinese_summary"] = journal_fallback_summary(paper)
 
     stats = {
         "candidate_paper_count": raw_count,
