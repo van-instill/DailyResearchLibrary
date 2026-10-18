@@ -290,6 +290,82 @@ function refreshAllAbstracts() {
   for (const card of nodes.paperList.querySelectorAll(".paper-card")) refreshAbstract(card);
 }
 
+// 卡片底部的标签：arXiv 的分类码对非本行的人完全不可读（q-fin.MF 是什么？），
+// 所以先给一个学科大标签，再给中文的方向名，原始代码只留在 title 里备查。
+const ARXIV_ARCHIVE_ZH = {
+  "q-fin": "金融学",
+  econ: "经济学",
+  stat: "统计学",
+  cs: "计算机科学",
+  math: "数学",
+  eess: "电子信息",
+  nlin: "非线性科学",
+  "q-bio": "生物学",
+};
+
+const ARXIV_CATEGORY_ZH = {
+  "q-fin.GN": "一般金融",
+  "q-fin.MF": "数学金融",
+  "q-fin.PM": "投资组合管理",
+  "q-fin.PR": "资产定价与对冲",
+  "q-fin.RM": "风险管理",
+  "q-fin.ST": "统计金融",
+  "q-fin.TR": "交易与市场微观结构",
+  "q-fin.CP": "计算金融",
+  "econ.EM": "计量经济学",
+  "econ.GN": "一般经济学",
+  "econ.TH": "理论经济学",
+  "stat.AP": "应用统计",
+  "stat.CO": "计算统计",
+  "stat.ME": "统计方法",
+  "stat.ML": "统计机器学习",
+  "stat.ST": "统计理论",
+  "stat.OT": "其他统计",
+  "math.ST": "概率统计理论",
+  "math.PR": "概率论",
+  "math.OC": "优化与控制",
+  "math.FA": "泛函分析",
+  "math.NA": "数值分析",
+  "cs.LG": "机器学习",
+  "cs.AI": "人工智能",
+  "cs.CL": "自然语言处理",
+  "cs.CE": "计算工程",
+  "cs.CV": "计算机视觉",
+  "cs.IT": "信息论",
+  "eess.SP": "信号处理",
+  "eess.SY": "系统与控制",
+};
+
+function tagParts(paper) {
+  const groups = [];
+  const details = [];
+  const seen = new Set();
+  const pushGroup = (name) => {
+    if (name && !groups.includes(name)) groups.push(name);
+  };
+  const pushDetail = (label, code) => {
+    if (!label || seen.has(label)) return;
+    seen.add(label);
+    details.push({ label, code });
+  };
+
+  // 顶刊的 venue_group 就是学科，categories[0] 是同一件事，别重复
+  if (paper.venue_group) pushGroup(paper.venue_group);
+  for (const category of paper.categories || []) {
+    const raw = String(category || "").trim();
+    if (!raw || raw === paper.venue_group) continue;
+    const translated = ARXIV_CATEGORY_ZH[raw];
+    if (translated) {
+      pushGroup(ARXIV_ARCHIVE_ZH[raw.split(".")[0]]);
+      pushDetail(translated, raw);
+    } else {
+      // 顶刊带出来的是英文主题词，本身就是给人看的，原样保留
+      pushDetail(raw, "");
+    }
+  }
+  return { groups: groups.slice(0, 2), details: details.slice(0, 5) };
+}
+
 function renderPaper(paper) {
   const node = nodes.template.content.firstElementChild.cloneNode(true);
   const best = paper.best_match || {};
@@ -330,10 +406,18 @@ function renderPaper(paper) {
   }
 
   const tags = node.querySelector(".paper-tags");
-  for (const category of (paper.categories || []).slice(0, 8)) {
+  const { groups, details } = tagParts(paper);
+  for (const group of groups) {
+    const tag = document.createElement("span");
+    tag.className = "tag is-group";
+    tag.textContent = group;
+    tags.appendChild(tag);
+  }
+  for (const item of details) {
     const tag = document.createElement("span");
     tag.className = "tag";
-    tag.textContent = category;
+    tag.textContent = item.label;
+    if (item.code) tag.title = `arXiv ${item.code}`;
     tags.appendChild(tag);
   }
 
