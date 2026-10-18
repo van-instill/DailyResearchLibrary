@@ -19,6 +19,7 @@
 | 归档 | 只增不减 | 已收录的论文永远留在数据里，页面上用「本期新增」标签区分本期这 10 篇 |
 | 不重复 | 与**全部历史**去重 | 去重键是 DOI + 论文 id + 标题指纹，任一命中就算同一篇 |
 | 淘汰 | 无 | 上一版有"常驻 20 篇 + 冷却 56 天"，这一版取消了：论文不再被挤掉，也就不需要冷却 |
+| 同一周只跑一期 | 期号幂等 | 数据顶层记 `weekly_period`（如 `2026-W42`）。工作流带 `push` 触发，改代码会重跑，但同一周已选过就不再新增，只重新生成数据；手动补稿传 `weekly_new_count` 可强制加一批 |
 
 **更新的完整逻辑**（回答"是不是每次都把范围里的论文重新打分挑最合适的"）：
 
@@ -244,13 +245,13 @@ curl "https://api.openalex.org/sources?filter=issn:0022-1082&select=id,display_n
 | 变量 | 默认 | 说明 |
 | --- | --- | --- |
 | `PAPER_WINDOW_START` | 2018-01-01 | 论文时间窗口起点，早于它的论文一律丢弃 |
-| `WEEKLY_NEW_PAPERS` | 10 | 每期每个集合新增几篇 |
-| `DISPLAY_CAP` | 20 | 每个集合常驻多少篇 |
-| `REENTRY_COOLDOWN_DAYS` | 56 | 被挤出列表的论文多久之后可以重新进来 |
+| `WEEKLY_NEW_TOTAL` | 10 | 每期**两条线合计**新增几篇，自动对半（10 → 各 5） |
+| `RADAR_COLLECTION_COUNT` | 2 | 流水线条数，用来把总量对半分 |
+| `WEEKLY_NEW_PAPERS` | 空 | 单独指定单条线的配额，设了它就不看总量 |
 | `MAX_PER_TOPIC` | 25 | 每个方向最多抓多少篇 arXiv 候选 |
 | `ARXIV_WINDOW_SEARCH` | true | 是否额外跑一趟「2018 至今 + relevance」的老预印本召回 |
 | `ARXIV_WINDOW_RESULTS` | 40 | 每个方向那趟窗口召回取多少条 |
-| `MAX_NEW_PAPERS` | 60 | arXiv 侧进入选稿的候选池上限（最终只留 10 篇新的） |
+| `MAX_NEW_PAPERS` | 60 | arXiv 侧进入选稿的候选池上限（最终只留 5 篇新的） |
 | `MAX_SUMMARIES` | 40 | 每轮最多生成多少篇中文解读（控制成本） |
 | `JOURNAL_PER_VENUE_RESULTS` | 50 | 单刊每轮取多少条候选 |
 | `MAX_NEW_JOURNAL_PAPERS` | 60 | 顶刊侧进入选稿的候选池上限 |
