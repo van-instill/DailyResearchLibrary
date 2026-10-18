@@ -53,6 +53,23 @@ class BuildMessageTest(unittest.TestCase):
         self.assertIn("\\*alpha\\*", body)
         self.assertIn("\\_x", body)
 
+    def test_more_than_ten_papers_is_capped_not_crashed(self):
+        # 曾经这里会 IndexError：编号只有一个 ①—⑩ 的字符串
+        daily = [_paper(f"D{i}", url=f"https://e.org/d{i}") for i in range(12)]
+        journal = [_paper(f"J{i}", url=f"https://e.org/j{i}", venue="Quantitative Economics") for i in range(12)]
+        title, body = notify.build_markdown(daily, journal, "2026-W50", "https://x.github.io/r")
+        self.assertIn("24", title)
+        self.assertEqual(body.count("](https://e.org/"), 10)
+        self.assertIn("另有 14 篇", body)
+        html_body = notify.build_html(daily, journal, "2026-W50", "https://x.github.io/r")
+        self.assertEqual(html_body.count("https://e.org/"), 0)  # html 版不嵌单篇链接
+
+    def test_marker_falls_back_after_ten(self):
+        self.assertEqual(notify.marker(0), "①")
+        self.assertEqual(notify.marker(9), "⑩")
+        self.assertEqual(notify.marker(10), "11")
+        self.assertEqual(notify.marker(42), "43")
+
     def test_long_venue_is_truncated(self):
         journal = [_paper("T", venue="Some Extremely Long Journal Name That Goes On And On Forever")]
         _, body = notify.build_markdown([], journal, "2026-W46", "https://x.github.io/repo")

@@ -86,13 +86,25 @@ def short_venue(paper: dict, fallback: str) -> str:
     return venue if len(venue) <= 34 else venue[:33] + "…"
 
 
+def marker(index: int) -> str:
+    """①—⑩ 用完就退回 11、12，别因为某周补稿超过 10 篇直接崩掉。"""
+    return MARK[index] if index < len(MARK) else f"{index + 1}"
+
+
+def digest_items(new_daily: list[dict], new_journal: list[dict]) -> list[tuple[str, dict]]:
+    """两个集合合起来按顺序排，整条消息最多 MAX_ITEMS 条（微信消息太长会被折叠）。"""
+    items = [("arXiv", p) for p in new_daily] + [("顶刊", p) for p in new_journal]
+    return items[:MAX_ITEMS]
+
+
 def entry_line(index: int, paper: dict, group: str) -> str:
     """一条论文：编号 + 标题（带链接）+ 期刊/方向。"""
     title = md_escape(paper.get("title") or "Untitled")
     url = paper.get("paper_url") or paper.get("doi") or paper.get("pdf_url") or ""
-    head = f"**{MARK[index]} {title}**"
+    mark = marker(index)
+    head = f"**{mark} {title}**"
     if url:
-        head = f"**[{MARK[index]} {title}]({url})**"
+        head = f"**[{mark} {title}]({url})**"
     topic = ((paper.get("best_match") or {}).get("topic_name") or "").strip()
     meta = " · ".join(x for x in (short_venue(paper, group), topic) if x)
     return f"{head}\n{meta}"
@@ -108,17 +120,19 @@ def build_markdown(new_daily: list[dict], new_journal: list[dict], period: str, 
     if new_journal:
         counts.append(f"顶刊 {len(new_journal)} 篇")
 
+    items = digest_items(new_daily, new_journal)
     lines = [f"**本周新收录 {total} 篇**（{' · '.join(counts)}）", ""]
-    index = 0
-    for group, papers in (("arXiv", new_daily), ("顶刊", new_journal)):
-        if not papers:
-            continue
-        lines.append(f"**{group}**")
-        lines.append("")
-        for paper in papers[:MAX_ITEMS]:
-            lines.append(entry_line(index, paper, group))
+    current = ""
+    for index, (group, paper) in enumerate(items):
+        if group != current:
+            lines.append(f"**{group}**")
             lines.append("")
-            index += 1
+            current = group
+        lines.append(entry_line(index, paper, group))
+        lines.append("")
+    if total > len(items):
+        lines.append(f"…另有 {total - len(items)} 篇，见页面")
+        lines.append("")
     base = site.rstrip("/")
     lines.append(f"👉 [**打开论文雷达 · 本期新增**]({base}/#latest)")
     if new_daily and new_journal:
@@ -130,25 +144,22 @@ def build_markdown(new_daily: list[dict], new_journal: list[dict], period: str, 
 def build_html(new_daily: list[dict], new_journal: list[dict], period: str, site: str) -> str:
     total = len(new_daily) + len(new_journal)
     rows = []
-    index = 0
-    for group, papers in (("arXiv", new_daily), ("顶刊", new_journal)):
-        for paper in papers[:MAX_ITEMS]:
-            sub = " · ".join(
-                x
-                for x in (
-                    short_venue(paper, group),
-                    ((paper.get("best_match") or {}).get("topic_name") or "").strip(),
-                )
-                if x
+    for index, (group, paper) in enumerate(digest_items(new_daily, new_journal)):
+        sub = " · ".join(
+            x
+            for x in (
+                short_venue(paper, group),
+                ((paper.get("best_match") or {}).get("topic_name") or "").strip(),
             )
-            rows.append(
-                '<div style="padding:10px 0;border-bottom:1px solid #eceff3">'
-                f'<div style="font-size:14px;line-height:1.5;color:#1b1f24;font-weight:600">'
-                f"{MARK[index]} {html.escape(paper.get('title') or 'Untitled')}</div>"
-                f'<div style="margin-top:4px;font-size:12px;color:#6b7280">{html.escape(sub)}</div>'
-                "</div>"
-            )
-            index += 1
+            if x
+        )
+        rows.append(
+            '<div style="padding:10px 0;border-bottom:1px solid #eceff3">'
+            f'<div style="font-size:14px;line-height:1.5;color:#1b1f24;font-weight:600">'
+            f"{marker(index)} {html.escape(paper.get('title') or 'Untitled')}</div>"
+            f'<div style="margin-top:4px;font-size:12px;color:#6b7280">{html.escape(sub)}</div>'
+            "</div>"
+        )
     body = "".join(rows)
     base = site.rstrip("/")
     secondary = ""
