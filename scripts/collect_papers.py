@@ -2207,13 +2207,36 @@ def collect(
         key=lambda p: (p["best_match"]["score"], paper_activity_datetime(p)),
         reverse=True,
     )
+    daily_recent_papers = [paper for paper in recent_papers if paper.get("source_type") != "conference"]
+    conference_recent_papers = [paper for paper in recent_papers if paper.get("source_type") == "conference"]
+    daily_merged_papers, daily_retention_stats = merge_with_retained_papers(
+        daily_recent_papers, existing_payload, now, recent_history_days
+    )
+    conference_merged_papers, conference_retention_stats = merge_with_retained_papers(
+        conference_recent_papers,
+        existing_conference_payload,
+        now,
+        recent_history_days,
+        active_conference_years_by_source,
+    )
+    daily_merged_papers.sort(key=lambda p: (p["best_match"]["score"], paper_activity_datetime(p)), reverse=True)
+    conference_merged_papers.sort(key=lambda p: (p["best_match"]["score"], paper_activity_datetime(p)), reverse=True)
+
+    # 摘要必须在合并之后生成：此前只对当日新抓到的论文生成，
+    # 历史保留的论文永远进不了摘要流程，只能一直显示占位文案。
     from llm_screen import is_real_summary, load_summary_cache, save_summary_cache, store_summary
+
+    summary_targets = [*daily_merged_papers, *conference_merged_papers]
+    summary_targets.sort(key=lambda p: (p["best_match"]["score"], paper_activity_datetime(p)), reverse=True)
 
     summaries_by_id: dict[str, tuple[dict[str, str], dict[str, Any]]] = {}
     summary_cache = load_summary_cache()
     llm_jobs = []
     summary_cache_hits = 0
-    for paper in recent_papers[:max_summaries]:
+    for paper in summary_targets[:max_summaries]:
+        if is_real_summary(paper.get("chinese_summary")):
+            # 历史论文里已有的真实摘要直接沿用，不重复生成，也不被占位文案覆盖
+            continue
         if not should_summarize_paper_with_llm(paper):
             continue
         paper_id = str(paper.get("id", ""))
@@ -2245,28 +2268,16 @@ def collect(
             store_summary(summary_cache, paper_id, summary)
     save_summary_cache(summary_cache)
 
-    for index, paper in enumerate(recent_papers):
+    for index, paper in enumerate(summary_targets):
         paper_id = str(paper.get("id", ""))
         if index < max_summaries and paper_id in summaries_by_id:
             summary, adjusted_match = summaries_by_id[paper_id]
             paper["chinese_summary"] = summary
             paper["best_match"] = adjusted_match
             paper["matches"] = [adjusted_match if m["topic_id"] == adjusted_match["topic_id"] else m for m in paper["matches"]]
-        else:
+        elif not is_real_summary(paper.get("chinese_summary")):
             paper["chinese_summary"] = fallback_summary(paper, paper["best_match"])
 
-    daily_recent_papers = [paper for paper in recent_papers if paper.get("source_type") != "conference"]
-    conference_recent_papers = [paper for paper in recent_papers if paper.get("source_type") == "conference"]
-    daily_merged_papers, daily_retention_stats = merge_with_retained_papers(
-        daily_recent_papers, existing_payload, now, recent_history_days
-    )
-    conference_merged_papers, conference_retention_stats = merge_with_retained_papers(
-        conference_recent_papers,
-        existing_conference_payload,
-        now,
-        recent_history_days,
-        active_conference_years_by_source,
-    )
     daily_merged_papers.sort(key=lambda p: (p["best_match"]["score"], paper_activity_datetime(p)), reverse=True)
     conference_merged_papers.sort(key=lambda p: (p["best_match"]["score"], paper_activity_datetime(p)), reverse=True)
 
