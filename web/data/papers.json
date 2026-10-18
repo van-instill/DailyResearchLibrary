@@ -1,6 +1,6 @@
 {
-  "generated_at": "Sun, 18 Oct 2026 11:39:51 +0000",
-  "generated_at_iso": "2026-10-18T11:39:51.749426+00:00",
+  "generated_at": "Sun, 18 Oct 2026 12:07:10 +0000",
+  "generated_at_iso": "2026-10-18T12:07:10.831869+00:00",
   "config_source": "file",
   "data_kind": "daily",
   "topics": [
@@ -826,8 +826,8 @@
       },
       "first_seen_at": "2026-10-18T11:39:51.749426+00:00",
       "last_seen_at": "2026-10-18T11:39:51.749426+00:00",
-      "retained_from_previous_run": false,
-      "is_new_this_week": true,
+      "retained_from_previous_run": true,
+      "is_new_this_week": false,
       "chinese_summary": {
         "problem": "局部投影（$\\text{LPs}$）在实证宏观经济学中被广泛用于估计对政策干预的脉冲响应，但摘要指出它们在许多方面仍是黑箱：往往不清楚是何种机制或哪些历史事件驱动了某个具体估计。",
         "method": "作者提出一种新的分解，将 $\\text{LP}$ 估计拆解为历史事件贡献之和，即在每个时间戳上是权重与响应变量实现值的乘积。在最小二乘情形下，摘要说明这些权重有两种解释：其一为净化并标准化后的冲击，其二为被投影的政策干预与样本中过去干预之间的接近度得分；第二种解释自然推广到机器学习方法，其中许多方法给出的脉冲响应虽在预测变量上非线性，但仍通过基于接近度的权重对过去结果进行线性加总。",
@@ -892,8 +892,8 @@
       },
       "first_seen_at": "2026-10-18T11:39:51.749426+00:00",
       "last_seen_at": "2026-10-18T11:39:51.749426+00:00",
-      "retained_from_previous_run": false,
-      "is_new_this_week": true,
+      "retained_from_previous_run": true,
+      "is_new_this_week": false,
       "chinese_summary": {
         "problem": "双重差分（$\\text{DiD}$）与合成控制（$\\text{SC}$）都是面板数据因果推断中广泛使用的方法，各有不同的优势与局限；论文要提出一种整合两者优势的短面板因果推断方法。",
         "method": "论文提出一种新的短面板因果推断方法，在平行趋势或组别层面 $\\text{SC}$ 条件这两个非嵌套假设中的任一成立下，给出处理组平均处理效应（$\\text{ATT}$）的双重稳健识别策略。基于该识别结果，论文建立估计 $\\text{ATT}$ 的统一半参数框架；识别稳健矩函数在平行趋势假设下满足 Neyman 正交性，但在 $\\text{SC}$ 假设下不满足，因此两种识别策略的渐近方差不同。论文还提出乘子自助法（multiplier bootstrap），在任一假设下一致地近似渐近分布，并将方法扩展到重复截面数据与交错处理设计。",
@@ -959,8 +959,8 @@
       },
       "first_seen_at": "2026-10-18T11:39:51.749426+00:00",
       "last_seen_at": "2026-10-18T11:39:51.749426+00:00",
-      "retained_from_previous_run": false,
-      "is_new_this_week": true,
+      "retained_from_previous_run": true,
+      "is_new_this_week": false,
       "chinese_summary": {
         "problem": "论文要解决的问题是：高频数据包含被称为市场微观结构噪声（$\\text{MN}$）的观测误差，而本文要在 $\\text{MN}$ 相依（即自相关且与收益率相关）的情形下处理已实现波动率（$\\text{RV}$）的分解问题。",
         "method": "本文假设存在如 Hansen and Lunde[$2006$] 所报告的相依 $\\text{MN}$，即该噪声自相关并与收益率相关；在此基础上扩展 Nagakura and Watanabe[$2015$] 提出的、将 $\\text{RV}$ 分解为真实波动率与 $\\text{MN}$ 影响的状态空间模型；并通过模拟和实际数据对模型进行比较。",
@@ -1027,8 +1027,8 @@
       },
       "first_seen_at": "2026-10-18T11:39:51.749426+00:00",
       "last_seen_at": "2026-10-18T11:39:51.749426+00:00",
-      "retained_from_previous_run": false,
-      "is_new_this_week": true,
+      "retained_from_previous_run": true,
+      "is_new_this_week": false,
       "chinese_summary": {
         "problem": "在金融风险管理中，$\\text{VaR}$ 估计潜在组合损失但无法反映某一阈值之外的损失；$\\text{ES}$ 通过给出此类超出损失的條件期望弥补这一局限，是更好的尾部风险度量。然而 $\\text{ES}$ 本身不可诱导，不能通过最小化某个评分函数来估计，尽管其与 $\\text{VaR}$ 的联合可诱导性允许联合估计。",
         "method": "基于 $\\text{ES}$ 与 $\\text{VaR}$ 的联合可诱导性，提出条件自回归预期损失（$\\text{CAESar}$）模型，灵活处理动态模式与异方差性，且不对价格收益做分布假设。$\\text{CAESar}$ 系数的优化分三步：通过 $\\text{CAViaR}$ 回归拟合 $\\text{VaR}$ 分量；将 $\\text{ES}$ 表述为自回归过程；在确保单调性约束以避免分位数交叉的条件下联合估计 $\\text{VaR}$ 与 $\\text{ES}$ 系数。",
@@ -1095,8 +1095,8 @@
       },
       "first_seen_at": "2026-10-18T11:39:51.749426+00:00",
       "last_seen_at": "2026-10-18T11:39:51.749426+00:00",
-      "retained_from_previous_run": false,
-      "is_new_this_week": true,
+      "retained_from_previous_run": true,
+      "is_new_this_week": false,
       "chinese_summary": {
         "problem": "计量经济学与机器学习社区分别发展的随机方法与神经网络方法在金融波动率预测中长期各自演进、相互交流很少，本文试图弥合这一差距。",
         "method": "本文建立 $\\text{GARCH}$ 族模型与其对应神经网络模型之间的等价关系；基于该等价关系提出 $\\text{GARCH}$-$\\text{NN}$ 方法，将 $\\text{GARCH}$ 模型的神经网络对应物作为组件整合进已有神经网络架构，从而把 $\\text{GARCH}$ 模型中固有的波动率典型事实注入神经网络；并开发 $\\text{GARCH}$-$\\text{LSTM}$ 模型来展示 $\\text{GARCH}$-$\\text{NN}$ 方法的能力。",
@@ -1105,6 +1105,335 @@
         "abstract_zh": "波动率作为不确定性的度量，在风险管理等众多金融活动中起着关键作用。计量经济学与机器学习社区为金融波动率预测发展了两类不同的方法：随机方法与神经网络（$\\text{NN}$）方法。尽管各有优势，这些方法传统上在各自独立的研究轨迹上演进，彼此之间很少互动。本研究致力于通过建立 $\\text{GARCH}$ 族模型与其对应 $\\text{NN}$ 对应物之间的等价关系来弥合这一差距。在建立等价关系之后，我们引入一种名为 $\\text{GARCH}$-$\\text{NN}$ 的创新方法来构建基于 $\\text{NN}$ 的波动率模型。它获得 $\\text{GARCH}$ 模型的 $\\text{NN}$ 对应物，并将它们作为组件整合进一个已有的 $\\text{NN}$ 架构，从而将 $\\text{GARCH}$ 模型中固有的波动率典型事实（$\\text{SFs}$）无缝注入神经网络。我们开发 $\\text{GARCH}$-$\\text{LSTM}$ 模型以展示 $\\text{GARCH}$-$\\text{NN}$ 方法的效力。实验结果表明，将 $\\text{GARCH}$ 族模型的 $\\text{NN}$ 对应物合并进已有 $\\text{NN}$ 模型，相比单独使用随机模型和 $\\text{NN}$ 模型能带来更好的结果。",
         "evidence": "Experiment results validate that amalgamating the NN counterparts of the GARCH family models into established NN models leads to enhanced outcomes compared to employing the stochastic and NN models in isolation.",
         "why_relevant": "直接涉及 $\\text{GARCH}$ 与波动率预测，属波动率建模核心议题。",
+        "v": 4
+      }
+    },
+    {
+      "id": "2111.10784v1",
+      "source": "arXiv",
+      "title": "Why Synthetic Control estimators are biased and what to do about it: Introducing Relaxed and Penalized Synthetic Controls",
+      "authors": [
+        "Oscar Engelbrektson"
+      ],
+      "summary": "This paper extends the literature on the theoretical properties of synthetic controls to the case of non-linear generative models, showing that the synthetic control estimator is generally biased in such settings. I derive a lower bound for the bias, showing that the only component of it that is affected by the choice of synthetic control is the weighted sum of pairwise differences between the treated unit and the untreated units in the synthetic control. To address this bias, I propose a novel synthetic control estimator that allows for a constant difference of the synthetic control to the treated unit in the pre-treatment period, and that penalizes the pairwise discrepancies. Allowing for a constant offset makes the model more flexible, thus creating a larger set of potential synthetic controls, and the penalization term allows for the selection of the potential solution that will minimize bias. I study the properties of this estimator and propose a data-driven process for parameterizing the penalization term.",
+      "published": "2021-11-21T10:27:29Z",
+      "updated": "2021-11-21T10:27:29Z",
+      "paper_url": "http://arxiv.org/abs/2111.10784v1",
+      "pdf_url": "https://arxiv.org/pdf/2111.10784v1",
+      "categories": [
+        "econ.EM",
+        "stat.ME"
+      ],
+      "seed_topic": "timeseries_causal",
+      "from_window_search": true,
+      "matches": [
+        {
+          "topic_id": "timeseries_causal",
+          "topic_name": "时间序列与因果识别",
+          "score": 0.9,
+          "level": "high",
+          "reason": "AI 判定：合成控制估计量偏差与改进，核心正是合成控制方法；关键词命中：synthetic control",
+          "keyword_hits": [
+            "synthetic control"
+          ],
+          "mechanical_score": 0.394,
+          "llm_score": 90.0,
+          "llm_source": "cache",
+          "llm_reason": "直接研究合成控制估计量的偏差与改进，属于合成控制方法核心议题。"
+        }
+      ],
+      "best_match": {
+        "topic_id": "timeseries_causal",
+        "topic_name": "时间序列与因果识别",
+        "score": 0.9,
+        "level": "high",
+        "reason": "$\\text{AI}$ 判定：合成控制估计量偏差与改进，核心正是合成控制方法；关键词命中：synthetic control",
+        "keyword_hits": [
+          "synthetic control"
+        ],
+        "mechanical_score": 0.394,
+        "llm_score": 90.0,
+        "llm_source": "cache",
+        "llm_reason": "直接研究合成控制估计量的偏差与改进，属于合成控制方法核心议题。"
+      },
+      "first_seen_at": "2026-10-18T12:07:10.831869+00:00",
+      "last_seen_at": "2026-10-18T12:07:10.831869+00:00",
+      "retained_from_previous_run": false,
+      "is_new_this_week": true,
+      "chinese_summary": {
+        "problem": "论文要解决的问题是：在非线性生成模型下，合成控制估计量是否有偏，以及若有偏应如何应对。",
+        "method": "论文将合成控制理论性质的研究扩展到非线性生成模型的情形，推导了偏差的下界。论文提出一种新的合成控制估计量，允许处理前时期合成控制与处理单元之间存在常数差异，并对成对差异进行惩罚。论文研究了该估计量的性质，并提出一个数据驱动的过程来参数化惩罚项。",
+        "innovation": "论文将合成控制的理论性质分析扩展到非线性生成模型；推导出偏差下界，并指出偏差中受合成控制选择影响的唯一成分是处理单元与合成控制中未处理单元之间成对差异的加权和；提出允许常数偏移并对成对差异施加惩罚的新合成控制估计量，且给出数据驱动的惩罚项参数化过程。",
+        "conclusion": "论文表明，在非线性生成模型下合成控制估计量通常是有偏的；偏差中受合成控制选择影响的唯一成分是处理单元与合成控制中未处理单元之间成对差异的加权和。",
+        "abstract_zh": "本文将关于合成控制理论性质的文献扩展到非线性生成模型的情形，表明合成控制估计量在此类设定下通常是有偏的。我推导了偏差的一个下界，表明其中受合成控制选择影响的唯一成分是处理单元与合成控制中未处理单元之间成对差异的加权和。为解决这一偏差，我提出一种新的合成控制估计量，该估计量允许在预处理时期合成控制与处理单元之间存在常数差异，并对成对差异进行惩罚。允许常数偏移使模型更加灵活，从而产生更大的潜在合成控制集合，而惩罚项允许选择将使偏差最小化的潜在解。我研究了该估计量的性质，并提出一个数据驱动的过程来参数化惩罚项。",
+        "evidence": "This paper extends the literature on the theoretical properties of synthetic controls to the case of non-linear generative models, showing that the synthetic control estimator is generally biased in such settings.",
+        "why_relevant": "直接研究合成控制估计量的偏差与改进，属于合成控制方法核心议题。",
+        "v": 4
+      }
+    },
+    {
+      "id": "2609.20264v1",
+      "source": "arXiv",
+      "title": "Risk-Set Transported Synthetic Control with Difference-in-Differences Adjustment under Staggered Treatment Adoption",
+      "authors": [
+        "Mojtaba Eslami"
+      ],
+      "summary": "In staggered treatment-adoption designs, later-treated units are valid controls for an earlier-treated cohort only until their own treatment begins, so the admissible donor set contracts with event time. Fixing the donor pool at the longest horizon discards temporarily eligible donors, whereas re-estimating synthetic-control weights independently at each horizon can make the counterfactual unstable as donor composition changes. We propose Risk-Set Transported Synthetic Control with Difference-in-Differences Adjustment (RT-SC-DiD). For each cohort and event-time horizon, the estimator fits weights on the currently untreated donors while shrinking them toward a transported reference that reallocates the weight of exiting donors to similar surviving donors. A DiD baseline correction removes persistent level differences. We characterize distortion from horizon-by-horizon reoptimization, derive the loading change induced by naive deletion and renormalization, and give a conditional recursive bound for error propagation under an explicitly assumed regularity condition on the transport map. We also introduce donor-support diagnostics and a donor-only placebo procedure for selecting the transport penalty. In an 80-replication pilot comparison and a separate 40-replication-per-value sensitivity analysis, intermediate transport regularization reduces average RMSE relative to independent horizon-specific estimation and strong anchoring. This evidence supports the method's bias-variance motivation but is not a proved guarantee. RT-SC-DiD is intended for settings where later-treated units provide useful short-horizon information and donor support contracts materially over time. Existing staggered synthetic-control and synthetic difference-in-differences methods do not, to our knowledge, explicitly regularize within-cohort weight sequences toward transported references as risk sets contract.",
+      "published": "2026-07-29T01:10:54Z",
+      "updated": "2026-07-29T01:10:54Z",
+      "paper_url": "http://arxiv.org/abs/2609.20264v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.20264v1",
+      "categories": [
+        "stat.AP",
+        "cs.AI",
+        "econ.EM",
+        "q-fin.ST",
+        "stat.ME"
+      ],
+      "seed_topic": "timeseries_causal",
+      "from_window_search": true,
+      "matches": [
+        {
+          "topic_id": "timeseries_causal",
+          "topic_name": "时间序列与因果识别",
+          "score": 0.88,
+          "level": "high",
+          "reason": "AI 判定：合成控制与双重差分结合，处理交错采纳，属因果识别核心方法；关键词命中：difference-in-differences、synthetic control",
+          "keyword_hits": [
+            "difference-in-differences",
+            "synthetic control"
+          ],
+          "mechanical_score": 0.512,
+          "llm_score": 88.0,
+          "llm_source": "cache",
+          "llm_reason": "合成控制与双重差分结合处理交错采纳，属因果识别核心方法。"
+        }
+      ],
+      "best_match": {
+        "topic_id": "timeseries_causal",
+        "topic_name": "时间序列与因果识别",
+        "score": 0.88,
+        "level": "high",
+        "reason": "$\\text{AI}$ 判定：合成控制与双重差分结合，处理交错采纳，属因果识别核心方法；关键词命中：difference-in-differences、synthetic control",
+        "keyword_hits": [
+          "difference-in-differences",
+          "synthetic control"
+        ],
+        "mechanical_score": 0.512,
+        "llm_score": 88.0,
+        "llm_source": "cache",
+        "llm_reason": "合成控制与双重差分结合处理交错采纳，属因果识别核心方法。"
+      },
+      "first_seen_at": "2026-10-18T12:07:10.831869+00:00",
+      "last_seen_at": "2026-10-18T12:07:10.831869+00:00",
+      "retained_from_previous_run": false,
+      "is_new_this_week": true,
+      "chinese_summary": {
+        "problem": "在交错处理采纳设计中，后处理单元仅在自身处理开始前是早处理队列的有效控制，因此可允许的供体集合随事件时间收缩；将供体池固定在最长horizon会丢弃暂时合格的供体，而在每个horizon独立重新估计合成控制权重会因供体构成变化而使反事实不稳定。",
+        "method": "提出 Risk-Set Transported Synthetic Control with Difference-in-Differences Adjustment ($\\text{RT}$-$\\text{SC}$-$\\text{DiD}$)。对每个队列和事件时间horizon，估计器在当前未处理供体上拟合权重，同时将其向一个transported reference收缩，该参考把退出供体的权重重新分配给相似的存活供体；并用$\\text{DiD}$基线校正去除持久水平差异。作者刻画了逐horizon重新优化带来的扭曲，推导了朴素删除与重新归一化引起的loading change，并在对transport map显式假设的正则条件下给出误差传播的条件递归界；还引入donor-support diagnostics和donor-only placebo procedure来选择transport penalty。",
+        "innovation": "针对风险集收缩下队列内权重序列，显式地向transported references正则化；刻画逐horizon重新优化的扭曲并推导朴素删除与重新归一化的loading change；给出误差传播的条件递归界，并提出donor-support diagnostics与donor-only placebo procedure用于选择transport penalty。",
+        "conclusion": "在$80$次重复的pilot比较和另一项每个取值$40$次重复的敏感性分析中，intermediate transport regularization相对于独立horizon特定估计和strong anchoring降低了平均$\\text{RMSE}$；该证据支持方法的偏差-方差动机，但不是已证明的保证。",
+        "abstract_zh": "在交错处理采纳设计中，后处理单元仅在自身处理开始前是早处理队列的有效控制，因此可允许的供体集合随事件时间收缩。将供体池固定在最长horizon会丢弃暂时合格的供体，而在每个horizon独立重新估计合成控制权重会因供体构成变化而使反事实不稳定。我们提出 Risk-Set Transported Synthetic Control with Difference-in-Differences Adjustment ($\\text{RT}$-$\\text{SC}$-$\\text{DiD}$)。对每个队列和事件时间horizon，估计器在当前未处理供体上拟合权重，同时将其向一个transported reference收缩，该参考把退出供体的权重重新分配给相似的存活供体。$\\text{DiD}$基线校正去除持久水平差异。我们刻画了逐horizon重新优化带来的扭曲，推导了朴素删除与重新归一化引起的loading change，并在对transport map显式假设的正则条件下给出误差传播的条件递归界。我们还引入donor-support diagnostics和donor-only placebo procedure来选择transport penalty。在$80$次重复的pilot比较和另一项每个取值$40$次重复的敏感性分析中，intermediate transport regularization相对于独立horizon特定估计和strong anchoring降低了平均$\\text{RMSE}$。该证据支持方法的偏差-方差动机，但不是已证明的保证。$\\text{RT}$-$\\text{SC}$-$\\text{DiD}$ intended for settings where later-treated units provide useful short-horizon information and donor support contracts materially over time。据我们所知，现有的交错合成控制和合成双重差分方法没有在风险集收缩时显式地将队列内权重序列向transported references正则化。",
+        "evidence": "In an 80-replication pilot comparison and a separate 40-replication-per-value sensitivity analysis, intermediate transport regularization reduces average RMSE relative to independent horizon-specific estimation and strong anchoring.",
+        "why_relevant": "合成控制与双重差分结合处理交错采纳，属因果识别核心方法。",
+        "v": 4
+      }
+    },
+    {
+      "id": "2604.27035v1",
+      "source": "arXiv",
+      "title": "Doubly robust local projections difference-in-differences",
+      "authors": [
+        "Daniel de Abreu Pereira Uhr",
+        "Guilherme Valle Moura"
+      ],
+      "summary": "This paper develops a doubly robust extension of local-projections difference-in-differences (LP-DiD) for staggered absorbing treatments. The resulting estimator, DRLPDID, preserves the LP-DiD local-stack ATT target and is consistent when either the local untreated-outcome regression or the local treatment-probability model is correctly specified. It also delivers influence-function-based inference for post-treatment summaries and multiplier-bootstrap bands for dynamic paths. In Monte Carlo designs with covariate-driven selection, DRLPDID matches regression-adjusted LP-DiD under outcome-model alignment and clearly outperforms the IPT-only variant under propensity-score misspecification. In the no-fault-divorce application, DRLPDID tracks robust staggered-adoption estimators and is less negative than unadjusted LP-DiD.",
+      "published": "2026-04-29T16:10:04Z",
+      "updated": "2026-04-29T16:10:04Z",
+      "paper_url": "http://arxiv.org/abs/2604.27035v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.27035v1",
+      "categories": [
+        "econ.EM"
+      ],
+      "seed_topic": "timeseries_causal",
+      "from_window_search": true,
+      "matches": [
+        {
+          "topic_id": "timeseries_causal",
+          "topic_name": "时间序列与因果识别",
+          "score": 0.88,
+          "level": "high",
+          "reason": "AI 判定：局部投影双重差分双重稳健估计，正属该方向核心识别方法；关键词命中：local projections、difference-in-differences",
+          "keyword_hits": [
+            "local projections",
+            "difference-in-differences"
+          ],
+          "mechanical_score": 0.346,
+          "llm_score": 88.0,
+          "llm_source": "cache",
+          "llm_reason": "局部投影与双重差分结合并加双重稳健识别，正属时间序列因果识别核心方法。"
+        }
+      ],
+      "best_match": {
+        "topic_id": "timeseries_causal",
+        "topic_name": "时间序列与因果识别",
+        "score": 0.88,
+        "level": "high",
+        "reason": "$\\text{AI}$ 判定：局部投影双重差分双重稳健估计，正属该方向核心识别方法；关键词命中：local projections、difference-in-differences",
+        "keyword_hits": [
+          "local projections",
+          "difference-in-differences"
+        ],
+        "mechanical_score": 0.346,
+        "llm_score": 88.0,
+        "llm_source": "cache",
+        "llm_reason": "局部投影与双重差分结合并加双重稳健识别，正属时间序列因果识别核心方法。"
+      },
+      "first_seen_at": "2026-10-18T12:07:10.831869+00:00",
+      "last_seen_at": "2026-10-18T12:07:10.831869+00:00",
+      "retained_from_previous_run": false,
+      "is_new_this_week": true,
+      "chinese_summary": {
+        "problem": "论文针对交错吸收处理（staggered absorbing treatments）情形下的局部投影双重差分（$\\text{LP}$-$\\text{DiD}$），要给出一个双重稳健的扩展估计量。",
+        "method": "论文提出估计量 $\\text{DRLPDID}$，它保留 $\\text{LP}$-$\\text{DiD}$ 的 local-stack $\\text{ATT}$ 目标；当局部未处理结果回归或局部处理概率模型二者之一被正确设定时，该估计量一致。它还给出基于影响函数的后处理汇总推断，以及动态路径的 multiplier-bootstrap 带。",
+        "innovation": "论文将双重稳健性引入 $\\text{LP}$-$\\text{DiD}$，用于交错吸收处理；在保持 $\\text{LP}$-$\\text{DiD}$ 的 local-stack $\\text{ATT}$ 目标的同时，使估计量在局部未处理结果回归或局部处理概率模型任一正确设定下保持一致；并配套提供基于影响函数的后处理汇总推断与动态路径的 multiplier-bootstrap 带。",
+        "conclusion": "在存在协变量驱动选择（covariate-driven selection）的 Monte Carlo 设计中，$\\text{DRLPDID}$ 在结果模型对齐时与回归调整的 $\\text{LP}$-$\\text{DiD}$ 相当，在倾向得分误设定下明显优于仅用 $\\text{IPT}$ 的变体；在 no-fault-divorce 应用中，$\\text{DRLPDID}$ 与稳健的交错采纳估计量走势一致，且比未调整的 $\\text{LP}$-$\\text{DiD}$ 负得更少。",
+        "abstract_zh": "本文为交错吸收处理下的局部投影双重差分（$\\text{LP}$-$\\text{DiD}$）发展了一个双重稳健扩展。所得估计量 $\\text{DRLPDID}$ 保留了 $\\text{LP}$-$\\text{DiD}$ 的 local-stack $\\text{ATT}$ 目标，并在局部未处理结果回归或局部处理概率模型二者之一被正确设定时一致。它还给出基于影响函数的后处理汇总推断，以及动态路径的 multiplier-bootstrap 带。在存在协变量驱动选择的 Monte Carlo 设计中，$\\text{DRLPDID}$ 在结果模型对齐时与回归调整的 $\\text{LP}$-$\\text{DiD}$ 相当，在倾向得分误设定下明显优于仅用 $\\text{IPT}$ 的变体。在 no-fault-divorce 应用中，$\\text{DRLPDID}$ 与稳健的交错采纳估计量走势一致，且比未调整的 $\\text{LP}$-$\\text{DiD}$ 负得更少。",
+        "evidence": "In Monte Carlo designs with covariate-driven selection, DRLPDID matches regression-adjusted LP-DiD under outcome-model alignment and clearly outperforms the IPT-only variant under propensity-score misspecification.",
+        "why_relevant": "局部投影与双重差分结合并加双重稳健识别，正属时间序列因果识别核心方法。",
+        "v": 4
+      }
+    },
+    {
+      "id": "2603.27458v1",
+      "source": "arXiv",
+      "title": "Extreme Value Inference for CoVaR and Systemic Risk",
+      "authors": [
+        "Xiaoting Li",
+        "Harry Joe"
+      ],
+      "summary": "We develop an extreme value framework for CoVaR centered on $v(q \\mid p ; C)$, the copula-adjusted probability level, or equivalently, the CoVaR on the uniform (0,1) scale. We characterize the possible tail regimes of $v(q \\mid p ; C)$ through the limit behavior of the copula conditional distribution and show that these regimes are determined by the joint tail expansions of the copula. This leads to tractable conditions for identifying the tail regime and deriving the asymptotic behavior of $v(q | p ; C)$. Building on this characterization, we propose a minimum-distance estimation approach for CoVaR that accommodates multiple tail regimes. The methodology links CoVaR and $Δ$CoVaR to the underlying joint tail behavior, thereby providing a clear interpretation of these measures in systemic risk analysis. An empirical analysis across U.S. sectors demonstrates the practical value of the approach for assessing systemic risk contributions and exposures with important implications for macroprudential surveillance and risk management.",
+      "published": "2026-03-29T00:45:28Z",
+      "updated": "2026-03-29T00:45:28Z",
+      "paper_url": "http://arxiv.org/abs/2603.27458v1",
+      "pdf_url": "https://arxiv.org/pdf/2603.27458v1",
+      "categories": [
+        "stat.ME"
+      ],
+      "seed_topic": "risk_extreme",
+      "from_window_search": true,
+      "matches": [
+        {
+          "topic_id": "risk_extreme",
+          "topic_name": "风险测度与尾部风险",
+          "score": 0.88,
+          "level": "high",
+          "reason": "AI 判定：用极值理论与Copula对CoVaR做尾部推断，正是系统性尾部风险核心；关键词命中：extreme value、systemic risk、copula",
+          "keyword_hits": [
+            "extreme value",
+            "systemic risk",
+            "copula"
+          ],
+          "mechanical_score": 0.315,
+          "llm_score": 88.0,
+          "llm_source": "cache",
+          "llm_reason": "用极值理论与Copula对CoVaR做尾部推断，直接对应系统性尾部风险研究。"
+        }
+      ],
+      "best_match": {
+        "topic_id": "risk_extreme",
+        "topic_name": "风险测度与尾部风险",
+        "score": 0.88,
+        "level": "high",
+        "reason": "$\\text{AI}$ 判定：用极值理论与Copula对$\\text{CoVaR}$做尾部推断，正是系统性尾部风险核心；关键词命中：extreme value、systemic risk、copula",
+        "keyword_hits": [
+          "extreme value",
+          "systemic risk",
+          "copula"
+        ],
+        "mechanical_score": 0.315,
+        "llm_score": 88.0,
+        "llm_source": "cache",
+        "llm_reason": "用极值理论与Copula对$\\text{CoVaR}$做尾部推断，直接对应系统性尾部风险研究。"
+      },
+      "first_seen_at": "2026-10-18T12:07:10.831869+00:00",
+      "last_seen_at": "2026-10-18T12:07:10.831869+00:00",
+      "retained_from_previous_run": false,
+      "is_new_this_week": true,
+      "chinese_summary": {
+        "problem": "论文要解决的问题是：为 $\\text{CoVaR}$ 建立一个极值框架，并刻画 $v(q \\mid p ; C)$（即 copula 调整后的概率水平，或等价地，在均匀 $(0,1)$ 尺度上的 $\\text{CoVaR}$）可能的尾部机制。",
+        "method": "论文通过 copula 条件分布的极限行为刻画 $v(q \\mid p ; C)$ 的可能尾部机制，并表明这些机制由 copula 的联合尾部展开决定。由此得到可处理的条件，用于识别尾部机制并推导 $v(q | p ; C)$ 的渐近行为。在此基础上，论文提出一种适应多种尾部机制的最小距离 $\\text{CoVaR}$ 估计方法。",
+        "innovation": "论文提出一个以 $v(q \\mid p ; C)$ 为中心的 $\\text{CoVaR}$ 极值框架；通过 copula 条件分布的极限行为刻画 $v(q \\mid p ; C)$ 的可能尾部机制，并表明这些机制由 copula 的联合尾部展开决定；给出识别尾部机制与推导 $v(q | p ; C)$ 渐近行为的可处理条件，并提出适应多种尾部机制的最小距离 $\\text{CoVaR}$ 估计方法，将 $\\text{CoVaR}$ 与 $\\Delta$$\\text{CoVaR}$ 联系到潜在的联合尾部行为。",
+        "conclusion": "论文表明 $v(q \\mid p ; C)$ 的可能尾部机制由 copula 的联合尾部展开决定，并由此得到识别尾部机制与推导 $v(q | p ; C)$ 渐近行为的可处理条件；所提方法将 $\\text{CoVaR}$ 与 $\\Delta$$\\text{CoVaR}$ 联系到潜在的联合尾部行为，从而为这些系统性风险度量提供清晰解释。",
+        "abstract_zh": "我们为 $\\text{CoVaR}$ 建立一个极值框架，其中心是 $v(q \\mid p ; C)$，即 copula 调整后的概率水平，或等价地，在均匀 $(0,1)$ 尺度上的 $\\text{CoVaR}$。我们通过 copula 条件分布的极限行为刻画 $v(q \\mid p ; C)$ 的可能尾部机制，并表明这些机制由 copula 的联合尾部展开决定。这引出可处理的条件，用于识别尾部机制并推导 $v(q | p ; C)$ 的渐近行为。基于这一刻画，我们提出一种适应多种尾部机制的最小距离 $\\text{CoVaR}$ 估计方法。该方法将 $\\text{CoVaR}$ 与 $\\Delta$$\\text{CoVaR}$ 联系到潜在的联合尾部行为，从而为这些度量在系统性风险分析中提供清晰的解释。一项跨美国行业的实证分析展示了该方法在评估系统性风险贡献与暴露方面的实用价值，并对宏观审慎监管与风险管理具有重要含义。",
+        "evidence": "Building on this characterization, we propose a minimum-distance estimation approach for CoVaR that accommodates multiple tail regimes.",
+        "why_relevant": "用极值理论与Copula对$\\text{CoVaR}$做尾部推断，直接对应系统性尾部风险研究。",
+        "v": 4
+      }
+    },
+    {
+      "id": "2512.19484v1",
+      "source": "arXiv",
+      "title": "Structured Event Representation and Stock Return Predictability",
+      "authors": [
+        "Gang Li",
+        "Dandan Qiao",
+        "Mingxuan Zheng"
+      ],
+      "summary": "We find that event features extracted by large language models (LLMs) are effective for text-based stock return prediction. Using a pre-trained LLM to extract event features from news articles, we propose a novel deep learning model based on structured event representation (SER) and attention mechanisms to predict stock returns in the cross-section. Our SER-based model provides superior performance compared with other existing text-driven models to forecast stock returns out of sample and offers highly interpretable feature structures to examine the mechanisms underlying the stock return predictability. We further provide various implications based on SER and highlight the crucial benefit of structured model inputs in stock return predictability.",
+      "published": "2025-12-22T15:40:27Z",
+      "updated": "2025-12-22T15:40:27Z",
+      "paper_url": "http://arxiv.org/abs/2512.19484v1",
+      "pdf_url": "https://arxiv.org/pdf/2512.19484v1",
+      "categories": [
+        "econ.GN",
+        "cs.CE",
+        "stat.ML"
+      ],
+      "seed_topic": "financial_ml_text",
+      "from_window_search": true,
+      "matches": [
+        {
+          "topic_id": "financial_ml_text",
+          "topic_name": "金融机器学习与文本数据",
+          "score": 0.88,
+          "level": "high",
+          "reason": "AI 判定：用LLM抽取事件特征做横截面股票收益预测，属金融机器学习与文本方向核心；关键词命中：stock return prediction",
+          "keyword_hits": [
+            "stock return prediction"
+          ],
+          "mechanical_score": 0.31,
+          "llm_score": 88.0,
+          "llm_source": "cache",
+          "llm_reason": "用LLM抽取事件特征做横截面股票收益预测，属金融机器学习与文本方向核心。"
+        }
+      ],
+      "best_match": {
+        "topic_id": "financial_ml_text",
+        "topic_name": "金融机器学习与文本数据",
+        "score": 0.88,
+        "level": "high",
+        "reason": "$\\text{AI}$ 判定：用$\\text{LLM}$抽取事件特征做横截面股票收益预测，属金融机器学习与文本方向核心；关键词命中：stock return prediction",
+        "keyword_hits": [
+          "stock return prediction"
+        ],
+        "mechanical_score": 0.31,
+        "llm_score": 88.0,
+        "llm_source": "cache",
+        "llm_reason": "用$\\text{LLM}$抽取事件特征做横截面股票收益预测，属金融机器学习与文本方向核心。"
+      },
+      "first_seen_at": "2026-10-18T12:07:10.831869+00:00",
+      "last_seen_at": "2026-10-18T12:07:10.831869+00:00",
+      "retained_from_previous_run": false,
+      "is_new_this_week": true,
+      "chinese_summary": {
+        "problem": "论文要解决的问题是：由大语言模型（$\\text{LLMs}$）抽取的事件特征是否对基于文本的股票收益预测有效。",
+        "method": "使用预训练的大语言模型从新闻文章中抽取事件特征，并提出一个基于结构化事件表示（$\\text{SER}$）与注意力机制的新型深度学习模型，用于预测横截面股票收益。",
+        "innovation": "提出基于结构化事件表示（$\\text{SER}$）与注意力机制的深度学习模型，用预训练大语言模型从新闻文章中抽取事件特征；该模型提供高度可解释的特征结构，用于考察股票收益可预测性背后的机制；并强调结构化模型输入在股票收益可预测性中的关键益处。",
+        "conclusion": "摘要指出，由大语言模型抽取的事件特征对基于文本的股票收益预测是有效的；基于 $\\text{SER}$ 的模型在样本外预测股票收益方面优于其他现有文本驱动模型，并提供高度可解释的特征结构以考察股票收益可预测性背后的机制。",
+        "abstract_zh": "我们发现，由大语言模型（$\\text{LLMs}$）抽取的事件特征对基于文本的股票收益预测是有效的。我们使用一个预训练的大语言模型从新闻文章中抽取事件特征，并提出一个基于结构化事件表示（$\\text{SER}$）与注意力机制的新型深度学习模型，用于预测横截面股票收益。我们的基于 $\\text{SER}$ 的模型在样本外预测股票收益方面，相比其他现有文本驱动模型提供了更优的表现，并提供高度可解释的特征结构，以考察股票收益可预测性背后的机制。我们进一步基于 $\\text{SER}$ 给出多种含义，并强调结构化模型输入在股票收益可预测性中的关键益处。",
+        "evidence": "Our SER-based model provides superior performance compared with other existing text-driven models to forecast stock returns out of sample and offers highly interpretable feature structures to examine the mechanisms underlying the stock return predictability.",
+        "why_relevant": "用$\\text{LLM}$抽取事件特征做横截面股票收益预测，属金融机器学习与文本方向核心。",
         "v": 4
       }
     },
@@ -1860,7 +2189,22 @@
     "id:2407.06619v2": "2026-10-18T11:39:51.749426+00:00",
     "t:caesarconditionalautoregressiveexpectedshortfall": "2026-10-18T11:39:51.749426+00:00",
     "id:2402.06642v1": "2026-10-18T11:39:51.749426+00:00",
-    "t:fromgarchtoneuralnetworkforvolatilityforecast": "2026-10-18T11:39:51.749426+00:00"
+    "t:fromgarchtoneuralnetworkforvolatilityforecast": "2026-10-18T11:39:51.749426+00:00",
+    "2505.12422v2": "2026-10-18T11:39:51.749426+00:00",
+    "2503.11375v3": "2026-10-18T11:39:51.749426+00:00",
+    "2408.17187v1": "2026-10-18T11:39:51.749426+00:00",
+    "2407.06619v2": "2026-10-18T11:39:51.749426+00:00",
+    "2402.06642v1": "2026-10-18T11:39:51.749426+00:00",
+    "id:2111.10784v1": "2026-10-18T12:07:10.831869+00:00",
+    "t:whysyntheticcontrolestimatorsarebiasedandwhattodoaboutitintroducingrelaxedandpenalizedsyntheticcontrols": "2026-10-18T12:07:10.831869+00:00",
+    "id:2609.20264v1": "2026-10-18T12:07:10.831869+00:00",
+    "t:risksettransportedsyntheticcontrolwithdifferenceindifferencesadjustmentunderstaggeredtreatmentadoption": "2026-10-18T12:07:10.831869+00:00",
+    "id:2604.27035v1": "2026-10-18T12:07:10.831869+00:00",
+    "t:doublyrobustlocalprojectionsdifferenceindifferences": "2026-10-18T12:07:10.831869+00:00",
+    "id:2603.27458v1": "2026-10-18T12:07:10.831869+00:00",
+    "t:extremevalueinferenceforcovarandsystemicrisk": "2026-10-18T12:07:10.831869+00:00",
+    "id:2512.19484v1": "2026-10-18T12:07:10.831869+00:00",
+    "t:structuredeventrepresentationandstockreturnpredictability": "2026-10-18T12:07:10.831869+00:00"
   },
   "stats": {
     "candidate_paper_count": 212,
@@ -1878,7 +2222,7 @@
     "filtered_low_relevance_count": 71,
     "days": 7,
     "collection_mode": "lookback",
-    "collection_cutoff_iso": "2026-10-11T11:39:51.749426+00:00",
+    "collection_cutoff_iso": "2026-10-11T12:07:10.831869+00:00",
     "max_per_topic": 25,
     "max_new_papers": 60,
     "max_new_conference_papers": 50,
@@ -1923,20 +2267,20 @@
     "conference_arxiv_enrichment_succeeded": 0,
     "conference_arxiv_enrichment_skipped": 0,
     "conference_arxiv_enrichment_last_error": "",
-    "paper_count": 25,
+    "paper_count": 30,
     "new_paper_count": 60,
     "weekly_new_count": 5,
     "weekly_new_quota": 5,
     "weekly_new_total": 10,
-    "kept_previous_count": 20,
-    "display_count": 25,
-    "archive_count": 25,
+    "kept_previous_count": 25,
+    "display_count": 30,
+    "archive_count": 30,
     "dropped_from_display_count": 0,
-    "duplicate_candidate_count": 11,
-    "fresh_candidate_count": 49,
+    "duplicate_candidate_count": 16,
+    "fresh_candidate_count": 44,
     "max_stored_papers": 1200,
     "max_data_bytes": 12582912,
-    "data_bytes": 165197,
+    "data_bytes": 201651,
     "storage_trimmed_count": 0,
     "storage_trimmed_by_level": {
       "high": 0,
