@@ -99,8 +99,10 @@ jobs:
                   print(f"Warning: no previous {name} anywhere, archive starts empty")
                   continue
               _, best, label = max(options, key=lambda item: item[0])
-              shutil.copy(best, data / name)
-              shutil.copy(best, cache / name)
+              # 选中的可能本来就是缓存/仓库里那一份，同文件 copy 会抛 SameFileError
+              for target in (data / name, cache / name):
+                  if best.resolve() != target.resolve():
+                      shutil.copy(best, target)
               print(f"Hydrate {name}: {label} ({stamp(data / name)})")
           PY
 
