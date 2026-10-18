@@ -1,6 +1,6 @@
 {
-  "generated_at": "Sun, 18 Oct 2026 12:11:55 +0000",
-  "generated_at_iso": "2026-10-18T12:11:55.447877+00:00",
+  "generated_at": "Sun, 18 Oct 2026 12:12:47 +0000",
+  "generated_at_iso": "2026-10-18T12:12:47.168346+00:00",
   "config_source": "file",
   "data_kind": "daily",
   "topics": [
@@ -1892,6 +1892,7 @@
     "2407.06619v2": "2026-10-18T11:39:51.749426+00:00",
     "2402.06642v1": "2026-10-18T11:39:51.749426+00:00"
   },
+  "weekly_period": "2026-W42",
   "stats": {
     "candidate_paper_count": 212,
     "daily_candidate_paper_count": 212,
@@ -1908,7 +1909,7 @@
     "filtered_low_relevance_count": 71,
     "days": 7,
     "collection_mode": "lookback",
-    "collection_cutoff_iso": "2026-10-11T12:07:10.831869+00:00",
+    "collection_cutoff_iso": "2026-10-11T12:12:47.168346+00:00",
     "max_per_topic": 25,
     "max_new_papers": 60,
     "max_new_conference_papers": 50,
@@ -1955,26 +1956,25 @@
     "conference_arxiv_enrichment_last_error": "",
     "paper_count": 25,
     "new_paper_count": 60,
-    "weekly_new_count": 5,
-    "weekly_new_quota": 5,
+    "weekly_period": "2026-W42",
+    "weekly_new_count": 0,
+    "weekly_new_quota": 0,
     "weekly_new_total": 10,
     "kept_previous_count": 25,
-    "display_count": 30,
-    "archive_count": 30,
+    "display_count": 25,
+    "archive_count": 25,
     "dropped_from_display_count": 0,
     "duplicate_candidate_count": 16,
     "fresh_candidate_count": 44,
     "max_stored_papers": 1200,
     "max_data_bytes": 12582912,
-    "data_bytes": 201651,
+    "data_bytes": 171105,
     "storage_trimmed_count": 0,
     "storage_trimmed_by_level": {
       "high": 0,
       "medium": 0,
       "low": 0,
       "unknown": 0
-    },
-    "weekly_period": "2026-W42"
-  },
-  "weekly_period": "2026-W42"
+    }
+  }
 }

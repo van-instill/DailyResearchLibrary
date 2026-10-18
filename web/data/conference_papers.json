@@ -1,6 +1,6 @@
 {
-  "generated_at": "Sun, 18 Oct 2026 12:11:55 +0000",
-  "generated_at_iso": "2026-10-18T12:11:55.447877+00:00",
+  "generated_at": "Sun, 18 Oct 2026 12:14:09 +0000",
+  "generated_at_iso": "2026-10-18T12:14:09.769509+00:00",
   "config_source": "file",
   "data_kind": "journal",
   "topics": [
@@ -2246,6 +2246,7 @@
     "openalex:w3084432689": "2026-10-18T11:41:54.573051+00:00",
     "10.1080/14697688.2020.1805505": "2026-10-18T11:41:54.573051+00:00"
   },
+  "weekly_period": "2026-W42",
   "stats": {
     "candidate_paper_count": 1423,
     "new_paper_count": 60,
@@ -2405,19 +2406,20 @@
       }
     },
     "collection_mode": "incremental",
-    "high_count": 30,
-    "with_abstract_count": 30,
-    "weekly_new_count": 5,
-    "weekly_new_quota": 5,
+    "high_count": 25,
+    "with_abstract_count": 25,
+    "weekly_period": "2026-W42",
+    "weekly_new_count": 0,
+    "weekly_new_quota": 0,
     "weekly_new_total": 10,
     "kept_previous_count": 25,
-    "display_count": 30,
-    "archive_count": 30,
+    "display_count": 25,
+    "archive_count": 25,
     "dropped_from_display_count": 0,
     "duplicate_candidate_count": 17,
     "fresh_candidate_count": 43,
-    "summary_jobs": 5,
-    "summary_succeeded": 5,
+    "summary_jobs": 0,
+    "summary_succeeded": 0,
     "summary_failed": 0,
     "summary_cache_hits": 25,
     "preprint_checked": 0,
@@ -2425,7 +2427,7 @@
     "preprint_cache_hits": 0,
     "max_stored_papers": 1200,
     "max_data_bytes": 12582912,
-    "data_bytes": 210564,
+    "data_bytes": 178643,
     "storage_trimmed_count": 0,
     "storage_trimmed_by_level": {
       "high": 0,
@@ -2433,8 +2435,6 @@
       "low": 0,
       "unknown": 0
     },
-    "paper_count": 25,
-    "weekly_period": "2026-W42"
-  },
-  "weekly_period": "2026-W42"
+    "paper_count": 25
+  }
 }
