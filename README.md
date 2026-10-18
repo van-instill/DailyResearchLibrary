@@ -126,15 +126,17 @@ python -m http.server 8000 --directory web
 
 ### `config/journals.json`
 
+默认收录 `国际期刊目录.md` 里的 **29 本**，按 `group` 分成经济学（7）、统计学（6）、金融学（16），每条带 `rank`（4\* / 4 / 3 / 2）。
+
 加期刊需要两个东西：ISSN（[portal.issn.org](https://portal.issn.org) 查）和 OpenAlex 来源 ID。
 
 ```bash
 curl "https://api.openalex.org/sources?filter=issn:0022-1082&select=id,display_name"
 ```
 
-拿到 `S5353659` 这样的 ID 填进 `openalex_source_id` 即可（不填也行，脚本会自己查，多花一次请求）。
+拿到 `S5353659` 这样的 ID 填进 `openalex_source_id` 即可。**不填也能用**——脚本会按 ISSN 现查（每本多一次请求）。仓库里有 `scripts/_probe_journals.py`，改一下里面的刊名清单就能批量解析 ISSN 并顺带统计各刊的摘要覆盖率。
 
-常用 ISSN：JF `0022-1082`、JFE `0304-405X`、RFS `0893-9454`、JFQA `0022-1090`、JoE `0304-4076`、Econometrica `0012-9682`、REStat `0034-6535`、JBES `0735-0015`、JAE `0883-7252`、JBF `0378-4266`、JEF `0927-5398`、QF `1469-7688`。
+`per_venue_results` 默认 25：单刊在一轮里最多取多少条近期记录。29 本 × 25 ≈ 700 条候选，够 AI 阅卷挑；调太大会让 OpenAlex 请求变慢且候选池里堆满低相关论文。
 
 ## 常用可调参数
 
@@ -170,7 +172,8 @@ curl "https://api.openalex.org/sources?filter=issn:0022-1082&select=id,display_n
   ```
 
   点邮件里的链接激活，把 key 存成 `OPENALEX_API_KEY` secret。即使不配，脚本也会自动回退到 Crossref，页面不会空白。
-- **Elsevier 期刊（JFE / JoE / JBF）经常不提供摘要**：OpenAlex 和 Crossref 都拿不到，这几本刊的部分论文只有标题和 DOI。脚本不会让模型凭标题猜内容，这类条目会明确标注「未提供摘要」。
+- **不少期刊不给摘要**：实测 Crossref 对 Elsevier 系（JFE / JoE / JCF / JFI / IME）、JASA、Econometric Reviews、Quantitative Finance 的近期记录几乎不提供 abstract；OpenAlex 好一些（JF 23/25、JoE 14/25、JFE 14/25 有摘要），但仍不完整。没有摘要的论文不会送进 AI 阅卷（只凭标题判断会瞎猜），它们在机械分排序里靠后，通常进不了最终的展示名单。这类条目如果出现，会明确标注「未提供摘要」，只给标题和 DOI。
+- **AI 阅卷依赖摘要质量**：这是当前最影响效果的一环。想让某本刊多出内容，先确认它的摘要覆盖率（用 `scripts/_probe_journals.py` 可以批量统计）。
 - **arXiv 429**：同时开太多方向会被限流，脚本默认每个方向之间停 15 秒；被限流时自动跳过并使用缓存数据。
 - **分数只反映关键词与分类重合度**，不是论文质量的判断，high 只是「很可能相关」，最终还是要点开原文。
 

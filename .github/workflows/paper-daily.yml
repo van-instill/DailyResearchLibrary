@@ -131,10 +131,10 @@ jobs:
           JOURNAL_PER_VENUE_RESULTS: ${{ vars.JOURNAL_PER_VENUE_RESULTS || '100' }}
           JOURNAL_VENUE_DELAY_SECONDS: ${{ vars.JOURNAL_VENUE_DELAY_SECONDS || '1' }}
           JOURNAL_RETENTION_DAYS: ${{ vars.JOURNAL_RETENTION_DAYS || '400' }}
-          MAX_NEW_JOURNAL_PAPERS: ${{ vars.MAX_NEW_JOURNAL_PAPERS || '40' }}
-          MAX_JOURNAL_SUMMARIES: ${{ vars.MAX_JOURNAL_SUMMARIES || '30' }}
-          MAX_STORED_JOURNAL_PAPERS: ${{ vars.MAX_STORED_JOURNAL_PAPERS || '300' }}
-          MAX_JOURNAL_PER_VENUE: ${{ vars.MAX_JOURNAL_PER_VENUE || '6' }}
+          MAX_NEW_JOURNAL_PAPERS: ${{ vars.MAX_NEW_JOURNAL_PAPERS || '60' }}
+          MAX_JOURNAL_SUMMARIES: ${{ vars.MAX_JOURNAL_SUMMARIES || '40' }}
+          MAX_STORED_JOURNAL_PAPERS: ${{ vars.MAX_STORED_JOURNAL_PAPERS || '500' }}
+          MAX_JOURNAL_PER_VENUE: ${{ vars.MAX_JOURNAL_PER_VENUE || '4' }}
           MIN_JOURNAL_SCORE: ${{ vars.MIN_JOURNAL_SCORE || '0.18' }}
           MAX_DATA_BYTES: ${{ vars.MAX_DATA_BYTES || '8388608' }}
           CLEAR_PAPER_CACHE: ${{ github.event_name == 'workflow_dispatch' && inputs.clear_cache || vars.CLEAR_PAPER_CACHE || 'false' }}

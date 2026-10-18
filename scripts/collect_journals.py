@@ -117,6 +117,12 @@ def normalize_name(value: str) -> str:
     return re.sub(r"[^a-z0-9]+", " ", value.lower()).strip()
 
 
+def venue_key(value: str) -> str:
+    """Loose key so "The Journal of Finance" and "Journal of Finance" collapse together."""
+    key = normalize_name(value)
+    return key[4:] if key.startswith("the ") else key
+
+
 def resolve_source_id(venue: dict[str, Any]) -> str:
     """Resolve the authoritative OpenAlex source id for a venue (ISSN driven)."""
     explicit = str(venue.get("openalex_source_id") or "").strip()
@@ -215,7 +221,7 @@ def paper_from_work(work: dict[str, Any], venue: dict[str, Any]) -> dict[str, An
 
     primary = work.get("primary_location") or {}
     source_info = primary.get("source") or {}
-    venue_name = str(source_info.get("display_name") or venue.get("name") or "")
+    venue_name = str(venue.get("name") or source_info.get("display_name") or "")
     published = iso_date(work.get("publication_date"))
 
     topics = []
@@ -332,7 +338,7 @@ def paper_from_crossref(item: dict[str, Any], venue: dict[str, Any]) -> dict[str
         abstract = html_to_text(abstract)
         abstract = re.sub(r"^\s*(Abstract|ABSTRACT)\s*[:.]?\s*", "", abstract)
 
-    venue_name = html_lib.unescape(str((item.get("container-title") or [venue.get("name") or ""])[0]))
+    venue_name = str(venue.get("name") or html_lib.unescape(str((item.get("container-title") or [""])[0])))
     paper_url = f"https://doi.org/{doi}"
     return {
         "id": f"doi:{doi.lower()}",
@@ -524,7 +530,12 @@ def apply_summaries(papers: list[dict[str, Any]], topics: list[Topic], max_summa
     return stats
 
 
-def load_retained(existing: dict[str, Any], now: dt.datetime, retention_days: int) -> list[dict[str, Any]]:
+def load_retained(
+    existing: dict[str, Any],
+    now: dt.datetime,
+    retention_days: int,
+    canonical_venues: dict[str, str] | None = None,
+) -> list[dict[str, Any]]:
     cutoff = now - dt.timedelta(days=max(1, retention_days))
     retained = []
     for paper in existing.get("papers") or []:
@@ -536,6 +547,13 @@ def load_retained(existing: dict[str, Any], now: dt.datetime, retention_days: in
         level = str((paper.get("best_match") or {}).get("level") or "low").lower()
         if level not in RETAINED_LEVELS and published and (now - published).days > 45:
             continue
+        if canonical_venues is not None:
+            key = venue_key(str(paper.get("venue") or ""))
+            canonical = canonical_venues.get(key)
+            if not canonical:
+                # 该刊已从配置里移除（或刊名对不上），不再保留
+                continue
+            paper = {**paper, "venue": canonical}
         retained.append(paper)
     return retained
 
@@ -632,7 +650,11 @@ def collect(
                             stats["type"] = "openalex_journal_widened"
                 candidates.extend(works)
                 source_stats[name] = stats
-                continue
+                if works:
+                    continue
+                # OpenAlex 完全没有这本刊的近期记录，改走 Crossref 兜底
+                print(f"Notice: {name} empty on OpenAlex, falling back to Crossref", flush=True)
+                source_stats[name] = {**stats, "openalex_empty": True}
             except Exception as exc:  # noqa: BLE001
                 print(f"Warning: OpenAlex failed for {name}: {exc}", file=sys.stderr, flush=True)
                 if "429" in str(exc):
@@ -653,7 +675,7 @@ def collect(
                     works = fetch_venue_crossref(venue, widened, per_page)
                     stats.update({"fetched": len(works), "from_date": widened})
             candidates.extend(works)
-            source_stats[name] = stats
+            source_stats[name] = {**source_stats.get(name, {}), **stats}
         except Exception as exc:  # noqa: BLE001
             source_stats[name] = {"type": "crossref_fallback", "fetched": 0, "error": str(exc)}
             print(f"Warning: journal fetch failed for {name}: {exc}", file=sys.stderr, flush=True)
@@ -694,10 +716,10 @@ def collect(
         capped = []
         per_venue_count: dict[str, int] = {}
         for paper in scored:
-            venue_key = str(paper.get("venue") or "")
-            if per_venue_count.get(venue_key, 0) >= max_per_venue:
+            paper_venue = str(paper.get("venue") or "")
+            if per_venue_count.get(paper_venue, 0) >= max_per_venue:
                 continue
-            per_venue_count[venue_key] = per_venue_count.get(venue_key, 0) + 1
+            per_venue_count[paper_venue] = per_venue_count.get(paper_venue, 0) + 1
             capped.append(paper)
         scored = capped
 
@@ -715,7 +737,17 @@ def collect(
             existing = load_json(output_path)
         except Exception as exc:  # noqa: BLE001
             print(f"Warning: cannot read existing journal data: {exc}", file=sys.stderr)
-    retained = load_retained(existing, now, env_int("JOURNAL_RETENTION_DAYS", 400))
+    canonical_venues = {
+        venue_key(str(venue.get("name") or "")): str(venue.get("name") or "")
+        for venue in venues
+        if venue.get("name")
+    }
+    retained = load_retained(
+        existing,
+        now,
+        env_int("JOURNAL_RETENTION_DAYS", 400),
+        canonical_venues,
+    )
     merged = sort_papers(merge_papers(scored, retained, now))
 
     stats = {

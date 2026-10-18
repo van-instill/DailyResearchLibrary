@@ -1,59 +1,36 @@
 {
   "enabled": true,
   "lookback_days": 150,
-  "per_venue_results": 100,
+  "per_venue_results": 25,
   "keywords_per_query": 12,
+  "max_pages": 1,
+  "comment": "来源：国际期刊目录.md（29 本）。openalex_source_id 留空的会在运行时按 ISSN 现查。",
   "venues": [
     {
-      "id": "jf",
-      "name": "Journal of Finance",
-      "group": "金融顶刊",
+      "id": "qje",
+      "name": "Quarterly Journal of Economics",
+      "group": "经济学",
+      "rank": "4*",
       "issn": [
-        "0022-1082"
-      ],
-      "openalex_source_id": "S5353659"
+        "0033-5533",
+        "1531-4650"
+      ]
     },
     {
-      "id": "jfe",
-      "name": "Journal of Financial Economics",
-      "group": "金融顶刊",
+      "id": "restud",
+      "name": "Review of Economic Studies",
+      "group": "经济学",
+      "rank": "4*",
       "issn": [
-        "0304-405X"
-      ],
-      "openalex_source_id": "S149240962"
-    },
-    {
-      "id": "rfs",
-      "name": "Review of Financial Studies",
-      "group": "金融顶刊",
-      "issn": [
-        "0893-9454"
-      ],
-      "openalex_source_id": "S170137484"
-    },
-    {
-      "id": "jfqa",
-      "name": "Journal of Financial and Quantitative Analysis",
-      "group": "金融顶刊",
-      "issn": [
-        "0022-1090",
-        "1756-6916"
-      ],
-      "openalex_source_id": "S193228710"
-    },
-    {
-      "id": "joe",
-      "name": "Journal of Econometrics",
-      "group": "计量顶刊",
-      "issn": [
-        "0304-4076"
-      ],
-      "openalex_source_id": "S127742747"
+        "0034-6527",
+        "1467-937X"
+      ]
     },
     {
       "id": "econometrica",
       "name": "Econometrica",
-      "group": "计量顶刊",
+      "group": "经济学",
+      "rank": "4*",
       "issn": [
         "0012-9682",
         "1468-0262"
@@ -63,7 +40,8 @@
     {
       "id": "restat",
       "name": "Review of Economics and Statistics",
-      "group": "计量顶刊",
+      "group": "经济学",
+      "rank": "4",
       "issn": [
         "0034-6535",
         "1530-9142"
@@ -71,9 +49,81 @@
       "openalex_source_id": "S180061323"
     },
     {
+      "id": "qe",
+      "name": "Quantitative Economics",
+      "group": "经济学",
+      "rank": "4",
+      "issn": [
+        "1759-7323",
+        "1759-7331"
+      ]
+    },
+    {
+      "id": "ect",
+      "name": "Econometric Theory",
+      "group": "经济学",
+      "rank": "4",
+      "issn": [
+        "0266-4666",
+        "1469-4360"
+      ]
+    },
+    {
+      "id": "ecrev",
+      "name": "Econometric Reviews",
+      "group": "经济学",
+      "rank": "3",
+      "issn": [
+        "0747-4938",
+        "1532-4168"
+      ]
+    },
+    {
+      "id": "aos",
+      "name": "Annals of Statistics",
+      "group": "统计学",
+      "rank": "4*",
+      "issn": [
+        "0090-5364",
+        "2168-8966"
+      ]
+    },
+    {
+      "id": "jasa",
+      "name": "Journal of the American Statistical Association",
+      "group": "统计学",
+      "rank": "4",
+      "issn": [
+        "0162-1459",
+        "1537-274X"
+      ]
+    },
+    {
+      "id": "joe",
+      "name": "Journal of Econometrics",
+      "group": "统计学",
+      "rank": "4",
+      "issn": [
+        "0304-4076",
+        "1872-6895"
+      ],
+      "openalex_source_id": "S127742747"
+    },
+    {
+      "id": "biometrika",
+      "name": "Biometrika",
+      "group": "统计学",
+      "rank": "4",
+      "issn": [
+        "0006-3444",
+        "1464-3510"
+      ]
+    },
+    {
       "id": "jbes",
       "name": "Journal of Business & Economic Statistics",
-      "group": "计量期刊",
+      "group": "统计学",
+      "rank": "4",
       "issn": [
         "0735-0015",
         "1537-2707"
@@ -81,43 +131,179 @@
       "openalex_source_id": "S18095783"
     },
     {
-      "id": "jae",
-      "name": "Journal of Applied Econometrics",
-      "group": "计量期刊",
+      "id": "jrssb",
+      "name": "Journal of the Royal Statistical Society: Series B",
+      "group": "统计学",
+      "rank": "4",
       "issn": [
-        "0883-7252",
-        "1099-1255"
-      ],
-      "openalex_source_id": "S85739584"
+        "1369-7412",
+        "1467-9868"
+      ]
     },
     {
-      "id": "jbf",
-      "name": "Journal of Banking & Finance",
-      "group": "金融期刊",
+      "id": "jf",
+      "name": "Journal of Finance",
+      "group": "金融学",
+      "rank": "4*",
       "issn": [
-        "0378-4266"
+        "0022-1082",
+        "1540-6261"
       ],
-      "openalex_source_id": "S2876017"
+      "openalex_source_id": "S5353659"
     },
     {
-      "id": "jef",
-      "name": "Journal of Empirical Finance",
-      "group": "金融期刊",
+      "id": "jfe",
+      "name": "Journal of Financial Economics",
+      "group": "金融学",
+      "rank": "4*",
       "issn": [
-        "0927-5398"
+        "0304-405X",
+        "1879-0690"
       ],
-      "openalex_source_id": "S145875555"
+      "openalex_source_id": "S149240962"
+    },
+    {
+      "id": "rfs",
+      "name": "Review of Financial Studies",
+      "group": "金融学",
+      "rank": "4*",
+      "issn": [
+        "0893-9454",
+        "1465-7368"
+      ],
+      "openalex_source_id": "S170137484"
+    },
+    {
+      "id": "rof",
+      "name": "Review of Finance",
+      "group": "金融学",
+      "rank": "4",
+      "issn": [
+        "1572-3097",
+        "1573-692X"
+      ]
+    },
+    {
+      "id": "jfqa",
+      "name": "Journal of Financial and Quantitative Analysis",
+      "group": "金融学",
+      "rank": "4",
+      "issn": [
+        "0022-1090",
+        "1756-6916"
+      ],
+      "openalex_source_id": "S193228710"
+    },
+    {
+      "id": "jcf",
+      "name": "Journal of Corporate Finance",
+      "group": "金融学",
+      "rank": "4",
+      "issn": [
+        "0929-1199",
+        "1872-6313"
+      ]
+    },
+    {
+      "id": "jfi",
+      "name": "Journal of Financial Intermediation",
+      "group": "金融学",
+      "rank": "4",
+      "issn": [
+        "1042-9573",
+        "1096-0473"
+      ]
+    },
+    {
+      "id": "jmcb",
+      "name": "Journal of Money, Credit and Banking",
+      "group": "金融学",
+      "rank": "4",
+      "issn": [
+        "0022-2879",
+        "1538-4616"
+      ]
+    },
+    {
+      "id": "jfm",
+      "name": "Journal of Futures Markets",
+      "group": "金融学",
+      "rank": "3",
+      "issn": [
+        "0270-7314",
+        "1096-9934"
+      ]
     },
     {
       "id": "qf",
       "name": "Quantitative Finance",
-      "group": "金融期刊",
+      "group": "金融学",
+      "rank": "3",
       "issn": [
         "1469-7688",
         "1469-7696"
       ],
       "openalex_source_id": "S182689569"
+    },
+    {
+      "id": "mathfin",
+      "name": "Mathematical Finance",
+      "group": "金融学",
+      "rank": "3",
+      "issn": [
+        "0960-1627",
+        "1467-9965"
+      ]
+    },
+    {
+      "id": "finstoch",
+      "name": "Finance and Stochastics",
+      "group": "金融学",
+      "rank": "3",
+      "issn": [
+        "0949-2984",
+        "1432-1122"
+      ]
+    },
+    {
+      "id": "raps",
+      "name": "Review of Asset Pricing Studies",
+      "group": "金融学",
+      "rank": "3",
+      "issn": [
+        "2045-9920",
+        "2045-9939"
+      ]
+    },
+    {
+      "id": "jfec",
+      "name": "Journal of Financial Econometrics",
+      "group": "金融学",
+      "rank": "3",
+      "issn": [
+        "1479-8409",
+        "1479-8417"
+      ]
+    },
+    {
+      "id": "ime",
+      "name": "Insurance: Mathematics and Economics",
+      "group": "金融学",
+      "rank": "3",
+      "issn": [
+        "0167-6687",
+        "1873-5959"
+      ]
+    },
+    {
+      "id": "siamfin",
+      "name": "SIAM Journal on Financial Mathematics",
+      "group": "金融学",
+      "rank": "2",
+      "issn": [
+        "1945-497X",
+        "1945-4961"
+      ]
     }
-  ],
-  "max_pages": 1
+  ]
 }
