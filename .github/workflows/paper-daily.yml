@@ -20,7 +20,7 @@ on:
     types: [opened, edited, reopened]
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
   issues: read
@@ -60,40 +60,64 @@ jobs:
         env:
           REPO: ${{ github.repository }}
         run: |
-          mkdir -p web/data
-          # 缓存是每周才被访问一次，GitHub 会在 7 天未使用时清理掉；
-          # 所以缓存没命中时，退一步从线上已经部署的站点把上一期数据取回来，
-          # 否则一旦缓存被清，"不和之前的重复"就失效了。
-          SITE="https://${REPO%%/*}.github.io/${REPO##*/}"
-          fetch_live() {
-            local name="$1"
-            if [ -s ".paper-cache/$name" ]; then
-              cp ".paper-cache/$name" "web/data/$name"
-              return 0
-            fi
-            if curl -sSf --max-time 60 -o "web/data/$name" "$SITE/data/$name"; then
-              mkdir -p .paper-cache
-              cp "web/data/$name" ".paper-cache/$name"
-              echo "Recovered $name from $SITE"
-            fi
-          }
-          fetch_live papers.json
-          fetch_live conference_papers.json
+          # 上一期的数据可能在三个地方，取"时间戳最新"的那份：
+          #   1) Actions 缓存（7 天不用就会被 GitHub 清掉，不可靠）
+          #   2) 仓库里提交过的 web/data/*.json（每周都会提交回 main，最可靠）
+          #   3) 线上已部署的站点（前两者都缺时的兜底）
+          # 「新论文不和之前的重复」完全依赖这里拿到上一期数据，取错一份就会重复推送，
+          # 所以不按顺序猜，直接比 generated_at_iso。
+          python3 - <<'PY'
+          import json, os, shutil, urllib.request
+          from pathlib import Path
+
+          cache = Path(".paper-cache")
+          data = Path("web/data")
+          cache.mkdir(parents=True, exist_ok=True)
+          data.mkdir(parents=True, exist_ok=True)
+          owner, repo = os.environ["REPO"].split("/")[:2]
+          site = f"https://{owner}.github.io/{repo}/data"
+
+          def stamp(path: Path) -> str:
+              try:
+                  return str(json.loads(path.read_text(encoding="utf-8")).get("generated_at_iso") or "")
+              except Exception:
+                  return ""
+
+          for name in ("papers.json", "conference_papers.json"):
+              options = []
+              for path, label in ((cache / name, "actions cache"), (data / name, "repo commit")):
+                  if path.exists() and path.stat().st_size > 0 and stamp(path):
+                      options.append((stamp(path), path, label))
+              live = cache / f"{name}.live"
+              try:
+                  urllib.request.urlretrieve(f"{site}/{name}", live)
+                  if stamp(live):
+                      options.append((stamp(live), live, "live site"))
+              except Exception as exc:  # noqa: BLE001
+                  print(f"live fetch failed for {name}: {exc}")
+              if not options:
+                  print(f"Warning: no previous {name} anywhere, archive starts empty")
+                  continue
+              _, best, label = max(options, key=lambda item: item[0])
+              shutil.copy(best, data / name)
+              shutil.copy(best, cache / name)
+              print(f"Hydrate {name}: {label} ({stamp(data / name)})")
+          PY
 
       - name: Collect arXiv papers
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           CONFIG_ISSUE_TITLE: Research Interests
           PAPER_WINDOW_START: ${{ vars.PAPER_WINDOW_START || '2018-01-01' }}
-          WEEKLY_NEW_PAPERS: ${{ vars.WEEKLY_NEW_PAPERS || '10' }}
-          DISPLAY_CAP: ${{ vars.DISPLAY_CAP || '20' }}
-          REENTRY_COOLDOWN_DAYS: ${{ vars.REENTRY_COOLDOWN_DAYS || '56' }}
+          WEEKLY_NEW_TOTAL: ${{ vars.WEEKLY_NEW_TOTAL || '10' }}
+          RADAR_COLLECTION_COUNT: ${{ vars.RADAR_COLLECTION_COUNT || '2' }}
+          WEEKLY_NEW_PAPERS: ${{ vars.WEEKLY_NEW_PAPERS || '' }}
           LOOKBACK_DAYS: ${{ github.event_name == 'workflow_dispatch' && inputs.lookback_days || vars.LOOKBACK_DAYS || '7' }}
           MAX_PER_TOPIC: ${{ vars.MAX_PER_TOPIC || '25' }}
           MAX_SUMMARIES: ${{ vars.MAX_SUMMARIES || '40' }}
           MAX_NEW_PAPERS: ${{ vars.MAX_NEW_PAPERS || '60' }}
-          MAX_STORED_PAPERS: ${{ vars.MAX_STORED_PAPERS || '20' }}
-          MAX_DATA_BYTES: ${{ vars.MAX_DATA_BYTES || '8388608' }}
+          MAX_STORED_PAPERS: ${{ vars.MAX_STORED_PAPERS || '1200' }}
+          MAX_DATA_BYTES: ${{ vars.MAX_DATA_BYTES || '12582912' }}
           RECENT_HISTORY_DAYS: ${{ vars.RECENT_HISTORY_DAYS || '45' }}
           PAPER_SOURCES: ${{ vars.PAPER_SOURCES || 'arxiv' }}
           CONTACT_EMAIL: ${{ vars.CONTACT_EMAIL || '' }}
@@ -142,9 +166,9 @@ jobs:
           OPENALEX_EMAIL: ${{ vars.OPENALEX_EMAIL || vars.CONTACT_EMAIL || '' }}
           OPENALEX_API_KEY: ${{ secrets.OPENALEX_API_KEY }}
           PAPER_WINDOW_START: ${{ vars.PAPER_WINDOW_START || '2018-01-01' }}
-          WEEKLY_NEW_PAPERS: ${{ vars.WEEKLY_NEW_PAPERS || '10' }}
-          DISPLAY_CAP: ${{ vars.DISPLAY_CAP || '20' }}
-          REENTRY_COOLDOWN_DAYS: ${{ vars.REENTRY_COOLDOWN_DAYS || '56' }}
+          WEEKLY_NEW_TOTAL: ${{ vars.WEEKLY_NEW_TOTAL || '10' }}
+          RADAR_COLLECTION_COUNT: ${{ vars.RADAR_COLLECTION_COUNT || '2' }}
+          WEEKLY_NEW_PAPERS: ${{ vars.WEEKLY_NEW_PAPERS || '' }}
           SCREEN_MODE: ${{ vars.SCREEN_MODE || 'llm' }}
           SCREEN_MIN_SCORE: ${{ vars.SCREEN_MIN_SCORE || '45' }}
           SCREEN_BATCH_SIZE: ${{ vars.SCREEN_BATCH_SIZE || '6' }}
@@ -158,10 +182,10 @@ jobs:
           JOURNAL_VENUE_DELAY_SECONDS: ${{ vars.JOURNAL_VENUE_DELAY_SECONDS || '1' }}
           MAX_NEW_JOURNAL_PAPERS: ${{ vars.MAX_NEW_JOURNAL_PAPERS || '60' }}
           MAX_JOURNAL_SUMMARIES: ${{ vars.MAX_JOURNAL_SUMMARIES || '40' }}
-          MAX_STORED_JOURNAL_PAPERS: ${{ vars.MAX_STORED_JOURNAL_PAPERS || '20' }}
+          MAX_STORED_JOURNAL_PAPERS: ${{ vars.MAX_STORED_JOURNAL_PAPERS || '1200' }}
           MAX_JOURNAL_PER_VENUE: ${{ vars.MAX_JOURNAL_PER_VENUE || '3' }}
           MIN_JOURNAL_SCORE: ${{ vars.MIN_JOURNAL_SCORE || '0.18' }}
-          MAX_DATA_BYTES: ${{ vars.MAX_DATA_BYTES || '8388608' }}
+          MAX_DATA_BYTES: ${{ vars.MAX_DATA_BYTES || '12582912' }}
           CLEAR_PAPER_CACHE: ${{ github.event_name == 'workflow_dispatch' && inputs.clear_cache || vars.CLEAR_PAPER_CACHE || 'false' }}
           LLM_CONCURRENCY: ${{ vars.LLM_CONCURRENCY || '2' }}
           LLM_API_KEY: ${{ secrets.LLM_API_KEY }}
@@ -170,6 +194,22 @@ jobs:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
         run: python scripts/collect_journals.py
+
+      - name: Persist paper data back to the repo
+        run: |
+          # 把本期数据提交回 main，作用有两个：
+          #   1) 上一期数据永久留在 git 里，不依赖 7 天就会过期的 Actions 缓存；
+          #   2) 每周都有一次提交，仓库不会因为 60 天无活动而被 GitHub 停用定时任务。
+          # 用 GITHUB_TOKEN 发起的 push 不会再次触发工作流，不存在循环触发。
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add web/data/papers.json web/data/conference_papers.json
+          if git diff --cached --quiet; then
+            echo "No paper data change to commit"
+            exit 0
+          fi
+          git commit -m "data: weekly paper update [skip ci]"
+          git push origin HEAD:main
 
       - name: Stage paper data cache
         run: |

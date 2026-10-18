@@ -360,10 +360,19 @@ def screen_papers(
     return verdicts
 
 
-# v3：卡片不再展示「证据 / 局限 / 匹配」，改为「问题 / 方法 / 创新 / 主要结论」，
-# 字段变了就必须重写，否则旧条目里没有 conclusion，页面会空一块。
-SUMMARY_CACHE_PATH = Path(".paper-cache/summary_cache.v3.json")
-SUMMARY_FIELDS = ("problem", "method", "innovation", "conclusion", "abstract_zh", "why_relevant")
+# v4：中文摘要改成"逐句直译"，并新增 evidence（原文引用）做机械核对，
+# 老版本的缓存里没有 evidence，也就无法证明内容来自原文，所以整体作废重写。
+SUMMARY_CACHE_PATH = Path(".paper-cache/summary_cache.v4.json")
+SUMMARY_SCHEMA_VERSION = 4
+SUMMARY_FIELDS = (
+    "problem",
+    "method",
+    "innovation",
+    "conclusion",
+    "abstract_zh",
+    "evidence",
+    "why_relevant",
+)
 
 
 def _summary_cache_path() -> Path:
@@ -399,14 +408,22 @@ def save_summary_cache(entries: dict[str, Any]) -> None:
 
 
 def is_real_summary(summary: Any) -> bool:
-    """True only for a model-written summary, not a placeholder."""
+    """是否是"通过校验的模型摘要"，而不是占位文案。
+
+    除了文案本身不像占位，还要求带 `v == 4` 和一段原文引用 `evidence`：
+    没有引用的摘要无法证明内容来自原文，一律当作草稿重新生成。
+    """
     if not isinstance(summary, dict):
+        return False
+    if int(summary.get("v") or 0) < SUMMARY_SCHEMA_VERSION:
         return False
     problem = str(summary.get("problem") or "")
     if len(problem) < 15:
         return False
     conclusion = str(summary.get("conclusion") or "")
     if len(conclusion) < 10:
+        return False
+    if len(str(summary.get("evidence") or "").strip()) < 20:
         return False
     placeholders = ("未配置模型", "尚未配置", "没有提供足够摘要", "出版商未向开放索引", "DBLP")
     return not any(marker in problem for marker in placeholders)
@@ -417,6 +434,7 @@ def store_summary(entries: dict[str, Any], paper_id: str, summary: Any) -> None:
         return
     entries[paper_id] = {
         **{key: str(summary.get(key) or "") for key in SUMMARY_FIELDS},
+        "v": SUMMARY_SCHEMA_VERSION,
         "model": os.getenv("LLM_MODEL", "deepseek-chat"),
         "at": dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds"),
     }

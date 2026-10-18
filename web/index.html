@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>金融计量论文周报 · Paper Radar</title>
-    <link rel="stylesheet" href="./styles.css?v=20261018-weekly" />
+    <link rel="stylesheet" href="./styles.css?v=20261018-archive" />
     <link rel="stylesheet" href="./vendor/katex/katex.min.css" />
   </head>
   <body>
@@ -45,11 +45,11 @@
         <div class="metric-grid">
           <div class="metric">
             <span class="metric-value" id="paperCount">0</span>
-            <span class="metric-label">总论文</span>
+            <span class="metric-label">已收录</span>
           </div>
           <div class="metric">
             <span class="metric-value" id="weekCount">0</span>
-            <span class="metric-label">本周新增</span>
+            <span class="metric-label">本期新增</span>
           </div>
           <div class="metric">
             <span class="metric-value" id="monthCount">0</span>
@@ -69,9 +69,9 @@
         </div>
         <div class="tabs" role="tablist" aria-label="视图">
           <button class="tab active" type="button" data-view="all">全部</button>
-          <button class="tab" type="button" data-view="week">本周</button>
-          <button class="tab" type="button" data-view="month">本月</button>
-          <button class="tab" type="button" data-view="highlights">本周精选</button>
+          <button class="tab" type="button" data-view="latest">本期新增</button>
+          <button class="tab" type="button" data-view="month">本月新增</button>
+          <button class="tab" type="button" data-view="highlights">高分精选</button>
         </div>
         <div class="filters">
           <label class="field compact">
@@ -107,6 +107,9 @@
           <span id="resultCount">0 篇</span>
         </div>
         <div id="paperList" class="paper-list"></div>
+        <div class="list-more">
+          <button id="loadMore" class="load-more" type="button" hidden>加载更多</button>
+        </div>
       </section>
     </main>
 
@@ -170,6 +173,6 @@
 
     <script defer src="./vendor/katex/katex.min.js"></script>
     <script defer src="./vendor/katex/auto-render.min.js"></script>
-    <script defer src="./app.js?v=20261018-weekly"></script>
+    <script defer src="./app.js?v=20261018-archive"></script>
   </body>
 </html>

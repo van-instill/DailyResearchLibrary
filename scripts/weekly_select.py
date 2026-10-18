@@ -1,30 +1,28 @@
 """每周滚动更新的选稿规则（arXiv 与顶刊两条流水线共用）。
 
-用户设定的规则：
+用户设定的规则（2026-10 修订）：
 
 1. 时间窗口：2018-01-01 起，到当前为止；
 2. 更新频率：每周五上午 9 点跑一次（cron 在 workflow 里配置）；
-3. 每期最多新增 10 篇，页面常驻 20 个位置；
-4. 新抓到的不能和"当前正在展示的"重复；
-5. 20 个位置里优先留高分论文，被挤掉的从页面删除；被删掉的论文进入冷却期，
-   冷却结束后如果再次被抓到，可以重新进入列表。
+3. **每期合计新增 10 篇**（两条流水线各 5 篇：arXiv 5 + 顶刊 5）；
+4. 新增的论文绝不与"已经收录过的"重复；
+5. **已经收录的论文不删除**，全部留在归档里，页面上用「本期新增」把它们区分开；
+6. 因此不再需要"冷却期"概念——论文不会离开列表，也就不会出现两组论文周周来回跳。
 
-第 4 条和第 5 条放在一起会有一个坑：如果只排除"当前展示的 20 篇"，
-那么上周被挤掉的那 10 篇下一期又会原样回到候选池，列表会在两组论文之间来回跳。
-所以这里引入 `seen` 冷却表：记住每篇论文最后一次被展示的时间，冷却期内不再入选。
-冷却期（默认 56 天）之后才允许重新进来，等价于"后面有抓取到可以再放进来"。
+`seen` 仍然保留，但语义从"冷却表"变成"去重账本"：记录每一篇曾经入选过的论文 key。
+即使将来归档因为体积上限被裁掉一部分，账本也能保证那些论文不会又被当成新论文抓回来。
 """
 
 from __future__ import annotations
 
 import datetime as dt
 import os
+import re
 from typing import Any
 
 DEFAULT_WINDOW_START = "2018-01-01"
-DEFAULT_WEEKLY_NEW = 10
-DEFAULT_DISPLAY_CAP = 20
-DEFAULT_COOLDOWN_DAYS = 56
+DEFAULT_WEEKLY_NEW_TOTAL = 10
+DEFAULT_COLLECTION_COUNT = 2
 
 
 def env_int(name: str, default: int) -> int:
@@ -76,12 +74,41 @@ def in_window(paper: dict[str, Any]) -> bool:
     return stamp >= window_start()
 
 
+def normalize_doi(value: Any) -> str:
+    text = str(value or "").strip().lower()
+    if not text:
+        return ""
+    text = re.sub(r"^https?://(dx\.)?doi\.org/", "", text)
+    return text.strip()
+
+
+def title_key(value: Any) -> str:
+    return re.sub(r"[^0-9a-z\u4e00-\u9fff]+", "", str(value or "").lower())
+
+
+def paper_keys(paper: dict[str, Any]) -> list[str]:
+    """一篇论文的全部可比对身份，用于"绝不重复"的判断。
+
+    只看 `id` 不够：同一篇论文从 OpenAlex 抓到时是 ``openalex:W123``，
+    走 Crossref 兜底时是 ``doi:10.xxx``，两条路都命中的话会被当成两篇。
+    所以 DOI、id、标题指纹三者都用，命中任意一个就算同一篇。
+    """
+    keys: list[str] = []
+    doi = normalize_doi(paper.get("doi"))
+    if doi:
+        keys.append("doi:" + doi)
+    pid = str(paper.get("id") or "").strip().lower()
+    if pid:
+        keys.append("id:" + pid)
+    tid = title_key(paper.get("title"))
+    if len(tid) >= 12:
+        keys.append("t:" + tid)
+    return keys
+
+
 def paper_key(paper: dict[str, Any]) -> str:
-    for field in ("id", "doi", "paper_url"):
-        value = str(paper.get(field) or "").strip()
-        if value:
-            return value.lower()
-    return ""
+    keys = paper_keys(paper)
+    return keys[0] if keys else ""
 
 
 def score_of(paper: dict[str, Any]) -> float:
@@ -97,39 +124,82 @@ def sort_key(paper: dict[str, Any]) -> tuple[float, float]:
 
 
 def load_seen(payload: dict[str, Any]) -> dict[str, str]:
-    """从上一期数据里取出冷却表 `{论文 key: 最后展示时间}`。
+    """取出"曾经入选过"的账本 `{论文 key: 最后入选时间}`。
 
-    旧版数据没有 `seen` 字段（此前是"保留 + 合并"的逻辑），这时用
-    `last_seen_at` 补一份初始冷却表，否则迁移当期会把刚淘汰的论文
-    当成全新论文又选回来。
+    兼容三种历史格式：
+    * v2 起：顶层 `seen` 字段（本次及以后继续沿用）；
+    * v1：没有 `seen`，用当期 `papers` 里的 `last_seen_at` 补种；
+    * 迁移期：早期 `seen` 的 key 是裸 id / DOI，不是带前缀的规范 key。
     """
     if not isinstance(payload, dict):
         return {}
     seen = payload.get("seen")
-    if isinstance(seen, dict) and seen:
-        return {str(key): str(value) for key, value in seen.items() if key and value}
-
-    seeded: dict[str, str] = {}
+    ledger: dict[str, str] = {}
+    if isinstance(seen, dict):
+        for key, value in seen.items():
+            text = str(key or "").strip()
+            stamp = str(value or "").strip()
+            if text and stamp:
+                ledger[text.lower()] = stamp
     for paper in payload.get("papers") or []:
         if not isinstance(paper, dict):
             continue
-        key = paper_key(paper)
-        stamp = str(paper.get("last_seen_at") or paper.get("first_seen_at") or "")
-        if key and stamp:
-            seeded[key] = stamp
-    return seeded
+        stamp = str(paper.get("last_seen_at") or paper.get("first_seen_at") or "").strip()
+        if not stamp:
+            continue
+        for key in paper_keys(paper):
+            ledger.setdefault(key, stamp)
+        # 兼容旧版裸 key（无前缀）
+        raw = str(paper.get("id") or paper.get("paper_url") or "").strip().lower()
+        if raw:
+            ledger.setdefault(raw, stamp)
+        raw_doi = normalize_doi(paper.get("doi"))
+        if raw_doi:
+            ledger.setdefault(raw_doi, stamp)
+    return ledger
+
+
+def keyset_of(papers: list[dict[str, Any]], ledger: dict[str, str] | None = None) -> set[str]:
+    """归档 + 账本合并成一张"这些都已经收录过"的集合。"""
+    blocked: set[str] = set(ledger or {})
+    for paper in papers:
+        if not isinstance(paper, dict):
+            continue
+        blocked.update(paper_keys(paper))
+        raw = str(paper.get("id") or paper.get("paper_url") or "").strip().lower()
+        if raw:
+            blocked.add(raw)
+        raw_doi = normalize_doi(paper.get("doi"))
+        if raw_doi:
+            blocked.add(raw_doi)
+    return blocked
+
+
+def weekly_new_total() -> int:
+    """每期新增总量，跨两条流水线合计。"""
+    return max(0, env_int("WEEKLY_NEW_TOTAL", DEFAULT_WEEKLY_NEW_TOTAL))
+
+
+def collection_count() -> int:
+    return max(1, env_int("RADAR_COLLECTION_COUNT", DEFAULT_COLLECTION_COUNT))
 
 
 def weekly_new() -> int:
-    return max(0, env_int("WEEKLY_NEW_PAPERS", DEFAULT_WEEKLY_NEW))
+    """单条流水线本期的新增配额。
 
-
-def display_cap() -> int:
-    return max(0, env_int("DISPLAY_CAP", DEFAULT_DISPLAY_CAP))
-
-
-def cooldown_days() -> int:
-    return max(0, env_int("REENTRY_COOLDOWN_DAYS", DEFAULT_COOLDOWN_DAYS))
+    默认按总量对半分（10 篇 → arXiv 5 + 顶刊 5）；显式设置
+    `WEEKLY_NEW_PAPERS` 时以它为准，方便临时只调一条线。
+    """
+    raw = (os.getenv("WEEKLY_NEW_PAPERS") or "").strip()
+    if raw:
+        try:
+            return max(0, int(float(raw)))
+        except ValueError:
+            pass
+    total = weekly_new_total()
+    if total <= 0:
+        return 0
+    return max(1, round(total / collection_count()))
 
 
 def select_weekly(
@@ -140,80 +210,102 @@ def select_weekly(
     *,
     weekly_new_count: int | None = None,
     cap: int | None = None,
-    cooldown: int | None = None,
 ) -> tuple[list[dict[str, Any]], dict[str, str], dict[str, int]]:
-    """按「本期新增 N 篇 + 保留高分旧论文」的方式选出本期展示列表。
+    """选出本期列表：`本期新增 N 篇` + `全部历史归档`。
 
-    返回 (本期论文列表, 更新后的冷却表, 统计信息)。
+    与旧版（滚动窗口 20 个位置）的关键差别：**不再有"挤掉"**。
+    归档只增不减，所以 new_batch 只是"给本期贴个新标签"，
+    keepers 全部原样保留，`is_new_this_week` 用来在前端做区分。
+
+    返回 (本期论文列表, 更新后的账本, 统计信息)。
     """
     new_quota = weekly_new() if weekly_new_count is None else max(0, weekly_new_count)
-    cap_count = display_cap() if cap is None else max(0, cap)
-    cooldown_count = cooldown_days() if cooldown is None else max(0, cooldown)
-    cooldown_span = dt.timedelta(days=cooldown_count)
+    archive_cap = 0 if cap is None else max(0, cap)
 
-    previous_list = [p for p in previous if isinstance(p, dict) and paper_key(p)]
-    previous_keys = {paper_key(p) for p in previous_list}
+    previous_list: list[dict[str, Any]] = []
+    seen_keys: set[str] = set()
+    for paper in previous:
+        if not isinstance(paper, dict):
+            continue
+        keys = paper_keys(paper)
+        if not keys:
+            continue
+        # 历史数据里也可能有重复（早期两条抓取路径都命中同一篇），顺手去重
+        if any(key in seen_keys for key in keys):
+            continue
+        seen_keys.update(keys)
+        previous_list.append(paper)
 
-    # 冷却期内的论文不再入选，避免"删掉又原样回来"的来回跳
-    cooling: set[str] = set()
-    for key, stamp in seen.items():
-        when = parse_dt(stamp)
-        if when is not None and now - when < cooldown_span:
-            cooling.add(key)
+    blocked = keyset_of(previous_list, seen)
 
     fresh: list[dict[str, Any]] = []
-    cooling_blocked = 0
     fresh_keys: set[str] = set()
+    duplicates = 0
     for paper in candidates:
         if not isinstance(paper, dict):
             continue
-        key = paper_key(paper)
-        if not key or key in previous_keys:
+        keys = paper_keys(paper)
+        if not keys:
             continue
-        if key in cooling:
-            cooling_blocked += 1
+        if any(key in blocked for key in keys):
+            duplicates += 1
             continue
-        if key in fresh_keys:
+        if any(key in fresh_keys for key in keys):
+            duplicates += 1
             continue
-        fresh_keys.add(key)
+        if not in_window(paper):
+            continue
+        fresh_keys.update(keys)
         fresh.append(paper)
 
     fresh.sort(key=sort_key, reverse=True)
     new_batch = fresh[:new_quota]
 
-    keep_slots = max(0, cap_count - len(new_batch))
-    keepers = sorted(previous_list, key=sort_key, reverse=True)[:keep_slots]
-
-    new_keys = {paper_key(p) for p in new_batch}
+    new_keys = {key for paper in new_batch for key in paper_keys(paper)}
     selected: list[dict[str, Any]] = []
-    for paper in [*new_batch, *keepers]:
+    for paper in new_batch:
         item = dict(paper)
         item.setdefault("first_seen_at", now.isoformat())
         item["last_seen_at"] = now.isoformat()
-        item["retained_from_previous_run"] = paper_key(paper) not in new_keys
-        item["is_new_this_week"] = paper_key(paper) in new_keys
+        item["retained_from_previous_run"] = False
+        item["is_new_this_week"] = True
         selected.append(item)
+
+    kept = 0
+    for paper in previous_list:
+        item = dict(paper)
+        item.setdefault("first_seen_at", item.get("last_seen_at") or now.isoformat())
+        item["retained_from_previous_run"] = True
+        item["is_new_this_week"] = any(key in new_keys for key in paper_keys(paper))
+        selected.append(item)
+        kept += 1
+
     selected.sort(key=sort_key, reverse=True)
 
-    # 冷却表：先按保留期裁掉过期条目，再把本期展示过的论文刷新为"现在"
-    horizon = cooldown_span * 3 if cooldown_span else dt.timedelta(days=180)
-    updated_seen: dict[str, str] = {}
-    for key, stamp in seen.items():
-        when = parse_dt(stamp)
-        if when is None or now - when <= horizon:
+    # 账本：只记录"入选过"的 key，永不删除，用来兜住归档被裁掉的情况
+    updated_seen = dict(seen)
+    for paper in new_batch:
+        stamp = now.isoformat()
+        for key in paper_keys(paper):
             updated_seen[key] = stamp
-    for paper in selected:
-        updated_seen[paper_key(paper)] = now.isoformat()
+
+    archived = len(selected)
+    trimmed = 0
+    if archive_cap and archived > archive_cap:
+        # 只有显式设置硬上限时才裁历史，正常配置下不会触发
+        ordered = sorted(selected, key=sort_key, reverse=True)
+        trimmed = archived - archive_cap
+        selected = ordered[:archive_cap]
 
     stats = {
         "weekly_new_count": len(new_batch),
-        "kept_previous_count": len(keepers),
-        "display_count": len(selected),
-        "dropped_from_display_count": max(0, len(previous_list) - len(keepers)),
-        "cooldown_blocked_count": cooling_blocked,
-        "fresh_candidate_count": len(fresh),
-        "display_cap": cap_count,
         "weekly_new_quota": new_quota,
-        "reentry_cooldown_days": cooldown_count,
+        "weekly_new_total": weekly_new_total(),
+        "kept_previous_count": kept,
+        "display_count": len(selected),
+        "archive_count": len(selected),
+        "dropped_from_display_count": trimmed,
+        "duplicate_candidate_count": duplicates,
+        "fresh_candidate_count": len(fresh),
     }
     return selected, updated_seen, stats

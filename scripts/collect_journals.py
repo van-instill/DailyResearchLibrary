@@ -161,7 +161,9 @@ def abstract_from_inverted_index(index: Any) -> str:
     if not positions:
         return ""
     positions.sort(key=lambda item: item[0])
-    return normalize_space(" ".join(word for _, word in positions))
+    text = normalize_space(" ".join(word for _, word in positions))
+    # OpenAlex 的倒排索引常常把摘要首行的 "ABSTRACT" 当成第一个词，去掉它
+    return re.sub(r"^(abstract|summary)\s*[:.\-]?\s+", "", text, flags=re.IGNORECASE)
 
 
 def iso_date(value: str | None) -> str:
@@ -495,6 +497,7 @@ def journal_fallback_summary(paper: dict[str, Any]) -> dict[str, str]:
             "method": "请打开原文链接查看模型设定、识别策略与实证设计。",
             "innovation": "缺少摘要，无法可靠判断创新点，已避免让模型凭标题猜测。",
             "conclusion": "缺少摘要，无法给出可靠结论，请阅读原文。",
+            "evidence": "",
             "why_relevant": reason,
         }
     first_sentence = re.split(r"(?<=[.!?])\s+", str(paper.get("summary") or ""))[0]
@@ -503,6 +506,7 @@ def journal_fallback_summary(paper: dict[str, Any]) -> dict[str, str]:
         "method": first_sentence[:300] if first_sentence else "请打开原文查看方法细节。",
         "innovation": "配置 DEEPSEEK_API_KEY 后会自动生成中文创新点总结。",
         "conclusion": "基础模式不做结论抽取，请参考原英文摘要。",
+        "evidence": "",
         "why_relevant": reason,
     }
 
@@ -984,7 +988,7 @@ def main() -> None:
     parser.add_argument("--lookback-days", type=int, default=env_int("JOURNAL_LOOKBACK_DAYS", 150))
     parser.add_argument("--max-papers", type=int, default=env_int("MAX_NEW_JOURNAL_PAPERS", 40))
     parser.add_argument("--max-summaries", type=int, default=env_int("MAX_JOURNAL_SUMMARIES", 30))
-    parser.add_argument("--max-stored-papers", type=int, default=env_int("MAX_STORED_JOURNAL_PAPERS", 300))
+    parser.add_argument("--max-stored-papers", type=int, default=env_int("MAX_STORED_JOURNAL_PAPERS", 1200))
     parser.add_argument("--max-data-bytes", type=int, default=env_int("MAX_DATA_BYTES", 8 * 1024 * 1024))
     parser.add_argument(
         "--clear-cache", action="store_true", default=os.getenv("CLEAR_PAPER_CACHE", "").lower() == "true"

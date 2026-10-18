@@ -39,9 +39,9 @@ DEFAULT_OUTPUT = Path("web/data/papers.json")
 DEFAULT_CONFERENCE_OUTPUT = Path("web/data/conference_papers.json")
 RETAINED_MATCH_LEVELS = {"high", "medium"}
 DEFAULT_MAX_NEW_PAPERS = 50
-DEFAULT_MAX_STORED_PAPERS = 50
+DEFAULT_MAX_STORED_PAPERS = 1200
 DEFAULT_MAX_NEW_CONFERENCE_PAPERS = 50
-DEFAULT_MAX_STORED_CONFERENCE_PAPERS = 300
+DEFAULT_MAX_STORED_CONFERENCE_PAPERS = 1200
 DEFAULT_MAX_DATA_BYTES = 8 * 1024 * 1024
 DEFAULT_RECENT_HISTORY_DAYS = 45
 TRANSIENT_HTTP_CODES = {429, 500, 502, 503, 504}
@@ -1614,6 +1614,7 @@ def fallback_summary(paper: dict[str, Any], best_match: dict[str, Any]) -> dict[
             "method": "请打开论文链接查看方法和系统设计细节。",
             "innovation": "仅凭标题无法可靠判断创新点，已避免占用模型翻译额度。",
             "conclusion": "缺少摘要，无法给出可靠结论，请阅读原文。",
+            "evidence": "",
             "why_relevant": best_match.get("reason", "与配置方向存在文本匹配。"),
         }
     if not has_meaningful_summary(paper):
@@ -1622,6 +1623,7 @@ def fallback_summary(paper: dict[str, Any], best_match: dict[str, Any]) -> dict[
             "method": "请打开论文链接查看方法细节。",
             "innovation": "标题信息不足，无法可靠提取创新点。",
             "conclusion": "缺少摘要，无法给出可靠结论，请阅读原文。",
+            "evidence": "",
             "why_relevant": best_match.get("reason", "与配置方向存在文本匹配。"),
         }
     return {
@@ -1629,6 +1631,7 @@ def fallback_summary(paper: dict[str, Any], best_match: dict[str, Any]) -> dict[
         "method": first_sentence[:300] if first_sentence else "请打开论文链接查看方法细节。",
         "innovation": "需要接入模型 API 后自动抽取更精确的中文创新点。",
         "conclusion": "基础模式不做结论抽取，请参考原英文摘要。",
+        "evidence": "",
         "why_relevant": best_match.get("reason", "与配置方向存在文本匹配。"),
     }
 
@@ -1705,23 +1708,123 @@ def call_openai_compatible(prompt: str) -> dict[str, Any]:
     return json.loads(content)
 
 
-def build_llm_prompt(topic: Topic, paper: dict[str, Any], base_match: dict[str, Any]) -> str:
-    abstract_label = "摘要/题录信息" if paper.get("source_type") == "conference" else "摘要"
+SUMMARY_SCHEMA_VERSION = 4
+
+
+def _letter_stream(text: str) -> str:
+    """只留字母数字，用于"原句是否真的在摘要里"的比对。"""
+    return re.sub(r"[^0-9a-z]+", " ", str(text or "").lower()).strip()
+
+
+def _split_sentences(text: str) -> list[str]:
+    return [part for part in re.split(r"(?<=[.!?])\s+", str(text or "")) if part.strip()]
+
+
+def evidence_in_abstract(abstract: str, evidence: str) -> bool:
+    """模型给出的引用句是否真的逐字来自原摘要（允许标点/连字符差异）。"""
+    target = _letter_stream(evidence)
+    if len(target) < 20:
+        return False
+    haystack = _letter_stream(abstract)
+    if not haystack:
+        return False
+    if target in haystack:
+        return True
+    import difflib
+
+    best = 0.0
+    for sentence in _split_sentences(abstract):
+        candidate = _letter_stream(sentence)
+        if not candidate:
+            continue
+        if target in candidate or candidate in target:
+            return True
+        best = max(best, difflib.SequenceMatcher(None, target, candidate).ratio())
+    return best >= 0.86
+
+
+NUMBER_RE = re.compile(r"(\d+\.\d+|\d+\s*%|\d{3,})")
+
+
+def unsupported_numbers(abstract: str, text: str) -> list[str]:
+    """找出模型写的、但原摘要里并不存在的数值。
+
+    只校验小数点数字、百分数、三位以上整数（含年份过滤）：这几类最容易被
+    "顺手编出来"，而且一旦编错，读者拿去引用就是硬伤。
+    """
+    haystack = str(abstract or "")
+    missing: list[str] = []
+    for match in NUMBER_RE.finditer(str(text or "")):
+        token = match.group(1).replace(" ", "")
+        digits = re.sub(r"[^\d.]", "", token)
+        if not digits:
+            continue
+        if digits.isdigit() and len(digits) == 4 and 1900 <= int(digits) <= 2100:
+            continue
+        if digits in haystack:
+            continue
+        if token not in missing:
+            missing.append(token)
+    return missing
+
+
+def verify_summary(paper: dict[str, Any], summary: dict[str, str]) -> list[str]:
+    """机械核对"有没有超出原摘要"。返回问题列表，空列表代表通过。"""
+    abstract = str(paper.get("summary") or "")
+    problems: list[str] = []
+    if not evidence_in_abstract(abstract, summary.get("evidence", "")):
+        problems.append("evidence 不是原摘要里的原句（必须逐字摘抄）")
+    claimed = " ".join(
+        str(summary.get(field) or "") for field in ("conclusion", "method", "innovation")
+    )
+    invented = unsupported_numbers(abstract, claimed)
+    if invented:
+        problems.append("摘要中没有这些数值：" + "、".join(invented[:4]))
+    english_words = len(re.findall(r"[A-Za-z]+", abstract))
+    zh = str(summary.get("abstract_zh") or "")
+    if english_words >= 80 and len(zh) < 1.05 * english_words:
+        problems.append(
+            f"abstract_zh 太短（{len(zh)} 字 / 原文 {english_words} 词），说明被压缩了，请逐句直译"
+        )
+    for field in ("problem", "method", "innovation", "conclusion"):
+        if len(str(summary.get(field) or "").strip()) < 6:
+            problems.append(f"{field} 为空")
+            break
+    return problems
+
+
+def build_llm_prompt(
+    topic: Topic,
+    paper: dict[str, Any],
+    base_match: dict[str, Any],
+    problems: list[str] | None = None,
+) -> str:
+    abstract_label = "摘要/题录信息" if paper.get("source_type") == "conference" else "原文摘要"
     latex_rule = (
-        "5. 数学符号、变量、公式一律写成 LaTeX：行内用 $...$，独立公式用 $$...$$。"
+        "数学符号、变量、公式一律写成 LaTeX：行内用 $...$，独立公式用 $$...$$。"
         "例如 $\\sigma_t^2$、$\\mathbb{E}[r_{t+1}\\mid\\mathcal{F}_t]$、$\\hat{\\beta}$、"
         "$\\alpha+\\beta+\\gamma<1$。不要把公式降级成纯文本（如 sigma^2 = omega + alpha*e^2），"
         "也不要用 Unicode 上下标拼凑。注意 JSON 字符串里的反斜杠必须转义，"
         "写进 JSON 时是 \"$\\\\sigma_t^2$\" 这种形式。"
     )
+    repair = ""
+    if problems:
+        repair = (
+            "\n上一次输出没通过校验，问题：\n- "
+            + "\n- ".join(problems)
+            + "\n请严格重做，这一次必须全部满足下面的硬性约束。\n"
+        )
     return f"""
-请根据论文标题、摘要、分类和我的研究方向，输出精确中文分析。目标不是逐句翻译，而是综合整篇摘要快速判断这篇论文是否值得阅读。
-要求：
-1. 先识别论文真正解决的问题、核心机制和实证/理论结果，再翻译成自然中文。
-2. 不要夸大摘要中没有的信息；摘要没写的结论不要替作者补。
-3. 相关性判断要严格，说明它具体匹配哪些关键词、场景或问题。
-4. 如果论文只是泛泛相关，请把 match_level 降为 medium 或 low，并在 why_relevant 里说明需要人工复核。
-{latex_rule}
+你要做的是"忠实转述"，不是"读后感"，也不是"提炼要点"。只允许使用下面给出的原文摘要，禁止任何外部知识、推测或补全。
+{repair}
+硬性约束（违反任意一条，这份输出就直接作废）：
+1. 只能使用原文摘要里出现过的事实。摘要没写的数据、样本期、样本量、系数、显著性、结论，一律不许写；不确定就写「摘要未提及」。
+2. 摘要里没有具体数值时，你的输出里也不许出现任何具体数值；摘要里有数值时，必须原样照抄，不许改写成"约""显著为正"之类的模糊说法。
+3. abstract_zh 必须是逐句直译：原文一句就译一句，保持原有的句子顺序、信息量和限定条件（如 "under the assumption"、"in the cross-section"）。不许合并、不许省略、不许概括成三五句要点、不许添加原文没有的评论。数学符号保留 LaTeX。
+4. evidence 必须从原文摘要里原样摘抄一句完整英文（不改写、不改单复数、不加省略号、不加引号），这句要能直接支撑 conclusion。
+5. problem / method / innovation / conclusion 各自换行独立，用中文；conclusion 只陈述摘要明确写出的结果。
+6. 相关性判断要严格；如果只是泛泛相关，把 match_level 降为 medium 或 low，并在 why_relevant 里说明需要人工复核。
+7. {latex_rule}
 
 我的研究方向：
 名称：{topic.name}
@@ -1741,11 +1844,12 @@ arXiv 分类：{", ".join(paper.get("categories", []))}
 
 请输出 JSON，字段必须为：
 {{
-  "problem": "论文要解决的问题，中文，1-2句，避免空泛背景",
-  "method": "核心方法，中文，2-3句，包含关键技术组件或数学形式",
-  "innovation": "相对已有工作的具体创新点，中文，2-3点合并成一段",
-  "conclusion": "主要结论：作者最终得到的结果或主张，中文，1-2句，尽量带上关键数值、效应方向或成立条件",
-  "abstract_zh": "整篇摘要的中文译文，3-5句，忠实于原摘要、不要添加原文没有的信息，不要写成要点罗列",
+  "problem": "论文要解决的问题，中文，1-2句，只用摘要里说过的内容",
+  "method": "核心方法，中文，2-3句，包含摘要提到的关键技术组件或数学形式",
+  "innovation": "相对已有工作的具体创新点，中文，2-3点合并成一段，只写摘要声称的贡献",
+  "conclusion": "主要结论：摘要明确写出的结果或主张，中文，1-2句，带原文给出的数值或成立条件",
+  "abstract_zh": "原文摘要的逐句中文直译，句子数与原文一一对应，不省略不合并",
+  "evidence": "从原文摘要逐字摘抄的一句英文原句，用来支撑上面的 conclusion",
   "why_relevant": "一句话说明为什么匹配我的研究方向，不超过40字",
   "match_score_adjustment": 0.0,
   "match_level": "high|medium|low"
@@ -1756,23 +1860,50 @@ arXiv 分类：{", ".join(paper.get("categories", []))}
 def summarize_with_llm(topic: Topic, paper: dict[str, Any], base_match: dict[str, Any]) -> tuple[dict[str, str], dict[str, Any]]:
     if not llm_enabled():
         return fallback_summary(paper, base_match), base_match
-
-    prompt = build_llm_prompt(topic, paper, base_match)
-    try:
-        data = call_openai_compatible(prompt)
-    except Exception as exc:
-        print(f"Warning: LLM summary failed for {paper.get('id')}: {exc}", file=sys.stderr)
+    # 没有摘要就绝不调模型：让它"根据标题推测"等于允许它编造
+    if not has_meaningful_summary(paper):
         return fallback_summary(paper, base_match), base_match
 
-    summary = {
-        "problem": str(data.get("problem", "")),
-        "method": str(data.get("method", "")),
-        "innovation": str(data.get("innovation", "")),
-        "conclusion": str(data.get("conclusion", "")),
-        "abstract_zh": str(data.get("abstract_zh", "")),
-        "why_relevant": str(data.get("why_relevant", "")),
-    }
-    adjustment = float(data.get("match_score_adjustment", 0.0) or 0.0)
+    prompt = build_llm_prompt(topic, paper, base_match)
+    data: dict[str, Any] = {}
+    candidate: dict[str, Any] = {}
+    for attempt in range(2):
+        try:
+            parsed = call_openai_compatible(prompt)
+            if not isinstance(parsed, dict):
+                raise ValueError("model response is not a JSON object")
+            data = parsed
+        except Exception as exc:
+            print(f"Warning: LLM summary failed for {paper.get('id')}: {exc}", file=sys.stderr)
+            return fallback_summary(paper, base_match), base_match
+        candidate = {
+            "problem": str(data.get("problem", "")),
+            "method": str(data.get("method", "")),
+            "innovation": str(data.get("innovation", "")),
+            "conclusion": str(data.get("conclusion", "")),
+            "abstract_zh": str(data.get("abstract_zh", "")),
+            "evidence": str(data.get("evidence", "")),
+            "why_relevant": str(data.get("why_relevant", "")),
+            "v": SUMMARY_SCHEMA_VERSION,
+        }
+        problems = verify_summary(paper, candidate)
+        if not problems:
+            break
+        print(
+            f"Warning: summary rejected for {paper.get('id')} (attempt {attempt + 1}): {'; '.join(problems)}",
+            file=sys.stderr,
+            flush=True,
+        )
+        prompt = build_llm_prompt(topic, paper, base_match, problems)
+    else:
+        # 两次都没过校验：宁可显示"请读原文"，也不把编造的内容放上去
+        return fallback_summary(paper, base_match), base_match
+
+    summary = candidate
+    try:
+        adjustment = float(data.get("match_score_adjustment") or 0.0)
+    except (TypeError, ValueError):
+        adjustment = 0.0
     adjusted_score = max(0.0, min(1.0, base_match["score"] + adjustment))
     adjusted_level = str(data.get("match_level") or match_level(adjusted_score)).lower()
     if adjusted_level not in {"high", "medium", "low"}:
@@ -1965,12 +2096,32 @@ def deletion_sort_key(paper: dict[str, Any]) -> tuple[int, dt.datetime]:
     return relevance_priority, paper_datetime(paper)
 
 
+def compact_for_storage(paper: dict[str, Any]) -> dict[str, Any]:
+    """瘦身再入库：`matches` 里存着每个方向的分数，页面只读 `best_match`。
+
+    归档只增不减，一篇 6KB 的话 1200 篇就是 7MB，首屏解析会很慢；
+    把 matches 压成只剩最佳那条，单篇省 20% 左右，展示效果不变。
+
+    顺手清掉摘要开头的 "ABSTRACT" 标签（OpenAlex 倒排索引会把它当正文第一个词，
+    历史数据里已经存进去的也在这里一并洗掉）。
+    """
+    best = paper.get("best_match")
+    if isinstance(best, dict) and isinstance(paper.get("matches"), list) and len(paper["matches"]) > 1:
+        paper = {**paper, "matches": [best]}
+    summary = str(paper.get("summary") or "")
+    if summary:
+        cleaned = re.sub(r"^\s*(abstract|summary)\s*[:.\-]?\s+", "", summary, flags=re.IGNORECASE)
+        if cleaned != summary:
+            paper = {**paper, "summary": cleaned}
+    return paper
+
+
 def trim_papers_for_storage(
     payload: dict[str, Any],
     max_stored_papers: int,
     max_data_bytes: int,
 ) -> tuple[list[dict[str, Any]], dict[str, Any]]:
-    papers = list(payload.get("papers", []))
+    papers = [compact_for_storage(paper) for paper in payload.get("papers", [])]
     removed_by_level = {"high": 0, "medium": 0, "low": 0, "unknown": 0}
 
     def projected_size() -> int:
@@ -2288,12 +2439,16 @@ def collect(
     summary_cache = load_summary_cache()
     llm_jobs = []
     summary_cache_hits = 0
-    for paper in summary_targets[:max_summaries]:
-        if is_real_summary(paper.get("chinese_summary")):
-            # 历史论文里已有的真实摘要直接沿用，不重复生成，也不被占位文案覆盖
-            continue
-        if not should_summarize_paper_with_llm(paper):
-            continue
+    # 注意顺序：必须先滤掉"已经有合格摘要"的论文，再截断到 max_summaries。
+    # 归档模式下目录里可能有几百篇，若先截断，前 40 篇全是老论文，
+    # 本周新进来的 5 篇永远轮不到生成摘要，只能挂占位文案。
+    pending_summary = [
+        paper
+        for paper in summary_targets
+        if not is_real_summary(paper.get("chinese_summary"))
+        and should_summarize_paper_with_llm(paper)
+    ]
+    for paper in pending_summary[:max_summaries]:
         paper_id = str(paper.get("id", ""))
         cached_summary = summary_cache.get(paper_id)
         if is_real_summary(cached_summary):
@@ -2323,9 +2478,9 @@ def collect(
             store_summary(summary_cache, paper_id, summary)
     save_summary_cache(summary_cache)
 
-    for index, paper in enumerate(summary_targets):
+    for paper in summary_targets:
         paper_id = str(paper.get("id", ""))
-        if index < max_summaries and paper_id in summaries_by_id:
+        if paper_id in summaries_by_id:
             summary, adjusted_match = summaries_by_id[paper_id]
             paper["chinese_summary"] = summary
             paper["best_match"] = adjusted_match

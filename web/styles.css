@@ -598,7 +598,7 @@ select:focus,
   padding-bottom: 2px;
 }
 
-/* 中英文摘要：默认只露 5 行多，超出才出现"展开"；切换语言不占额外高度 */
+/* 中英文摘要：默认只露 2 行，超出才出现"展开"；切换语言不占额外高度 */
 .abstract-panel {
   margin-top: 14px;
   border-top: 1px dashed var(--line);
@@ -662,7 +662,7 @@ select:focus,
 .abstract-body {
   position: relative;
   margin-top: 8px;
-  max-height: 5.4em;
+  max-height: 3.3em; /* 2 行：line-height 1.62em × 2 */
   overflow: hidden;
 }
 
@@ -676,7 +676,7 @@ select:focus,
   right: 0;
   bottom: 0;
   left: 0;
-  height: 1.8em;
+  height: 1.3em;
   background: linear-gradient(to bottom, rgba(0, 0, 0, 0), var(--card-bg));
   pointer-events: none;
 }
@@ -815,4 +815,32 @@ select:focus,
   .paper-link {
     flex: 1 1 auto;
   }
+}
+
+.list-more {
+  display: flex;
+  justify-content: center;
+  margin: 18px 0 6px;
+}
+
+.load-more {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--card-bg);
+  color: var(--text);
+  padding: 9px 22px;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.load-more:hover,
+.load-more:focus-visible {
+  border-color: var(--teal);
+  color: var(--teal);
+}
+
+.load-more[hidden] {
+  display: none;
 }

@@ -7,6 +7,7 @@ const state = {
     conference: null,
   },
   theme: "dark",
+  page: 1,
   filters: {
     query: "",
     topic: "all",
@@ -16,6 +17,10 @@ const state = {
     date: "",
   },
 };
+
+// 归档只增不减，一年下来会有几百篇；一次只渲染 20 张卡片，剩下的按需加载，
+// 否则首屏要渲染上千个 DOM 节点 + KaTeX 公式，手机上直接卡死。
+const PAGE_SIZE = 20;
 
 const nodes = {
   updatedAt: document.querySelector("#updatedAt"),
@@ -35,6 +40,7 @@ const nodes = {
   themeOptions: document.querySelectorAll("[data-theme-option]"),
   collectionTabs: document.querySelectorAll("[data-collection]"),
   tabs: document.querySelectorAll(".tab"),
+  loadMore: document.querySelector("#loadMore"),
   template: document.querySelector("#paperTemplate"),
 };
 
@@ -161,21 +167,30 @@ function matchesBaseFilters(paper) {
 
 function matchesView(paper) {
   if (state.filters.view === "all") return true;
+  if (state.filters.view === "latest") return Boolean(paper.is_new_this_week);
   const date = selectedDate();
   const collectedAt = collectionTime(paper);
-  if (state.filters.view === "daily") return dateKey(collectedAt) === state.filters.date;
-  if (state.filters.view === "week") return inRange(collectedAt, startOfWeek(date), endOfWeek(date));
   if (state.filters.view === "month") return inRange(collectedAt, startOfMonth(date), endOfMonth(date));
-  if (state.filters.view === "highlights") {
-    return inRange(collectedAt, startOfWeek(date), endOfWeek(date)) && scoreOf(paper) >= 0.4;
-  }
+  if (state.filters.view === "highlights") return scoreOf(paper) >= 0.6;
   return true;
 }
 
+// 排序：本期新增排在最前，其次按收录时间倒序，最后才是匹配分。
+// 归档模式下"按分数排"会把半年前的高分论文压在首页，看不到新东西。
+function sortPapers(list) {
+  return list.sort((a, b) => {
+    const fresh = Number(Boolean(b.is_new_this_week)) - Number(Boolean(a.is_new_this_week));
+    if (fresh) return fresh;
+    const byCollected = String(collectionTime(b)).localeCompare(String(collectionTime(a)));
+    if (byCollected) return byCollected;
+    return scoreOf(b) - scoreOf(a);
+  });
+}
+
 function filteredPapers() {
-  return (activeData().papers || [])
-    .filter((paper) => matchesBaseFilters(paper) && matchesView(paper))
-    .sort((a, b) => scoreOf(b) - scoreOf(a) || String(b.published || "").localeCompare(String(a.published || "")));
+  return sortPapers(
+    (activeData().papers || []).filter((paper) => matchesBaseFilters(paper) && matchesView(paper))
+  );
 }
 
 function setText(parent, selector, text) {
@@ -334,18 +349,14 @@ function renderPaper(paper) {
 
 function viewLabels() {
   const date = selectedDate();
-  const dayLabel = formatDate(date.toISOString());
-  const weekStart = formatDate(startOfWeek(date).toISOString());
-  const weekEndDate = endOfWeek(date);
-  weekEndDate.setDate(weekEndDate.getDate() - 1);
-  const weekEnd = formatDate(weekEndDate.toISOString());
   const monthLabel = `${date.getFullYear()} 年 ${String(date.getMonth() + 1).padStart(2, "0")} 月`;
+  const total = (activeData().papers || []).length;
+  const fresh = (activeData().papers || []).filter((paper) => paper.is_new_this_week).length;
   return {
-    all: [state.filters.collection === "conference" ? "顶刊精选" : "全部论文", "全部已收录论文"],
-    daily: ["当日论文", dayLabel],
-    week: ["本周论文", `${weekStart} - ${weekEnd}`],
-    month: ["月度论文", monthLabel],
-    highlights: ["本周精选", `${weekStart} - ${weekEnd}`],
+    all: [state.filters.collection === "conference" ? "顶刊精选" : "arXiv 论文", `已收录 ${total} 篇，按收录时间倒序`],
+    latest: ["本期新增", `本期新增 ${fresh} 篇，旧论文不删除、留在归档里`],
+    month: ["本月新增", monthLabel],
+    highlights: ["高分精选", "AI 相关度 ≥ 0.60"],
   };
 }
 
@@ -367,13 +378,21 @@ function render() {
     empty.className = "empty-state";
     empty.textContent = "当前筛选条件下没有论文。";
     nodes.paperList.appendChild(empty);
+    if (nodes.loadMore) nodes.loadMore.hidden = true;
     return;
   }
 
+  const visible = papers.slice(0, state.page * PAGE_SIZE);
   const fragment = document.createDocumentFragment();
-  for (const paper of papers) fragment.appendChild(renderPaper(paper));
+  for (const paper of visible) fragment.appendChild(renderPaper(paper));
   nodes.paperList.appendChild(fragment);
   refreshAllAbstracts();
+
+  if (nodes.loadMore) {
+    const rest = papers.length - visible.length;
+    nodes.loadMore.hidden = rest <= 0;
+    nodes.loadMore.textContent = `加载更多（还有 ${rest} 篇）`;
+  }
 }
 
 function hydrateTopicFilter() {
@@ -404,13 +423,19 @@ function hydrateDateFilter() {
 function updateStats() {
   const papers = activeData().papers || [];
   const date = selectedDate();
-  const weekPapers = papers.filter((paper) => inRange(collectionTime(paper), startOfWeek(date), endOfWeek(date)));
+  const fresh = papers.filter((paper) => paper.is_new_this_week).length;
   const monthPapers = papers.filter((paper) => inRange(collectionTime(paper), startOfMonth(date), endOfMonth(date)));
   const top = papers.reduce((max, paper) => Math.max(max, scoreOf(paper)), 0);
   nodes.paperCount.textContent = String(papers.length);
-  nodes.weekCount.textContent = String(weekPapers.length);
+  nodes.weekCount.textContent = String(fresh);
   nodes.monthCount.textContent = String(monthPapers.length);
   nodes.topScore.textContent = top.toFixed(2);
+}
+
+// 任何一个筛选条件变了都要回到第一页，否则会停在"第 5 页"上看着空列表
+function resetAndRender() {
+  state.page = 1;
+  render();
 }
 
 function bindEvents() {
@@ -421,15 +446,15 @@ function bindEvents() {
   }
   nodes.searchInput.addEventListener("input", (event) => {
     state.filters.query = event.target.value.trim();
-    render();
+    resetAndRender();
   });
   nodes.topicFilter.addEventListener("change", (event) => {
     state.filters.topic = event.target.value;
-    render();
+    resetAndRender();
   });
   nodes.levelFilter.addEventListener("change", (event) => {
     state.filters.level = event.target.value;
-    render();
+    resetAndRender();
   });
   for (const tab of nodes.collectionTabs) {
     tab.addEventListener("click", () => {
@@ -442,21 +467,25 @@ function bindEvents() {
       hydrateDateFilter();
       updateStats();
       updateUpdatedAt();
-      render();
+      resetAndRender();
     });
   }
   nodes.dateFilter.addEventListener("change", (event) => {
     state.filters.date = event.target.value;
     updateStats();
-    render();
+    resetAndRender();
   });
   for (const tab of nodes.tabs) {
     tab.addEventListener("click", () => {
       state.filters.view = tab.dataset.view;
       for (const item of nodes.tabs) item.classList.toggle("active", item === tab);
-      render();
+      resetAndRender();
     });
   }
+  nodes.loadMore?.addEventListener("click", () => {
+    state.page += 1;
+    render();
+  });
   nodes.paperList.addEventListener("click", (event) => {
     const tab = event.target.closest(".abstract-tab");
     if (tab) {
@@ -507,7 +536,8 @@ function updateUpdatedAt(message = "") {
   const mode = stats.collection_mode === "incremental" ? "增量" : "初始化";
   const kind = state.filters.collection === "conference" ? "顶刊精选" : "arXiv 新论文";
   const weekly = Number(stats.weekly_new_count || 0);
-  const fresh = weekly ? ` · 本周新增 ${weekly} 篇` : "";
+  const total = Number(stats.weekly_new_total || 0);
+  const fresh = weekly ? ` · 本期新增 ${weekly} 篇${total ? `（两条线合计 ${total} 篇）` : ""}` : "";
   nodes.updatedAt.textContent = `${kind} · 更新于 ${formatDate(data.generated_at_iso)}${fresh} · ${mode} · ${stats.llm_enabled ? "LLM" : "基础"}`;
 }
 
