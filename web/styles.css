@@ -565,6 +565,20 @@ select:focus,
   overflow-wrap: anywhere;
 }
 
+/* KaTeX：行内公式跟随正文，独立公式允许横向滚动，避免撑破三栏网格 */
+.summary-grid dd .katex,
+.match-reason .katex {
+  font-size: 1em;
+}
+
+.summary-grid dd .katex-display,
+.match-reason .katex-display {
+  margin: 6px 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 2px;
+}
+
 .paper-footer {
   display: flex;
   align-items: center;

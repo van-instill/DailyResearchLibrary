@@ -13,6 +13,7 @@ from __future__ import annotations
 import argparse
 import concurrent.futures
 import datetime as dt
+import difflib
 import email.utils
 import html as html_lib
 import json
@@ -484,6 +485,134 @@ def journal_fallback_summary(paper: dict[str, Any]) -> dict[str, str]:
     }
 
 
+PREPRINT_CACHE_PATH = Path(".paper-cache/preprint_cache.json")
+ARXIV_API = "https://export.arxiv.org/api/query"
+ARXIV_NS = "{http://www.w3.org/2005/Atom}"
+
+
+def _title_key(value: str) -> str:
+    return re.sub(r"[^0-9a-z\u4e00-\u9fff]+", " ", str(value or "").lower()).strip()
+
+
+def _preprint_cache_path() -> Path:
+    return Path(os.getenv("PREPRINT_CACHE_PATH", str(PREPRINT_CACHE_PATH)))
+
+
+def load_preprint_cache() -> dict[str, Any]:
+    path = _preprint_cache_path()
+    if not path.exists():
+        return {}
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+        return data if isinstance(data, dict) else {}
+    except Exception:  # noqa: BLE001
+        return {}
+
+
+def save_preprint_cache(entries: dict[str, Any]) -> None:
+    path = _preprint_cache_path()
+    try:
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(json.dumps(entries, ensure_ascii=False, indent=1), encoding="utf-8")
+    except Exception as exc:  # noqa: BLE001
+        print(f"Warning: cannot write preprint cache: {exc}", file=sys.stderr)
+
+
+def search_arxiv_preprint(title: str, timeout: int = 25) -> dict[str, Any]:
+    """按标题在 arXiv 找同名预印本，返回它的摘要。
+
+    出版社常常不给开放索引摘要（Informa/Elsevier 尤甚），但同一篇工作
+    往往有 arXiv 版本。arXiv API 是公开可用的，按标题精确匹配比抓
+    出版社页面（403）稳定得多。
+    """
+    import xml.etree.ElementTree as ET
+
+    cleaned = re.sub(r'["\\\r\n\t]+', " ", str(title or "")).strip()
+    if len(cleaned) < 20:
+        return {"status": "none", "reason": "title too short"}
+    url = ARXIV_API + "?" + urllib.parse.urlencode(
+        {"search_query": f'ti:"{cleaned[:220]}"', "start": 0, "max_results": 5}
+    )
+    req = urllib.request.Request(
+        url,
+        headers={"User-Agent": "paper-daily/1.0 (+https://github.com/van-instill/DailyResearchLibrary)"},
+    )
+    with urllib.request.urlopen(req, timeout=timeout) as resp:
+        body = resp.read().decode("utf-8", "replace")
+    root = ET.fromstring(body)
+    target = _title_key(cleaned)
+    best: tuple[float, str, str, str] | None = None
+    for entry in root.findall(f"{ARXIV_NS}entry"):
+        cand_title = normalize_space(entry.findtext(f"{ARXIV_NS}title") or "")
+        cand_abstract = normalize_space(entry.findtext(f"{ARXIV_NS}summary") or "")
+        if not cand_title or len(cand_abstract) < 120:
+            continue
+        ratio = difflib.SequenceMatcher(None, target, _title_key(cand_title)).ratio()
+        if ratio < 0.92:
+            continue
+        link = (entry.findtext(f"{ARXIV_NS}id") or "").strip()
+        if best is None or ratio > best[0]:
+            best = (ratio, cand_title, cand_abstract, link)
+    if best is None:
+        return {"status": "none"}
+    return {
+        "status": "found",
+        "title": best[1],
+        "abstract": best[2],
+        "url": best[3],
+        "similarity": round(best[0], 3),
+    }
+
+
+def fill_missing_abstracts(papers: list[dict[str, Any]], max_lookups: int | None = None) -> dict[str, int]:
+    """给没有摘要的论文补上 arXiv 预印本摘要。结果按 DOI 缓存，不重复请求。"""
+    limit = max_lookups if max_lookups is not None else env_int("PREPRINT_MAX_LOOKUPS", 20)
+    stats = {"preprint_checked": 0, "preprint_filled": 0, "preprint_cache_hits": 0}
+    if limit <= 0:
+        return stats
+    cache = load_preprint_cache()
+    changed = False
+    for paper in papers:
+        if stats["preprint_checked"] >= limit:
+            break
+        if has_meaningful_summary(paper):
+            continue
+        key = str(paper.get("doi") or paper.get("id") or "").strip().lower()
+        if not key:
+            continue
+        entry = cache.get(key)
+        if entry is None:
+            stats["preprint_checked"] += 1
+            try:
+                entry = search_arxiv_preprint(str(paper.get("title") or ""))
+            except Exception as exc:  # noqa: BLE001
+                print(
+                    f"Warning: preprint lookup failed for {str(paper.get('title') or '')[:60]}: {exc}",
+                    file=sys.stderr,
+                    flush=True,
+                )
+                continue
+            cache[key] = entry
+            changed = True
+            time.sleep(3)  # arXiv 建议请求间隔
+        else:
+            stats["preprint_cache_hits"] += 1
+        if entry.get("abstract"):
+            paper["summary"] = entry["abstract"]
+            paper["abstract_source"] = "arxiv-preprint"
+            paper["preprint_url"] = entry.get("url", "")
+            stats["preprint_filled"] += 1
+    if changed:
+        save_preprint_cache(cache)
+    if stats["preprint_filled"]:
+        print(
+            f"Preprint fallback filled {stats['preprint_filled']} abstracts "
+            f"(checked {stats['preprint_checked']})",
+            flush=True,
+        )
+    return stats
+
+
 def apply_summaries(papers: list[dict[str, Any]], topics: list[Topic], max_summaries: int) -> dict[str, Any]:
     topics_by_id = {topic.id: topic for topic in topics}
     from llm_screen import is_real_summary, load_summary_cache, save_summary_cache, store_summary
@@ -756,6 +885,8 @@ def collect(
         canonical_venues,
     )
     merged = sort_papers(merge_papers(scored, retained, now))
+    # 先给没摘要的论文找 arXiv 预印本，再生成六段内容，否则这些论文只能出占位文案
+    preprint_stats = fill_missing_abstracts(merged)
     # 摘要放在合并之后：历史里一直没生成过六段内容的论文也能被补上（有缓存，重复论文不花钱）
     from llm_screen import is_real_summary
 
@@ -780,6 +911,7 @@ def collect(
         "high_count": sum(1 for paper in merged if str((paper.get("best_match") or {}).get("level")) == "high"),
         "with_abstract_count": sum(1 for paper in merged if has_meaningful_summary(paper)),
         **summary_stats,
+        **preprint_stats,
     }
     payload = {
         "generated_at": email.utils.format_datetime(now),

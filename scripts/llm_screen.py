@@ -348,7 +348,9 @@ def screen_papers(
     return verdicts
 
 
-SUMMARY_CACHE_PATH = Path(".paper-cache/summary_cache.json")
+# v2：提示词要求数学符号用 LaTeX 输出，旧缓存里的纯文本摘要需要重写一遍，
+# 因此换一个缓存文件名，让旧条目自然失效而不必手动清理。
+SUMMARY_CACHE_PATH = Path(".paper-cache/summary_cache.v2.json")
 SUMMARY_FIELDS = ("problem", "method", "innovation", "evidence", "limitations", "why_relevant")
 
 

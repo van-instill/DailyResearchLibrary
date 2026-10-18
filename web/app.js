@@ -181,6 +181,29 @@ function setText(parent, selector, text) {
   parent.querySelector(selector).textContent = text || "暂无";
 }
 
+function renderMath(element) {
+  if (!element) return;
+  const render =
+    [window.renderMathInElement, window.renderMathInElement?.default, window.katex?.renderMathInElement]
+      .find((fn) => typeof fn === "function") || null;
+  if (!render) return;
+  try {
+    render(element, {
+      delimiters: [
+        { left: "$$", right: "$$", display: true },
+        { left: "\\[", right: "\\]", display: true },
+        { left: "$", right: "$", display: false },
+        { left: "\\(", right: "\\)", display: false },
+      ],
+      throwOnError: false,
+      strict: false,
+    });
+  } catch (err) {
+    // 渲染失败就保留原始文本，不影响阅读
+    console.warn("KaTeX render failed", err);
+  }
+}
+
 function safeFilename(paper) {
   const title = String(paper.title || paper.id || "paper")
     .replace(/[\\/:*?"<>|]+/g, " ")
@@ -228,7 +251,11 @@ function renderPaper(paper) {
   setText(node, ".summary-evidence", summary.evidence);
   setText(node, ".summary-limitations", summary.limitations);
   setText(node, ".summary-relevant", summary.why_relevant);
-  setText(node, ".match-reason", `${best.topic_name || "未分类"}：${best.reason || ""}`);
+  setText(node, ".match-reason", `${best.topic_name || "未分类"}：${best.llm_reason || best.reason || ""}`);
+
+  for (const field of node.querySelectorAll(".summary-grid dd, .match-reason")) {
+    renderMath(field);
+  }
 
   const tags = node.querySelector(".paper-tags");
   for (const category of (paper.categories || []).slice(0, 8)) {

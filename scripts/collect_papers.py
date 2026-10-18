@@ -1671,6 +1671,13 @@ def call_openai_compatible(prompt: str) -> dict[str, Any]:
 
 def build_llm_prompt(topic: Topic, paper: dict[str, Any], base_match: dict[str, Any]) -> str:
     abstract_label = "摘要/题录信息" if paper.get("source_type") == "conference" else "摘要"
+    latex_rule = (
+        "5. 数学符号、变量、公式一律写成 LaTeX：行内用 $...$，独立公式用 $$...$$。"
+        "例如 $\\sigma_t^2$、$\\mathbb{E}[r_{t+1}\\mid\\mathcal{F}_t]$、$\\hat{\\beta}$、"
+        "$\\alpha+\\beta+\\gamma<1$。不要把公式降级成纯文本（如 sigma^2 = omega + alpha*e^2），"
+        "也不要用 Unicode 上下标拼凑。注意 JSON 字符串里的反斜杠必须转义，"
+        "写进 JSON 时是 \"$\\\\sigma_t^2$\" 这种形式。"
+    )
     return f"""
 请根据论文标题、摘要、分类和我的研究方向，输出精确中文分析。目标不是逐句翻译，而是综合整篇摘要快速判断这篇论文是否值得阅读。
 要求：
@@ -1678,6 +1685,7 @@ def build_llm_prompt(topic: Topic, paper: dict[str, Any], base_match: dict[str, 
 2. 不要夸大摘要中没有的信息；如果证据不足，请明确说明。
 3. 相关性判断要严格，说明它具体匹配哪些关键词、场景或系统瓶颈。
 4. 如果论文只是泛泛相关，请把 match_level 降为 medium 或 low，并在 why_relevant 里说明需要人工复核。
+{latex_rule}
 
 我的研究方向：
 名称：{topic.name}
@@ -1698,7 +1706,7 @@ arXiv 分类：{", ".join(paper.get("categories", []))}
 请输出 JSON，字段必须为：
 {{
   "problem": "论文要解决的问题，中文，1-2句，避免空泛背景",
-  "method": "核心方法，中文，2-3句，包含关键技术组件或系统流程",
+  "method": "核心方法，中文，2-3句，包含关键技术组件或数学形式",
   "innovation": "相对已有工作的具体创新点，中文，2-3点合并成一段",
   "evidence": "摘要中可核验的实验、理论或系统证据；没有则写证据不足",
   "limitations": "可能局限或需要阅读全文确认的点",
