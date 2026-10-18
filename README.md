@@ -57,6 +57,7 @@ scripts/collect_papers.py    # arXiv 采集
 scripts/collect_journals.py  # 顶刊采集（OpenAlex + Crossref 回退）
 scripts/weekly_select.py     # 每周选稿（时间窗/配额/全量去重）
 scripts/llm_screen.py        # AI 阅卷：批量判相关性 + 缓存 + 失败降级
+scripts/notify.py            # 每周推送：把本期新增推到微信
 web/                         # 静态站点
 .github/workflows/paper-daily.yml
 ```
@@ -187,6 +188,37 @@ git push -u origin main
 - **改文件**（简单直接）：编辑 `config/interests.json` 里的 `topics`，push 后自动触发
 - **提 Issue**（不用碰代码）：`Issues → New issue → Research Interests`，改 JSON 里的 `keywords` 和 `arxiv_categories` 后提交
 
+### 6. 每周微信推送（可选）
+
+每周五更新完、页面部署上线之后，会往微信发一条卡片：**本期新增 10 篇的标题列表 + 一个「打开论文雷达」按钮**，
+点开直接落在「本期新增」页（`#latest`），带一个「只看顶刊」的副链接（`#journal-latest`）。
+
+微信个人号没有开放接口，所以「文件传输助手」无法由程序投放消息（第三方 hook 个人微信有封号风险，不建议）。
+正规做法是借微信服务号的模板消息：程序把内容发给一个推送服务，服务用它的服务号给你发卡片。以下通道任选其一，
+**只填你用的那一个 Secret 即可**：
+
+| Secret | 说明 |
+| --- | --- |
+| `SERVERCHAN_SENDKEY` | [Server酱](https://sct.ftqq.com)，扫码登录拿 SendKey，微信关注「方糖」服务号。免费 5 条/天，每周一条足够 |
+| `PUSHPLUS_TOKEN` | [PushPlus](https://www.pushplus.plus)，微信扫码拿 token 并关注它的公众号，需实名认证后才能发 |
+| `WXPUSHER_APP_TOKEN` + `WXPUSHER_UIDS` | [WxPusher](https://wxpusher.zjiecode.com)，支持 HTML 卡片且点击直达站点，体验最接近「卡片」 |
+| `WECOM_BOT_WEBHOOK` | 企业微信群机器人，消息可同步到微信的「企业微信」入口 |
+| `NOTIFY_WEBHOOK_URL` | 任意自定义 webhook，POST 一个 JSON（title/text/markdown/html/url） |
+
+配置完可以本地先看效果，不会真的发出去：
+
+```bash
+python scripts/notify.py --dry-run          # 打印本周推送文案
+python scripts/notify.py --root . --force   # 真发一次（需先设好上面的环境变量）
+```
+
+几条行为约定：
+
+- **只在定时任务里推**（还有手动运行时勾上 `notify`）。push 触发的是代码改动，不会打扰你。
+- **同一期只推一次**：推送记录存在 `.paper-cache/notify_state.json`，同一周重跑会自动跳过。
+- **推送失败不影响更新**：这一步挂了也只是没收到消息，页面照常部署；所有通道都失败时不写状态，下周会重试。
+- 想临时关掉：Variables 里设 `NOTIFY_ENABLED=false`。
+
 ## 本地预览
 
 ```bash
@@ -268,6 +300,8 @@ curl "https://api.openalex.org/sources?filter=issn:0022-1082&select=id,display_n
 | `SCREEN_CONCURRENCY` | 3 | 并发请求数，遇到 429 就调小 |
 | `SCREEN_CACHE_DAYS` | 60 | AI 判定结果的缓存天数，越大越省钱 |
 | `LOOKBACK_DAYS` | 7 | arXiv"最近几天"那一趟的窗口 |
+| `NOTIFY_ENABLED` | true | 设为 `false` 关掉每周微信推送 |
+| `NOTIFY_CHANNELS` | 空 | 只填了多个推送 key 时，用它限定发哪几个，如 `serverchan` |
 
 ## 已知限制（重要）
 
@@ -286,6 +320,7 @@ curl "https://api.openalex.org/sources?filter=issn:0022-1082&select=id,display_n
 - **AI 阅卷依赖摘要质量**：这是当前最影响效果的一环。想让某本刊多出内容，先确认它的摘要覆盖率（用 `scripts/_probe_journals.py` 可以批量统计）。
 - **arXiv 429**：同时开太多方向会被限流，脚本默认每个方向之间停 15 秒；被限流时自动跳过并使用缓存数据。
 - **分数只反映关键词与分类重合度**，不是论文质量的判断，high 只是「很可能相关」，最终还是要点开原文。
+- **微信推送要依赖第三方服务**：微信不给个人号开放消息接口，所以这条链路是「GitHub Actions → 推送服务 → 微信服务号」。免费额度一般是每天 5 条（每周一条够用），但服务本身不是你能控制的，哪天停了就得换一家——脚本里五个通道可以随时切换。
 
 ## 与原项目（Futuresxy/paper-daily）的差异
 

@@ -16,6 +16,10 @@ on:
         description: "是否清空历史缓存后重新生成论文列表"
         required: false
         default: "false"
+      notify:
+        description: "手动运行时是否也推送微信（定时任务默认会推）"
+        required: false
+        default: "false"
   issues:
     types: [opened, edited, reopened]
 
@@ -221,12 +225,6 @@ jobs:
             cp web/data/conference_papers.json .paper-cache/conference_papers.json
           fi
 
-      - name: Save paper data cache
-        uses: actions/cache/save@v4
-        with:
-          path: .paper-cache
-          key: paper-data-${{ github.run_id }}-${{ github.run_attempt }}
-
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
@@ -238,3 +236,27 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+      # 推送放在部署之后：用户点开卡片时新一期必须已经在线。
+      # 只让定时任务推（push 触发是代码改动，不该打扰），手动运行时勾选 notify 才推。
+      - name: Push weekly digest to WeChat
+        if: github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.notify == 'true')
+        continue-on-error: true
+        env:
+          SERVERCHAN_SENDKEY: ${{ secrets.SERVERCHAN_SENDKEY }}
+          PUSHPLUS_TOKEN: ${{ secrets.PUSHPLUS_TOKEN }}
+          WXPUSHER_APP_TOKEN: ${{ secrets.WXPUSHER_APP_TOKEN }}
+          WXPUSHER_UIDS: ${{ secrets.WXPUSHER_UIDS }}
+          WECOM_BOT_WEBHOOK: ${{ secrets.WECOM_BOT_WEBHOOK }}
+          NOTIFY_WEBHOOK_URL: ${{ secrets.NOTIFY_WEBHOOK_URL }}
+          NOTIFY_CHANNELS: ${{ vars.NOTIFY_CHANNELS || '' }}
+          SITE_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/
+        run: python scripts/notify.py --root .
+
+      # 缓存放在推送之后存：推送成功会往 .paper-cache 写一份「本期已推送」记录，
+      # 同一期重跑（或缓存被恢复）就不会重复发消息。
+      - name: Save paper data cache
+        uses: actions/cache/save@v4
+        with:
+          path: .paper-cache
+          key: paper-data-${{ github.run_id }}-${{ github.run_attempt }}

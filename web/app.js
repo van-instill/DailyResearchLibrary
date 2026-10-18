@@ -347,6 +347,39 @@ function renderPaper(paper) {
   return node;
 }
 
+// 微信推送点进来的是 #latest 这种锚点，落地直接停在「本期新增」，
+// 省得用户自己再找一遍。顺手记成 #journal-latest 的形式区分两个集合。
+const HASH_VIEWS = new Set(["all", "latest", "month", "highlights"]);
+const HASH_COLLECTIONS = { daily: "daily", arxiv: "daily", conference: "conference", journal: "conference" };
+
+function readHash() {
+  const raw = location.hash.replace(/^#/, "").toLowerCase();
+  if (!raw) return null;
+  const parsed = {};
+  for (const part of raw.split(/[-_+/]/).filter(Boolean)) {
+    if (HASH_VIEWS.has(part)) parsed.view = part;
+    else if (HASH_COLLECTIONS[part]) parsed.collection = HASH_COLLECTIONS[part];
+  }
+  return Object.keys(parsed).length ? parsed : null;
+}
+
+function applyHash() {
+  const parsed = readHash();
+  if (!parsed) return false;
+  if (parsed.collection) state.filters.collection = parsed.collection;
+  if (parsed.view) state.filters.view = parsed.view;
+  for (const item of nodes.collectionTabs) {
+    item.classList.toggle("active", item.dataset.collection === state.filters.collection);
+  }
+  for (const item of nodes.tabs) item.classList.toggle("active", item.dataset.view === state.filters.view);
+  return true;
+}
+
+function syncHash() {
+  const next = state.filters.collection === "conference" ? `#journal-${state.filters.view}` : `#${state.filters.view}`;
+  if (location.hash !== next) history.replaceState(null, "", next);
+}
+
 function viewLabels() {
   const date = selectedDate();
   const monthLabel = `${date.getFullYear()} 年 ${String(date.getMonth() + 1).padStart(2, "0")} 月`;
@@ -468,6 +501,7 @@ function bindEvents() {
       updateStats();
       updateUpdatedAt();
       resetAndRender();
+      syncHash();
     });
   }
   nodes.dateFilter.addEventListener("change", (event) => {
@@ -480,8 +514,17 @@ function bindEvents() {
       state.filters.view = tab.dataset.view;
       for (const item of nodes.tabs) item.classList.toggle("active", item === tab);
       resetAndRender();
+      syncHash();
     });
   }
+  window.addEventListener("hashchange", () => {
+    if (!applyHash()) return;
+    hydrateTopicFilter();
+    hydrateDateFilter();
+    updateStats();
+    updateUpdatedAt();
+    resetAndRender();
+  });
   nodes.loadMore?.addEventListener("click", () => {
     state.page += 1;
     render();
@@ -578,11 +621,13 @@ async function main() {
     updateUpdatedAt(`数据读取失败：${error.message}`);
   }
 
+  applyHash();
   updateUpdatedAt();
   hydrateTopicFilter();
   hydrateDateFilter();
   updateStats();
   render();
+  syncHash();
 }
 
 main();
