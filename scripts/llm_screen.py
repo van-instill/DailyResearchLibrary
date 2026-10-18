@@ -287,6 +287,12 @@ def screen_papers(
 
     fresh_count = len(pending)
     if len(pending) > max_papers:
+        # 按时间倒序截断：否则候选会按期刊顺序排队，排在后面的刊永远轮不到阅卷
+        def _recency(paper: dict[str, Any]) -> dt.datetime:
+            stamp = parse_datetime(str(paper.get("published") or ""))
+            return stamp or dt.datetime.min.replace(tzinfo=dt.timezone.utc)
+
+        pending.sort(key=_recency, reverse=True)
         pending = pending[:max_papers]
         print(
             f"Warning: screening capped at {max_papers} papers (of {fresh_count}); "

@@ -86,7 +86,7 @@ jobs:
           SCREEN_MIN_SCORE: ${{ vars.SCREEN_MIN_SCORE || '45' }}
           SCREEN_BATCH_SIZE: ${{ vars.SCREEN_BATCH_SIZE || '6' }}
           SCREEN_CONCURRENCY: ${{ vars.SCREEN_CONCURRENCY || '3' }}
-          SCREEN_MAX_PAPERS: ${{ vars.SCREEN_MAX_PAPERS || '400' }}
+          SCREEN_MAX_PAPERS: ${{ vars.SCREEN_MAX_PAPERS || '1200' }}
           SCREEN_CACHE_DAYS: ${{ vars.SCREEN_CACHE_DAYS || '60' }}
           SCREEN_CACHE_PATH: .paper-cache/screen_cache.json
           ARXIV_SORT_BY: ${{ vars.ARXIV_SORT_BY || 'lastUpdatedDate' }}
@@ -125,10 +125,10 @@ jobs:
           SCREEN_MIN_SCORE: ${{ vars.SCREEN_MIN_SCORE || '45' }}
           SCREEN_BATCH_SIZE: ${{ vars.SCREEN_BATCH_SIZE || '6' }}
           SCREEN_CONCURRENCY: ${{ vars.SCREEN_CONCURRENCY || '3' }}
-          SCREEN_MAX_PAPERS: ${{ vars.SCREEN_MAX_PAPERS || '400' }}
+          SCREEN_MAX_PAPERS: ${{ vars.SCREEN_MAX_PAPERS || '1200' }}
           SCREEN_CACHE_DAYS: ${{ vars.SCREEN_CACHE_DAYS || '60' }}
           SCREEN_CACHE_PATH: .paper-cache/screen_cache.json
-          JOURNAL_PER_VENUE_RESULTS: ${{ vars.JOURNAL_PER_VENUE_RESULTS || '100' }}
+          JOURNAL_PER_VENUE_RESULTS: ${{ vars.JOURNAL_PER_VENUE_RESULTS || '25' }}
           JOURNAL_VENUE_DELAY_SECONDS: ${{ vars.JOURNAL_VENUE_DELAY_SECONDS || '1' }}
           JOURNAL_RETENTION_DAYS: ${{ vars.JOURNAL_RETENTION_DAYS || '400' }}
           MAX_NEW_JOURNAL_PAPERS: ${{ vars.MAX_NEW_JOURNAL_PAPERS || '60' }}
