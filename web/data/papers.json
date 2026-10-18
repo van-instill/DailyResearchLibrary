@@ -1,6 +1,6 @@
 {
-  "generated_at": "Sun, 18 Oct 2026 12:12:47 +0000",
-  "generated_at_iso": "2026-10-18T12:12:47.168346+00:00",
+  "generated_at": "Sun, 18 Oct 2026 12:18:28 +0000",
+  "generated_at_iso": "2026-10-18T12:18:28.636924+00:00",
   "config_source": "file",
   "data_kind": "daily",
   "topics": [
@@ -1909,7 +1909,7 @@
     "filtered_low_relevance_count": 71,
     "days": 7,
     "collection_mode": "lookback",
-    "collection_cutoff_iso": "2026-10-11T12:12:47.168346+00:00",
+    "collection_cutoff_iso": "2026-10-11T12:18:28.636924+00:00",
     "max_per_topic": 25,
     "max_new_papers": 60,
     "max_new_conference_papers": 50,
@@ -1957,6 +1957,7 @@
     "paper_count": 25,
     "new_paper_count": 60,
     "weekly_period": "2026-W42",
+    "period_new_count": 5,
     "weekly_new_count": 0,
     "weekly_new_quota": 0,
     "weekly_new_total": 10,
@@ -1968,7 +1969,7 @@
     "fresh_candidate_count": 44,
     "max_stored_papers": 1200,
     "max_data_bytes": 12582912,
-    "data_bytes": 171105,
+    "data_bytes": 171132,
     "storage_trimmed_count": 0,
     "storage_trimmed_by_level": {
       "high": 0,

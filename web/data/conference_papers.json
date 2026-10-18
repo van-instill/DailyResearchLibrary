@@ -1,6 +1,6 @@
 {
-  "generated_at": "Sun, 18 Oct 2026 12:14:09 +0000",
-  "generated_at_iso": "2026-10-18T12:14:09.769509+00:00",
+  "generated_at": "Sun, 18 Oct 2026 12:19:50 +0000",
+  "generated_at_iso": "2026-10-18T12:19:50.822206+00:00",
   "config_source": "file",
   "data_kind": "journal",
   "topics": [
@@ -2409,6 +2409,7 @@
     "high_count": 25,
     "with_abstract_count": 25,
     "weekly_period": "2026-W42",
+    "period_new_count": 5,
     "weekly_new_count": 0,
     "weekly_new_quota": 0,
     "weekly_new_total": 10,
@@ -2427,7 +2428,7 @@
     "preprint_cache_hits": 0,
     "max_stored_papers": 1200,
     "max_data_bytes": 12582912,
-    "data_bytes": 178643,
+    "data_bytes": 178670,
     "storage_trimmed_count": 0,
     "storage_trimmed_by_level": {
       "high": 0,
