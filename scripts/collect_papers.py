@@ -326,6 +326,12 @@ def arxiv_query_for_topic(topic: Topic) -> str:
 
     category_terms = [f"cat:{category}" for category in topic.arxiv_categories[:5]]
     query_mode = os.getenv("ARXIV_QUERY_MODE", "keyword").strip().lower()
+    if query_mode == "category":
+        # 没有模型兜底时，纯分类召回会把大量无关论文放进来，自动退回关键词 AND 分类
+        from llm_screen import screening_active
+
+        if not screening_active():
+            query_mode = "strict"
     if query_mode == "keyword":
         if keyword_terms:
             return "(" + " OR ".join(keyword_terms) + ")"
