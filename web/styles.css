@@ -662,7 +662,11 @@ select:focus,
 .abstract-body {
   position: relative;
   margin-top: 8px;
-  max-height: 3.3em; /* 2 行：line-height 1.62em × 2 */
+  /* 精确两行：字号和行高都跟 .abstract-text 保持一致，2 × 21.87px。
+     之前写 3.3em，em 是按父级字号（15px）算的，实际放进了两行半。 */
+  font-size: 13.5px;
+  line-height: 1.62;
+  max-height: calc(1.62em * 2);
   overflow: hidden;
 }
 
@@ -705,14 +709,14 @@ select:focus,
 }
 
 .match-reason {
-  display: -webkit-box;
-  max-width: 68%;
-  overflow: hidden;
+  /* 这里是「为什么匹配你」的完整说明，不能截断：
+     原来限宽 68% + line-clamp 2 行，手机上每行写不满还会吃掉后半句。 */
+  flex: 1 1 auto;
+  min-width: 0;
   color: var(--muted);
   font-size: 12px;
   line-height: 1.5;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
+  overflow-wrap: anywhere;
 }
 
 .paper-links {

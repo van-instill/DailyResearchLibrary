@@ -163,7 +163,7 @@
         "topic_name": "波动率建模与高频计量",
         "score": 0.95,
         "level": "high",
-        "reason": "AI 判定：用多元分数布朗运动建模预测已实现波动率，核心匹配；关键词命中：realized volatility",
+        "reason": "$\\text{AI}$ 判定：用多元分数布朗运动建模预测已实现波动率，核心匹配；关键词命中：realized volatility",
         "keyword_hits": [
           "realized volatility"
         ],
@@ -176,11 +176,11 @@
       "last_seen_at": "2026-10-18T11:05:14.375893+00:00",
       "retained_from_previous_run": true,
       "chinese_summary": {
-        "problem": "论文要解决的问题是用具有分量 Hurst 指数的多元分数布朗运动（mfBm）对已实现波动率（RV）进行建模与预测，并考察相关系数与 Hurst 指数之间的相互作用。",
-        "method": "论文使用具有分量 Hurst 指数的多元分数布朗运动（mfBm）对已实现波动率（RV）建模与预测，并提出一种新的模型参数估计方法，同时建立其一致性与渐近正态性。论文还构造了一个时间可逆性检验，并针对数据生成过程为时间可逆 mfBm 的情形推导最优预测公式并分析其性质。",
-        "innovation": "论文提出了一种新的 mfBm 模型参数估计方法，并建立其一致性与渐近正态性；构造了一个时间可逆性检验，该检验在 RV 数据上通常不被拒绝；在数据生成过程为时间可逆 mfBm 时推导出最优预测公式并分析其性质。",
-        "conclusion": "一个关键洞见是：具有不同 Hurst 指数和非零相关性的 mfBm 相比一维模型能够降低预测误差；与这一理论一致，使用时间可逆 mfBm 的样本外预测相比单变量 fBm 有所改进，尤其当估计的 Hurst 指数差异显著时；实证结果表明 mfBm 在样本外预测方面优于 HAR 及其变体。",
-        "abstract_zh": "一个具有分量 Hurst 指数的多元分数布朗运动（mfBm）被用于对已实现波动率（RV）建模与预测。我们考察相关系数与 Hurst 指数之间的相互作用，并提出一种新的模型参数估计方法，建立其一致性与渐近正态性。此外，我们构造了一个时间可逆性检验，该检验通常不被 RV 数据拒绝。当数据生成过程为时间可逆 mfBm 时，我们推导出最优预测公式并分析其性质。一个关键洞见是：具有不同 Hurst 指数和非零相关性的 mfBm 相比一维模型能够降低预测误差。与这一理论一致，使用时间可逆 mfBm 的样本外预测相比单变量 fBm 有所改进，尤其当估计的 Hurst 指数差异显著时。实证结果表明，mfBm 在样本外预测方面优于 HAR 及其变体。",
+        "problem": "论文要解决的问题是用具有分量 Hurst 指数的多元分数布朗运动（$\\text{mfBm}$）对已实现波动率（$\\text{RV}$）进行建模与预测，并考察相关系数与 Hurst 指数之间的相互作用。",
+        "method": "论文使用具有分量 Hurst 指数的多元分数布朗运动（$\\text{mfBm}$）对已实现波动率（$\\text{RV}$）建模与预测，并提出一种新的模型参数估计方法，同时建立其一致性与渐近正态性。论文还构造了一个时间可逆性检验，并针对数据生成过程为时间可逆 $\\text{mfBm}$ 的情形推导最优预测公式并分析其性质。",
+        "innovation": "论文提出了一种新的 $\\text{mfBm}$ 模型参数估计方法，并建立其一致性与渐近正态性；构造了一个时间可逆性检验，该检验在 $\\text{RV}$ 数据上通常不被拒绝；在数据生成过程为时间可逆 $\\text{mfBm}$ 时推导出最优预测公式并分析其性质。",
+        "conclusion": "一个关键洞见是：具有不同 Hurst 指数和非零相关性的 $\\text{mfBm}$ 相比一维模型能够降低预测误差；与这一理论一致，使用时间可逆 $\\text{mfBm}$ 的样本外预测相比单变量 $\\text{fBm}$ 有所改进，尤其当估计的 Hurst 指数差异显著时；实证结果表明 $\\text{mfBm}$ 在样本外预测方面优于 $\\text{HAR}$ 及其变体。",
+        "abstract_zh": "一个具有分量 Hurst 指数的多元分数布朗运动（$\\text{mfBm}$）被用于对已实现波动率（$\\text{RV}$）建模与预测。我们考察相关系数与 Hurst 指数之间的相互作用，并提出一种新的模型参数估计方法，建立其一致性与渐近正态性。此外，我们构造了一个时间可逆性检验，该检验通常不被 $\\text{RV}$ 数据拒绝。当数据生成过程为时间可逆 $\\text{mfBm}$ 时，我们推导出最优预测公式并分析其性质。一个关键洞见是：具有不同 Hurst 指数和非零相关性的 $\\text{mfBm}$ 相比一维模型能够降低预测误差。与这一理论一致，使用时间可逆 $\\text{mfBm}$ 的样本外预测相比单变量 $\\text{fBm}$ 有所改进，尤其当估计的 Hurst 指数差异显著时。实证结果表明，$\\text{mfBm}$ 在样本外预测方面优于 $\\text{HAR}$ 及其变体。",
         "evidence": "Empirical results demonstrate that mfBm outperforms HAR and its variants in terms of out-of-sample forecast.",
         "why_relevant": "直接对已实现波动率建模与预测，属波动率建模与高频计量核心议题。",
         "v": 4
@@ -234,14 +234,14 @@
         "topic_name": "波动率建模与高频计量",
         "score": 0.95,
         "level": "high",
-        "reason": "AI 判定：研究价格-波动率共跳跃与HAR波动率预测，属高频波动率核心主题；关键词命中：volatility forecasting",
+        "reason": "$\\text{AI}$ 判定：研究价格-波动率共跳跃与$\\text{HAR}$波动率预测，属高频波动率核心主题；关键词命中：volatility forecasting",
         "keyword_hits": [
           "volatility forecasting"
         ],
         "mechanical_score": 0.306,
         "llm_score": 95.0,
         "llm_source": "llm",
-        "llm_reason": "直接研究高频共跳跃与HAR波动率预测，契合波动率建模与高频计量方向。"
+        "llm_reason": "直接研究高频共跳跃与$\\text{HAR}$波动率预测，契合波动率建模与高频计量方向。"
       },
       "first_seen_at": "2026-10-18T11:05:14.375893+00:00",
       "last_seen_at": "2026-10-18T11:05:14.375893+00:00",
@@ -249,12 +249,12 @@
       "is_new_this_week": false,
       "chinese_summary": {
         "problem": "论文考察价格与波动率的同步跳跃是否能改进波动率预测。",
-        "method": "使用最新的高频 S&P 500 与 VIX 数据，在日内粒度上识别价格‐波动率共跳跃，并构造上行、下行与非对称测度。将这些测度嵌入 Heterogeneous Autoregressive (HAR) 模型进行预测分析。",
-        "innovation": "在日内粒度上识别价格‐波动率共跳跃并构造上行、下行与非对称测度；将这些共跳跃影响嵌入 HAR 模型；发现近期价格跳跃在伴随同步波动率跳跃时成为波动率的重要预测变量，该效应此前文献未记录。",
-        "conclusion": "下行共跳跃提高未来波动率，上行共跳跃降低波动率；纳入这些共跳跃影响的 HAR 模型样本外预测表现显著提升。",
-        "abstract_zh": "本文考察价格与波动率的同步跳跃是否改进波动率预测。使用最新的高频 S&P 500 与 VIX 数据，我们在日内粒度上识别价格‐波动率共跳跃，并构造上行、下行与非对称测度。将这些测度嵌入 Heterogeneous Autoregressive (HAR) 模型，我们提供新的经验证据表明下行共跳跃提高未来波动率，上行共跳跃降低波动率。样本外分析进一步显示，纳入这些共跳跃影响显著提升 HAR 模型的预测表现。此外，我们的结果揭示，近期价格跳跃在伴随同步波动率跳跃时成为波动率的重要预测变量，这一效应此前文献未记录。最后，我们还记录了价格‐波动率共跳跃的经济解释、政策含义与经济价值。",
+        "method": "使用最新的高频 S&P $500$ 与 $\\text{VIX}$ 数据，在日内粒度上识别价格‐波动率共跳跃，并构造上行、下行与非对称测度。将这些测度嵌入 Heterogeneous Autoregressive ($\\text{HAR}$) 模型进行预测分析。",
+        "innovation": "在日内粒度上识别价格‐波动率共跳跃并构造上行、下行与非对称测度；将这些共跳跃影响嵌入 $\\text{HAR}$ 模型；发现近期价格跳跃在伴随同步波动率跳跃时成为波动率的重要预测变量，该效应此前文献未记录。",
+        "conclusion": "下行共跳跃提高未来波动率，上行共跳跃降低波动率；纳入这些共跳跃影响的 $\\text{HAR}$ 模型样本外预测表现显著提升。",
+        "abstract_zh": "本文考察价格与波动率的同步跳跃是否改进波动率预测。使用最新的高频 S&P $500$ 与 $\\text{VIX}$ 数据，我们在日内粒度上识别价格‐波动率共跳跃，并构造上行、下行与非对称测度。将这些测度嵌入 Heterogeneous Autoregressive ($\\text{HAR}$) 模型，我们提供新的经验证据表明下行共跳跃提高未来波动率，上行共跳跃降低波动率。样本外分析进一步显示，纳入这些共跳跃影响显著提升 $\\text{HAR}$ 模型的预测表现。此外，我们的结果揭示，近期价格跳跃在伴随同步波动率跳跃时成为波动率的重要预测变量，这一效应此前文献未记录。最后，我们还记录了价格‐波动率共跳跃的经济解释、政策含义与经济价值。",
         "evidence": "Out‐of‐sample analysis further shows that incorporating these impacts of cojumps significantly enhances HAR model forecasting performance.",
-        "why_relevant": "直接研究高频共跳跃与HAR波动率预测，契合波动率建模与高频计量方向。",
+        "why_relevant": "直接研究高频共跳跃与$\\text{HAR}$波动率预测，契合波动率建模与高频计量方向。",
         "v": 4
       }
     },
@@ -307,14 +307,14 @@
         "topic_name": "波动率建模与高频计量",
         "score": 0.95,
         "level": "high",
-        "reason": "AI 判定：HAR模型预测已实现波动率并分解跳跃连续成分，核心匹配；关键词命中：realized volatility",
+        "reason": "$\\text{AI}$ 判定：$\\text{HAR}$模型预测已实现波动率并分解跳跃连续成分，核心匹配；关键词命中：realized volatility",
         "keyword_hits": [
           "realized volatility"
         ],
         "mechanical_score": 0.275,
         "llm_score": 95.0,
         "llm_source": "llm",
-        "llm_reason": "直接研究已实现波动率的 HAR 建模、跳跃与连续成分分解及波动率预测。"
+        "llm_reason": "直接研究已实现波动率的 $\\text{HAR}$ 建模、跳跃与连续成分分解及波动率预测。"
       },
       "first_seen_at": "2026-10-18T11:05:14.375893+00:00",
       "last_seen_at": "2026-10-18T11:05:14.375893+00:00",
@@ -322,12 +322,12 @@
       "is_new_this_week": false,
       "chinese_summary": {
         "problem": "论文考察盘后信息在中国商品期货波动率预测中的作用，并利用夜盘交易的推出，该交易可能有助于对源自海外市场的信息作出实时反应。",
-        "method": "论文对 10 个商品期货生成对未来日间已实现波动率的及时预测，使用异质自回归（HAR）模型，并在模型中分别加入和不加入过去夜盘的已实现方差度量。论文还单独考虑夜盘价格变动中的跳跃成分与连续成分。",
-        "innovation": "论文利用夜盘交易的推出来考察盘后信息在预测中国商品期货波动率中的作用；论文将夜盘已实现波动率纳入 HAR 模型进行预测；论文分别考虑夜盘价格变动中的跳跃成分与连续成分。",
+        "method": "论文对 $10$ 个商品期货生成对未来日间已实现波动率的及时预测，使用异质自回归（$\\text{HAR}$）模型，并在模型中分别加入和不加入过去夜盘的已实现方差度量。论文还单独考虑夜盘价格变动中的跳跃成分与连续成分。",
+        "innovation": "论文利用夜盘交易的推出来考察盘后信息在预测中国商品期货波动率中的作用；论文将夜盘已实现波动率纳入 $\\text{HAR}$ 模型进行预测；论文分别考虑夜盘价格变动中的跳跃成分与连续成分。",
         "conclusion": "夜盘已实现波动率在各市场都具有显著的样本内和样本外预测能力；相比之下，将日度隔夜收益平方作为替代度量带来的改进有限；单独考虑夜盘价格变动中的跳跃成分与连续成分具有实证价值，其优越表现在长预测期限上最为明显。",
-        "abstract_zh": "本研究考察盘后信息在预测中国商品期货波动率中的作用，利用夜盘交易的推出，该交易可能有助于对源自海外市场的信息作出实时反应。我们使用分别加入和不加入过去夜盘已实现方差度量的异质自回归（HAR）模型，对 10 个商品期货的未来日间已实现波动率生成及时预测。我们的结果揭示，夜盘已实现波动率在各市场都具有显著的样本内和样本外预测能力。相比之下，将日度隔夜收益平方作为替代度量纳入模型带来的改进有限。此外，我们记录了分别考虑夜盘价格变动中的跳跃成分与连续成分的实证价值，其优越表现在长预测期限上最为明显。改进的统计精度对风险厌恶型投资者也具有经济意义，并且对识别、估计和预测程序的变化保持稳健。",
+        "abstract_zh": "本研究考察盘后信息在预测中国商品期货波动率中的作用，利用夜盘交易的推出，该交易可能有助于对源自海外市场的信息作出实时反应。我们使用分别加入和不加入过去夜盘已实现方差度量的异质自回归（$\\text{HAR}$）模型，对 $10$ 个商品期货的未来日间已实现波动率生成及时预测。我们的结果揭示，夜盘已实现波动率在各市场都具有显著的样本内和样本外预测能力。相比之下，将日度隔夜收益平方作为替代度量纳入模型带来的改进有限。此外，我们记录了分别考虑夜盘价格变动中的跳跃成分与连续成分的实证价值，其优越表现在长预测期限上最为明显。改进的统计精度对风险厌恶型投资者也具有经济意义，并且对识别、估计和预测程序的变化保持稳健。",
         "evidence": "Our results reveal significant predictive power, both in‐sample and out‐of‐sample, associated with the night‐time realized volatility across markets.",
-        "why_relevant": "直接研究已实现波动率的 HAR 建模、跳跃与连续成分分解及波动率预测。",
+        "why_relevant": "直接研究已实现波动率的 $\\text{HAR}$ 建模、跳跃与连续成分分解及波动率预测。",
         "v": 4
       }
     },
@@ -381,7 +381,7 @@
         "topic_name": "波动率建模与高频计量",
         "score": 0.95,
         "level": "high",
-        "reason": "AI 判定：高频数据大维瞬时波动率矩阵非参数估计，含微观结构噪声，核心匹配；关键词命中：high-frequency data",
+        "reason": "$\\text{AI}$ 判定：高频数据大维瞬时波动率矩阵非参数估计，含微观结构噪声，核心匹配；关键词命中：high-frequency data",
         "keyword_hits": [
           "high-frequency data"
         ],
@@ -455,7 +455,7 @@
         "topic_name": "波动率建模与高频计量",
         "score": 0.95,
         "level": "high",
-        "reason": "AI 判定：HAR长记忆已实现波动率模型结合RNN预测VaR，核心属已实现波动率建模与预测；关键词命中：realized volatility",
+        "reason": "$\\text{AI}$ 判定：$\\text{HAR}$长记忆已实现波动率模型结合$\\text{RNN}$预测$\\text{VaR}$，核心属已实现波动率建模与预测；关键词命中：realized volatility",
         "keyword_hits": [
           "realized volatility"
         ],
@@ -469,11 +469,11 @@
       "retained_from_previous_run": true,
       "is_new_this_week": false,
       "chinese_summary": {
-        "problem": "论文提出一个长记忆与非线性的已实现波动率模型类，用于直接预测风险价值（VaR）。",
-        "method": "该模型称为 RNN-HAR，扩展了异质自回归（HAR）模型，通过整合循环神经网络（RNN）来处理非线性动态。采用基于分位数损失的广义贝叶斯方法与序贯蒙特卡洛进行模型估计和序贯预测。实证分析使用日收盘价和已实现测度，数据约 12 年直至 2022 年，覆盖 31 个市场指数。",
-        "innovation": "提出 RNN-HAR，将 RNN 整合进以高效捕捉已实现测度长记忆著称的 HAR 框架以处理非线性动态；采用基于分位数损失的广义贝叶斯方法与序贯蒙特卡洛进行估计与序贯预测；并公开了实现代码。",
-        "conclusion": "结果表明，所提出的 RNN-HAR 模型在研究中考虑的所有其他模型之上持续表现更优；其一步向前 VaR 预测性能与基本 HAR 模型及其扩展进行了比较。",
-        "abstract_zh": "提出了一类长记忆与非线性的已实现波动率模型，用于直接预测风险价值（VaR）。该模型被称为 RNN-HAR，它扩展了异质自回归（HAR）模型——一个以高效捕捉已实现测度中的长记忆而著称的框架——通过整合循环神经网络（RNN）来处理非线性动态。RNN-HAR 采用基于分位数损失的广义贝叶斯方法与序贯蒙特卡洛进行模型估计和序贯预测。实证分析使用日收盘价和已实现测度，数据约 12 年直至 2022 年，覆盖 31 个市场指数。所提出模型的一步向前 VaR 预测性能与基本 HAR 模型及其扩展进行了比较。结果表明，所提出的 RNN-HAR 模型在研究中考虑的所有其他模型之上持续表现更优。HAR-RNN 模型的实现代码已在 GitHub 公开：https://github.com/chaowang-usyd/RNN-HAR。",
+        "problem": "论文提出一个长记忆与非线性的已实现波动率模型类，用于直接预测风险价值（$\\text{VaR}$）。",
+        "method": "该模型称为 $\\text{RNN}$-$\\text{HAR}$，扩展了异质自回归（$\\text{HAR}$）模型，通过整合循环神经网络（$\\text{RNN}$）来处理非线性动态。采用基于分位数损失的广义贝叶斯方法与序贯蒙特卡洛进行模型估计和序贯预测。实证分析使用日收盘价和已实现测度，数据约 $12$ 年直至 $2022$ 年，覆盖 $31$ 个市场指数。",
+        "innovation": "提出 $\\text{RNN}$-$\\text{HAR}$，将 $\\text{RNN}$ 整合进以高效捕捉已实现测度长记忆著称的 $\\text{HAR}$ 框架以处理非线性动态；采用基于分位数损失的广义贝叶斯方法与序贯蒙特卡洛进行估计与序贯预测；并公开了实现代码。",
+        "conclusion": "结果表明，所提出的 $\\text{RNN}$-$\\text{HAR}$ 模型在研究中考虑的所有其他模型之上持续表现更优；其一步向前 $\\text{VaR}$ 预测性能与基本 $\\text{HAR}$ 模型及其扩展进行了比较。",
+        "abstract_zh": "提出了一类长记忆与非线性的已实现波动率模型，用于直接预测风险价值（$\\text{VaR}$）。该模型被称为 $\\text{RNN}$-$\\text{HAR}$，它扩展了异质自回归（$\\text{HAR}$）模型——一个以高效捕捉已实现测度中的长记忆而著称的框架——通过整合循环神经网络（$\\text{RNN}$）来处理非线性动态。$\\text{RNN}$-$\\text{HAR}$ 采用基于分位数损失的广义贝叶斯方法与序贯蒙特卡洛进行模型估计和序贯预测。实证分析使用日收盘价和已实现测度，数据约 $12$ 年直至 $2022$ 年，覆盖 $31$ 个市场指数。所提出模型的一步向前 $\\text{VaR}$ 预测性能与基本 $\\text{HAR}$ 模型及其扩展进行了比较。结果表明，所提出的 $\\text{RNN}$-$\\text{HAR}$ 模型在研究中考虑的所有其他模型之上持续表现更优。$\\text{HAR}$-$\\text{RNN}$ 模型的实现代码已在 $\\text{GitHub}$ 公开：https://github.com/chaowang-usyd/$\\text{RNN}$-$\\text{HAR}$。",
         "evidence": "The results demonstrate that the proposed RNN-HAR model consistently outperforms all other models considered in the study.",
         "why_relevant": "直接涉及已实现波动率的长记忆建模与波动率预测，契合研究方向。",
         "v": 4
@@ -527,27 +527,27 @@
         "topic_name": "波动率建模与高频计量",
         "score": 0.95,
         "level": "high",
-        "reason": "AI 判定：已实现波动率建模与预测，DCS模型对比HAR，核心主题高度吻合；关键词命中：realized volatility",
+        "reason": "$\\text{AI}$ 判定：已实现波动率建模与预测，$\\text{DCS}$模型对比$\\text{HAR}$，核心主题高度吻合；关键词命中：realized volatility",
         "keyword_hits": [
           "realized volatility"
         ],
         "mechanical_score": 0.275,
         "llm_score": 95.0,
         "llm_source": "llm",
-        "llm_reason": "直接研究已实现波动率建模与预测，并对比 HAR，契合波动率预测方向。"
+        "llm_reason": "直接研究已实现波动率建模与预测，并对比 $\\text{HAR}$，契合波动率预测方向。"
       },
       "first_seen_at": "2026-10-18T11:05:14.375893+00:00",
       "last_seen_at": "2026-10-18T11:05:14.375893+00:00",
       "retained_from_previous_run": true,
       "is_new_this_week": false,
       "chinese_summary": {
-        "problem": "论文要解决的问题是为已实现波动率（RV）建立一个统计建模框架，并评估该模型在预测上的表现。",
-        "method": "论文用动态条件得分（DCS）模型对 RV 建模：先对 RV 的对数拟合线性高斯模型做初步分析，据此提示采用两成分动态设定；随后直接在 RV 上以广义第二类 Beta（GB2）条件分布拟合带杠杆和星期效应的两成分 DCS 设定，或等价地在 RV 的对数上以指数广义第二类 Beta（EGB2）分布拟合。模型在含与不含异方差两种情形下的预测表现，与异质自回归（HAR）及其若干扩展和其他模型进行比较。",
-        "innovation": "摘要声称的贡献是：提出以 GB2 条件分布（等价地，对 RV 对数用 EGB2 分布）直接对 RV 建模的两成分 DCS 设定，并纳入杠杆与星期效应；将该模型与 HAR 及其扩展等模型在预测上作比较；另用汇率数据集将 GB2-DCS 模型与使用 realized quarticity 的模型作比较。",
-        "conclusion": "总体而言，使用 GB2-DCS 模型有明确收益，即使 HAR 模型使用了已实现半方差等额外信息也是如此；当目标是预测尾部行为时，厚尾的 GB2 模型表现远好于薄尾分布模型；在汇率数据上，额外信息同样没有带来预测优势。",
-        "abstract_zh": "本文建立了一个用动态条件得分（DCS）模型对已实现波动率（RV）建模的统计框架。它首先表明，对于一个股票指数数据集，基于对 RV 的对数拟合线性高斯模型的初步分析，提示应采用两成分动态设定。它还表明数据偏离正态性、存在周内模式以及存在异方差。随后，带杠杆和星期效应的两成分 DCS 设定被直接对 RV 以广义第二类 Beta（GB2）条件分布进行拟合，或等价地对 RV 的对数以指数广义第二类 Beta（EGB2）分布进行拟合。该模型在含与不含异方差情形下的预测表现，与异质自回归（HAR）、其若干扩展以及一些其他模型的表现进行了比较。总体而言，使用 GB2-DCS 模型有明确收益，即使 HAR 模型使用了已实现半方差等额外信息也是如此。当目标是预测尾部行为时，厚尾的 GB2 模型表现远好于薄尾分布模型。进一步的一项练习使用汇率数据集，将 GB2-DCS 模型与使用已实现四次幂（realized quarticity）的模型进行比较。额外信息同样没有带来预测优势。总体而言，GB2-DCS 模型透明，对 RV 的性质提供了全面的描述，并且在预测上难以被击败。",
+        "problem": "论文要解决的问题是为已实现波动率（$\\text{RV}$）建立一个统计建模框架，并评估该模型在预测上的表现。",
+        "method": "论文用动态条件得分（$\\text{DCS}$）模型对 $\\text{RV}$ 建模：先对 $\\text{RV}$ 的对数拟合线性高斯模型做初步分析，据此提示采用两成分动态设定；随后直接在 $\\text{RV}$ 上以广义第二类 Beta（$\\text{GB2}$）条件分布拟合带杠杆和星期效应的两成分 $\\text{DCS}$ 设定，或等价地在 $\\text{RV}$ 的对数上以指数广义第二类 Beta（$\\text{EGB2}$）分布拟合。模型在含与不含异方差两种情形下的预测表现，与异质自回归（$\\text{HAR}$）及其若干扩展和其他模型进行比较。",
+        "innovation": "摘要声称的贡献是：提出以 $\\text{GB2}$ 条件分布（等价地，对 $\\text{RV}$ 对数用 $\\text{EGB2}$ 分布）直接对 $\\text{RV}$ 建模的两成分 $\\text{DCS}$ 设定，并纳入杠杆与星期效应；将该模型与 $\\text{HAR}$ 及其扩展等模型在预测上作比较；另用汇率数据集将 $\\text{GB2}$-$\\text{DCS}$ 模型与使用 realized quarticity 的模型作比较。",
+        "conclusion": "总体而言，使用 $\\text{GB2}$-$\\text{DCS}$ 模型有明确收益，即使 $\\text{HAR}$ 模型使用了已实现半方差等额外信息也是如此；当目标是预测尾部行为时，厚尾的 $\\text{GB2}$ 模型表现远好于薄尾分布模型；在汇率数据上，额外信息同样没有带来预测优势。",
+        "abstract_zh": "本文建立了一个用动态条件得分（$\\text{DCS}$）模型对已实现波动率（$\\text{RV}$）建模的统计框架。它首先表明，对于一个股票指数数据集，基于对 $\\text{RV}$ 的对数拟合线性高斯模型的初步分析，提示应采用两成分动态设定。它还表明数据偏离正态性、存在周内模式以及存在异方差。随后，带杠杆和星期效应的两成分 $\\text{DCS}$ 设定被直接对 $\\text{RV}$ 以广义第二类 Beta（$\\text{GB2}$）条件分布进行拟合，或等价地对 $\\text{RV}$ 的对数以指数广义第二类 Beta（$\\text{EGB2}$）分布进行拟合。该模型在含与不含异方差情形下的预测表现，与异质自回归（$\\text{HAR}$）、其若干扩展以及一些其他模型的表现进行了比较。总体而言，使用 $\\text{GB2}$-$\\text{DCS}$ 模型有明确收益，即使 $\\text{HAR}$ 模型使用了已实现半方差等额外信息也是如此。当目标是预测尾部行为时，厚尾的 $\\text{GB2}$ 模型表现远好于薄尾分布模型。进一步的一项练习使用汇率数据集，将 $\\text{GB2}$-$\\text{DCS}$ 模型与使用已实现四次幂（realized quarticity）的模型进行比较。额外信息同样没有带来预测优势。总体而言，$\\text{GB2}$-$\\text{DCS}$ 模型透明，对 $\\text{RV}$ 的性质提供了全面的描述，并且在预测上难以被击败。",
         "evidence": "Overall there is a clear gain from using the GB2-DCS model, even when the HAR model uses additional information, such as realized semi-variance.",
-        "why_relevant": "直接研究已实现波动率建模与预测，并对比 HAR，契合波动率预测方向。",
+        "why_relevant": "直接研究已实现波动率建模与预测，并对比 $\\text{HAR}$，契合波动率预测方向。",
         "v": 4
       }
     },
@@ -598,14 +598,14 @@
         "topic_name": "波动率建模与高频计量",
         "score": 0.95,
         "level": "high",
-        "reason": "AI 判定：已实现GARCH-Itô高频波动率建模与拟似然估计；关键词命中：GARCH",
+        "reason": "$\\text{AI}$ 判定：已实现$\\text{GARCH}$-Itô高频波动率建模与拟似然估计；关键词命中：$\\text{GARCH}$",
         "keyword_hits": [
           "GARCH"
         ],
         "mechanical_score": 0.319,
         "llm_score": 95.0,
         "llm_source": "llm",
-        "llm_reason": "直接涉及已实现 GARCH-Itô 高频波动率建模与拟似然估计，契合波动率建模与高频计量方向。"
+        "llm_reason": "直接涉及已实现 $\\text{GARCH}$-Itô 高频波动率建模与拟似然估计，契合波动率建模与高频计量方向。"
       },
       "first_seen_at": "2026-10-18T11:05:14.375893+00:00",
       "last_seen_at": "2026-10-18T11:05:14.375893+00:00",
@@ -613,12 +613,12 @@
       "is_new_this_week": false,
       "chinese_summary": {
         "problem": "论文要解决的问题是：如何用一个 Itô 扩散过程来建模高频金融数据，同时容纳低频波动率动态。",
-        "method": "论文将带有对数积分波动率的离散时间非线性指数 GARCH 结构嵌入连续的瞬时波动率过程，从而引入一个新的 Itô 扩散过程。给定对数积分波动率的自回归结构，论文提出拟似然估计程序进行参数估计，并建立其渐近性质。论文还进行了模拟研究以检验有限样本表现，并对 S&P 500 成分股中的 50 只资产进行了实证研究。",
-        "innovation": "与现有 GARCH-Itô 模型不同，所提模型的瞬时波动率过程具有非线性结构，这确保了对数积分波动率具有已实现 GARCH 结构；论文将这一模型称为指数已实现 GARCH-Itô 模型。",
+        "method": "论文将带有对数积分波动率的离散时间非线性指数 $\\text{GARCH}$ 结构嵌入连续的瞬时波动率过程，从而引入一个新的 Itô 扩散过程。给定对数积分波动率的自回归结构，论文提出拟似然估计程序进行参数估计，并建立其渐近性质。论文还进行了模拟研究以检验有限样本表现，并对 S&P $500$ 成分股中的 $50$ 只资产进行了实证研究。",
+        "innovation": "与现有 $\\text{GARCH}$-Itô 模型不同，所提模型的瞬时波动率过程具有非线性结构，这确保了对数积分波动率具有已实现 $\\text{GARCH}$ 结构；论文将这一模型称为指数已实现 $\\text{GARCH}$-Itô 模型。",
         "conclusion": "数值研究表明所提模型具有优势；摘要未提及具体数值。",
-        "abstract_zh": "本文引入一个新的 Itô 扩散过程来建模高频金融数据，该过程能够通过将带有对数积分波动率的离散时间非线性指数广义自回归条件异方差（GARCH）结构嵌入连续的瞬时波动率过程，来容纳低频波动率动态。所提模型的关键特征是，与现有 GARCH-Itô 模型不同，瞬时波动率过程具有非线性结构，这确保了对数积分波动率具有已实现 GARCH 结构。我们称之为指数已实现 GARCH-Itô 模型。给定对数积分波动率的自回归结构，我们提出一种拟似然估计程序用于参数估计，并建立其渐近性质。我们进行模拟研究以检验所提模型的有限样本表现，并对 S&P 500 成分股中的 50 只资产进行实证研究。数值研究显示了所提模型的优势。",
+        "abstract_zh": "本文引入一个新的 Itô 扩散过程来建模高频金融数据，该过程能够通过将带有对数积分波动率的离散时间非线性指数广义自回归条件异方差（$\\text{GARCH}$）结构嵌入连续的瞬时波动率过程，来容纳低频波动率动态。所提模型的关键特征是，与现有 $\\text{GARCH}$-Itô 模型不同，瞬时波动率过程具有非线性结构，这确保了对数积分波动率具有已实现 $\\text{GARCH}$ 结构。我们称之为指数已实现 $\\text{GARCH}$-Itô 模型。给定对数积分波动率的自回归结构，我们提出一种拟似然估计程序用于参数估计，并建立其渐近性质。我们进行模拟研究以检验所提模型的有限样本表现，并对 S&P $500$ 成分股中的 $50$ 只资产进行实证研究。数值研究显示了所提模型的优势。",
         "evidence": "Numerical studies show the advantages of the proposed model.",
-        "why_relevant": "直接涉及已实现 GARCH-Itô 高频波动率建模与拟似然估计，契合波动率建模与高频计量方向。",
+        "why_relevant": "直接涉及已实现 $\\text{GARCH}$-Itô 高频波动率建模与拟似然估计，契合波动率建模与高频计量方向。",
         "v": 4
       }
     },
@@ -673,7 +673,7 @@
         "topic_name": "波动率建模与高频计量",
         "score": 0.95,
         "level": "high",
-        "reason": "AI 判定：分数布朗运动随机波动率粗糙度GMM估计，处理高频已实现方差噪声；关键词命中：stochastic volatility、high-frequency data",
+        "reason": "$\\text{AI}$ 判定：分数布朗运动随机波动率粗糙度$\\text{GMM}$估计，处理高频已实现方差噪声；关键词命中：stochastic volatility、high-frequency data",
         "keyword_hits": [
           "stochastic volatility",
           "high-frequency data"
@@ -689,10 +689,10 @@
       "is_new_this_week": false,
       "chinese_summary": {
         "problem": "论文针对由分数布朗运动驱动、Hurst 指数不受限制的对数正态随机波动率模型，提出估计其粗糙度（Hurst 指数）的问题。",
-        "method": "论文发展了 GMM 方法，并证明基于积分方差（integrated variance）的参数估计量是一致的，且在更强条件下渐近正态。论文考察了当积分方差被由离散高频数据计算出的含噪波动率度量替代时该程序的表现，并构造了一种解析方法来控制测量误差的影响，且不引入冗余参数（nuisance parameters）。",
-        "innovation": "论文提出用 GMM 估计由分数布朗运动驱动、Hurst 指数不受限制的对数正态随机波动率模型；指出已实现估计量包含抽样误差，会把分形系数偏向“虚假粗糙”（illusive roughness）；并构造不引入冗余参数的解析方法来控制测量误差的影响。",
-        "conclusion": "模拟研究显示该方法在积分方差与已实现方差两种情形下、在整个记忆谱（memory spectrum）上都具有令人信服的小样本性质，且偏差校正减弱了参数估计中的系统性偏离；应用于众多领先股票指数的经验高频数据时，Hurst 指数估计约为 0.05，确认了随机波动率的粗糙性。",
-        "abstract_zh": "我们发展了一种 GMM 方法，用于估计由分数布朗运动驱动、Hurst 指数不受限制的对数正态随机波动率模型。我们证明，基于积分方差的参数估计量是一致的，并且在更强条件下是渐近正态分布的。我们考察了当积分方差被由离散高频数据计算出的含噪波动率度量替代时，我们的程序的表现。已实现估计量包含抽样误差，这会把分形系数偏向“虚假粗糙”。我们构造了一种解析方法来控制测量误差的影响，且不引入冗余参数。在一项模拟研究中，我们展示了我们的方法在基于积分方差和已实现方差、覆盖整个记忆谱时令人信服的小样本性质。我们表明，偏差校正减弱了参数估计中的任何系统性偏离。我们的程序被应用于来自众多领先股票指数的经验高频数据。采用我们的稳健方法，Hurst 指数被估计为约 0.05，确认了随机波动率中的粗糙性。",
+        "method": "论文发展了 $\\text{GMM}$ 方法，并证明基于积分方差（integrated variance）的参数估计量是一致的，且在更强条件下渐近正态。论文考察了当积分方差被由离散高频数据计算出的含噪波动率度量替代时该程序的表现，并构造了一种解析方法来控制测量误差的影响，且不引入冗余参数（nuisance parameters）。",
+        "innovation": "论文提出用 $\\text{GMM}$ 估计由分数布朗运动驱动、Hurst 指数不受限制的对数正态随机波动率模型；指出已实现估计量包含抽样误差，会把分形系数偏向“虚假粗糙”（illusive roughness）；并构造不引入冗余参数的解析方法来控制测量误差的影响。",
+        "conclusion": "模拟研究显示该方法在积分方差与已实现方差两种情形下、在整个记忆谱（memory spectrum）上都具有令人信服的小样本性质，且偏差校正减弱了参数估计中的系统性偏离；应用于众多领先股票指数的经验高频数据时，Hurst 指数估计约为 $0.05$，确认了随机波动率的粗糙性。",
+        "abstract_zh": "我们发展了一种 $\\text{GMM}$ 方法，用于估计由分数布朗运动驱动、Hurst 指数不受限制的对数正态随机波动率模型。我们证明，基于积分方差的参数估计量是一致的，并且在更强条件下是渐近正态分布的。我们考察了当积分方差被由离散高频数据计算出的含噪波动率度量替代时，我们的程序的表现。已实现估计量包含抽样误差，这会把分形系数偏向“虚假粗糙”。我们构造了一种解析方法来控制测量误差的影响，且不引入冗余参数。在一项模拟研究中，我们展示了我们的方法在基于积分方差和已实现方差、覆盖整个记忆谱时令人信服的小样本性质。我们表明，偏差校正减弱了参数估计中的任何系统性偏离。我们的程序被应用于来自众多领先股票指数的经验高频数据。采用我们的稳健方法，Hurst 指数被估计为约 $0.05$，确认了随机波动率中的粗糙性。",
         "evidence": "With our robust approach the Hurst index is estimated around 0.05, confirming roughness in stochastic volatility.",
         "why_relevant": "涉及随机波动率、高频已实现方差与测量误差，直接对应波动率建模与高频计量。",
         "v": 4
@@ -744,7 +744,7 @@
         "topic_name": "波动率建模与高频计量",
         "score": 0.95,
         "level": "high",
-        "reason": "AI 判定：高频数据下微观结构噪声矩的一致估计，正是高频计量核心问题",
+        "reason": "$\\text{AI}$ 判定：高频数据下微观结构噪声矩的一致估计，正是高频计量核心问题",
         "keyword_hits": [],
         "mechanical_score": 0.219,
         "llm_score": 95.0,
@@ -757,10 +757,10 @@
       "is_new_this_week": false,
       "chinese_summary": {
         "problem": "论文要解决的问题是度量微观结构噪声，即由市场不完美造成的观测资产价格对基础价值的偏离。",
-        "method": "论文引入 Realized moMents of Disjoint Increments（ReMeDI）范式，基于高频数据提出微观结构噪声过程任意阶矩的一致估计量，其中噪声过程可以是序列相依的、内生的和非平稳的。论文刻画了所提估计量的极限分布，并在 infill 渐近下构造置信区间。",
-        "innovation": "论文提出 ReMeDI 范式来度量微观结构噪声，并给出噪声过程任意阶矩的一致估计量，允许噪声过程序列相依、内生且非平稳；同时刻画估计量的极限分布并在 infill 渐近下构造置信区间。",
-        "conclusion": "模拟与实证研究表明，ReMeDI 方法在度量微观结构噪声的尺度与序列相依性方面非常有效；此外，估计量对模型设定、样本量和数据频率相当稳健。",
-        "abstract_zh": "我们引入不相交增量的已实现矩（ReMeDI）范式，用以度量微观结构噪声（由市场不完美造成的观测资产价格对基础价值的偏离）。我们基于高频数据提出微观结构噪声过程任意阶矩的一致估计量，其中噪声过程可以是序列相依的、内生的和非平稳的。我们刻画所提估计量的极限分布，并在 infill 渐近下构造置信区间。我们的模拟与实证研究表明，ReMeDI 方法在度量微观结构噪声的尺度与序列相依性方面非常有效。此外，这些估计量对模型设定、样本量和数据频率相当稳健。",
+        "method": "论文引入 Realized $\\text{moMents}$ of Disjoint Increments（$\\text{ReMeDI}$）范式，基于高频数据提出微观结构噪声过程任意阶矩的一致估计量，其中噪声过程可以是序列相依的、内生的和非平稳的。论文刻画了所提估计量的极限分布，并在 infill 渐近下构造置信区间。",
+        "innovation": "论文提出 $\\text{ReMeDI}$ 范式来度量微观结构噪声，并给出噪声过程任意阶矩的一致估计量，允许噪声过程序列相依、内生且非平稳；同时刻画估计量的极限分布并在 infill 渐近下构造置信区间。",
+        "conclusion": "模拟与实证研究表明，$\\text{ReMeDI}$ 方法在度量微观结构噪声的尺度与序列相依性方面非常有效；此外，估计量对模型设定、样本量和数据频率相当稳健。",
+        "abstract_zh": "我们引入不相交增量的已实现矩（$\\text{ReMeDI}$）范式，用以度量微观结构噪声（由市场不完美造成的观测资产价格对基础价值的偏离）。我们基于高频数据提出微观结构噪声过程任意阶矩的一致估计量，其中噪声过程可以是序列相依的、内生的和非平稳的。我们刻画所提估计量的极限分布，并在 infill 渐近下构造置信区间。我们的模拟与实证研究表明，$\\text{ReMeDI}$ 方法在度量微观结构噪声的尺度与序列相依性方面非常有效。此外，这些估计量对模型设定、样本量和数据频率相当稳健。",
         "evidence": "Our simulation and empirical studies show that the ReMeDI approach is very effective to measure the scale and the serial dependence of microstructure noise.",
         "why_relevant": "直接针对高频数据下的微观结构噪声度量，属于高频计量核心议题。",
         "v": 4
@@ -813,7 +813,7 @@
         "topic_name": "波动率建模与高频计量",
         "score": 0.95,
         "level": "high",
-        "reason": "AI 判定：核心研究跳跃与符号变化对已实现波动率建模和预测的影响；关键词命中：realized volatility",
+        "reason": "$\\text{AI}$ 判定：核心研究跳跃与符号变化对已实现波动率建模和预测的影响；关键词命中：realized volatility",
         "keyword_hits": [
           "realized volatility"
         ],
@@ -885,7 +885,7 @@
         "topic_name": "波动率建模与高频计量",
         "score": 0.95,
         "level": "high",
-        "reason": "AI 判定：提出滚动窗口已实现波动率估计并改进高频波动率预测，核心贴合该方向。；关键词命中：realized volatility",
+        "reason": "$\\text{AI}$ 判定：提出滚动窗口已实现波动率估计并改进高频波动率预测，核心贴合该方向。；关键词命中：realized volatility",
         "keyword_hits": [
           "realized volatility"
         ],
@@ -899,11 +899,11 @@
       "retained_from_previous_run": true,
       "is_new_this_week": false,
       "chinese_summary": {
-        "problem": "论文要解决的问题是：在已实现波动率文献中，按日历日对日内收益平方求和构造日终估计量，并用于样本外1日已实现波动率建模时，普通最小二乘回归仅使用 $N-1$ 个数据点。",
-        "method": "论文提出“滚动”方法（RRV），在每个时间戳对 trailing $M$ 个收益求和，而不论这 $M$ 个收益是否属于同一日历日。与“日历”方法（RV）相比，RRV 在样本外1日已实现波动率模型的 OLS 回归中纳入 $M(N-2)+1$ 个数据点，而前者仅有 $N-1$ 个数据点。论文对 S&P 500 和 26 只道琼斯工业平均指数股票比较了两种模型。",
-        "innovation": "论文的创新点在于：提出“滚动”已实现波动率（RRV）方法，在每个时间戳对 trailing $M$ 个收益求和，而不要求这些收益属于同一日历日；由此在样本外1日已实现波动率模型的 OLS 回归中纳入 $M(N-2)+1$ 个数据点，而非传统日历方法的 $N-1$ 个数据点，从而有效降低标准误，并可能得到更准确的预测。",
-        "conclusion": "对 S&P 500 和 26 只道琼斯工业平均指数股票的比较结果总体上表明，滚动方法在样本外表现上统计和经济上都显著优于传统日历方法。",
-        "abstract_zh": "假设有 $N$ 个可用日历日，每个日历日有 $M$ 个日内收益，已实现波动率文献建议通过对每个特定日期的 $M$ 个收益平方求和来构造 $N$ 个日终估计量。我们提出一种“滚动”[滚动 RV（RRV）]方法，而不是这种“日历”[已实现方差（RV）]方法，该方法在每个时间戳简单地对 trailing $M$ 个收益求和，而不论这 $M$ 个收益是否全部属于同一日历日。当估计样本外1日已实现波动率模型时，前者导致一个具有 $N-1$ 个数据点的普通最小二乘（OLS）回归，而后者纳入 $M(N-2)+1$ 个数据点，有效降低标准误，并可能得到更准确的预测。我们对 S&P 500 和 26 只道琼斯工业平均指数股票比较了两种模型；我们的结果总体上表明，滚动方法在样本外表现上统计和经济上都显著优于传统日历方法。",
+        "problem": "论文要解决的问题是：在已实现波动率文献中，按日历日对日内收益平方求和构造日终估计量，并用于样本外$1$日已实现波动率建模时，普通最小二乘回归仅使用 $N-1$ 个数据点。",
+        "method": "论文提出“滚动”方法（$\\text{RRV}$），在每个时间戳对 trailing $M$ 个收益求和，而不论这 $M$ 个收益是否属于同一日历日。与“日历”方法（$\\text{RV}$）相比，$\\text{RRV}$ 在样本外$1$日已实现波动率模型的 $\\text{OLS}$ 回归中纳入 $M(N-2)+1$ 个数据点，而前者仅有 $N-1$ 个数据点。论文对 S&P $500$ 和 $26$ 只道琼斯工业平均指数股票比较了两种模型。",
+        "innovation": "论文的创新点在于：提出“滚动”已实现波动率（$\\text{RRV}$）方法，在每个时间戳对 trailing $M$ 个收益求和，而不要求这些收益属于同一日历日；由此在样本外$1$日已实现波动率模型的 $\\text{OLS}$ 回归中纳入 $M(N-2)+1$ 个数据点，而非传统日历方法的 $N-1$ 个数据点，从而有效降低标准误，并可能得到更准确的预测。",
+        "conclusion": "对 S&P $500$ 和 $26$ 只道琼斯工业平均指数股票的比较结果总体上表明，滚动方法在样本外表现上统计和经济上都显著优于传统日历方法。",
+        "abstract_zh": "假设有 $N$ 个可用日历日，每个日历日有 $M$ 个日内收益，已实现波动率文献建议通过对每个特定日期的 $M$ 个收益平方求和来构造 $N$ 个日终估计量。我们提出一种“滚动”[滚动 $\\text{RV}$（$\\text{RRV}$）]方法，而不是这种“日历”[已实现方差（$\\text{RV}$）]方法，该方法在每个时间戳简单地对 trailing $M$ 个收益求和，而不论这 $M$ 个收益是否全部属于同一日历日。当估计样本外$1$日已实现波动率模型时，前者导致一个具有 $N-1$ 个数据点的普通最小二乘（$\\text{OLS}$）回归，而后者纳入 $M(N-2)+1$ 个数据点，有效降低标准误，并可能得到更准确的预测。我们对 S&P $500$ 和 $26$ 只道琼斯工业平均指数股票比较了两种模型；我们的结果总体上表明，滚动方法在样本外表现上统计和经济上都显著优于传统日历方法。",
         "evidence": "We compare both models for the S&P 500 and 26 Dow Jones Industrial Average stocks; our results generally suggest that the Rolling approach yields both statistically and economically significant superior out-of-sample performance over the traditional Calendar approach.",
         "why_relevant": "提出滚动窗口已实现波动率估计并改进高频波动率预测，核心贴合波动率建模与高频计量方向。",
         "v": 4
@@ -959,7 +959,7 @@
         "topic_name": "波动率建模与高频计量",
         "score": 0.95,
         "level": "high",
-        "reason": "AI 判定：扩展HAR模型预测已实现波动率，纳入隐含波动率与杠杆效应，核心属波动率预测。；关键词命中：realized volatility、implied volatility",
+        "reason": "$\\text{AI}$ 判定：扩展$\\text{HAR}$模型预测已实现波动率，纳入隐含波动率与杠杆效应，核心属波动率预测。；关键词命中：realized volatility、implied volatility",
         "keyword_hits": [
           "realized volatility",
           "implied volatility"
@@ -967,20 +967,20 @@
         "mechanical_score": 0.425,
         "llm_score": 95.0,
         "llm_source": "cache",
-        "llm_reason": "该文扩展 HAR 模型预测已实现波动率，并纳入隐含波动率与杠杆效应，直接契合波动率建模与预测方向。"
+        "llm_reason": "该文扩展 $\\text{HAR}$ 模型预测已实现波动率，并纳入隐含波动率与杠杆效应，直接契合波动率建模与预测方向。"
       },
       "first_seen_at": "2026-10-18T11:41:54.573051+00:00",
       "last_seen_at": "2026-10-18T11:41:54.573051+00:00",
       "retained_from_previous_run": false,
       "is_new_this_week": true,
       "chinese_summary": {
-        "problem": "论文要解决的问题是：在预测已实现波动率时，如何把隐含波动率、杠杆效应、隔夜收益和已实现波动率的波动率纳入异质自回归（HAR）模型。",
-        "method": "论文扩展了异质自回归模型（HAR），在模型中纳入隐含波动率（IV）、杠杆效应、隔夜收益以及已实现波动率的波动率。论文分析了 10 个国际股票指数，并比较了仅加入 IV 的简单 HAR 模型（HAR-IV）与不含 IV 的 HAR 模型，以及 HAR-IV 模型的进一步扩展。",
-        "innovation": "论文将隐含波动率、杠杆效应、隔夜收益和已实现波动率的波动率同时纳入 HAR 框架来预测已实现波动率；摘要指出，尽管仅加入 IV 的简单 HAR 模型（HAR-IV）比任何不含 IV 的 HAR 模型都更准确，但所有市场都支持对 HAR-IV 模型作进一步扩展。",
-        "conclusion": "摘要指出，仅加入 IV 的简单 HAR 模型（HAR-IV）比任何不含 IV 的 HAR 模型都更准确，且所有市场都支持对 HAR-IV 模型作进一步扩展；除英国外，所有市场使用隔夜收益都能得到更准确的预测，美国使用已实现波动率的波动率能得到更准确的预测，五个市场使用杠杆效应能得到更准确的预测；一项在险价值（VaR）检验支持这些发现的经济显著性。",
-        "abstract_zh": "我们扩展异质自回归模型（HAR），纳入隐含波动率（IV）、杠杆效应、隔夜收益和已实现波动率的波动率，以此来预测已实现波动率。我们分析了 10 个国际股票指数，发现尽管仅加入 IV 的简单 HAR 模型（HAR-IV）比任何不含 IV 的 HAR 模型都更准确，但所有市场都支持对 HAR-IV 模型作进一步扩展。除英国外，所有市场使用隔夜收益都能得到更准确的预测，美国使用已实现波动率的波动率能得到更准确的预测，五个市场使用杠杆效应能得到更准确的预测。一项在险价值检验支持我们这些发现的经济显著性。",
+        "problem": "论文要解决的问题是：在预测已实现波动率时，如何把隐含波动率、杠杆效应、隔夜收益和已实现波动率的波动率纳入异质自回归（$\\text{HAR}$）模型。",
+        "method": "论文扩展了异质自回归模型（$\\text{HAR}$），在模型中纳入隐含波动率（$\\text{IV}$）、杠杆效应、隔夜收益以及已实现波动率的波动率。论文分析了 $10$ 个国际股票指数，并比较了仅加入 $\\text{IV}$ 的简单 $\\text{HAR}$ 模型（$\\text{HAR}$-$\\text{IV}$）与不含 $\\text{IV}$ 的 $\\text{HAR}$ 模型，以及 $\\text{HAR}$-$\\text{IV}$ 模型的进一步扩展。",
+        "innovation": "论文将隐含波动率、杠杆效应、隔夜收益和已实现波动率的波动率同时纳入 $\\text{HAR}$ 框架来预测已实现波动率；摘要指出，尽管仅加入 $\\text{IV}$ 的简单 $\\text{HAR}$ 模型（$\\text{HAR}$-$\\text{IV}$）比任何不含 $\\text{IV}$ 的 $\\text{HAR}$ 模型都更准确，但所有市场都支持对 $\\text{HAR}$-$\\text{IV}$ 模型作进一步扩展。",
+        "conclusion": "摘要指出，仅加入 $\\text{IV}$ 的简单 $\\text{HAR}$ 模型（$\\text{HAR}$-$\\text{IV}$）比任何不含 $\\text{IV}$ 的 $\\text{HAR}$ 模型都更准确，且所有市场都支持对 $\\text{HAR}$-$\\text{IV}$ 模型作进一步扩展；除英国外，所有市场使用隔夜收益都能得到更准确的预测，美国使用已实现波动率的波动率能得到更准确的预测，五个市场使用杠杆效应能得到更准确的预测；一项在险价值（$\\text{VaR}$）检验支持这些发现的经济显著性。",
+        "abstract_zh": "我们扩展异质自回归模型（$\\text{HAR}$），纳入隐含波动率（$\\text{IV}$）、杠杆效应、隔夜收益和已实现波动率的波动率，以此来预测已实现波动率。我们分析了 $10$ 个国际股票指数，发现尽管仅加入 $\\text{IV}$ 的简单 $\\text{HAR}$ 模型（$\\text{HAR}$-$\\text{IV}$）比任何不含 $\\text{IV}$ 的 $\\text{HAR}$ 模型都更准确，但所有市场都支持对 $\\text{HAR}$-$\\text{IV}$ 模型作进一步扩展。除英国外，所有市场使用隔夜收益都能得到更准确的预测，美国使用已实现波动率的波动率能得到更准确的预测，五个市场使用杠杆效应能得到更准确的预测。一项在险价值检验支持我们这些发现的经济显著性。",
         "evidence": "We analyze 10 international stock indices finding that, although a simple HAR model augmented with IV (HAR‐IV) is more accurate than any HAR model excluding it, all markets support further extensions of the HAR‐IV model.",
-        "why_relevant": "该文扩展 HAR 模型预测已实现波动率，并纳入隐含波动率与杠杆效应，直接契合波动率建模与预测方向。",
+        "why_relevant": "该文扩展 $\\text{HAR}$ 模型预测已实现波动率，并纳入隐含波动率与杠杆效应，直接契合波动率建模与预测方向。",
         "v": 4
       }
     },
@@ -1033,7 +1033,7 @@
         "topic_name": "波动率建模与高频计量",
         "score": 0.95,
         "level": "high",
-        "reason": "AI 判定：高频数据下spot volatility非参数推断与跳跃识别，核心贴合高频波动率；关键词命中：asset pricing",
+        "reason": "$\\text{AI}$ 判定：高频数据下spot volatility非参数推断与跳跃识别，核心贴合高频波动率；关键词命中：asset pricing",
         "keyword_hits": [
           "asset pricing"
         ],
@@ -1050,8 +1050,8 @@
         "problem": "论文要解决的是对半鞅资产价格过程的潜在即期波动率进行非参数推断的问题。",
         "method": "论文提出一种新理论，将局部估计块大小 $k$ 视为固定，而非基于局部估计块内观测数递增的渐近概念。由此得到的即期波动率估计量不再具有一致性，但该理论允许在任何给定时间点构造渐近有效且易于计算的逐点置信区间。将理论扩展到估计块数量增长的高维推断设定，进一步允许构造波动率路径的一致置信带。",
         "innovation": "相对已有基于局部估计块内观测数递增渐近理论的工作，论文的创新在于：将估计块大小 $k$ 视为固定，并在此设定下构建渐近有效的逐点置信区间；将理论扩展到高维推断设定以构造波动率路径的一致置信带；通过模拟研究和实证应用验证新推断程序的可靠性。",
-        "conclusion": "基于 S&P 500 股指日内数据的实证应用揭示了在 FOMC 新闻公告时市场波动率出现高度显著的突变或跳跃，验证了近期资产定价金融学和货币经济学中各种基于高频的识别方案的使用。",
-        "abstract_zh": "我们提出一种关于半鞅资产价格过程潜在即期波动率的非参数推断的新理论。与基于局部估计块内观测数递增的渐近概念的现有理论不同，我们的理论将估计块大小 $k$ 视为固定。虽然所得的即期波动率估计量不再具有一致性，但新理论允许在任何给定时间点构造渐近有效且易于计算的逐点置信区间。将理论扩展到估计块数量增长的高维推断设定，进一步允许构造波动率路径的一致置信带。一项经验上现实校准的模拟研究强调了新推断程序的实践可靠性。基于 S&P 500 股指日内数据的实证应用揭示了在 FOMC 新闻公告时市场波动率出现高度显著的突变或跳跃，验证了近期资产定价金融学和货币经济学中各种基于高频的识别方案的使用。",
+        "conclusion": "基于 S&P $500$ 股指日内数据的实证应用揭示了在 $\\text{FOMC}$ 新闻公告时市场波动率出现高度显著的突变或跳跃，验证了近期资产定价金融学和货币经济学中各种基于高频的识别方案的使用。",
+        "abstract_zh": "我们提出一种关于半鞅资产价格过程潜在即期波动率的非参数推断的新理论。与基于局部估计块内观测数递增的渐近概念的现有理论不同，我们的理论将估计块大小 $k$ 视为固定。虽然所得的即期波动率估计量不再具有一致性，但新理论允许在任何给定时间点构造渐近有效且易于计算的逐点置信区间。将理论扩展到估计块数量增长的高维推断设定，进一步允许构造波动率路径的一致置信带。一项经验上现实校准的模拟研究强调了新推断程序的实践可靠性。基于 S&P $500$ 股指日内数据的实证应用揭示了在 $\\text{FOMC}$ 新闻公告时市场波动率出现高度显著的突变或跳跃，验证了近期资产定价金融学和货币经济学中各种基于高频的识别方案的使用。",
         "evidence": "An empirical application based on intraday data for the S&P 500 equity index reveals highly significant abrupt changes, or jumps, in the market volatility at FOMC news announcement times, validating recent uses of various high‐frequency‐based identification schemes in asset pricing finance and monetary economics.",
         "why_relevant": "论文研究高频数据下即期波动率非参数推断与跳跃识别，直接契合波动率建模与高频计量方向。",
         "v": 4
@@ -1107,7 +1107,7 @@
         "topic_name": "波动率建模与高频计量",
         "score": 0.95,
         "level": "high",
-        "reason": "AI 判定：扩展Realized GARCH建模衰减偏差，做波动率与VaR/ES预测，核心贴合该方向；关键词命中：expected shortfall、tail risk",
+        "reason": "$\\text{AI}$ 判定：扩展Realized $\\text{GARCH}$建模衰减偏差，做波动率与$\\text{VaR}$/$\\text{ES}$预测，核心贴合该方向；关键词命中：expected shortfall、tail risk",
         "keyword_hits": [
           "expected shortfall",
           "tail risk"
@@ -1115,7 +1115,7 @@
         "mechanical_score": 0.488,
         "llm_score": 95.0,
         "llm_source": "cache",
-        "llm_reason": "直接扩展 Realized GARCH，做波动率与 VaR/ES 预测，契合波动率建模与高频计量方向。"
+        "llm_reason": "直接扩展 Realized $\\text{GARCH}$，做波动率与 $\\text{VaR}$/$\\text{ES}$ 预测，契合波动率建模与高频计量方向。"
       },
       "first_seen_at": "2026-10-18T11:41:54.573051+00:00",
       "last_seen_at": "2026-10-18T11:41:54.573051+00:00",
@@ -1123,12 +1123,12 @@
       "is_new_this_week": true,
       "chinese_summary": {
         "problem": "论文要解决的问题是波动率预测中的衰减偏差（attenuation bias）效应的建模。",
-        "method": "论文依赖对 Hansen 等提出的 Realized GARCH 模型的适当推广。在这些推广中，滞后已实现测度对当前条件方差的影响，按照该测度在特定时点自身的准确度进行加权。这一特征使得在滞后波动率被更准确测量时，可以赋予其更高的权重。",
-        "innovation": "提出对 Realized GARCH 模型的新推广，用于建模波动率预测中的衰减偏差效应；将滞后已实现测度对当前条件方差的影响，按该测度在特定时点的准确度加权，从而在滞后波动率测量更准确时赋予其更高权重。",
-        "conclusion": "实证分析结果表明，在统计准则和经济准则下，所提出的设定在样本外预测表现上均能优于标准 Realized GARCH 模型。",
-        "abstract_zh": "本文提出了对波动率预测中衰减偏差效应进行建模的新方法。我们的策略依赖于对 Hansen 等 [Realized garch: A joint model for returns and realized measures of volatility. J. Appl. Econom., 2012, 27(6), 877–906] 提出的 Realized GARCH 模型的适当推广，其中滞后已实现测度对当前条件方差的影响，按照该测度在特定时点自身的准确度进行加权。这一特征使得在滞后波动率被更准确测量时，可以赋予其更高的权重。通过对一组主要股票市场指数的应用，评估了所提出模型生成波动率及相关尾部风险测度、Value-at-Risk 和 Expected Shortfall 的准确预测的能力。实证分析结果表明，在统计准则和经济准则下，所提出的设定在样本外预测表现上均能优于标准 Realized GARCH 模型。",
+        "method": "论文依赖对 Hansen 等提出的 Realized $\\text{GARCH}$ 模型的适当推广。在这些推广中，滞后已实现测度对当前条件方差的影响，按照该测度在特定时点自身的准确度进行加权。这一特征使得在滞后波动率被更准确测量时，可以赋予其更高的权重。",
+        "innovation": "提出对 Realized $\\text{GARCH}$ 模型的新推广，用于建模波动率预测中的衰减偏差效应；将滞后已实现测度对当前条件方差的影响，按该测度在特定时点的准确度加权，从而在滞后波动率测量更准确时赋予其更高权重。",
+        "conclusion": "实证分析结果表明，在统计准则和经济准则下，所提出的设定在样本外预测表现上均能优于标准 Realized $\\text{GARCH}$ 模型。",
+        "abstract_zh": "本文提出了对波动率预测中衰减偏差效应进行建模的新方法。我们的策略依赖于对 Hansen 等 [Realized garch: A joint model for returns and realized measures of volatility. J. Appl. Econom., $2012$, $27$($6$), $877$–$906$] 提出的 Realized $\\text{GARCH}$ 模型的适当推广，其中滞后已实现测度对当前条件方差的影响，按照该测度在特定时点自身的准确度进行加权。这一特征使得在滞后波动率被更准确测量时，可以赋予其更高的权重。通过对一组主要股票市场指数的应用，评估了所提出模型生成波动率及相关尾部风险测度、Value-at-Risk 和 Expected Shortfall 的准确预测的能力。实证分析结果表明，在统计准则和经济准则下，所提出的设定在样本外预测表现上均能优于标准 Realized $\\text{GARCH}$ 模型。",
         "evidence": "The results of the empirical analysis show that the proposed specifications are able to outperform standard Realized GARCH models in terms of out-of-sample forecast performance under both statistical and economic criteria.",
-        "why_relevant": "直接扩展 Realized GARCH，做波动率与 VaR/ES 预测，契合波动率建模与高频计量方向。",
+        "why_relevant": "直接扩展 Realized $\\text{GARCH}$，做波动率与 $\\text{VaR}$/$\\text{ES}$ 预测，契合波动率建模与高频计量方向。",
         "v": 4
       }
     },
@@ -1182,7 +1182,7 @@
         "topic_name": "波动率建模与高频计量",
         "score": 0.95,
         "level": "high",
-        "reason": "AI 判定：含已实现测度的随机波动率模型，用于期权定价与滤波，正合波动率建模核心。；关键词命中：option pricing",
+        "reason": "$\\text{AI}$ 判定：含已实现测度的随机波动率模型，用于期权定价与滤波，正合波动率建模核心。；关键词命中：option pricing",
         "keyword_hits": [
           "option pricing"
         ],
@@ -1197,10 +1197,10 @@
       "is_new_this_week": true,
       "chinese_summary": {
         "problem": "已实现波动率测度受测量误差影响，论文要在此基础上刻画收益率与已实现测度同潜在条件方差之间的关系。",
-        "method": "论文引入一族离散时间随机波动率模型，包含两个测量方程，分别把观测到的收益率和已实现测度与潜在条件方差联系起来。针对该类模型，论文建立了半解析期权定价框架；对模型的基本设定，给出解析滤波与平滑递推；对其更丰富的变体，给出有效的 MCMC 算法。",
-        "innovation": "论文提出一个包含两个测量方程的离散时间随机波动率模型族，这两个方程分别把观测收益率和已实现测度与潜在条件方差联系起来；论文为该模型类建立半解析期权定价框架；论文还给出基本设定的解析滤波与平滑递推，以及更丰富变体的有效 MCMC 算法。",
-        "conclusion": "实证分析表明，对已实现测度进行滤波和平滑，能够提升潜在波动率的持续性，而该参数在为 Standard and Poor's 500 Index 期权定价时至关重要。",
-        "abstract_zh": "基于已实现波动率测度受测量误差影响这一事实，我们引入一族新的离散时间随机波动率模型，它有两个测量方程，分别把观测到的收益率和已实现测度与潜在条件方差联系起来。针对该类模型，我们建立了一个半解析期权定价框架。此外，我们给出了模型基本设定的解析滤波与平滑递推，以及其更丰富变体的有效 MCMC 算法。实证分析表明，对已实现测度进行滤波和平滑在提升潜在波动率持续性方面的有效性——该参数在为 Standard and Poor's 500 Index 期权定价时至关重要。",
+        "method": "论文引入一族离散时间随机波动率模型，包含两个测量方程，分别把观测到的收益率和已实现测度与潜在条件方差联系起来。针对该类模型，论文建立了半解析期权定价框架；对模型的基本设定，给出解析滤波与平滑递推；对其更丰富的变体，给出有效的 $\\text{MCMC}$ 算法。",
+        "innovation": "论文提出一个包含两个测量方程的离散时间随机波动率模型族，这两个方程分别把观测收益率和已实现测度与潜在条件方差联系起来；论文为该模型类建立半解析期权定价框架；论文还给出基本设定的解析滤波与平滑递推，以及更丰富变体的有效 $\\text{MCMC}$ 算法。",
+        "conclusion": "实证分析表明，对已实现测度进行滤波和平滑，能够提升潜在波动率的持续性，而该参数在为 Standard and Poor's $500$ Index 期权定价时至关重要。",
+        "abstract_zh": "基于已实现波动率测度受测量误差影响这一事实，我们引入一族新的离散时间随机波动率模型，它有两个测量方程，分别把观测到的收益率和已实现测度与潜在条件方差联系起来。针对该类模型，我们建立了一个半解析期权定价框架。此外，我们给出了模型基本设定的解析滤波与平滑递推，以及其更丰富变体的有效 $\\text{MCMC}$ 算法。实证分析表明，对已实现测度进行滤波和平滑在提升潜在波动率持续性方面的有效性——该参数在为 Standard and Poor's $500$ Index 期权定价时至关重要。",
         "evidence": "The empirical analysis shows the effectiveness of filtering and smoothing realized measures in inflating the latent volatility persistence—the crucial parameter in pricing Standard and Poor’s 500 Index options.",
         "why_relevant": "该论文研究含已实现测度的随机波动率模型及其期权定价，与我的研究方向直接相关。",
         "v": 4
@@ -1257,7 +1257,7 @@
         "topic_name": "波动率建模与高频计量",
         "score": 0.93,
         "level": "high",
-        "reason": "AI 判定：用MS-MIDAS建模日内跳跃与已实现波动率，预测原油期货波动率。；关键词命中：realized volatility、volatility forecasting",
+        "reason": "$\\text{AI}$ 判定：用$\\text{MS}$-$\\text{MIDAS}$建模日内跳跃与已实现波动率，预测原油期货波动率。；关键词命中：realized volatility、volatility forecasting",
         "keyword_hits": [
           "realized volatility",
           "volatility forecasting"
@@ -1265,7 +1265,7 @@
         "mechanical_score": 0.425,
         "llm_score": 93.0,
         "llm_source": "cache",
-        "llm_reason": "用 MS-MIDAS 结合跳跃与已实现波动率预测原油期货波动率，直接契合波动率建模与预测方向。"
+        "llm_reason": "用 $\\text{MS}$-$\\text{MIDAS}$ 结合跳跃与已实现波动率预测原油期货波动率，直接契合波动率建模与预测方向。"
       },
       "first_seen_at": "2026-10-18T11:41:54.573051+00:00",
       "last_seen_at": "2026-10-18T11:41:54.573051+00:00",
@@ -1273,12 +1273,12 @@
       "is_new_this_week": true,
       "chinese_summary": {
         "problem": "本研究要考察日内跳跃与日间跳跃对原油期货价格已实现波动率的影响。",
-        "method": "研究设计了马尔可夫区制转换（MS）混合数据抽样（MIDAS）模型，并在此基础上探索日内与日间跳跃对原油期货价格已实现波动率的影响。样本内估计使用 MIDAS 模型，样本外评估则使用基于 Time-of-Day 波动率模式（TOD）检验并结合马尔可夫区制转换 MIDAS 的模型（MS-MIDAS-TOD）。",
-        "innovation": "研究设计并提出了 MS-MIDAS 模型，用于考察跳跃对原油期货已实现波动率的影响；并提出将基于 TOD 检验的连续波动率与跳跃纳入 MS-MIDAS 框架的 MS-MIDAS-TOD 模型。",
-        "conclusion": "样本内估计显示，使用 MIDAS 模型时，当前已实现波动率和跳跃对原油期货价格波动率具有显著正向影响；但使用 MS-MIDAS 模型时，跳跃的影响是混合的。样本外评估显示，MS-MIDAS-TOD 模型对预测未来一日原油期货波动率具有更高的预测能力；该模型改进的结果在中长期期限上仍然显著，并且也能优于简单组合预测。",
-        "abstract_zh": "本研究设计了马尔可夫区制转换（MS）混合数据抽样（MIDAS）模型，然后探索日内跳跃与日间跳跃对原油期货价格已实现波动率的影响。样本内估计显示，使用 MIDAS 模型时，当前已实现波动率和跳跃对原油期货价格波动率具有显著正向影响。然而，使用 MS-MIDAS 模型时，跳跃的影响是混合的。样本外评估显示，我们提出的模型——该模型基于 Time-of-Day 波动率模式（TOD）检验纳入连续波动率和跳跃，并结合马尔可夫区制转换 MIDAS 模型（MS-MIDAS-TOD）——在预测未来一日原油期货波动率方面表现出更高的预测能力。此外，我们进一步发现，该模型改进的结果在中长期期限上仍然显著，并且也能优于简单组合预测。",
+        "method": "研究设计了马尔可夫区制转换（$\\text{MS}$）混合数据抽样（$\\text{MIDAS}$）模型，并在此基础上探索日内与日间跳跃对原油期货价格已实现波动率的影响。样本内估计使用 $\\text{MIDAS}$ 模型，样本外评估则使用基于 Time-of-Day 波动率模式（$\\text{TOD}$）检验并结合马尔可夫区制转换 $\\text{MIDAS}$ 的模型（$\\text{MS}$-$\\text{MIDAS}$-$\\text{TOD}$）。",
+        "innovation": "研究设计并提出了 $\\text{MS}$-$\\text{MIDAS}$ 模型，用于考察跳跃对原油期货已实现波动率的影响；并提出将基于 $\\text{TOD}$ 检验的连续波动率与跳跃纳入 $\\text{MS}$-$\\text{MIDAS}$ 框架的 $\\text{MS}$-$\\text{MIDAS}$-$\\text{TOD}$ 模型。",
+        "conclusion": "样本内估计显示，使用 $\\text{MIDAS}$ 模型时，当前已实现波动率和跳跃对原油期货价格波动率具有显著正向影响；但使用 $\\text{MS}$-$\\text{MIDAS}$ 模型时，跳跃的影响是混合的。样本外评估显示，$\\text{MS}$-$\\text{MIDAS}$-$\\text{TOD}$ 模型对预测未来一日原油期货波动率具有更高的预测能力；该模型改进的结果在中长期期限上仍然显著，并且也能优于简单组合预测。",
+        "abstract_zh": "本研究设计了马尔可夫区制转换（$\\text{MS}$）混合数据抽样（$\\text{MIDAS}$）模型，然后探索日内跳跃与日间跳跃对原油期货价格已实现波动率的影响。样本内估计显示，使用 $\\text{MIDAS}$ 模型时，当前已实现波动率和跳跃对原油期货价格波动率具有显著正向影响。然而，使用 $\\text{MS}$-$\\text{MIDAS}$ 模型时，跳跃的影响是混合的。样本外评估显示，我们提出的模型——该模型基于 Time-of-Day 波动率模式（$\\text{TOD}$）检验纳入连续波动率和跳跃，并结合马尔可夫区制转换 $\\text{MIDAS}$ 模型（$\\text{MS}$-$\\text{MIDAS}$-$\\text{TOD}$）——在预测未来一日原油期货波动率方面表现出更高的预测能力。此外，我们进一步发现，该模型改进的结果在中长期期限上仍然显著，并且也能优于简单组合预测。",
         "evidence": "Out-of-sample evaluations show that our proposed model, which includes continuous volatility and jumps based on the Time-of-Day volatility pattern (TOD) test combined with the Markov-switching MIDAS model (MS-MIDAS-TOD), exhibits a higher predictive ability for forecasting one-day-ahead oil futures volatility.",
-        "why_relevant": "用 MS-MIDAS 结合跳跃与已实现波动率预测原油期货波动率，直接契合波动率建模与预测方向。",
+        "why_relevant": "用 $\\text{MS}$-$\\text{MIDAS}$ 结合跳跃与已实现波动率预测原油期货波动率，直接契合波动率建模与预测方向。",
         "v": 4
       }
     },
@@ -1329,7 +1329,7 @@
         "topic_name": "波动率建模与高频计量",
         "score": 0.92,
         "level": "high",
-        "reason": "AI 判定：用指数Hawkes建模跳跃聚集，估计跳跃概率并改进高频跳跃预测，核心属跳跃检测与高频建模",
+        "reason": "$\\text{AI}$ 判定：用指数Hawkes建模跳跃聚集，估计跳跃概率并改进高频跳跃预测，核心属跳跃检测与高频建模",
         "keyword_hits": [],
         "mechanical_score": 0.125,
         "llm_score": 92.0,
@@ -1343,8 +1343,8 @@
         "problem": "论文要解决的问题是：在用以指数 Hawkes 过程作为跳跃计数器的 Itô 半鞅来建模金融资产价格时，如何分析其中的跳跃风险。",
         "method": "论文使用 Itô 半鞅，并以指数 Hawkes 过程作为跳跃计数器。首先，在利用少量信息的情况下，估计一个已观测到的跳跃簇尚未耗尽的概率；其次，显式给出连续跳跃持续时间的条件密度，并证明持续时间随机增加；第三，给出连续时间区间内跳跃概率的界。",
         "innovation": "论文声称的贡献包括：在利用少量信息的情况下估计已观测跳跃簇尚未耗尽的概率；显式给出连续跳跃持续时间的条件密度，并证明持续时间随机增加；给出连续时间区间内跳跃概率的界。",
-        "conclusion": "将论文方法应用于 5 分钟美国收益率数据后，结果显示：跳跃簇耗尽概率与预期年度跳跃次数强相关，并且改善了跳跃预测。",
-        "abstract_zh": "我们分析由 Itô 半鞅建模的金融资产价格中的跳跃风险，其中以指数 Hawkes 过程作为跳跃计数器。首先，在利用少量信息的情况下，我们估计一个已观测到的跳跃簇尚未耗尽的概率。其次，我们显式给出连续跳跃持续时间的条件密度，并证明持续时间随机增加。第三，我们给出连续时间区间内跳跃概率的界。应用于 5 分钟美国收益率数据表明，跳跃簇耗尽概率与预期年度跳跃次数强相关，并改善了跳跃预测。",
+        "conclusion": "将论文方法应用于 $5$ 分钟美国收益率数据后，结果显示：跳跃簇耗尽概率与预期年度跳跃次数强相关，并且改善了跳跃预测。",
+        "abstract_zh": "我们分析由 Itô 半鞅建模的金融资产价格中的跳跃风险，其中以指数 Hawkes 过程作为跳跃计数器。首先，在利用少量信息的情况下，我们估计一个已观测到的跳跃簇尚未耗尽的概率。其次，我们显式给出连续跳跃持续时间的条件密度，并证明持续时间随机增加。第三，我们给出连续时间区间内跳跃概率的界。应用于 $5$ 分钟美国收益率数据表明，跳跃簇耗尽概率与预期年度跳跃次数强相关，并改善了跳跃预测。",
         "evidence": "Application to 5-minute U.S. returns shows that cluster depletion probabilities strongly correlate with the expected yearly jump count, and improve jump forecasts.",
         "why_relevant": "指数 Hawkes 跳跃聚集建模与高频跳跃预测，直接对应跳跃检测与高频计量方向。",
         "v": 4
@@ -1400,26 +1400,26 @@
         "topic_name": "资产定价与因子实证",
         "score": 0.9,
         "level": "high",
-        "reason": "AI 判定：多因子线性资产定价模型GMM估计与风险溢价，核心贴合；关键词命中：asset pricing",
+        "reason": "$\\text{AI}$ 判定：多因子线性资产定价模型$\\text{GMM}$估计与风险溢价，核心贴合；关键词命中：asset pricing",
         "keyword_hits": [
           "asset pricing"
         ],
         "mechanical_score": 0.369,
         "llm_score": 90.0,
         "llm_source": "cache",
-        "llm_reason": "直接比较多因子资产定价模型两种 GMM 表示的风险溢价估计与定价精度。"
+        "llm_reason": "直接比较多因子资产定价模型两种 $\\text{GMM}$ 表示的风险溢价估计与定价精度。"
       },
       "first_seen_at": "2026-10-18T04:51:02.123808+00:00",
       "last_seen_at": "2026-10-18T11:05:14.375893+00:00",
       "retained_from_previous_run": true,
       "chinese_summary": {
-        "problem": "多因子线性资产定价模型虽可等价地写成 Beta 形式或随机贴现因子（SDF）形式，但用广义矩估计（GMM）估计时，这两种表示未必给出相同的推断性质。",
-        "method": "使用一个多因子线性资产定价模型，将自助法模拟与解析近似相结合，比较两种等价表示下 GMM 估计量的抽样方差。",
-        "innovation": "摘要声称的贡献是：在两种等价表示下比较 GMM 估计量的抽样方差；指出这一权衡的主要来源在于因子的高阶矩，高阶矩在两种表示下对识别的影响不同；并在样本外投资组合应用中比较两种方法的效率与定价精度。",
-        "conclusion": "SDF 方法通常效率较低（即估计量方差更高），但定价比 Beta 方法更准确；在样本外投资组合应用中，Beta-GMM 在估计风险溢价上的效率增益超过 SDF-GMM 的定价精度优势，从而使基于 Beta 的交易策略具有更高的夏普比率。",
-        "abstract_zh": "尽管多因子线性资产定价模型可以等价地写成 Beta 形式或随机贴现因子（SDF）形式，但当用广义矩估计（GMM）进行估计时，这两种表示未必给出相同的推断性质。使用一个多因子线性资产定价模型，我们将自助法模拟与解析近似相结合，以比较两种等价表示下 GMM 估计量的抽样方差。我们发现，SDF 方法通常效率较低——即给出方差更高的估计量——但比 Beta 方法提供更准确的定价。我们表明，这一权衡的主要来源在于因子的高阶矩，这些高阶矩在两种表示下对识别的影响不同。值得注意的是，在样本外投资组合应用中，Beta-GMM 在估计风险溢价上的效率增益超过 SDF-GMM 的定价精度优势，从而使基于 Beta 的交易策略具有更高的夏普比率。",
+        "problem": "多因子线性资产定价模型虽可等价地写成 Beta 形式或随机贴现因子（$\\text{SDF}$）形式，但用广义矩估计（$\\text{GMM}$）估计时，这两种表示未必给出相同的推断性质。",
+        "method": "使用一个多因子线性资产定价模型，将自助法模拟与解析近似相结合，比较两种等价表示下 $\\text{GMM}$ 估计量的抽样方差。",
+        "innovation": "摘要声称的贡献是：在两种等价表示下比较 $\\text{GMM}$ 估计量的抽样方差；指出这一权衡的主要来源在于因子的高阶矩，高阶矩在两种表示下对识别的影响不同；并在样本外投资组合应用中比较两种方法的效率与定价精度。",
+        "conclusion": "$\\text{SDF}$ 方法通常效率较低（即估计量方差更高），但定价比 Beta 方法更准确；在样本外投资组合应用中，Beta-$\\text{GMM}$ 在估计风险溢价上的效率增益超过 $\\text{SDF}$-$\\text{GMM}$ 的定价精度优势，从而使基于 Beta 的交易策略具有更高的夏普比率。",
+        "abstract_zh": "尽管多因子线性资产定价模型可以等价地写成 Beta 形式或随机贴现因子（$\\text{SDF}$）形式，但当用广义矩估计（$\\text{GMM}$）进行估计时，这两种表示未必给出相同的推断性质。使用一个多因子线性资产定价模型，我们将自助法模拟与解析近似相结合，以比较两种等价表示下 $\\text{GMM}$ 估计量的抽样方差。我们发现，$\\text{SDF}$ 方法通常效率较低——即给出方差更高的估计量——但比 Beta 方法提供更准确的定价。我们表明，这一权衡的主要来源在于因子的高阶矩，这些高阶矩在两种表示下对识别的影响不同。值得注意的是，在样本外投资组合应用中，Beta-$\\text{GMM}$ 在估计风险溢价上的效率增益超过 $\\text{SDF}$-$\\text{GMM}$ 的定价精度优势，从而使基于 Beta 的交易策略具有更高的夏普比率。",
         "evidence": "Notably, in out-of-sample portfolio applications, the efficiency gains of Beta-GMM in estimating risk premia outweigh the pricing-accuracy benefits of SDF-GMM, leading to higher Sharpe ratios for Beta-based trading strategies.",
-        "why_relevant": "直接比较多因子资产定价模型两种 GMM 表示的风险溢价估计与定价精度。",
+        "why_relevant": "直接比较多因子资产定价模型两种 $\\text{GMM}$ 表示的风险溢价估计与定价精度。",
         "v": 4
       },
       "is_new_this_week": false
@@ -1474,7 +1474,7 @@
         "topic_name": "波动率建模与高频计量",
         "score": 0.9,
         "level": "high",
-        "reason": "AI 判定：GARCH模型估计方差风险溢价并联系VI期限结构与期权定价；关键词命中：risk premium、term structure",
+        "reason": "$\\text{AI}$ 判定：$\\text{GARCH}$模型估计方差风险溢价并联系$\\text{VI}$期限结构与期权定价；关键词命中：risk premium、term structure",
         "keyword_hits": [
           "risk premium",
           "term structure"
@@ -1482,19 +1482,19 @@
         "mechanical_score": 0.519,
         "llm_score": 90.0,
         "llm_source": "cache",
-        "llm_reason": "涉及 GARCH 模型估计方差风险溢价，并联系 VI 期限结构与期权定价。"
+        "llm_reason": "涉及 $\\text{GARCH}$ 模型估计方差风险溢价，并联系 $\\text{VI}$ 期限结构与期权定价。"
       },
       "first_seen_at": "2026-10-18T04:51:02.123808+00:00",
       "last_seen_at": "2026-10-18T11:05:14.375893+00:00",
       "retained_from_previous_run": true,
       "chinese_summary": {
-        "problem": "论文要解决的问题是：方差风险溢价（VRP）并未被股权风险溢价（ERP）完全解释，需要在一个模型中估计这种分离。",
-        "method": "论文使用一类新的 GARCH 模型进行估计，这类模型具有足够多的新息（innovations），从而将收益率与方差解耦。这种风险中性化（risk-neutralization）与连续时间设定相容。模型对波动率指数（VI）期限结构、VI 期货和股票期权进行联合估计。",
-        "innovation": "摘要声称的贡献是：采用具有足够多新息、可将收益率与方差解耦的新一类 GARCH 模型，使 VRP 与 ERP 的分离得以被检测；该风险中性化方式与连续时间设定相容；并指出 VI 期限结构、VI 期货与股票期权可能对 VRP 变化高度敏感。",
-        "conclusion": "当模型被联合估计时，会出现一致且规模可观的 VRP；这表明基于总似然和数值上的优势，与 VI 期货进行联合估计具有优势。",
-        "abstract_zh": "本文估计了一个模型，其中方差风险溢价（VRP）并未被股权风险溢价（ERP）完全解释。得益于一类具有足够多新息、可将收益率与方差解耦的新 GARCH 模型，这种分离可以被检测到。这种类型的风险中性化与连续时间设定相容。我们记录到，波动率指数（VI）期限结构、VI 期货和股票期权可能对 VRP 的变化高度敏感。当模型被联合估计时，会出现一致且规模可观的 VRP；这表明基于总似然和数值上的优势，与 VI 期货进行联合估计具有优势。",
+        "problem": "论文要解决的问题是：方差风险溢价（$\\text{VRP}$）并未被股权风险溢价（$\\text{ERP}$）完全解释，需要在一个模型中估计这种分离。",
+        "method": "论文使用一类新的 $\\text{GARCH}$ 模型进行估计，这类模型具有足够多的新息（innovations），从而将收益率与方差解耦。这种风险中性化（risk-neutralization）与连续时间设定相容。模型对波动率指数（$\\text{VI}$）期限结构、$\\text{VI}$ 期货和股票期权进行联合估计。",
+        "innovation": "摘要声称的贡献是：采用具有足够多新息、可将收益率与方差解耦的新一类 $\\text{GARCH}$ 模型，使 $\\text{VRP}$ 与 $\\text{ERP}$ 的分离得以被检测；该风险中性化方式与连续时间设定相容；并指出 $\\text{VI}$ 期限结构、$\\text{VI}$ 期货与股票期权可能对 $\\text{VRP}$ 变化高度敏感。",
+        "conclusion": "当模型被联合估计时，会出现一致且规模可观的 $\\text{VRP}$；这表明基于总似然和数值上的优势，与 $\\text{VI}$ 期货进行联合估计具有优势。",
+        "abstract_zh": "本文估计了一个模型，其中方差风险溢价（$\\text{VRP}$）并未被股权风险溢价（$\\text{ERP}$）完全解释。得益于一类具有足够多新息、可将收益率与方差解耦的新 $\\text{GARCH}$ 模型，这种分离可以被检测到。这种类型的风险中性化与连续时间设定相容。我们记录到，波动率指数（$\\text{VI}$）期限结构、$\\text{VI}$ 期货和股票期权可能对 $\\text{VRP}$ 的变化高度敏感。当模型被联合估计时，会出现一致且规模可观的 $\\text{VRP}$；这表明基于总似然和数值上的优势，与 $\\text{VI}$ 期货进行联合估计具有优势。",
         "evidence": "When the model is jointly estimated a consistent and sizable VRP emerges; suggesting that joint estimation with VI futures has an edge based on total likelihood and numerical advantage.",
-        "why_relevant": "涉及 GARCH 模型估计方差风险溢价，并联系 VI 期限结构与期权定价。",
+        "why_relevant": "涉及 $\\text{GARCH}$ 模型估计方差风险溢价，并联系 $\\text{VI}$ 期限结构与期权定价。",
         "v": 4
       },
       "is_new_this_week": false
@@ -1547,7 +1547,7 @@
         "topic_name": "金融机器学习与文本数据",
         "score": 0.9,
         "level": "high",
-        "reason": "AI 判定：仅凭标题：用大语言模型预测股票收益，正属金融机器学习与收益预测；关键词命中：return predictability",
+        "reason": "$\\text{AI}$ 判定：仅凭标题：用大语言模型预测股票收益，正属金融机器学习与收益预测；关键词命中：return predictability",
         "keyword_hits": [
           "return predictability"
         ],
@@ -1562,11 +1562,11 @@
       "abstract_source": "arxiv-preprint",
       "preprint_url": "http://arxiv.org/abs/2304.07619v6",
       "chinese_summary": {
-        "problem": "论文要解决的问题是：大型语言模型（LLM）能否在没有直接金融训练的情况下，从新闻标题预测股市反应。",
-        "method": "论文使用知识截止日期之后的新闻标题，让 GPT-4 对标题打分，并考察这些分数对初始市场反应与随后漂移的预测能力。论文还比较不同模型规模下的预测能力，并构建一个纳入 LLM 技术、信息处理能力约束、反应不足与套利限制的理论模型来 rationalize 这些发现。",
-        "innovation": "摘要声称的贡献包括：记录 LLM 无需直接金融训练即可从新闻标题预测股市反应的能力；使用知识截止日期之后的标题检验 GPT-4 对初始市场反应的捕捉；发现预测能力随模型规模增大而总体上升，并据此提出金融推理是复杂 LLM 的新兴能力；构建纳入 LLM 技术、信息处理能力约束、反应不足与套利限制的理论模型来解释这些发现。",
-        "conclusion": "使用知识截止日期之后的标题，GPT-4 捕捉到初始市场反应，对不可交易的初始反应达到约 90% 的组合-日命中率；GPT-4 分数也显著预测随后的漂移，尤其对小盘股和负面新闻；预测能力总体随模型规模增大而上升；随着 LLM 采用率上升，策略收益下降，这与价格效率改善一致。",
-        "abstract_zh": "我们记录了像 ChatGPT 这样的大型语言模型（LLM）在没有直接金融训练的情况下从新闻标题预测股市反应的能力。使用知识截止日期之后的标题，GPT-4 捕捉到初始市场反应，对不可交易的初始反应达到约 90% 的组合-日命中率。GPT-4 分数也显著预测随后的漂移，尤其对小盘股和负面新闻。预测能力总体随模型规模增大而上升，表明金融推理是复杂 LLM 的一种新兴能力。随着 LLM 采用率上升，策略收益下降，这与价格效率改善一致。为 rationalize 这些发现，我们构建了一个纳入 LLM 技术、信息处理能力约束、反应不足与套利限制的理论模型。",
+        "problem": "论文要解决的问题是：大型语言模型（$\\text{LLM}$）能否在没有直接金融训练的情况下，从新闻标题预测股市反应。",
+        "method": "论文使用知识截止日期之后的新闻标题，让 $\\text{GPT}$-$4$ 对标题打分，并考察这些分数对初始市场反应与随后漂移的预测能力。论文还比较不同模型规模下的预测能力，并构建一个纳入 $\\text{LLM}$ 技术、信息处理能力约束、反应不足与套利限制的理论模型来 rationalize 这些发现。",
+        "innovation": "摘要声称的贡献包括：记录 $\\text{LLM}$ 无需直接金融训练即可从新闻标题预测股市反应的能力；使用知识截止日期之后的标题检验 $\\text{GPT}$-$4$ 对初始市场反应的捕捉；发现预测能力随模型规模增大而总体上升，并据此提出金融推理是复杂 $\\text{LLM}$ 的新兴能力；构建纳入 $\\text{LLM}$ 技术、信息处理能力约束、反应不足与套利限制的理论模型来解释这些发现。",
+        "conclusion": "使用知识截止日期之后的标题，$\\text{GPT}$-$4$ 捕捉到初始市场反应，对不可交易的初始反应达到约 $90\\%$ 的组合-日命中率；$\\text{GPT}$-$4$ 分数也显著预测随后的漂移，尤其对小盘股和负面新闻；预测能力总体随模型规模增大而上升；随着 $\\text{LLM}$ 采用率上升，策略收益下降，这与价格效率改善一致。",
+        "abstract_zh": "我们记录了像 $\\text{ChatGPT}$ 这样的大型语言模型（$\\text{LLM}$）在没有直接金融训练的情况下从新闻标题预测股市反应的能力。使用知识截止日期之后的标题，$\\text{GPT}$-$4$ 捕捉到初始市场反应，对不可交易的初始反应达到约 $90\\%$ 的组合-日命中率。$\\text{GPT}$-$4$ 分数也显著预测随后的漂移，尤其对小盘股和负面新闻。预测能力总体随模型规模增大而上升，表明金融推理是复杂 $\\text{LLM}$ 的一种新兴能力。随着 $\\text{LLM}$ 采用率上升，策略收益下降，这与价格效率改善一致。为 rationalize 这些发现，我们构建了一个纳入 $\\text{LLM}$ 技术、信息处理能力约束、反应不足与套利限制的理论模型。",
         "evidence": "Using post-knowledge-cutoff headlines, GPT-4 captures initial market responses, achieving approximately 90% portfolio-day hit rates for the non-tradable initial reaction.",
         "why_relevant": "直接研究大语言模型从新闻标题预测股票收益，契合金融机器学习与文本数据方向。",
         "v": 4
@@ -1623,7 +1623,7 @@
         "topic_name": "波动率建模与高频计量",
         "score": 0.9,
         "level": "high",
-        "reason": "AI 判定：非高斯随机波动率模型与期权定价，贴合随机波动率与隐含波动率方向；关键词命中：stochastic volatility、implied volatility",
+        "reason": "$\\text{AI}$ 判定：非高斯随机波动率模型与期权定价，贴合随机波动率与隐含波动率方向；关键词命中：stochastic volatility、implied volatility",
         "keyword_hits": [
           "stochastic volatility",
           "implied volatility"
@@ -1638,10 +1638,10 @@
       "retained_from_previous_run": true,
       "chinese_summary": {
         "problem": "论文提出一个基于自回归伽马过程的随机波动率模型，该模型允许在依赖非高斯收益新息分布的同时，对风险中性测度做结构保持的变换。",
-        "method": "模型采用 Meixner（MXN）分布，为收益动态引入条件随机偏度和峰度。作者将 David S. Bates 的近似最大似然方法与适用于高度振荡函数的数值积分技术相结合，提出一种快速且准确的估计方法，并推导出闭式的离散时间期权定价公式。",
+        "method": "模型采用 Meixner（$\\text{MXN}$）分布，为收益动态引入条件随机偏度和峰度。作者将 David S. Bates 的近似最大似然方法与适用于高度振荡函数的数值积分技术相结合，提出一种快速且准确的估计方法，并推导出闭式的离散时间期权定价公式。",
         "innovation": "提出基于自回归伽马过程、允许结构保持风险中性测度变换且收益新息为非高斯分布的随机波动率模型；采用 Meixner 分布使收益动态具备条件随机偏度和峰度；给出快速准确的估计方法（Bates 近似最大似然结合适用于高度振荡函数的数值积分）以及闭式离散时间期权定价公式。",
-        "conclusion": "摘要称 MXN 模型在同类别基准以及广义自回归条件异方差族基准的比较中表现尤其好，在直接对期权数据校准以及应用于隐含波动率水平高的期权数据（如比特币）时均如此；摘要未提及具体数值。",
-        "abstract_zh": "我们提出一个基于自回归伽马过程的新颖随机波动率模型，该模型允许对风险中性测度做结构保持的变换，同时依赖非高斯分布来描述收益新息。该模型采用 Meixner（MXN）分布，为收益动态丰富了条件随机偏度和峰度。我们通过将 David S. Bates 的近似最大似然方法与适用于高度振荡函数的数值积分技术相结合，提出一种快速且准确的估计方法。我们推导出一个闭式的离散时间期权定价公式。与其类别内以及广义自回归条件异方差族的基准相比，MXN 模型在直接对期权数据校准时，以及在应用于具有高隐含波动率水平的期权数据（如比特币）时，表现尤其好。",
+        "conclusion": "摘要称 $\\text{MXN}$ 模型在同类别基准以及广义自回归条件异方差族基准的比较中表现尤其好，在直接对期权数据校准以及应用于隐含波动率水平高的期权数据（如比特币）时均如此；摘要未提及具体数值。",
+        "abstract_zh": "我们提出一个基于自回归伽马过程的新颖随机波动率模型，该模型允许对风险中性测度做结构保持的变换，同时依赖非高斯分布来描述收益新息。该模型采用 Meixner（$\\text{MXN}$）分布，为收益动态丰富了条件随机偏度和峰度。我们通过将 David S. Bates 的近似最大似然方法与适用于高度振荡函数的数值积分技术相结合，提出一种快速且准确的估计方法。我们推导出一个闭式的离散时间期权定价公式。与其类别内以及广义自回归条件异方差族的基准相比，$\\text{MXN}$ 模型在直接对期权数据校准时，以及在应用于具有高隐含波动率水平的期权数据（如比特币）时，表现尤其好。",
         "evidence": "The MXN model performs particularly well, compared to benchmarks within its class and of the generalized autoregressive conditional heteroskedasticity family, when calibrated directly to option data and when applied to option data with a high level of implied volatility, such as Bitcoin.",
         "why_relevant": "非高斯随机波动率与离散时间期权定价，涉及隐含波动率校准。",
         "v": 4
@@ -1695,7 +1695,7 @@
         "topic_name": "波动率建模与高频计量",
         "score": 0.9,
         "level": "high",
-        "reason": "AI 判定：已实现协方差矩阵预测，属高频已实现测度建模核心",
+        "reason": "$\\text{AI}$ 判定：已实现协方差矩阵预测，属高频已实现测度建模核心",
         "keyword_hits": [],
         "mechanical_score": 0.125,
         "llm_score": 90.0,
@@ -1706,11 +1706,11 @@
       "last_seen_at": "2026-10-18T11:05:14.375893+00:00",
       "retained_from_previous_run": true,
       "chinese_summary": {
-        "problem": "论文要解决的问题是：如何对资产收益率的已实现协方差（RCOV）矩阵进行预测，并在预测中处理协方差矩阵的对称正定约束、非线性动态与高维性。",
-        "method": "论文提出一个具有黎曼几何感知的深度学习框架来预测 RCOV 矩阵，从而考虑协方差矩阵的几何性质，自然地处理对称正定约束，同时考虑非线性动态，并高效地管理高维性。此外，论文利用 RCOV 矩阵的 Fréchet 样本均值，将异质自回归模型扩展到矩阵变量框架下的几何方法。",
-        "innovation": "论文声称的创新点包括：提出使用黎曼几何感知深度学习框架预测 RCOV 矩阵的新方法；在考虑协方差矩阵几何性质的同时自然处理对称正定约束、考虑非线性动态并高效管理高维性；利用 RCOV 矩阵的 Fréchet 样本均值，将异质自回归模型扩展为矩阵变量框架下的几何方法。",
-        "conclusion": "论文将所提方法应用于预测 S&P 500 指数中五十家市值最大公司的日度 RCOV 矩阵，并表明本研究提出的方法在预测精度方面优于传统方法。",
-        "abstract_zh": "在本研究中，我们提出了一种使用具有黎曼几何感知的深度学习框架来预测资产收益率已实现协方差（RCOV）矩阵的新方法。通过这种方式，我们考虑了协方差矩阵的几何性质，自然地处理对称正定约束，同时考虑非线性动态，并高效地管理高维性。此外，通过使用 RCOV 矩阵的 Fréchet 样本均值，我们将异质自回归模型扩展到矩阵变量框架下的几何方法。我们将我们的方法应用于预测 S&P 500 指数中五十家市值最大公司的日度 RCOV 矩阵，并表明本研究提出的方法在预测精度方面优于传统方法。",
+        "problem": "论文要解决的问题是：如何对资产收益率的已实现协方差（$\\text{RCOV}$）矩阵进行预测，并在预测中处理协方差矩阵的对称正定约束、非线性动态与高维性。",
+        "method": "论文提出一个具有黎曼几何感知的深度学习框架来预测 $\\text{RCOV}$ 矩阵，从而考虑协方差矩阵的几何性质，自然地处理对称正定约束，同时考虑非线性动态，并高效地管理高维性。此外，论文利用 $\\text{RCOV}$ 矩阵的 Fréchet 样本均值，将异质自回归模型扩展到矩阵变量框架下的几何方法。",
+        "innovation": "论文声称的创新点包括：提出使用黎曼几何感知深度学习框架预测 $\\text{RCOV}$ 矩阵的新方法；在考虑协方差矩阵几何性质的同时自然处理对称正定约束、考虑非线性动态并高效管理高维性；利用 $\\text{RCOV}$ 矩阵的 Fréchet 样本均值，将异质自回归模型扩展为矩阵变量框架下的几何方法。",
+        "conclusion": "论文将所提方法应用于预测 S&P $500$ 指数中五十家市值最大公司的日度 $\\text{RCOV}$ 矩阵，并表明本研究提出的方法在预测精度方面优于传统方法。",
+        "abstract_zh": "在本研究中，我们提出了一种使用具有黎曼几何感知的深度学习框架来预测资产收益率已实现协方差（$\\text{RCOV}$）矩阵的新方法。通过这种方式，我们考虑了协方差矩阵的几何性质，自然地处理对称正定约束，同时考虑非线性动态，并高效地管理高维性。此外，通过使用 $\\text{RCOV}$ 矩阵的 Fréchet 样本均值，我们将异质自回归模型扩展到矩阵变量框架下的几何方法。我们将我们的方法应用于预测 S&P $500$ 指数中五十家市值最大公司的日度 $\\text{RCOV}$ 矩阵，并表明本研究提出的方法在预测精度方面优于传统方法。",
         "evidence": "We apply our approach to forecast daily RCOV matrices for fifty among the most capitalized companies in the S&P 500 index and show that the methods presented in this study outperform traditional approaches in terms of predictive accuracy.",
         "why_relevant": "该论文直接研究已实现协方差矩阵预测，属于高频已实现测度建模的核心议题。",
         "v": 4
@@ -1768,7 +1768,7 @@
         "topic_name": "波动率建模与高频计量",
         "score": 0.88,
         "level": "high",
-        "reason": "AI 判定：GARCH与随机波动率模型的连续时间极限及期权定价，核心贴合波动率建模；关键词命中：GARCH、stochastic volatility",
+        "reason": "$\\text{AI}$ 判定：$\\text{GARCH}$与随机波动率模型的连续时间极限及期权定价，核心贴合波动率建模；关键词命中：$\\text{GARCH}$、stochastic volatility",
         "keyword_hits": [
           "GARCH",
           "stochastic volatility"
@@ -1776,19 +1776,19 @@
         "mechanical_score": 0.406,
         "llm_score": 88.0,
         "llm_source": "cache",
-        "llm_reason": "直接研究GARCH与随机波动率模型的连续时间极限及期权定价，契合波动率建模方向。"
+        "llm_reason": "直接研究$\\text{GARCH}$与随机波动率模型的连续时间极限及期权定价，契合波动率建模方向。"
       },
       "first_seen_at": "2026-10-18T04:51:02.123808+00:00",
       "last_seen_at": "2026-10-18T11:05:14.375893+00:00",
       "retained_from_previous_run": true,
       "chinese_summary": {
-        "problem": "本文研究允许厚尾、多成分波动率和非单调定价核的离散时间广义自回归条件异方差（GARCH）与随机波动率（SV）期权定价模型的弱收敛问题。",
-        "method": "引入一个一般仿射框架，基于分布不变的参数收敛速率，同时推导高斯与逆高斯 GARCH 模型的新扩散极限。当限制为单成分设定时，所得极限给出非退化双变量扩散；并通过采用替代参数收敛速率，对两类仿射与非仿射离散时间 SV 模型的所有可能极限提供全面分类。",
-        "innovation": "提出可同时推导高斯与逆高斯 GARCH 模型新扩散极限的一般仿射框架；在单成分设定下得到非退化双变量扩散，推广了仿射 GARCH 文献中的已有结果；并借助替代参数收敛速率，对两类仿射与非仿射离散时间 SV 模型的所有可能极限给出全面分类。",
+        "problem": "本文研究允许厚尾、多成分波动率和非单调定价核的离散时间广义自回归条件异方差（$\\text{GARCH}$）与随机波动率（$\\text{SV}$）期权定价模型的弱收敛问题。",
+        "method": "引入一个一般仿射框架，基于分布不变的参数收敛速率，同时推导高斯与逆高斯 $\\text{GARCH}$ 模型的新扩散极限。当限制为单成分设定时，所得极限给出非退化双变量扩散；并通过采用替代参数收敛速率，对两类仿射与非仿射离散时间 $\\text{SV}$ 模型的所有可能极限提供全面分类。",
+        "innovation": "提出可同时推导高斯与逆高斯 $\\text{GARCH}$ 模型新扩散极限的一般仿射框架；在单成分设定下得到非退化双变量扩散，推广了仿射 $\\text{GARCH}$ 文献中的已有结果；并借助替代参数收敛速率，对两类仿射与非仿射离散时间 $\\text{SV}$ 模型的所有可能极限给出全面分类。",
         "conclusion": "摘要指出，在离散时间与连续时间中流行的典型仿射模型类彼此并不类似；总体而言，新的极限扩散产生的期权价格最接近按日频采样的离散时间对应物。",
-        "abstract_zh": "本文研究允许厚尾、多成分波动率和非单调定价核的离散时间广义自回归条件异方差（GARCH）与随机波动率（SV）期权定价模型的弱收敛。我们引入一个一般仿射框架，该框架使得能够基于分布不变的参数收敛速率，同时推导高斯与逆高斯 GARCH 模型的新扩散极限。当限制为单成分设定时，我们的极限给出非退化双变量扩散，推广了仿射 GARCH 文献中的已有结果。通过采用替代参数收敛速率，我们进一步对两类仿射与非仿射离散时间 SV 模型的所有可能极限提供全面分类。具体而言，我们表明在离散时间与连续时间中流行的典型仿射模型类彼此并不类似。我们的理论结果得到一系列数值实验的支持，这些实验考察参数缩放假设与模型特征对欧式期权价格收敛的影响。总体而言，我们发现新的极限扩散产生的期权价格最接近按日频采样的离散时间对应物。",
+        "abstract_zh": "本文研究允许厚尾、多成分波动率和非单调定价核的离散时间广义自回归条件异方差（$\\text{GARCH}$）与随机波动率（$\\text{SV}$）期权定价模型的弱收敛。我们引入一个一般仿射框架，该框架使得能够基于分布不变的参数收敛速率，同时推导高斯与逆高斯 $\\text{GARCH}$ 模型的新扩散极限。当限制为单成分设定时，我们的极限给出非退化双变量扩散，推广了仿射 $\\text{GARCH}$ 文献中的已有结果。通过采用替代参数收敛速率，我们进一步对两类仿射与非仿射离散时间 $\\text{SV}$ 模型的所有可能极限提供全面分类。具体而言，我们表明在离散时间与连续时间中流行的典型仿射模型类彼此并不类似。我们的理论结果得到一系列数值实验的支持，这些实验考察参数缩放假设与模型特征对欧式期权价格收敛的影响。总体而言，我们发现新的极限扩散产生的期权价格最接近按日频采样的离散时间对应物。",
         "evidence": "Overall, we find that the new limiting diffusions produce option prices that are closest to their discrete-time counterparts sampled at daily frequency.",
-        "why_relevant": "直接研究GARCH与随机波动率模型的连续时间极限及期权定价，契合波动率建模方向。",
+        "why_relevant": "直接研究$\\text{GARCH}$与随机波动率模型的连续时间极限及期权定价，契合波动率建模方向。",
         "v": 4
       },
       "is_new_this_week": false
@@ -1843,7 +1843,7 @@
         "topic_name": "波动率建模与高频计量",
         "score": 0.88,
         "level": "high",
-        "reason": "AI 判定：提出波动率滤波预测算法，多指数样本外检验与波动率择时；关键词命中：volatility forecasting",
+        "reason": "$\\text{AI}$ 判定：提出波动率滤波预测算法，多指数样本外检验与波动率择时；关键词命中：volatility forecasting",
         "keyword_hits": [
           "volatility forecasting"
         ],
@@ -1856,11 +1856,11 @@
       "last_seen_at": "2026-10-18T11:05:14.375893+00:00",
       "retained_from_previous_run": true,
       "chinese_summary": {
-        "problem": "论文要解决的问题是波动率预测，即提出一种用于波动率预测的融合滤波算法（FFA）。",
-        "method": "FFA 通过求解一个惩罚优化问题来提取潜在波动率，该形式与 HP 滤波和 Whittaker–Henderson 平滑相关。作者将其应用于 10 个主要股票指数，并在样本内和样本外与不同基准模型比较表现。",
-        "innovation": "摘要声称的贡献是提出融合滤波算法（FFA），通过求解与 HP 滤波和 Whittaker–Henderson 平滑相关的惩罚优化问题来提取潜在波动率，并将其用于波动率预测。",
-        "conclusion": "结果显示 FFA 在不同损失函数和不同期限上显著优于基准模型，且这种优势主要集中在正常和低波动状态；波动率择时策略的结果也确认其相对基准模型具有竞争力。",
-        "abstract_zh": "本文提出一种用于波动率预测的融合滤波算法（FFA）。FFA 通过求解一个惩罚优化问题来提取潜在波动率，该形式与 HP 滤波和 Whittaker–Henderson 平滑相关。为了考察 FFA 的实证表现，我们将其应用于 10 个主要股票指数，并在样本内和样本外将其表现与不同基准进行比较。结果显示，FFA 在不同损失函数和不同期限上显著优于基准模型，且这种优势主要集中在正常和低波动状态。我们使用波动率择时策略评估 FFA 的经济价值，结果也确认其相对基准模型具有竞争力。总之，FFA 为市场波动率滤波和预测提供了一种计算高效的替代工具。",
+        "problem": "论文要解决的问题是波动率预测，即提出一种用于波动率预测的融合滤波算法（$\\text{FFA}$）。",
+        "method": "$\\text{FFA}$ 通过求解一个惩罚优化问题来提取潜在波动率，该形式与 $\\text{HP}$ 滤波和 Whittaker–Henderson 平滑相关。作者将其应用于 $10$ 个主要股票指数，并在样本内和样本外与不同基准模型比较表现。",
+        "innovation": "摘要声称的贡献是提出融合滤波算法（$\\text{FFA}$），通过求解与 $\\text{HP}$ 滤波和 Whittaker–Henderson 平滑相关的惩罚优化问题来提取潜在波动率，并将其用于波动率预测。",
+        "conclusion": "结果显示 $\\text{FFA}$ 在不同损失函数和不同期限上显著优于基准模型，且这种优势主要集中在正常和低波动状态；波动率择时策略的结果也确认其相对基准模型具有竞争力。",
+        "abstract_zh": "本文提出一种用于波动率预测的融合滤波算法（$\\text{FFA}$）。$\\text{FFA}$ 通过求解一个惩罚优化问题来提取潜在波动率，该形式与 $\\text{HP}$ 滤波和 Whittaker–Henderson 平滑相关。为了考察 $\\text{FFA}$ 的实证表现，我们将其应用于 $10$ 个主要股票指数，并在样本内和样本外将其表现与不同基准进行比较。结果显示，$\\text{FFA}$ 在不同损失函数和不同期限上显著优于基准模型，且这种优势主要集中在正常和低波动状态。我们使用波动率择时策略评估 $\\text{FFA}$ 的经济价值，结果也确认其相对基准模型具有竞争力。总之，$\\text{FFA}$ 为市场波动率滤波和预测提供了一种计算高效的替代工具。",
         "evidence": "The results show that FFA significantly dominates the benchmark models across different loss functions and horizons, and this dominance mainly concentrates in normal and low‐volatility regimes.",
         "why_relevant": "直接涉及波动率滤波与预测，并做多指数样本外检验，契合波动率建模与预测方向。",
         "v": 4
@@ -1917,26 +1917,26 @@
         "topic_name": "金融机器学习与文本数据",
         "score": 0.88,
         "level": "high",
-        "reason": "AI 判定：构建时序一致LLM并用于金融新闻嵌入预测股票收益，属金融机器学习与文本方向核心。；关键词命中：asset pricing",
+        "reason": "$\\text{AI}$ 判定：构建时序一致$\\text{LLM}$并用于金融新闻嵌入预测股票收益，属金融机器学习与文本方向核心。；关键词命中：asset pricing",
         "keyword_hits": [
           "asset pricing"
         ],
         "mechanical_score": 0.338,
         "llm_score": 88.0,
         "llm_source": "cache",
-        "llm_reason": "构建时序一致LLM并用于金融新闻嵌入预测股票收益，属金融机器学习与文本方向核心。"
+        "llm_reason": "构建时序一致$\\text{LLM}$并用于金融新闻嵌入预测股票收益，属金融机器学习与文本方向核心。"
       },
       "first_seen_at": "2026-10-17T08:45:43.802436+00:00",
       "last_seen_at": "2026-10-18T11:05:14.375893+00:00",
       "retained_from_previous_run": true,
       "chinese_summary": {
         "problem": "大型语言模型在社会科学中的使用日益增多，但其训练数据可能引入前视偏差和训练泄漏；一个良好的时序一致语言模型需要在时间受限的数据下高效利用训练数据以保持准确性。",
-        "method": "作者训练了一套时序一致的大型语言模型 ChronoBERT 和 ChronoGPT，这些模型仅纳入在每个时间点本可获得的文本数据。尽管存在严格的时间约束，模型在自然语言处理基准上仍取得强劲表现。",
-        "innovation": "训练了仅使用每个时间点可得文本数据的时序一致大型语言模型 ChronoBERT 和 ChronoGPT；在严格时间约束下仍达到强劲的 NLP 基准表现，优于或匹配广泛使用的模型（如 BERT），并与更大的开放权重模型保持竞争力；指出前视偏差是模型和应用特定的，因为即使时序一致语言模型的语言理解较差，在其上应用的回归或预测模型也可以补偿。",
-        "conclusion": "在从金融新闻嵌入预测次日股票收益的资产定价应用中，ChronoBERT 和 ChronoGPT 的实时输出达到与更大且可能带有偏差的 Llama 模型相当的 Sharpe 比率；结果表明这是一个可扩展、实用的框架，用于缓解训练泄漏，确保在金融和其他社会科学领域更可信的回测和预测。",
-        "abstract_zh": "大型语言模型在社会科学中的使用日益增多，但其训练数据可能引入前视偏差和训练泄漏。一个良好的时序一致语言模型需要在时间受限的数据下高效利用训练数据以保持准确性。在这里，我们通过训练一套时序一致的大型语言模型 ChronoBERT 和 ChronoGPT 来克服这一挑战，这些模型仅纳入在每个时间点本可获得的文本数据。尽管存在这一严格的时间约束，我们的模型在自然语言处理基准上取得强劲表现，优于或匹配广泛使用的模型（例如 BERT），并与更大的开放权重模型保持竞争力。前视偏差是模型和应用特定的，因为即使时序一致语言模型的语言理解较差，在其上应用的回归或预测模型也可以补偿。在从金融新闻嵌入预测次日股票收益的资产定价应用中，我们发现 ChronoBERT 和 ChronoGPT 的实时输出达到与更大且可能带有偏差的 Llama 模型相当的 Sharpe 比率。我们的结果表明了一个可扩展、实用的框架，用于缓解训练泄漏，确保在金融和其他社会科学领域更可信的回测和预测。",
+        "method": "作者训练了一套时序一致的大型语言模型 $\\text{ChronoBERT}$ 和 $\\text{ChronoGPT}$，这些模型仅纳入在每个时间点本可获得的文本数据。尽管存在严格的时间约束，模型在自然语言处理基准上仍取得强劲表现。",
+        "innovation": "训练了仅使用每个时间点可得文本数据的时序一致大型语言模型 $\\text{ChronoBERT}$ 和 $\\text{ChronoGPT}$；在严格时间约束下仍达到强劲的 $\\text{NLP}$ 基准表现，优于或匹配广泛使用的模型（如 $\\text{BERT}$），并与更大的开放权重模型保持竞争力；指出前视偏差是模型和应用特定的，因为即使时序一致语言模型的语言理解较差，在其上应用的回归或预测模型也可以补偿。",
+        "conclusion": "在从金融新闻嵌入预测次日股票收益的资产定价应用中，$\\text{ChronoBERT}$ 和 $\\text{ChronoGPT}$ 的实时输出达到与更大且可能带有偏差的 Llama 模型相当的 Sharpe 比率；结果表明这是一个可扩展、实用的框架，用于缓解训练泄漏，确保在金融和其他社会科学领域更可信的回测和预测。",
+        "abstract_zh": "大型语言模型在社会科学中的使用日益增多，但其训练数据可能引入前视偏差和训练泄漏。一个良好的时序一致语言模型需要在时间受限的数据下高效利用训练数据以保持准确性。在这里，我们通过训练一套时序一致的大型语言模型 $\\text{ChronoBERT}$ 和 $\\text{ChronoGPT}$ 来克服这一挑战，这些模型仅纳入在每个时间点本可获得的文本数据。尽管存在这一严格的时间约束，我们的模型在自然语言处理基准上取得强劲表现，优于或匹配广泛使用的模型（例如 $\\text{BERT}$），并与更大的开放权重模型保持竞争力。前视偏差是模型和应用特定的，因为即使时序一致语言模型的语言理解较差，在其上应用的回归或预测模型也可以补偿。在从金融新闻嵌入预测次日股票收益的资产定价应用中，我们发现 $\\text{ChronoBERT}$ 和 $\\text{ChronoGPT}$ 的实时输出达到与更大且可能带有偏差的 Llama 模型相当的 Sharpe 比率。我们的结果表明了一个可扩展、实用的框架，用于缓解训练泄漏，确保在金融和其他社会科学领域更可信的回测和预测。",
         "evidence": "In an asset pricing application predicting next-day stock returns from financial news embeddings, we find that ChronoBERT and ChronoGPT’s real-time outputs achieve Sharpe ratios comparable to a much larger and potentially biased Llama model.",
-        "why_relevant": "构建时序一致LLM并用于金融新闻嵌入预测股票收益，属金融机器学习与文本方向核心。",
+        "why_relevant": "构建时序一致$\\text{LLM}$并用于金融新闻嵌入预测股票收益，属金融机器学习与文本方向核心。",
         "v": 4
       },
       "is_new_this_week": false

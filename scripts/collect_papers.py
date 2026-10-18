@@ -25,6 +25,7 @@ from typing import Any
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from weekly_select import in_window, load_seen, select_weekly  # noqa: E402
+from latexify import latexify_summary, latexify_text  # noqa: E402
 
 
 ARXIV_API_URL = "https://export.arxiv.org/api/query"
@@ -2104,6 +2105,10 @@ def compact_for_storage(paper: dict[str, Any]) -> dict[str, Any]:
 
     顺手清掉摘要开头的 "ABSTRACT" 标签（OpenAlex 倒排索引会把它当正文第一个词，
     历史数据里已经存进去的也在这里一并洗掉）。
+
+    再把中文文本里的数字和英文缩写包成 LaTeX：这是所有论文（新抓的 + 归档里的）
+    落盘前的唯一必经点，放这儿才能保证新旧数据排版一致。函数是幂等的，
+    已经包过的 `$...$` 不会重复处理。
     """
     best = paper.get("best_match")
     if isinstance(best, dict) and isinstance(paper.get("matches"), list) and len(paper["matches"]) > 1:
@@ -2113,6 +2118,21 @@ def compact_for_storage(paper: dict[str, Any]) -> dict[str, Any]:
         cleaned = re.sub(r"^\s*(abstract|summary)\s*[:.\-]?\s+", "", summary, flags=re.IGNORECASE)
         if cleaned != summary:
             paper = {**paper, "summary": cleaned}
+
+    chinese_summary = paper.get("chinese_summary")
+    if isinstance(chinese_summary, dict):
+        paper = {**paper, "chinese_summary": latexify_summary(chinese_summary)}
+
+    if isinstance(best, dict):
+        reason_fields = {key for key in ("llm_reason", "reason") if isinstance(best.get(key), str)}
+        if reason_fields:
+            paper = {
+                **paper,
+                "best_match": {
+                    key: latexify_text(value) if key in reason_fields else value
+                    for key, value in best.items()
+                },
+            }
     return paper
 
 
