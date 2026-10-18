@@ -128,9 +128,14 @@ SCREEN_SYSTEM_PROMPT = (
 
 def _build_prompt(batch: list[dict[str, Any]], topics: list[Any]) -> str:
     papers_block = []
+    title_only_ids = []
     for paper in batch:
         title = normalize_space(str(paper.get("title") or ""))
+        has_abstract = has_meaningful_summary(paper)
         abstract = normalize_space(str(paper.get("summary") or ""))[:ABSTRACT_LIMIT]
+        if not has_abstract:
+            abstract = "（该刊未提供摘要，只有标题）"
+            title_only_ids.append(_cache_key(paper))
         venue = paper.get("venue") or ", ".join(paper.get("categories", [])[:3])
         papers_block.append(
             f'<paper id="{_cache_key(paper)}">\n'
@@ -138,6 +143,12 @@ def _build_prompt(batch: list[dict[str, Any]], topics: list[Any]) -> str:
             f"来源：{venue}\n"
             f"摘要：{abstract}\n"
             f"</paper>"
+        )
+    title_only_note = ""
+    if title_only_ids:
+        title_only_note = (
+            "\n注意：本次有论文没有摘要。对这类论文只根据标题判断它是否研究我关心的主题，"
+            "不确定就给 30-45 分，并在 reason 开头写「仅凭标题」。不要臆测它的方法或结论。\n"
         )
     return f"""下面是我的研究方向：
 {_topic_block(topics)}
@@ -152,7 +163,7 @@ def _build_prompt(batch: list[dict[str, Any]], topics: list[Any]) -> str:
 - 0-19：无关（其他学科、纯数学/纯理论、没有可迁移的实证或计量内容）
 
 同时给出最匹配的方向 id（必须来自上面列表），以及不超过 40 字的中文理由，说明具体匹配在哪。
-
+{title_only_note}
 {chr(10).join(papers_block)}
 
 严格输出如下 JSON，results 数组长度必须等于论文数量，id 要原样返回：
@@ -250,6 +261,13 @@ def screen_papers(
 
     verdicts: dict[str, dict[str, Any]] = {}
     pending: list[dict[str, Any]] = []
+    # 顶刊里 Elsevier 系常常不给摘要，但"这题是不是我关心的"看标题往往能判断，
+    # 所以默认允许只用标题判相关性（只判相关性，不生成创新点总结）。
+    allow_title_only = (os.getenv("SCREEN_ALLOW_TITLE_ONLY", "true") or "true").strip().lower() in {
+        "1",
+        "true",
+        "yes",
+    }
     for paper in papers:
         paper_id = _cache_key(paper)
         if not paper_id:
@@ -263,8 +281,7 @@ def screen_papers(
                 "source": "cache",
             }
             continue
-        # No abstract means the model can only guess from the title; keep rules verdict.
-        if not has_meaningful_summary(paper):
+        if not has_meaningful_summary(paper) and not allow_title_only:
             continue
         pending.append(paper)
 
