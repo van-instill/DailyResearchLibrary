@@ -554,6 +554,14 @@ select:focus,
   font-size: 12px;
 }
 
+/* 学科标签（金融学 / 经济学 / 统计学…）和具体方向区分开 */
+.tag.is-group {
+  color: var(--gold);
+  border-color: currentColor;
+  background: transparent;
+  font-weight: 600;
+}
+
 .summary-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
