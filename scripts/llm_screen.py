@@ -166,7 +166,7 @@ def _build_prompt(batch: list[dict[str, Any]], topics: list[Any]) -> str:
 {title_only_note}
 {chr(10).join(papers_block)}
 
-严格输出如下 JSON，results 数组长度必须等于论文数量，id 要原样返回：
+严格输出如下 json（results 数组长度必须等于论文数量，id 要原样返回）：
 {{"results":[{{"id":"论文id","score":0,"topic_id":"方向id","reason":"中文理由"}}]}}"""
 
 

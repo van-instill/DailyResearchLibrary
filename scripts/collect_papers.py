@@ -1597,8 +1597,31 @@ def fallback_summary(paper: dict[str, Any], best_match: dict[str, Any]) -> dict[
     }
 
 
+def env_text(name: str, default: str = "") -> str:
+    """Read env, treating missing OR blank as unset.
+
+    GitHub Actions sets an env var to "" when the expression resolves empty
+    (``${{ vars.X || secrets.X }}`` with both unset), and os.getenv(name, default)
+    returns "" in that case -- not the default. That produced ``"model": ""`` and
+    every DeepSeek call failed with HTTP 400.
+    """
+    value = (os.getenv(name) or "").strip()
+    return value or default
+
+
 def llm_enabled() -> bool:
-    return bool(os.getenv("LLM_API_KEY") or os.getenv("OPENAI_API_KEY") or os.getenv("DEEPSEEK_API_KEY"))
+    return bool(env_text("LLM_API_KEY") or env_text("OPENAI_API_KEY") or env_text("DEEPSEEK_API_KEY"))
+
+
+def llm_config() -> tuple[str, str, str]:
+    """Resolve (api_key, base_url, model) without leaking blank env values."""
+    api_key = env_text("LLM_API_KEY") or env_text("OPENAI_API_KEY") or env_text("DEEPSEEK_API_KEY")
+    use_deepseek = bool(env_text("DEEPSEEK_API_KEY"))
+    default_base = "https://api.deepseek.com/v1" if use_deepseek else "https://api.openai.com/v1"
+    default_model = "deepseek-chat" if use_deepseek else "gpt-4o-mini"
+    base_url = env_text("LLM_BASE_URL") or default_base
+    model = env_text("LLM_MODEL") or default_model
+    return api_key, base_url, model
 
 
 def llm_headers(api_key: str) -> dict[str, str]:
@@ -1610,11 +1633,7 @@ def llm_headers(api_key: str) -> dict[str, str]:
 
 
 def call_openai_compatible(prompt: str) -> dict[str, Any]:
-    api_key = os.getenv("LLM_API_KEY") or os.getenv("OPENAI_API_KEY") or os.getenv("DEEPSEEK_API_KEY") or ""
-    base_url = os.getenv("LLM_BASE_URL", "")
-    if not base_url:
-        base_url = "https://api.deepseek.com/v1" if os.getenv("DEEPSEEK_API_KEY") else "https://api.openai.com/v1"
-    model = os.getenv("LLM_MODEL", "deepseek-chat" if os.getenv("DEEPSEEK_API_KEY") else "gpt-4o-mini")
+    api_key, base_url, model = llm_config()
     endpoint = base_url.rstrip("/") + "/chat/completions"
     payload = {
         "model": model,
@@ -1623,7 +1642,7 @@ def call_openai_compatible(prompt: str) -> dict[str, Any]:
         "messages": [
             {
                 "role": "system",
-                "content": "你是严谨的论文技术分析助手。只输出合法 JSON，不要输出 Markdown。",
+                "content": "你是严谨的论文技术分析助手。只输出合法 json，不要输出 Markdown。",
             },
             {"role": "user", "content": prompt},
         ],
@@ -1634,8 +1653,18 @@ def call_openai_compatible(prompt: str) -> dict[str, Any]:
         headers=llm_headers(api_key),
         method="POST",
     )
-    with urllib.request.urlopen(req, timeout=90) as resp:
-        data = json.loads(resp.read().decode("utf-8"))
+    try:
+        with urllib.request.urlopen(req, timeout=90) as resp:
+            data = json.loads(resp.read().decode("utf-8"))
+    except urllib.error.HTTPError as exc:
+        detail = ""
+        try:
+            detail = exc.read().decode("utf-8", "replace")[:500]
+        except Exception:  # noqa: BLE001
+            pass
+        raise RuntimeError(
+            f"HTTP {exc.code} from {endpoint} (model={model!r}): {detail}"
+        ) from exc
     content = data["choices"][0]["message"]["content"]
     return json.loads(content)
 
