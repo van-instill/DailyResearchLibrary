@@ -333,6 +333,12 @@ def arxiv_query_for_topic(topic: Topic) -> str:
             return "(" + " OR ".join(category_terms) + ")"
         return f'all:"{topic.name}"'
 
+    if query_mode == "category":
+        # 只按学科分类召回，把"关键词没命中但语义相关"的论文也交给模型的阅卷环节
+        if category_terms:
+            return "(" + " OR ".join(category_terms) + ")"
+        return f'all:"{topic.name}"'
+
     if query_mode == "strict":
         parts = []
         if keyword_terms:
@@ -2063,6 +2069,10 @@ def collect(
     filtered_low_relevance = 0
     raw_daily_candidate_count = 0
     daily_outside_cutoff_count = 0
+    # 延迟导入：llm_screen 依赖本模块的 LLM 助手函数，模块级导入会形成循环
+    from llm_screen import apply_verdict, screen_papers, screening_active
+
+    screen_llm = screening_active()
     backfill_days = max(days, env_int("DAILY_BACKFILL_DAYS", 14))
     daily_backfill_cutoff = now - dt.timedelta(days=max(0, backfill_days))
     for paper in dedupe_papers(all_candidates):
@@ -2084,7 +2094,7 @@ def collect(
         matches = [score_paper(topic, paper) for topic in topics]
         matches.sort(key=lambda item: item["score"], reverse=True)
         best_match = matches[0]
-        if not is_relevant_enough(paper, best_match):
+        if not screen_llm and not is_relevant_enough(paper, best_match):
             filtered_low_relevance += 1
             continue
         paper["matches"] = matches
@@ -2095,6 +2105,32 @@ def collect(
             daily_backfill_candidates.append(paper)
         else:
             recent_papers.append(paper)
+
+    screened_paper_count = 0
+    if screen_llm:
+        pool = [*recent_papers, *daily_backfill_candidates]
+        verdicts = screen_papers(pool, topics, label="arXiv")
+        min_screen = env_float("SCREEN_MIN_SCORE", 45.0)
+        kept_primary: list[dict[str, Any]] = []
+        kept_backfill: list[dict[str, Any]] = []
+        for paper in pool:
+            verdict = verdicts.get(str(paper.get("id", "")))
+            if verdict:
+                apply_verdict(paper, verdict, topics)
+                if float(verdict["score"]) < min_screen:
+                    filtered_low_relevance += 1
+                    continue
+            if paper.get("backfilled_from_recent_arxiv"):
+                kept_backfill.append(paper)
+            else:
+                kept_primary.append(paper)
+        screened_paper_count = len(pool)
+        print(
+            f"AI screening kept {len(kept_primary) + len(kept_backfill)}/{len(pool)} arXiv candidates "
+            f"(min_score={min_screen:g})",
+            flush=True,
+        )
+        recent_papers, daily_backfill_candidates = kept_primary, kept_backfill
 
     recent_papers.sort(key=lambda p: (p["best_match"]["score"], paper_activity_datetime(p)), reverse=True)
     daily_recent_papers = [paper for paper in recent_papers if paper.get("source_type") != "conference"]
@@ -2192,6 +2228,8 @@ def collect(
         "daily_backfill_days": backfill_days,
         "daily_backfill_candidate_count": len(daily_backfill_candidates),
         "daily_backfill_added_count": daily_backfill_added_count,
+        "screen_mode": "llm" if screen_llm else "rules",
+        "screened_paper_count": screened_paper_count,
         "min_daily_papers": min_daily_papers,
         "filtered_low_relevance_count": filtered_low_relevance,
         "days": days,

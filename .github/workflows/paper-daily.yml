@@ -70,8 +70,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           CONFIG_ISSUE_TITLE: Research Interests
           LOOKBACK_DAYS: ${{ github.event_name == 'workflow_dispatch' && inputs.lookback_days || vars.LOOKBACK_DAYS || '1' }}
-          MAX_PER_TOPIC: ${{ vars.MAX_PER_TOPIC || '15' }}
-          MAX_SUMMARIES: ${{ vars.MAX_SUMMARIES || '20' }}
+          MAX_PER_TOPIC: ${{ vars.MAX_PER_TOPIC || '20' }}
+          MAX_SUMMARIES: ${{ vars.MAX_SUMMARIES || '30' }}
           MAX_NEW_PAPERS: ${{ vars.MAX_NEW_PAPERS || '50' }}
           MAX_STORED_PAPERS: ${{ vars.MAX_STORED_PAPERS || '50' }}
           MAX_DATA_BYTES: ${{ vars.MAX_DATA_BYTES || '8388608' }}
@@ -81,7 +81,14 @@ jobs:
           CROSSREF_EMAIL: ${{ vars.CROSSREF_EMAIL || '' }}
           OPENALEX_EMAIL: ${{ vars.OPENALEX_EMAIL || vars.CONTACT_EMAIL || '' }}
           SOURCE_DELAY_SECONDS: ${{ vars.SOURCE_DELAY_SECONDS || '3' }}
-          ARXIV_QUERY_MODE: ${{ vars.ARXIV_QUERY_MODE || 'strict' }}
+          ARXIV_QUERY_MODE: ${{ vars.ARXIV_QUERY_MODE || 'category' }}
+          SCREEN_MODE: ${{ vars.SCREEN_MODE || 'llm' }}
+          SCREEN_MIN_SCORE: ${{ vars.SCREEN_MIN_SCORE || '45' }}
+          SCREEN_BATCH_SIZE: ${{ vars.SCREEN_BATCH_SIZE || '6' }}
+          SCREEN_CONCURRENCY: ${{ vars.SCREEN_CONCURRENCY || '3' }}
+          SCREEN_MAX_PAPERS: ${{ vars.SCREEN_MAX_PAPERS || '400' }}
+          SCREEN_CACHE_DAYS: ${{ vars.SCREEN_CACHE_DAYS || '60' }}
+          SCREEN_CACHE_PATH: .paper-cache/screen_cache.json
           ARXIV_SORT_BY: ${{ vars.ARXIV_SORT_BY || 'lastUpdatedDate' }}
           ARXIV_EXPAND_CATEGORY_SEARCH: ${{ vars.ARXIV_EXPAND_CATEGORY_SEARCH || 'false' }}
           ARXIV_CATEGORY_MAX_RESULTS: ${{ vars.ARXIV_CATEGORY_MAX_RESULTS || vars.MAX_PER_TOPIC || '10' }}
@@ -114,6 +121,13 @@ jobs:
           OPENALEX_API_KEY: ${{ secrets.OPENALEX_API_KEY }}
           JOURNAL_LOOKBACK_DAYS: ${{ vars.JOURNAL_LOOKBACK_DAYS || '150' }}
           JOURNAL_MAX_PAGES: ${{ vars.JOURNAL_MAX_PAGES || '2' }}
+          SCREEN_MODE: ${{ vars.SCREEN_MODE || 'llm' }}
+          SCREEN_MIN_SCORE: ${{ vars.SCREEN_MIN_SCORE || '45' }}
+          SCREEN_BATCH_SIZE: ${{ vars.SCREEN_BATCH_SIZE || '6' }}
+          SCREEN_CONCURRENCY: ${{ vars.SCREEN_CONCURRENCY || '3' }}
+          SCREEN_MAX_PAPERS: ${{ vars.SCREEN_MAX_PAPERS || '400' }}
+          SCREEN_CACHE_DAYS: ${{ vars.SCREEN_CACHE_DAYS || '60' }}
+          SCREEN_CACHE_PATH: .paper-cache/screen_cache.json
           JOURNAL_PER_VENUE_RESULTS: ${{ vars.JOURNAL_PER_VENUE_RESULTS || '100' }}
           JOURNAL_VENUE_DELAY_SECONDS: ${{ vars.JOURNAL_VENUE_DELAY_SECONDS || '1' }}
           JOURNAL_RETENTION_DAYS: ${{ vars.JOURNAL_RETENTION_DAYS || '400' }}

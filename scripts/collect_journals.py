@@ -423,16 +423,18 @@ def journal_score(topic: Topic, paper: dict[str, Any]) -> dict[str, Any]:
 
 
 def score_and_filter(
-    papers: list[dict[str, Any]], topics: list[Topic]
+    papers: list[dict[str, Any]],
+    topics: list[Topic],
+    min_score: float | None = None,
 ) -> tuple[list[dict[str, Any]], int]:
     kept = []
     dropped = 0
-    min_score = env_float("MIN_JOURNAL_SCORE", 0.18)
+    threshold = env_float("MIN_JOURNAL_SCORE", 0.18) if min_score is None else min_score
     for paper in papers:
         matches = [journal_score(topic, paper) for topic in topics]
         matches.sort(key=lambda item: item["score"], reverse=True)
         best = matches[0]
-        if not best.get("keyword_hits") and float(best.get("score") or 0.0) < min_score:
+        if not best.get("keyword_hits") and float(best.get("score") or 0.0) < threshold:
             dropped += 1
             continue
         paper["matches"] = matches
@@ -657,8 +659,35 @@ def collect(
             print(f"Warning: journal fetch failed for {name}: {exc}", file=sys.stderr, flush=True)
 
     raw_count = len(candidates)
-    scored, dropped = score_and_filter(dedupe_by_doi(candidates), topics)
-    scored = sort_papers(scored)
+    unique_candidates = dedupe_by_doi(candidates)
+    from llm_screen import apply_verdict, screen_papers, screening_active
+
+    screen_llm = screening_active()
+    screened_count = 0
+    if screen_llm:
+        # 机械分只作为排序初值和兜底，淘汰交给模型
+        scored, _ = score_and_filter(unique_candidates, topics, min_score=0.0)
+        verdicts = screen_papers(scored, topics, label="journals")
+        min_screen = env_float("SCREEN_MIN_SCORE", 45.0)
+        kept: list[dict[str, Any]] = []
+        dropped = 0
+        for paper in scored:
+            verdict = verdicts.get(str(paper.get("id", "")))
+            if verdict:
+                apply_verdict(paper, verdict, topics)
+                if float(verdict["score"]) < min_screen:
+                    dropped += 1
+                    continue
+            kept.append(paper)
+        screened_count = len(scored)
+        print(
+            f"AI screening kept {len(kept)}/{len(scored)} journal candidates (min_score={min_screen:g})",
+            flush=True,
+        )
+        scored = sort_papers(kept)
+    else:
+        scored, dropped = score_and_filter(unique_candidates, topics)
+        scored = sort_papers(scored)
 
     max_per_venue = env_int("MAX_JOURNAL_PER_VENUE", 6)
     if max_per_venue > 0:
@@ -698,6 +727,8 @@ def collect(
         "lookback_days": lookback,
         "from_publication_date": from_date,
         "llm_enabled": llm_enabled(),
+        "screen_mode": "llm" if screen_llm else "rules",
+        "screened_paper_count": screened_count,
         "source_stats": source_stats,
         "collection_mode": "incremental",
         "high_count": sum(1 for paper in merged if str((paper.get("best_match") or {}).get("level")) == "high"),

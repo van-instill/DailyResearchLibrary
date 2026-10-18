@@ -13,9 +13,10 @@
 
 | 环节 | 实现 | 说明 |
 | --- | --- | --- |
-| 预印本抓取 | `scripts/collect_papers.py` | arXiv API，按关键词 + 分类（strict 模式）检索 |
+| 预印本抓取 | `scripts/collect_papers.py` | arXiv API，`category` 模式只按学科分类召回（关键词不再作硬门槛，交给 AI 阅卷） |
 | 顶刊抓取 | `scripts/collect_journals.py` | OpenAlex API（按 ISSN 定位期刊 → 拉全量新文），被限流时自动回退 Crossref |
-| 相关性打分 | 两个脚本内 | 关键词命中 + 方向描述词重合（顶刊没有 arXiv 分类，用单独的权重） |
+| AI 阅卷 | `scripts/llm_screen.py` | 模型逐篇判断相关性 0-100 分并指定方向；批量调用 + 磁盘缓存，异常时退回机械评分 |
+| 机械打分 | 两个采集脚本内 | 关键词命中 + 方向描述词重合，作为兜底与并列排序依据 |
 | 中文总结 | DeepSeek / OpenAI 兼容接口 | 输出「问题 / 方法 / 创新 / 证据 / 局限 / 为什么相关」六段 |
 | 展示 | `web/index.html` + `app.js` | 纯静态，无需后端；支持按方向、匹配度、日期筛选 |
 
@@ -26,9 +27,26 @@ config/interests.json        # 研究方向：关键词 + arXiv 分类
 config/journals.json         # 顶刊清单：ISSN + OpenAlex 来源 ID
 scripts/collect_papers.py    # arXiv 每日采集
 scripts/collect_journals.py  # 顶刊采集（OpenAlex + Crossref 回退）
+scripts/llm_screen.py        # AI 阅卷：批量判相关性 + 缓存 + 失败降级
 web/                         # 静态站点
 .github/workflows/paper-daily.yml
 ```
+
+## AI 阅卷：模型怎么参与筛选
+
+默认开启（`SCREEN_MODE=llm`）。完整链路：
+
+```
+抓取（放宽召回） → 机械打分（只做排序初值） → AI 批量阅卷 → 按 AI 分淘汰 → 截断配额 → 生成六段摘要
+```
+
+- **召回放宽**：arXiv 用 `ARXIV_QUERY_MODE=category`，只要落在 `q-fin.ST`、`econ.EM` 这些分类里就进候选池，不再强制关键词命中。这样「研究同一件事但换了说法」的论文不会漏（比如写 `tail dependence` 而关键词是 `tail risk`）。
+- **判断标准**：模型逐篇打 0-100 分（85+ 核心相关；60-84 相关；40-59 只是沾边；20-39 只在背景里提了一句；0-19 无关），同时指定最匹配的方向 id 并给 40 字理由。低于 `SCREEN_MIN_SCORE`（默认 45）直接淘汰。
+- **成本与速度**：默认每 6 篇打包一次请求，单轮最多 400 篇，并发 3。首次全量阅卷约 60 次请求、一分钟内跑完，费用约 ¥0.2~0.5；之后每天只对**新论文**调用，因为判定结果缓存在 `.paper-cache/screen_cache.json`（跟随 Actions cache 持久化）。
+- **失败降级**：没配 key、请求失败或返回的 JSON 不合法时，这批论文保留机械评分，页面不会变空。想彻底关掉就把 `SCREEN_MODE` 设为 `rules`。
+- **可追溯**：每篇论文的 `best_match` 里同时保留 `mechanical_score` 和 `llm_score`，方便你对照着调阈值。
+
+> 没有摘要的论文不会被送进阅卷（模型只能看标题，容易瞎猜），这类保留机械评分。
 
 ## 部署步骤
 
@@ -124,16 +142,22 @@ curl "https://api.openalex.org/sources?filter=issn:0022-1082&select=id,display_n
 
 | 变量 | 默认 | 说明 |
 | --- | --- | --- |
-| `MAX_PER_TOPIC` | 15 | 每个方向最多抓多少篇 arXiv 候选 |
+| `MAX_PER_TOPIC` | 20 | 每个方向最多抓多少篇 arXiv 候选 |
 | `MAX_NEW_PAPERS` | 50 | 每日新论文展示上限 |
-| `MAX_SUMMARIES` | 20 | 每天最多调用模型多少次（控制成本） |
+| `MAX_SUMMARIES` | 30 | 每天最多生成多少篇六段中文分析（控制成本） |
 | `JOURNAL_LOOKBACK_DAYS` | 150 | 顶刊回看天数 |
 | `MAX_NEW_JOURNAL_PAPERS` | 40 | 顶刊单轮新增上限 |
 | `MAX_JOURNAL_SUMMARIES` | 30 | 顶刊每日总结条数上限 |
 | `MAX_JOURNAL_PER_VENUE` | 6 | 单刊最多保留几篇，避免高产期刊刷屏 |
-| `MIN_PAPER_SCORE` | 0.08 | 每日论文最低相关性分 |
-| `MIN_JOURNAL_SCORE` | 0.18 | 顶刊最低相关性分 |
-| `ARXIV_QUERY_MODE` | strict | `strict` = 关键词 AND 分类，`keyword` = 只按关键词 |
+| `MIN_PAPER_SCORE` | 0.08 | 每日论文最低机械相关性分（AI 阅卷关闭时生效） |
+| `MIN_JOURNAL_SCORE` | 0.18 | 顶刊最低机械相关性分（AI 阅卷关闭时生效） |
+| `ARXIV_QUERY_MODE` | category | `category` = 只按分类召回（推荐，配合 AI 阅卷）；`strict` = 关键词 AND 分类；`keyword` = 只按关键词 |
+| `SCREEN_MODE` | llm | `llm` 用模型阅卷；`rules` 退回纯机械评分 |
+| `SCREEN_MIN_SCORE` | 45 | AI 分低于此值淘汰（0-100）。想多看调到 35，只看硬核调到 60 |
+| `SCREEN_BATCH_SIZE` | 6 | 每次请求塞几篇，越大越省钱但越容易输出截断 |
+| `SCREEN_MAX_PAPERS` | 400 | 单轮最多阅卷多少篇，超出部分保留机械评分 |
+| `SCREEN_CONCURRENCY` | 3 | 并发请求数，遇到 429 就调小 |
+| `SCREEN_CACHE_DAYS` | 60 | AI 判定结果的缓存天数，越大越省钱 |
 | `LOOKBACK_DAYS` | 1 | 定时任务默认只抓上一次运行之后的新文 |
 
 ## 已知限制（重要）
