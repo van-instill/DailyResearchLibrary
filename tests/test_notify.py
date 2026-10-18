@@ -34,11 +34,14 @@ class BuildMessageTest(unittest.TestCase):
         self.assertIn("https://x.github.io/repo/#journal-latest", body)
         self.assertIn("Journal of Econometrics", body)
 
-    def test_only_journal_week_has_no_secondary_link(self):
+    def test_only_journal_week_links_to_journal_tab(self):
+        # 只有顶刊有新增时，主按钮要落到顶刊那一页，别把用户丢到空的 arXiv 列表
         journal = [_paper("Solo", venue="Review of Financial Studies")]
         _, body = notify.build_markdown([], journal, "2026-W43", "https://x.github.io/repo")
         self.assertIn("本周新收录 1 篇", body)
-        self.assertNotIn("#journal-latest", body)
+        self.assertIn("#journal-latest", body)
+        self.assertNotIn("#latest", body)
+        self.assertIn("顶刊 1 篇", body)
 
     def test_every_paper_gets_its_own_link(self):
         daily = [_paper(f"Paper {i}", url=f"https://example.org/{i}") for i in range(3)]
