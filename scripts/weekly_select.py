@@ -351,6 +351,9 @@ def select_weekly(
 
     stats = {
         "weekly_period": period,
+        # period_new_count 是「本期一共几篇」，同周重跑不变；
+        # weekly_new_count 是「本次运行选了几篇」，同周重跑会是 0。前端两个都要能对上。
+        "period_new_count": sum(1 for item in selected if item.get("is_new_this_week")),
         "weekly_new_count": len(new_batch),
         "weekly_new_quota": new_quota,
         "weekly_new_total": weekly_new_total(),

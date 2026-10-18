@@ -535,7 +535,9 @@ function updateUpdatedAt(message = "") {
   const stats = data.stats || {};
   const mode = stats.collection_mode === "incremental" ? "增量" : "初始化";
   const kind = state.filters.collection === "conference" ? "顶刊精选" : "arXiv 新论文";
-  const weekly = Number(stats.weekly_new_count || 0);
+  // 用论文上的标记数，不用 stats.weekly_new_count：同一周重跑时那次运行没选新论文，
+  // stats 会记成 0，但本期的 5 篇标签还在，两边就对不上了。
+  const weekly = (data.papers || []).filter((paper) => paper.is_new_this_week).length;
   const total = Number(stats.weekly_new_total || 0);
   const fresh = weekly ? ` · 本期新增 ${weekly} 篇${total ? `（两条线合计 ${total} 篇）` : ""}` : "";
   nodes.updatedAt.textContent = `${kind} · 更新于 ${formatDate(data.generated_at_iso)}${fresh} · ${mode} · ${stats.llm_enabled ? "LLM" : "基础"}`;
