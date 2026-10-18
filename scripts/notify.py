@@ -110,6 +110,18 @@ def entry_line(index: int, paper: dict, group: str) -> str:
     return f"{head}\n{meta}"
 
 
+def target_links(new_daily: list[dict], new_journal: list[dict], site: str) -> list[tuple[str, str]]:
+    """两个集合在站点上是两个标签页，一个链接只能落到其中一个，
+    所以按集合各给一个入口，按钮上写明这一边有几篇，省得点进去发现只有 5 篇。"""
+    base = site.rstrip("/")
+    links = []
+    if new_daily:
+        links.append((f"arXiv {len(new_daily)} 篇", f"{base}/#latest"))
+    if new_journal:
+        links.append((f"顶刊 {len(new_journal)} 篇", f"{base}/#journal-latest"))
+    return links
+
+
 def build_markdown(new_daily: list[dict], new_journal: list[dict], period: str, site: str) -> tuple[str, str]:
     total = len(new_daily) + len(new_journal)
     title = f"论文雷达 {period}｜本周新增 {total} 篇"
@@ -133,11 +145,14 @@ def build_markdown(new_daily: list[dict], new_journal: list[dict], period: str, 
     if total > len(items):
         lines.append(f"…另有 {total - len(items)} 篇，见页面")
         lines.append("")
-    base = site.rstrip("/")
-    lines.append(f"👉 [**打开论文雷达 · 本期新增**]({base}/#latest)")
-    if new_daily and new_journal:
-        lines.append("")
-        lines.append(f"[只顶刊的 {len(new_journal)} 篇]({base}/#journal-latest)")
+
+    links = target_links(new_daily, new_journal, site)
+    if links:
+        primary, *rest = links
+        lines.append(f"👉 [**打开论文雷达 · {primary[0]}**]({primary[1]})")
+        for label, url in rest:
+            lines.append("")
+            lines.append(f"[{label}]({url})")
     return title, "\n".join(lines).strip()
 
 
@@ -161,14 +176,21 @@ def build_html(new_daily: list[dict], new_journal: list[dict], period: str, site
             "</div>"
         )
     body = "".join(rows)
-    base = site.rstrip("/")
-    secondary = ""
-    if new_daily and new_journal:
-        secondary = (
-            f'<a href="{html.escape(base + "/#journal-latest")}" '
-            'style="display:inline-block;margin-left:8px;padding:10px 16px;background:#eef2f9;'
-            'color:#2f6fed;border-radius:8px;text-decoration:none;font-size:14px">只看顶刊</a>'
+    links = target_links(new_daily, new_journal, site)
+    buttons = ""
+    if links:
+        primary, *rest = links
+        buttons = (
+            f'<a href="{html.escape(primary[1])}" '
+            'style="display:inline-block;padding:10px 16px;background:#2f6fed;color:#fff;'
+            f'border-radius:8px;text-decoration:none;font-size:14px">打开论文雷达 · {html.escape(primary[0])}</a>'
         )
+        for label, url in rest:
+            buttons += (
+                f'<a href="{html.escape(url)}" '
+                'style="display:inline-block;margin-left:8px;padding:10px 16px;background:#eef2f9;'
+                f'color:#2f6fed;border-radius:8px;text-decoration:none;font-size:14px">{html.escape(label)}</a>'
+            )
     return (
         '<div style="font-family:-apple-system,BlinkMacSystemFont,\'Segoe UI\',sans-serif;max-width:640px">'
         f'<div style="font-size:13px;color:#6b7280;margin-bottom:6px">论文雷达 · {html.escape(period)}</div>'
@@ -176,9 +198,7 @@ def build_html(new_daily: list[dict], new_journal: list[dict], period: str, site
         f'<div style="font-size:13px;color:#6b7280;margin-bottom:12px">'
         f"arXiv {len(new_daily)} 篇 · 顶刊 {len(new_journal)} 篇</div>"
         f"{body}"
-        f'<div style="margin-top:16px"><a href="{html.escape(base + "/#latest")}" '
-        'style="display:inline-block;padding:10px 16px;background:#2f6fed;color:#fff;'
-        f'border-radius:8px;text-decoration:none;font-size:14px">打开论文雷达 · 本期新增</a>{secondary}</div>'
+        f'<div style="margin-top:16px">{buttons}</div>'
         "</div>"
     )
 
