@@ -486,6 +486,23 @@ select:focus,
   color: var(--text);
 }
 
+/* 本周新增：配合"每周推 10 篇"的节奏，让人一眼看到哪几篇是这周新排进来的 */
+.fresh-badge {
+  display: inline-flex;
+  align-items: center;
+  min-height: 22px;
+  border: 1px solid var(--teal);
+  border-radius: 999px;
+  color: var(--teal);
+  padding: 2px 8px;
+  font-size: 11px;
+  font-weight: 750;
+}
+
+.fresh-badge[hidden] {
+  display: none;
+}
+
 .paper-title {
   margin: 12px 0 8px;
   max-width: 1050px;
@@ -539,7 +556,7 @@ select:focus,
 
 .summary-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 12px;
   margin: 16px 0 0;
 }
@@ -567,16 +584,114 @@ select:focus,
 
 /* KaTeX：行内公式跟随正文，独立公式允许横向滚动，避免撑破三栏网格 */
 .summary-grid dd .katex,
-.match-reason .katex {
+.match-reason .katex,
+.abstract-text .katex {
   font-size: 1em;
 }
 
 .summary-grid dd .katex-display,
-.match-reason .katex-display {
+.match-reason .katex-display,
+.abstract-text .katex-display {
   margin: 6px 0;
   overflow-x: auto;
   overflow-y: hidden;
   padding-bottom: 2px;
+}
+
+/* 中英文摘要：默认只露 5 行多，超出才出现"展开"；切换语言不占额外高度 */
+.abstract-panel {
+  margin-top: 14px;
+  border-top: 1px dashed var(--line);
+  padding-top: 10px;
+}
+
+.abstract-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.abstract-tabs {
+  display: inline-flex;
+  gap: 4px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--card-footer-bg);
+  padding: 3px;
+}
+
+.abstract-tab {
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--muted);
+  padding: 4px 12px;
+  font: inherit;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.abstract-tab.active {
+  background: var(--gold);
+  color: #11100e;
+  font-weight: 800;
+}
+
+.abstract-toggle {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--muted);
+  padding: 4px 10px;
+  font: inherit;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.abstract-toggle:hover,
+.abstract-toggle:focus-visible {
+  border-color: var(--teal);
+  color: var(--teal);
+}
+
+.abstract-toggle[hidden] {
+  display: none;
+}
+
+.abstract-body {
+  position: relative;
+  margin-top: 8px;
+  max-height: 5.4em;
+  overflow: hidden;
+}
+
+.abstract-body.is-expanded {
+  max-height: none;
+}
+
+.abstract-body.is-clipped::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 1.8em;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0), var(--card-bg));
+  pointer-events: none;
+}
+
+.abstract-text {
+  margin: 0;
+  color: var(--summary-text);
+  font-size: 13.5px;
+  line-height: 1.62;
+  overflow-wrap: anywhere;
+}
+
+.abstract-panel[data-lang="zh"] .abstract-en,
+.abstract-panel[data-lang="en"] .abstract-zh {
+  display: none;
 }
 
 .paper-footer {
@@ -590,9 +705,14 @@ select:focus,
 }
 
 .match-reason {
+  display: -webkit-box;
+  max-width: 68%;
+  overflow: hidden;
   color: var(--muted);
   font-size: 12px;
   line-height: 1.5;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
 }
 
 .paper-links {

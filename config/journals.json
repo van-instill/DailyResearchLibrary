@@ -1,10 +1,11 @@
 {
   "enabled": true,
-  "lookback_days": 150,
-  "per_venue_results": 25,
-  "keywords_per_query": 12,
+  "window_start": "2018-01-01",
+  "window_search": true,
+  "per_venue_results": 50,
+  "keywords_per_query": 8,
   "max_pages": 1,
-  "comment": "来源：国际期刊目录.md（29 本）。openalex_source_id 留空的会在运行时按 ISSN 现查。",
+  "comment": "来源：国际期刊目录.md（29 本）。openalex_source_id 留空的会在运行时按 ISSN 现查。window_search=true 时按方向关键词在 2018 至今的全文题录里做相关度召回，而不是只抓最近几个月。",
   "venues": [
     {
       "id": "qje",

@@ -43,6 +43,7 @@ from collect_papers import (  # noqa: E402
     trim_papers_for_storage,
     write_json,
 )
+from weekly_select import load_seen, select_weekly, window_start  # noqa: E402
 
 OPENALEX_SOURCES_URL = "https://api.openalex.org/sources"
 OPENALEX_WORKS_URL = "https://api.openalex.org/works"
@@ -272,15 +273,23 @@ def fetch_venue_works(
     from_date: str,
     per_page: int,
     max_pages: int,
+    search: str = "",
 ) -> list[dict[str, Any]]:
     papers: list[dict[str, Any]] = []
     for page in range(1, max(1, max_pages) + 1):
-        params = {
-            "filter": f"primary_location.source.id:{source_id},from_publication_date:{from_date},type:article",
-            "per-page": str(max(1, min(200, per_page))),
-            "page": str(page),
-            "select": WORK_SELECT,
-        }
+        work_filter = (
+            f"primary_location.source.id:{source_id},from_publication_date:{from_date},type:article"
+        )
+        params: dict[str, str] = {}
+        if search:
+            # 2018 起的宽窗口：按"标题/摘要里是否出现方向关键词"召回，
+            # 不排序就会按出版日期倒序，永远只能看到最近几个月。
+            work_filter += f",title_and_abstract.search:{search}"
+            params["sort"] = "relevance_score:desc"
+        params["filter"] = work_filter
+        params["per-page"] = str(max(1, min(200, per_page)))
+        params["page"] = str(page)
+        params["select"] = WORK_SELECT
         url = OPENALEX_WORKS_URL + "?" + urllib.parse.urlencode(params)
         data = openalex_request(url)
         results = data.get("results") or []
@@ -291,6 +300,21 @@ def fetch_venue_works(
         if len(results) < per_page:
             break
     return papers
+
+
+def window_search_terms(topics: list[Topic], per_topic: int = 8) -> str:
+    """把研究方向的关键词拼成 OpenAlex 的 OR 检索串（title_and_abstract.search）。
+
+    OpenAlex 的 search 是 AND 语义，把 40 个词直接空格连起来会返回 0 条；
+    用 `|` 做 OR 才能召回任意一个方向相关的论文。
+    """
+    terms: list[str] = []
+    for topic in topics:
+        for keyword in topic.keywords[:per_topic]:
+            cleaned = normalize_space(str(keyword or "")).replace("|", " ")
+            if cleaned and cleaned not in terms:
+                terms.append(cleaned)
+    return "|".join(terms)
 
 
 def crossref_request(url: str, timeout: float = 60, retries: int = 2) -> dict[str, Any]:
@@ -470,8 +494,7 @@ def journal_fallback_summary(paper: dict[str, Any]) -> dict[str, str]:
             "problem": f"出版商未向开放索引提供这篇 {venue} 文章的摘要，目前只有题录信息。",
             "method": "请打开原文链接查看模型设定、识别策略与实证设计。",
             "innovation": "缺少摘要，无法可靠判断创新点，已避免让模型凭标题猜测。",
-            "evidence": "暂无公开摘要，需要阅读原文核验。",
-            "limitations": "缺摘要会降低相关性打分与中文总结的准确度。",
+            "conclusion": "缺少摘要，无法给出可靠结论，请阅读原文。",
             "why_relevant": reason,
         }
     first_sentence = re.split(r"(?<=[.!?])\s+", str(paper.get("summary") or ""))[0]
@@ -479,8 +502,7 @@ def journal_fallback_summary(paper: dict[str, Any]) -> dict[str, str]:
         "problem": "尚未配置模型 API Key，当前只展示英文摘要首句。",
         "method": first_sentence[:300] if first_sentence else "请打开原文查看方法细节。",
         "innovation": "配置 DEEPSEEK_API_KEY 后会自动生成中文创新点总结。",
-        "evidence": "证据可在原文摘要中核验。",
-        "limitations": "基础模式不做深度技术对比。",
+        "conclusion": "基础模式不做结论抽取，请参考原英文摘要。",
         "why_relevant": reason,
     }
 
@@ -759,11 +781,20 @@ def collect(
         venues = []
 
     now = dt.datetime.now(dt.timezone.utc)
-    lookback = max(1, env_int("JOURNAL_LOOKBACK_DAYS", lookback_days))
-    from_date = (now - dt.timedelta(days=lookback)).date().isoformat()
+    # 按设定：抓取窗口固定从 2018-01-01 开始。每周只保留 10 篇新论文，
+    # 如果还按"最近 150 天"抓，候选池永远是最近那几十篇，2018-2024 的论文
+    # 根本没机会被看到。
+    from_date = window_start().date().isoformat()
+    lookback = max(1, (now.date() - window_start().date()).days)
     per_page = env_int("JOURNAL_PER_VENUE_RESULTS", int(journal_config.get("per_venue_results", 100)))
     max_pages = max(1, env_int("JOURNAL_MAX_PAGES", int(journal_config.get("max_pages", 2))))
     delay = env_float("JOURNAL_VENUE_DELAY_SECONDS", 1.0)
+    search_terms = window_search_terms(topics) if journal_config.get("window_search", True) else ""
+    if search_terms:
+        print(
+            f"Journal window: from {from_date}, relevance search over {len(search_terms.split('|'))} terms",
+            flush=True,
+        )
 
     candidates: list[dict[str, Any]] = []
     source_stats: dict[str, Any] = {}
@@ -776,7 +807,7 @@ def collect(
             print(f"Fetching OpenAlex journal works: {name}", flush=True)
             try:
                 source_id = resolve_source_id(venue)
-                works = fetch_venue_works(venue, source_id, from_date, per_page, max_pages)
+                works = fetch_venue_works(venue, source_id, from_date, per_page, max_pages, search_terms)
                 stats = {"type": "openalex_journal", "source_id": source_id, "fetched": len(works)}
                 if not works:
                     widened = widen_from_date(from_date)
@@ -785,7 +816,7 @@ def collect(
                             f"Notice: {name} returned 0 since {from_date}; retrying from {widened}",
                             flush=True,
                         )
-                        works = fetch_venue_works(venue, source_id, widened, per_page, max_pages)
+                        works = fetch_venue_works(venue, source_id, widened, per_page, max_pages, search_terms)
                         stats.update({"fetched": len(works), "from_date": widened})
                         if works:
                             stats["type"] = "openalex_journal_widened"
@@ -878,13 +909,24 @@ def collect(
         for venue in venues
         if venue.get("name")
     }
-    retained = load_retained(
-        existing,
-        now,
-        env_int("JOURNAL_RETENTION_DAYS", 400),
-        canonical_venues,
+    previous_papers = []
+    for paper in existing.get("papers") or []:
+        if not isinstance(paper, dict) or not paper.get("title"):
+            continue
+        key = venue_key(str(paper.get("venue") or ""))
+        canonical = canonical_venues.get(key)
+        if not canonical:
+            # 该刊已从配置里移除（或刊名对不上），不再保留
+            continue
+        previous_papers.append({**paper, "venue": canonical})
+
+    merged, seen_state, selection_stats = select_weekly(
+        previous=previous_papers,
+        candidates=scored,
+        seen=load_seen(existing),
+        now=now,
     )
-    merged = sort_papers(merge_papers(scored, retained, now))
+    merged = sort_papers(merged)
     # 先给没摘要的论文找 arXiv 预印本，再生成六段内容，否则这些论文只能出占位文案
     preprint_stats = fill_missing_abstracts(merged)
     # 摘要放在合并之后：历史里一直没生成过六段内容的论文也能被补上（有缓存，重复论文不花钱）
@@ -899,10 +941,10 @@ def collect(
         "candidate_paper_count": raw_count,
         "new_paper_count": len(scored),
         "filtered_low_relevance_count": dropped,
-        "retained_paper_count": len(retained),
         "venue_count": len(venues),
         "lookback_days": lookback,
         "from_publication_date": from_date,
+        "window_search_terms": len(search_terms.split("|")) if search_terms else 0,
         "llm_enabled": llm_enabled(),
         "screen_mode": "llm" if screen_llm else "rules",
         "screened_paper_count": screened_count,
@@ -910,6 +952,7 @@ def collect(
         "collection_mode": "incremental",
         "high_count": sum(1 for paper in merged if str((paper.get("best_match") or {}).get("level")) == "high"),
         "with_abstract_count": sum(1 for paper in merged if has_meaningful_summary(paper)),
+        **selection_stats,
         **summary_stats,
         **preprint_stats,
     }
@@ -920,6 +963,7 @@ def collect(
         "data_kind": "journal",
         "topics": [topic.__dict__ for topic in topics],
         "papers": merged,
+        "seen": seen_state,
         "stats": stats,
     }
     trimmed, storage_stats = trim_papers_for_storage(payload, max_stored_papers, max_data_bytes)

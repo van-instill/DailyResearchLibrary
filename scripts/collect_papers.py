@@ -22,6 +22,10 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+
+from weekly_select import in_window, load_seen, select_weekly  # noqa: E402
+
 
 ARXIV_API_URL = "https://export.arxiv.org/api/query"
 DBLP_API_URL = os.getenv("DBLP_API_URL", "http://dblp.org/search/publ/api")
@@ -536,6 +540,16 @@ def fetch_arxiv_query(search_query: str, max_results: int, sort_by: str, sort_or
     return parse_arxiv_entries(xml_data)
 
 
+def arxiv_window_query(topic: Topic, start: str, end: str) -> str:
+    """2018 起时间窗内的关键词检索（配合 relevance 排序找"老但相关"的预印本）。"""
+    terms = []
+    for keyword in topic.keywords[:8]:
+        escaped = keyword.replace('"', " ")
+        terms.append(f'all:"{escaped}"')
+    base = "(" + " OR ".join(terms) + ")" if terms else f'all:"{topic.name}"'
+    return f"{base} AND submittedDate:[{start} TO {end}]"
+
+
 def fetch_arxiv(topic: Topic, max_results: int) -> list[dict[str, Any]]:
     sort_by = os.getenv("ARXIV_SORT_BY", "lastUpdatedDate").strip() or "lastUpdatedDate"
     papers = fetch_arxiv_query(
@@ -558,6 +572,31 @@ def fetch_arxiv(topic: Topic, max_results: int) -> list[dict[str, Any]]:
             label=f"{topic.name} categories",
         )
         papers = dedupe_papers([*papers, *category_papers])
+
+    # 每周更新 + 2018 起的时间窗口：只抓最近 7 天会永远看不到 2018-2025 的论文，
+    # 所以再加一趟"窗口内 + 相关度排序"的检索，让老论文也有机会进入候选池。
+    if env_flag("ARXIV_WINDOW_SEARCH", True):
+        window_results = max(0, int(os.getenv("ARXIV_WINDOW_RESULTS", "40")))
+        if window_results:
+            from weekly_select import window_start
+
+            now_utc = dt.datetime.now(dt.timezone.utc)
+            start = window_start().strftime("%Y%m%d%H%M")
+            end = now_utc.strftime("%Y%m%d%H%M")
+            in_topic_delay = float(os.getenv("ARXIV_IN_TOPIC_DELAY_SECONDS", "3"))
+            if in_topic_delay > 0:
+                time.sleep(in_topic_delay)
+            window_papers = fetch_arxiv_query(
+                arxiv_window_query(topic, start, end),
+                window_results,
+                sort_by="relevance",
+                sort_order="descending",
+                label=f"{topic.name} window",
+            )
+            for paper in window_papers:
+                paper["from_window_search"] = True
+            papers = dedupe_papers([*papers, *window_papers])
+
     for paper in papers:
         paper["seed_topic"] = topic.id
     return papers
@@ -1574,8 +1613,7 @@ def fallback_summary(paper: dict[str, Any], best_match: dict[str, Any]) -> dict[
             "problem": "DBLP 题录没有摘要，且未在外部论文索引中找到足够可靠的同题论文摘要。",
             "method": "请打开论文链接查看方法和系统设计细节。",
             "innovation": "仅凭标题无法可靠判断创新点，已避免占用模型翻译额度。",
-            "evidence": "题录信息来自会议索引，技术细节需要在原文中核验。",
-            "limitations": "DBLP 通常不提供摘要；如果 arXiv、Semantic Scholar、OpenAlex 或 Crossref 暂未收录摘要，自动摘要会缺失。",
+            "conclusion": "缺少摘要，无法给出可靠结论，请阅读原文。",
             "why_relevant": best_match.get("reason", "与配置方向存在文本匹配。"),
         }
     if not has_meaningful_summary(paper):
@@ -1583,16 +1621,14 @@ def fallback_summary(paper: dict[str, Any], best_match: dict[str, Any]) -> dict[
             "problem": "来源没有提供足够摘要，当前不调用模型做标题猜测。",
             "method": "请打开论文链接查看方法细节。",
             "innovation": "标题信息不足，无法可靠提取创新点。",
-            "evidence": "证据不足，需要阅读全文核验。",
-            "limitations": "缺少摘要会降低自动相关性和中文总结质量。",
+            "conclusion": "缺少摘要，无法给出可靠结论，请阅读原文。",
             "why_relevant": best_match.get("reason", "与配置方向存在文本匹配。"),
         }
     return {
         "problem": "未配置模型 API，当前仅基于标题、摘要和关键词生成基础摘要。",
         "method": first_sentence[:300] if first_sentence else "请打开论文链接查看方法细节。",
         "innovation": "需要接入模型 API 后自动抽取更精确的中文创新点。",
-        "evidence": "来源摘要可在论文原文中核验。",
-        "limitations": "基础模式不会阅读全文，也不会进行深度技术对比。",
+        "conclusion": "基础模式不做结论抽取，请参考原英文摘要。",
         "why_relevant": best_match.get("reason", "与配置方向存在文本匹配。"),
     }
 
@@ -1681,9 +1717,9 @@ def build_llm_prompt(topic: Topic, paper: dict[str, Any], base_match: dict[str, 
     return f"""
 请根据论文标题、摘要、分类和我的研究方向，输出精确中文分析。目标不是逐句翻译，而是综合整篇摘要快速判断这篇论文是否值得阅读。
 要求：
-1. 先识别论文真正解决的问题、核心机制、实验或系统证据，再翻译成自然中文。
-2. 不要夸大摘要中没有的信息；如果证据不足，请明确说明。
-3. 相关性判断要严格，说明它具体匹配哪些关键词、场景或系统瓶颈。
+1. 先识别论文真正解决的问题、核心机制和实证/理论结果，再翻译成自然中文。
+2. 不要夸大摘要中没有的信息；摘要没写的结论不要替作者补。
+3. 相关性判断要严格，说明它具体匹配哪些关键词、场景或问题。
 4. 如果论文只是泛泛相关，请把 match_level 降为 medium 或 low，并在 why_relevant 里说明需要人工复核。
 {latex_rule}
 
@@ -1708,9 +1744,9 @@ arXiv 分类：{", ".join(paper.get("categories", []))}
   "problem": "论文要解决的问题，中文，1-2句，避免空泛背景",
   "method": "核心方法，中文，2-3句，包含关键技术组件或数学形式",
   "innovation": "相对已有工作的具体创新点，中文，2-3点合并成一段",
-  "evidence": "摘要中可核验的实验、理论或系统证据；没有则写证据不足",
-  "limitations": "可能局限或需要阅读全文确认的点",
-  "why_relevant": "为什么匹配我的研究方向",
+  "conclusion": "主要结论：作者最终得到的结果或主张，中文，1-2句，尽量带上关键数值、效应方向或成立条件",
+  "abstract_zh": "整篇摘要的中文译文，3-5句，忠实于原摘要、不要添加原文没有的信息，不要写成要点罗列",
+  "why_relevant": "一句话说明为什么匹配我的研究方向，不超过40字",
   "match_score_adjustment": 0.0,
   "match_level": "high|medium|low"
 }}
@@ -1732,8 +1768,8 @@ def summarize_with_llm(topic: Topic, paper: dict[str, Any], base_match: dict[str
         "problem": str(data.get("problem", "")),
         "method": str(data.get("method", "")),
         "innovation": str(data.get("innovation", "")),
-        "evidence": str(data.get("evidence", "")),
-        "limitations": str(data.get("limitations", "")),
+        "conclusion": str(data.get("conclusion", "")),
+        "abstract_zh": str(data.get("abstract_zh", "")),
         "why_relevant": str(data.get("why_relevant", "")),
     }
     adjustment = float(data.get("match_score_adjustment", 0.0) or 0.0)
@@ -2116,14 +2152,23 @@ def collect(
     from llm_screen import apply_verdict, screen_papers, screening_active
 
     screen_llm = screening_active()
+    window_search_candidate_count = 0
     backfill_days = max(days, env_int("DAILY_BACKFILL_DAYS", 14))
     daily_backfill_cutoff = now - dt.timedelta(days=max(0, backfill_days))
     for paper in dedupe_papers(all_candidates):
         is_conference_paper = paper.get("source_type") == "conference"
         if not is_conference_paper:
             raw_daily_candidate_count += 1
+            if not in_window(paper):
+                # 2018 之前的老预印本一律不要
+                daily_outside_cutoff_count += 1
+                continue
         activity_at = paper_activity_datetime(paper)
-        in_primary_window = is_conference_paper or activity_at >= cutoff
+        # 窗口检索（2018 起 + 相关度排序）命中的论文不受"最近几天"的限制
+        from_window_search = bool(paper.get("from_window_search"))
+        if from_window_search:
+            window_search_candidate_count += 1
+        in_primary_window = is_conference_paper or activity_at >= cutoff or from_window_search
         in_backfill_window = (
             not is_conference_paper
             and not in_primary_window
@@ -2217,15 +2262,17 @@ def collect(
     )
     daily_recent_papers = [paper for paper in recent_papers if paper.get("source_type") != "conference"]
     conference_recent_papers = [paper for paper in recent_papers if paper.get("source_type") == "conference"]
-    daily_merged_papers, daily_retention_stats = merge_with_retained_papers(
-        daily_recent_papers, existing_payload, now, recent_history_days
+    daily_merged_papers, daily_seen, daily_retention_stats = select_weekly(
+        previous=[p for p in (existing_payload.get("papers") or []) if isinstance(p, dict)],
+        candidates=daily_recent_papers,
+        seen=load_seen(existing_payload),
+        now=now,
     )
-    conference_merged_papers, conference_retention_stats = merge_with_retained_papers(
-        conference_recent_papers,
-        existing_conference_payload,
-        now,
-        recent_history_days,
-        active_conference_years_by_source,
+    conference_merged_papers, conference_seen, conference_retention_stats = select_weekly(
+        previous=[p for p in (existing_conference_payload.get("papers") or []) if isinstance(p, dict)],
+        candidates=conference_recent_papers,
+        seen=load_seen(existing_conference_payload),
+        now=now,
     )
     daily_merged_papers.sort(key=lambda p: (p["best_match"]["score"], paper_activity_datetime(p)), reverse=True)
     conference_merged_papers.sort(key=lambda p: (p["best_match"]["score"], paper_activity_datetime(p)), reverse=True)
@@ -2294,6 +2341,7 @@ def collect(
         "daily_candidate_paper_count": daily_candidate_paper_count,
         "conference_candidate_paper_count": conference_candidate_paper_count,
         "raw_daily_candidate_count": raw_daily_candidate_count,
+        "window_search_candidate_count": window_search_candidate_count,
         "daily_outside_cutoff_count": daily_outside_cutoff_count,
         "daily_backfill_days": backfill_days,
         "daily_backfill_candidate_count": len(daily_backfill_candidates),
@@ -2332,6 +2380,7 @@ def collect(
         "data_kind": "daily",
         "topics": [topic.__dict__ for topic in topics],
         "papers": daily_merged_papers,
+        "seen": daily_seen,
         "stats": {
             **base_stats,
             "paper_count": len(daily_merged_papers),
@@ -2354,6 +2403,7 @@ def collect(
         "data_kind": "conference",
         "topics": [topic.__dict__ for topic in topics],
         "papers": conference_merged_papers,
+        "seen": conference_seen,
         "stats": {
             **base_stats,
             "paper_count": len(conference_merged_papers),

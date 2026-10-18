@@ -287,15 +287,27 @@ def screen_papers(
 
     fresh_count = len(pending)
     if len(pending) > max_papers:
-        # 按时间倒序截断：否则候选会按期刊顺序排队，排在后面的刊永远轮不到阅卷
+        # 2018 起的宽窗口下，候选横跨 8 年，按时间截断会把所有老论文都切掉，
+        # 所以宽窗口模式改成按机械分截断（时间只作为同分时的次序）。
+        truncate_by = (os.getenv("SCREEN_TRUNCATE_BY", "recency") or "recency").strip().lower()
+
         def _recency(paper: dict[str, Any]) -> dt.datetime:
             stamp = parse_datetime(str(paper.get("published") or ""))
             return stamp or dt.datetime.min.replace(tzinfo=dt.timezone.utc)
 
-        pending.sort(key=_recency, reverse=True)
+        def _mechanical(paper: dict[str, Any]) -> float:
+            try:
+                return float((paper.get("best_match") or {}).get("score") or 0.0)
+            except (TypeError, ValueError):
+                return 0.0
+
+        if truncate_by == "score":
+            pending.sort(key=lambda paper: (_mechanical(paper), _recency(paper)), reverse=True)
+        else:
+            pending.sort(key=_recency, reverse=True)
         pending = pending[:max_papers]
         print(
-            f"Warning: screening capped at {max_papers} papers (of {fresh_count}); "
+            f"Warning: screening capped at {max_papers} papers (of {fresh_count}, by {truncate_by}); "
             f"raise SCREEN_MAX_PAPERS to cover more",
             file=sys.stderr,
             flush=True,
@@ -348,10 +360,10 @@ def screen_papers(
     return verdicts
 
 
-# v2：提示词要求数学符号用 LaTeX 输出，旧缓存里的纯文本摘要需要重写一遍，
-# 因此换一个缓存文件名，让旧条目自然失效而不必手动清理。
-SUMMARY_CACHE_PATH = Path(".paper-cache/summary_cache.v2.json")
-SUMMARY_FIELDS = ("problem", "method", "innovation", "evidence", "limitations", "why_relevant")
+# v3：卡片不再展示「证据 / 局限 / 匹配」，改为「问题 / 方法 / 创新 / 主要结论」，
+# 字段变了就必须重写，否则旧条目里没有 conclusion，页面会空一块。
+SUMMARY_CACHE_PATH = Path(".paper-cache/summary_cache.v3.json")
+SUMMARY_FIELDS = ("problem", "method", "innovation", "conclusion", "abstract_zh", "why_relevant")
 
 
 def _summary_cache_path() -> Path:
@@ -387,11 +399,14 @@ def save_summary_cache(entries: dict[str, Any]) -> None:
 
 
 def is_real_summary(summary: Any) -> bool:
-    """True only for a model-written six-field summary, not a placeholder."""
+    """True only for a model-written summary, not a placeholder."""
     if not isinstance(summary, dict):
         return False
     problem = str(summary.get("problem") or "")
     if len(problem) < 15:
+        return False
+    conclusion = str(summary.get("conclusion") or "")
+    if len(conclusion) < 10:
         return False
     placeholders = ("未配置模型", "尚未配置", "没有提供足够摘要", "出版商未向开放索引", "DBLP")
     return not any(marker in problem for marker in placeholders)

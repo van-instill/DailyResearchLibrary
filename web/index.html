@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>金融计量论文日报 · Paper Daily</title>
-    <link rel="stylesheet" href="./styles.css?v=20260530-split-sources" />
+    <title>金融计量论文周报 · Paper Radar</title>
+    <link rel="stylesheet" href="./styles.css?v=20261018-weekly" />
     <link rel="stylesheet" href="./vendor/katex/katex.min.css" />
   </head>
   <body>
@@ -12,7 +12,7 @@
       <div class="brand">
         <span class="brand-mark">FE</span>
         <div>
-          <h1>金融计量论文日报</h1>
+          <h1>金融计量论文周报</h1>
           <p id="updatedAt">正在读取数据</p>
         </div>
       </div>
@@ -64,12 +64,11 @@
 
       <section class="toolbar" aria-label="筛选">
         <div class="collection-tabs" role="tablist" aria-label="论文集合">
-          <button class="collection-tab active" type="button" data-collection="daily">每日新论文</button>
+          <button class="collection-tab active" type="button" data-collection="daily">arXiv 新论文</button>
           <button class="collection-tab" type="button" data-collection="conference">顶刊精选</button>
         </div>
         <div class="tabs" role="tablist" aria-label="视图">
-          <button class="tab" type="button" data-view="all">全部</button>
-          <button class="tab active" type="button" data-view="daily">当日</button>
+          <button class="tab active" type="button" data-view="all">全部</button>
           <button class="tab" type="button" data-view="week">本周</button>
           <button class="tab" type="button" data-view="month">本月</button>
           <button class="tab" type="button" data-view="highlights">本周精选</button>
@@ -116,6 +115,7 @@
         <div class="paper-main">
           <div class="paper-meta">
             <span class="match-badge"></span>
+            <span class="fresh-badge" hidden>本周新增</span>
             <span class="paper-date"></span>
             <span class="paper-source"></span>
             <span class="paper-collected"></span>
@@ -139,18 +139,23 @@
               <dd class="summary-innovation"></dd>
             </div>
             <div>
-              <dt>证据</dt>
-              <dd class="summary-evidence"></dd>
-            </div>
-            <div>
-              <dt>局限</dt>
-              <dd class="summary-limitations"></dd>
-            </div>
-            <div>
-              <dt>匹配</dt>
-              <dd class="summary-relevant"></dd>
+              <dt>主要结论</dt>
+              <dd class="summary-conclusion"></dd>
             </div>
           </dl>
+          <div class="abstract-panel" data-lang="zh">
+            <div class="abstract-head">
+              <div class="abstract-tabs" role="tablist" aria-label="摘要语言">
+                <button class="abstract-tab active" type="button" role="tab" aria-selected="true" data-abstract-lang="zh">中文摘要</button>
+                <button class="abstract-tab" type="button" role="tab" aria-selected="false" data-abstract-lang="en">English</button>
+              </div>
+              <button class="abstract-toggle" type="button" aria-expanded="false" hidden>展开</button>
+            </div>
+            <div class="abstract-body is-collapsed">
+              <p class="abstract-text abstract-zh"></p>
+              <p class="abstract-text abstract-en"></p>
+            </div>
+          </div>
         </div>
         <footer class="paper-footer">
           <span class="match-reason"></span>
@@ -165,6 +170,6 @@
 
     <script defer src="./vendor/katex/katex.min.js"></script>
     <script defer src="./vendor/katex/auto-render.min.js"></script>
-    <script defer src="./app.js?v=20261018-latex"></script>
+    <script defer src="./app.js?v=20261018-weekly"></script>
   </body>
 </html>

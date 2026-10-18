@@ -12,7 +12,7 @@ const state = {
     topic: "all",
     level: "all",
     collection: "daily",
-    view: "daily",
+    view: "all",
     date: "",
   },
 };
@@ -87,8 +87,10 @@ function dateKey(value) {
   return `${year}-${month}-${day}`;
 }
 
+// 「收录」= 这篇第一次进入列表的时间。周更模式下每一期都会把 last_seen_at
+// 刷成运行时间，用它做「本周」筛选会让 20 篇全部落在本周，失去意义。
 function collectionTime(paper) {
-  return paper.last_seen_at || paper.first_seen_at || paper.published || paper.updated || "";
+  return paper.first_seen_at || paper.last_seen_at || paper.published || paper.updated || "";
 }
 
 function startOfDay(date) {
@@ -142,9 +144,8 @@ function textIncludes(paper, query) {
     (paper.categories || []).join(" "),
     paper.best_match?.reason,
     paper.chinese_summary?.innovation,
-    paper.chinese_summary?.evidence,
-    paper.chinese_summary?.limitations,
-    paper.chinese_summary?.why_relevant,
+    paper.chinese_summary?.conclusion,
+    paper.chinese_summary?.abstract_zh,
   ]
     .join(" ")
     .toLowerCase();
@@ -221,6 +222,56 @@ function detailUrl(paper) {
   return /^https?:\/\//i.test(doi) ? doi : `https://doi.org/${doi}`;
 }
 
+function hydrateAbstract(node, paper, summary) {
+  const panel = node.querySelector(".abstract-panel");
+  if (!panel) return;
+  const zh = String(summary.abstract_zh || "").trim();
+  const en = String(paper.summary || "").trim();
+  panel.querySelector(".abstract-zh").textContent = zh;
+  panel.querySelector(".abstract-en").textContent = en;
+
+  if (!zh && !en) {
+    panel.remove();
+    return;
+  }
+  // 只有一种语言时就不给切换键，少一个能点的按钮
+  const tabs = panel.querySelectorAll(".abstract-tab");
+  if (!zh) {
+    tabs[0]?.remove();
+    panel.dataset.lang = "en";
+  } else if (!en) {
+    tabs[1]?.remove();
+    panel.dataset.lang = "zh";
+  }
+  for (const tab of panel.querySelectorAll(".abstract-tab")) {
+    const active = tab.dataset.abstractLang === panel.dataset.lang;
+    tab.classList.toggle("active", active);
+    tab.setAttribute("aria-selected", String(active));
+  }
+}
+
+// 折叠状态下只露 5 行左右；内容没超出就干脆不显示"展开"
+function refreshAbstract(card) {
+  const body = card.querySelector(".abstract-body");
+  const toggle = card.querySelector(".abstract-toggle");
+  if (!body || !toggle) return;
+  if (body.classList.contains("is-expanded")) {
+    toggle.hidden = false;
+    toggle.textContent = "收起";
+    toggle.setAttribute("aria-expanded", "true");
+    return;
+  }
+  const clipped = body.scrollHeight - body.clientHeight > 2;
+  body.classList.toggle("is-clipped", clipped);
+  toggle.hidden = !clipped;
+  toggle.textContent = "展开";
+  toggle.setAttribute("aria-expanded", "false");
+}
+
+function refreshAllAbstracts() {
+  for (const card of nodes.paperList.querySelectorAll(".paper-card")) refreshAbstract(card);
+}
+
 function renderPaper(paper) {
   const node = nodes.template.content.firstElementChild.cloneNode(true);
   const best = paper.best_match || {};
@@ -248,12 +299,15 @@ function renderPaper(paper) {
   setText(node, ".summary-problem", summary.problem);
   setText(node, ".summary-method", summary.method);
   setText(node, ".summary-innovation", summary.innovation);
-  setText(node, ".summary-evidence", summary.evidence);
-  setText(node, ".summary-limitations", summary.limitations);
-  setText(node, ".summary-relevant", summary.why_relevant);
+  setText(node, ".summary-conclusion", summary.conclusion);
   setText(node, ".match-reason", `${best.topic_name || "未分类"}：${best.llm_reason || best.reason || ""}`);
 
-  for (const field of node.querySelectorAll(".summary-grid dd, .match-reason")) {
+  const freshBadge = node.querySelector(".fresh-badge");
+  if (freshBadge && paper.is_new_this_week) freshBadge.hidden = false;
+
+  hydrateAbstract(node, paper, summary);
+
+  for (const field of node.querySelectorAll(".summary-grid dd, .match-reason, .abstract-text")) {
     renderMath(field);
   }
 
@@ -319,6 +373,7 @@ function render() {
   const fragment = document.createDocumentFragment();
   for (const paper of papers) fragment.appendChild(renderPaper(paper));
   nodes.paperList.appendChild(fragment);
+  refreshAllAbstracts();
 }
 
 function hydrateTopicFilter() {
@@ -379,7 +434,7 @@ function bindEvents() {
   for (const tab of nodes.collectionTabs) {
     tab.addEventListener("click", () => {
       state.filters.collection = tab.dataset.collection;
-      state.filters.view = state.filters.collection === "conference" ? "all" : "daily";
+      state.filters.view = "all";
       state.filters.topic = "all";
       for (const item of nodes.collectionTabs) item.classList.toggle("active", item === tab);
       for (const item of nodes.tabs) item.classList.toggle("active", item.dataset.view === state.filters.view);
@@ -402,6 +457,32 @@ function bindEvents() {
       render();
     });
   }
+  nodes.paperList.addEventListener("click", (event) => {
+    const tab = event.target.closest(".abstract-tab");
+    if (tab) {
+      const panel = tab.closest(".abstract-panel");
+      panel.dataset.lang = tab.dataset.abstractLang;
+      for (const item of panel.querySelectorAll(".abstract-tab")) {
+        const active = item === tab;
+        item.classList.toggle("active", active);
+        item.setAttribute("aria-selected", String(active));
+      }
+      refreshAbstract(tab.closest(".paper-card"));
+      return;
+    }
+    const toggle = event.target.closest(".abstract-toggle");
+    if (toggle) {
+      const card = toggle.closest(".paper-card");
+      const body = card.querySelector(".abstract-body");
+      body.classList.toggle("is-expanded");
+      refreshAbstract(card);
+    }
+  });
+  let resizeTimer = 0;
+  window.addEventListener("resize", () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(refreshAllAbstracts, 150);
+  });
 }
 
 async function loadData() {
@@ -424,8 +505,10 @@ function updateUpdatedAt(message = "") {
   const data = activeData();
   const stats = data.stats || {};
   const mode = stats.collection_mode === "incremental" ? "增量" : "初始化";
-  const kind = state.filters.collection === "conference" ? "顶刊精选" : "每日新论文";
-  nodes.updatedAt.textContent = `${kind} · 更新于 ${formatDate(data.generated_at_iso)} · ${mode} · ${stats.llm_enabled ? "LLM" : "基础"}`;
+  const kind = state.filters.collection === "conference" ? "顶刊精选" : "arXiv 新论文";
+  const weekly = Number(stats.weekly_new_count || 0);
+  const fresh = weekly ? ` · 本周新增 ${weekly} 篇` : "";
+  nodes.updatedAt.textContent = `${kind} · 更新于 ${formatDate(data.generated_at_iso)}${fresh} · ${mode} · ${stats.llm_enabled ? "LLM" : "基础"}`;
 }
 
 function resolveRepoLinks() {

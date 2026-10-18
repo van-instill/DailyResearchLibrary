@@ -4,7 +4,8 @@ on:
   push:
     branches: [main]
   schedule:
-    - cron: "0 22 * * *"
+    # 每周五 09:00（北京时间）= 周五 01:00 UTC
+    - cron: "0 1 * * 5"
   workflow_dispatch:
     inputs:
       lookback_days:
@@ -56,24 +57,42 @@ jobs:
             paper-data-
 
       - name: Hydrate cached paper data
+        env:
+          REPO: ${{ github.repository }}
         run: |
           mkdir -p web/data
-          if [ -f .paper-cache/papers.json ]; then
-            cp .paper-cache/papers.json web/data/papers.json
-          fi
-          if [ -f .paper-cache/conference_papers.json ]; then
-            cp .paper-cache/conference_papers.json web/data/conference_papers.json
-          fi
+          # 缓存是每周才被访问一次，GitHub 会在 7 天未使用时清理掉；
+          # 所以缓存没命中时，退一步从线上已经部署的站点把上一期数据取回来，
+          # 否则一旦缓存被清，"不和之前的重复"就失效了。
+          SITE="https://${REPO%%/*}.github.io/${REPO##*/}"
+          fetch_live() {
+            local name="$1"
+            if [ -s ".paper-cache/$name" ]; then
+              cp ".paper-cache/$name" "web/data/$name"
+              return 0
+            fi
+            if curl -sSf --max-time 60 -o "web/data/$name" "$SITE/data/$name"; then
+              mkdir -p .paper-cache
+              cp "web/data/$name" ".paper-cache/$name"
+              echo "Recovered $name from $SITE"
+            fi
+          }
+          fetch_live papers.json
+          fetch_live conference_papers.json
 
       - name: Collect arXiv papers
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           CONFIG_ISSUE_TITLE: Research Interests
-          LOOKBACK_DAYS: ${{ github.event_name == 'workflow_dispatch' && inputs.lookback_days || vars.LOOKBACK_DAYS || '1' }}
-          MAX_PER_TOPIC: ${{ vars.MAX_PER_TOPIC || '20' }}
-          MAX_SUMMARIES: ${{ vars.MAX_SUMMARIES || '60' }}
-          MAX_NEW_PAPERS: ${{ vars.MAX_NEW_PAPERS || '50' }}
-          MAX_STORED_PAPERS: ${{ vars.MAX_STORED_PAPERS || '50' }}
+          PAPER_WINDOW_START: ${{ vars.PAPER_WINDOW_START || '2018-01-01' }}
+          WEEKLY_NEW_PAPERS: ${{ vars.WEEKLY_NEW_PAPERS || '10' }}
+          DISPLAY_CAP: ${{ vars.DISPLAY_CAP || '20' }}
+          REENTRY_COOLDOWN_DAYS: ${{ vars.REENTRY_COOLDOWN_DAYS || '56' }}
+          LOOKBACK_DAYS: ${{ github.event_name == 'workflow_dispatch' && inputs.lookback_days || vars.LOOKBACK_DAYS || '7' }}
+          MAX_PER_TOPIC: ${{ vars.MAX_PER_TOPIC || '25' }}
+          MAX_SUMMARIES: ${{ vars.MAX_SUMMARIES || '40' }}
+          MAX_NEW_PAPERS: ${{ vars.MAX_NEW_PAPERS || '60' }}
+          MAX_STORED_PAPERS: ${{ vars.MAX_STORED_PAPERS || '20' }}
           MAX_DATA_BYTES: ${{ vars.MAX_DATA_BYTES || '8388608' }}
           RECENT_HISTORY_DAYS: ${{ vars.RECENT_HISTORY_DAYS || '45' }}
           PAPER_SOURCES: ${{ vars.PAPER_SOURCES || 'arxiv' }}
@@ -82,18 +101,21 @@ jobs:
           OPENALEX_EMAIL: ${{ vars.OPENALEX_EMAIL || vars.CONTACT_EMAIL || '' }}
           SOURCE_DELAY_SECONDS: ${{ vars.SOURCE_DELAY_SECONDS || '3' }}
           ARXIV_QUERY_MODE: ${{ vars.ARXIV_QUERY_MODE || 'category' }}
+          ARXIV_WINDOW_SEARCH: ${{ vars.ARXIV_WINDOW_SEARCH || 'true' }}
+          ARXIV_WINDOW_RESULTS: ${{ vars.ARXIV_WINDOW_RESULTS || '40' }}
           SCREEN_MODE: ${{ vars.SCREEN_MODE || 'llm' }}
           SCREEN_MIN_SCORE: ${{ vars.SCREEN_MIN_SCORE || '45' }}
           SCREEN_BATCH_SIZE: ${{ vars.SCREEN_BATCH_SIZE || '6' }}
           SCREEN_CONCURRENCY: ${{ vars.SCREEN_CONCURRENCY || '3' }}
           SCREEN_MAX_PAPERS: ${{ vars.SCREEN_MAX_PAPERS || '1200' }}
           SCREEN_CACHE_DAYS: ${{ vars.SCREEN_CACHE_DAYS || '60' }}
+          SCREEN_TRUNCATE_BY: ${{ vars.SCREEN_TRUNCATE_BY || 'score' }}
           SCREEN_CACHE_PATH: .paper-cache/screen_cache.json
           ARXIV_SORT_BY: ${{ vars.ARXIV_SORT_BY || 'lastUpdatedDate' }}
           ARXIV_EXPAND_CATEGORY_SEARCH: ${{ vars.ARXIV_EXPAND_CATEGORY_SEARCH || 'false' }}
           ARXIV_CATEGORY_MAX_RESULTS: ${{ vars.ARXIV_CATEGORY_MAX_RESULTS || vars.MAX_PER_TOPIC || '10' }}
           ARXIV_IN_TOPIC_DELAY_SECONDS: ${{ vars.ARXIV_IN_TOPIC_DELAY_SECONDS || '3' }}
-          MIN_DAILY_PAPERS: ${{ vars.MIN_DAILY_PAPERS || '8' }}
+          MIN_DAILY_PAPERS: ${{ vars.MIN_DAILY_PAPERS || '10' }}
           DAILY_BACKFILL_DAYS: ${{ vars.DAILY_BACKFILL_DAYS || '14' }}
           MIN_PAPER_SCORE: ${{ vars.MIN_PAPER_SCORE || '0.08' }}
           MIN_TITLE_ONLY_SCORE: ${{ vars.MIN_TITLE_ONLY_SCORE || '0.18' }}
@@ -119,22 +141,25 @@ jobs:
           CONTACT_EMAIL: ${{ vars.CONTACT_EMAIL || '' }}
           OPENALEX_EMAIL: ${{ vars.OPENALEX_EMAIL || vars.CONTACT_EMAIL || '' }}
           OPENALEX_API_KEY: ${{ secrets.OPENALEX_API_KEY }}
-          JOURNAL_LOOKBACK_DAYS: ${{ vars.JOURNAL_LOOKBACK_DAYS || '150' }}
-          JOURNAL_MAX_PAGES: ${{ vars.JOURNAL_MAX_PAGES || '2' }}
+          PAPER_WINDOW_START: ${{ vars.PAPER_WINDOW_START || '2018-01-01' }}
+          WEEKLY_NEW_PAPERS: ${{ vars.WEEKLY_NEW_PAPERS || '10' }}
+          DISPLAY_CAP: ${{ vars.DISPLAY_CAP || '20' }}
+          REENTRY_COOLDOWN_DAYS: ${{ vars.REENTRY_COOLDOWN_DAYS || '56' }}
           SCREEN_MODE: ${{ vars.SCREEN_MODE || 'llm' }}
           SCREEN_MIN_SCORE: ${{ vars.SCREEN_MIN_SCORE || '45' }}
           SCREEN_BATCH_SIZE: ${{ vars.SCREEN_BATCH_SIZE || '6' }}
           SCREEN_CONCURRENCY: ${{ vars.SCREEN_CONCURRENCY || '3' }}
           SCREEN_MAX_PAPERS: ${{ vars.SCREEN_MAX_PAPERS || '1200' }}
           SCREEN_CACHE_DAYS: ${{ vars.SCREEN_CACHE_DAYS || '60' }}
+          SCREEN_TRUNCATE_BY: ${{ vars.SCREEN_TRUNCATE_BY || 'score' }}
           SCREEN_CACHE_PATH: .paper-cache/screen_cache.json
-          JOURNAL_PER_VENUE_RESULTS: ${{ vars.JOURNAL_PER_VENUE_RESULTS || '25' }}
+          JOURNAL_PER_VENUE_RESULTS: ${{ vars.JOURNAL_PER_VENUE_RESULTS || '50' }}
+          JOURNAL_MAX_PAGES: ${{ vars.JOURNAL_MAX_PAGES || '1' }}
           JOURNAL_VENUE_DELAY_SECONDS: ${{ vars.JOURNAL_VENUE_DELAY_SECONDS || '1' }}
-          JOURNAL_RETENTION_DAYS: ${{ vars.JOURNAL_RETENTION_DAYS || '400' }}
           MAX_NEW_JOURNAL_PAPERS: ${{ vars.MAX_NEW_JOURNAL_PAPERS || '60' }}
-          MAX_JOURNAL_SUMMARIES: ${{ vars.MAX_JOURNAL_SUMMARIES || '150' }}
-          MAX_STORED_JOURNAL_PAPERS: ${{ vars.MAX_STORED_JOURNAL_PAPERS || '500' }}
-          MAX_JOURNAL_PER_VENUE: ${{ vars.MAX_JOURNAL_PER_VENUE || '4' }}
+          MAX_JOURNAL_SUMMARIES: ${{ vars.MAX_JOURNAL_SUMMARIES || '40' }}
+          MAX_STORED_JOURNAL_PAPERS: ${{ vars.MAX_STORED_JOURNAL_PAPERS || '20' }}
+          MAX_JOURNAL_PER_VENUE: ${{ vars.MAX_JOURNAL_PER_VENUE || '3' }}
           MIN_JOURNAL_SCORE: ${{ vars.MIN_JOURNAL_SCORE || '0.18' }}
           MAX_DATA_BYTES: ${{ vars.MAX_DATA_BYTES || '8388608' }}
           CLEAR_PAPER_CACHE: ${{ github.event_name == 'workflow_dispatch' && inputs.clear_cache || vars.CLEAR_PAPER_CACHE || 'false' }}
