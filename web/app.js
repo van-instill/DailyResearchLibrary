@@ -141,6 +141,9 @@ function levelOf(paper) {
   return String(paper.best_match?.level || "low").toLowerCase();
 }
 
+// 相关度徽标和筛选下拉都说中文，别一半 high 一半 高
+const LEVEL_LABELS = { high: "高", medium: "中", low: "低" };
+
 function textIncludes(paper, query) {
   if (!query) return true;
   const haystack = [
@@ -294,7 +297,7 @@ function renderPaper(paper) {
   const badge = node.querySelector(".match-badge");
   const level = levelOf(paper);
 
-  badge.textContent = `${level} ${scoreOf(paper).toFixed(2)}`;
+  badge.textContent = `${LEVEL_LABELS[level] || level} ${scoreOf(paper).toFixed(2)}`;
   badge.classList.add(level);
 
   setText(node, ".paper-date", `发布 ${formatDate(paper.published)}`);
