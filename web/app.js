@@ -190,6 +190,14 @@ function safeFilename(paper) {
   return `${title || "paper"}.pdf`;
 }
 
+function detailUrl(paper) {
+  const direct = String(paper.paper_url || "").trim();
+  if (direct) return direct;
+  const doi = String(paper.doi || "").trim();
+  if (!doi) return "";
+  return /^https?:\/\//i.test(doi) ? doi : `https://doi.org/${doi}`;
+}
+
 function renderPaper(paper) {
   const node = nodes.template.content.firstElementChild.cloneNode(true);
   const best = paper.best_match || {};
@@ -200,9 +208,19 @@ function renderPaper(paper) {
   badge.textContent = `${level} ${scoreOf(paper).toFixed(2)}`;
   badge.classList.add(level);
 
-  setText(node, ".paper-date", `发布 ${formatDate(paper.published)} · 收录 ${formatDate(collectionTime(paper))}`);
+  setText(node, ".paper-date", `发布 ${formatDate(paper.published)}`);
   setText(node, ".paper-source", paper.source || "paper");
-  setText(node, ".paper-title", paper.title);
+  setText(node, ".paper-collected", `收录 ${formatDate(collectionTime(paper))}`);
+
+  const titleUrl = detailUrl(paper);
+  const titleLink = node.querySelector(".paper-title-link");
+  titleLink.textContent = paper.title || "暂无";
+  if (titleUrl) {
+    titleLink.href = titleUrl;
+  } else {
+    titleLink.removeAttribute("href");
+    titleLink.classList.add("is-static");
+  }
   setText(node, ".paper-authors", (paper.authors || []).slice(0, 8).join(", "));
   setText(node, ".summary-problem", summary.problem);
   setText(node, ".summary-method", summary.method);
@@ -224,7 +242,7 @@ function renderPaper(paper) {
   const pdfLink = node.querySelector(".pdf-link");
   const downloadLink = node.querySelector(".download-link");
   const pdfUrl = paper.pdf_url || paper.paper_url || "#";
-  absLink.href = paper.paper_url || "#";
+  absLink.href = titleUrl || "#";
   pdfLink.href = pdfUrl;
   downloadLink.href = pdfUrl;
   downloadLink.setAttribute("download", safeFilename(paper));
