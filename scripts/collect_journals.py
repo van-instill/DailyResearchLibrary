@@ -43,7 +43,7 @@ from collect_papers import (  # noqa: E402
     trim_papers_for_storage,
     write_json,
 )
-from weekly_select import load_seen, select_weekly, window_start  # noqa: E402
+from weekly_select import load_seen, select_weekly, stored_period, window_start  # noqa: E402
 
 OPENALEX_SOURCES_URL = "https://api.openalex.org/sources"
 OPENALEX_WORKS_URL = "https://api.openalex.org/works"
@@ -929,6 +929,7 @@ def collect(
         candidates=scored,
         seen=load_seen(existing),
         now=now,
+        last_period=stored_period(existing),
     )
     merged = sort_papers(merged)
     # 先给没摘要的论文找 arXiv 预印本，再生成六段内容，否则这些论文只能出占位文案
@@ -968,6 +969,7 @@ def collect(
         "topics": [topic.__dict__ for topic in topics],
         "papers": merged,
         "seen": seen_state,
+        "weekly_period": selection_stats.get("weekly_period", ""),
         "stats": stats,
     }
     trimmed, storage_stats = trim_papers_for_storage(payload, max_stored_papers, max_data_bytes)

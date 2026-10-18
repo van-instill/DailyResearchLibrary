@@ -180,6 +180,44 @@ def weekly_new_total() -> int:
     return max(0, env_int("WEEKLY_NEW_TOTAL", DEFAULT_WEEKLY_NEW_TOTAL))
 
 
+def period_key(when: dt.datetime) -> str:
+    """把时间点折算成 ISO 周（如 ``2026-W42``），作为「本期」的标识。
+
+    必须按周算而不是按「上次运行」算：工作流是 push 触发的，改一次代码、
+    改一次文案都会重跑一遍。如果每跑一次就选一批新论文，一天推三次就会
+    多出三十篇，和「每周 10 篇」完全对不上。
+    """
+    iso = when.astimezone(dt.timezone.utc).isocalendar()
+    return f"{iso.year}-W{iso.week:02d}"
+
+
+def is_current_period(paper: dict[str, Any], period: str) -> bool:
+    """这篇论文是不是「本期入选的」。
+
+    看的是论文自己记的 `weekly_period`（它被选中的那一期），不是 first_seen_at。
+    用时间戳判断会把整个归档都标成新增——归档里早期论文的 first_seen_at
+    是迁移时统一回填的，几乎都落在同一周。
+    """
+    return str(paper.get("weekly_period") or "").strip() == period
+
+
+def stored_period(payload: dict[str, Any]) -> str:
+    """上一份数据里记录的期号。
+
+    写在顶层 `weekly_period`；早期版本只塞进了 `stats`，这里一并兼容，
+    否则升级后的第一次运行会认不出「这周已经选过」而多推一批。
+    """
+    if not isinstance(payload, dict):
+        return ""
+    direct = str(payload.get("weekly_period") or "").strip()
+    if direct:
+        return direct
+    stats = payload.get("stats")
+    if isinstance(stats, dict):
+        return str(stats.get("weekly_period") or "").strip()
+    return ""
+
+
 def collection_count() -> int:
     return max(1, env_int("RADAR_COLLECTION_COUNT", DEFAULT_COLLECTION_COUNT))
 
@@ -210,16 +248,25 @@ def select_weekly(
     *,
     weekly_new_count: int | None = None,
     cap: int | None = None,
-) -> tuple[list[dict[str, Any]], dict[str, str], dict[str, int]]:
+    last_period: str | None = None,
+) -> tuple[list[dict[str, Any]], dict[str, str], dict[str, Any]]:
     """选出本期列表：`本期新增 N 篇` + `全部历史归档`。
 
     与旧版（滚动窗口 20 个位置）的关键差别：**不再有"挤掉"**。
     归档只增不减，所以 new_batch 只是"给本期贴个新标签"，
     keepers 全部原样保留，`is_new_this_week` 用来在前端做区分。
 
+    `last_period` 是上一份数据里记录的期号。等于本期时说明这周已经选过稿了
+    （workflow 被 push 触发重跑、或手动点了一次），此时不再新增，
+    只把数据重新生成一遍。想强制加一批就显式传 `weekly_new_count`。
+
     返回 (本期论文列表, 更新后的账本, 统计信息)。
     """
+    period = period_key(now)
     new_quota = weekly_new() if weekly_new_count is None else max(0, weekly_new_count)
+    if weekly_new_count is None and last_period and last_period == period:
+        # 本周已经选过了：候选里没见过的论文留到下周，否则改一次代码就多推一批
+        new_quota = 0
     archive_cap = 0 if cap is None else max(0, cap)
 
     previous_list: list[dict[str, Any]] = []
@@ -268,6 +315,9 @@ def select_weekly(
         item.setdefault("first_seen_at", now.isoformat())
         item["last_seen_at"] = now.isoformat()
         item["retained_from_previous_run"] = False
+        # 记下它属于哪一期，后面「本期新增」标签就靠这个字段，
+        # 不依赖本次运行是否又选了它（同周重跑时 new_batch 是空的）
+        item["weekly_period"] = period
         item["is_new_this_week"] = True
         selected.append(item)
 
@@ -276,7 +326,9 @@ def select_weekly(
         item = dict(paper)
         item.setdefault("first_seen_at", item.get("last_seen_at") or now.isoformat())
         item["retained_from_previous_run"] = True
-        item["is_new_this_week"] = any(key in new_keys for key in paper_keys(paper))
+        item["is_new_this_week"] = is_current_period(item, period) or any(
+            key in new_keys for key in paper_keys(paper)
+        )
         selected.append(item)
         kept += 1
 
@@ -298,6 +350,7 @@ def select_weekly(
         selected = ordered[:archive_cap]
 
     stats = {
+        "weekly_period": period,
         "weekly_new_count": len(new_batch),
         "weekly_new_quota": new_quota,
         "weekly_new_total": weekly_new_total(),

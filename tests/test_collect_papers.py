@@ -14,6 +14,7 @@ from scripts.collect_papers import (
     cached_conference_years,
     collect,
     collection_cutoff,
+    compact_for_storage,
     conference_abstract_sources,
     default_conference_years,
     enrich_conference_paper_from_arxiv,
@@ -803,6 +804,142 @@ class RetentionTest(unittest.TestCase):
         self.assertEqual(payload["stats"]["daily_candidate_paper_count"], 1)
         self.assertEqual(payload["stats"]["daily_backfill_added_count"], 1)
         self.assertTrue(payload["papers"][0]["backfilled_from_recent_arxiv"])
+
+
+class LatexifyTest(unittest.TestCase):
+    """数字和英文术语要进数学模式，普通英文单词不能进。"""
+
+    def test_numbers_become_math(self):
+        from scripts.latexify import latexify_text
+
+        self.assertEqual(latexify_text("显著性水平 5%，参数 0.42"), r"显著性水平 $5\%$，参数 $0.42$")
+        self.assertEqual(latexify_text("共 3,120 个交易日"), r"共 $3{,}120$ 个交易日")
+        self.assertEqual(latexify_text("下跌 −3.5%"), r"下跌 $-3.5\%$")
+
+    def test_abbreviations_use_text_mode(self):
+        from scripts.latexify import latexify_text
+
+        self.assertEqual(latexify_text("HAR 模型"), r"$\text{HAR}$ 模型")
+        self.assertEqual(latexify_text("GARCH(1,1) 模型"), r"$\text{GARCH(1,1)}$ 模型")
+        self.assertEqual(latexify_text("DiD 与 VaR"), r"$\text{DiD}$ 与 $\text{VaR}$")
+        self.assertEqual(latexify_text("多元分数布朗运动 mfBm"), r"多元分数布朗运动 $\text{mfBm}$")
+
+    def test_plain_english_words_untouched(self):
+        from scripts.latexify import latexify_text
+
+        # 普通单词进数学模式会变斜体，中文句子里夹一串斜体不好读
+        for text in ("使用 high-frequency 数据", "The Hurst 指数", "arXiv 上的论文"):
+            self.assertEqual(latexify_text(text), text)
+
+    def test_existing_math_is_preserved(self):
+        from scripts.latexify import latexify_text
+
+        self.assertEqual(latexify_text(r"条件方差 $\sigma_t^2$ 为"), r"条件方差 $\sigma_t^2$ 为")
+        # 模型误把术语写成 $HAR$，要纠成正体，否则渲染成 H·A·R 相乘
+        self.assertEqual(latexify_text("$HAR$ 模型"), r"$\text{HAR}$ 模型")
+        self.assertEqual(latexify_text(r"$\alpha+\beta$"), r"$\alpha+\beta$")
+
+    def test_idempotent_and_unbalanced_dollar(self):
+        from scripts.latexify import latexify_text
+
+        once = latexify_text("HAR 模型在 2018–2024 年提升 12%")
+        self.assertEqual(latexify_text(once), once)
+        # 未闭合的 $ 整段放行，不能把半句话当公式拆掉
+        broken = "价格是 $100 左右，HAR 模型"
+        self.assertEqual(latexify_text(broken), broken)
+
+    def test_compact_for_storage_applies_latexify(self):
+        paper_payload = {
+            "id": "openalex:W1",
+            "summary": "Abstract: We study HAR models.",
+            "chinese_summary": {"problem": "研究 HAR 模型的预测能力", "evidence": "We study"},
+            "best_match": {"score": 0.5, "llm_reason": "匹配 HAR 模型"},
+            "matches": [{"score": 0.5}],
+        }
+        stored = compact_for_storage(paper_payload)
+        self.assertEqual(stored["chinese_summary"]["problem"], r"研究 $\text{HAR}$ 模型的预测能力")
+        self.assertEqual(stored["best_match"]["llm_reason"], r"匹配 $\text{HAR}$ 模型")
+        # evidence 是英文原句，必须保持原样，否则引用校验会对不上
+        self.assertEqual(stored["chinese_summary"]["evidence"], "We study")
+        # 英文摘要不能被 latexify 污染
+        self.assertEqual(stored["summary"], "We study HAR models.")
+
+
+class WeeklyPeriodTest(unittest.TestCase):
+    """同一周内重复运行（push 触发）不能反复新增论文。"""
+
+    @staticmethod
+    def candidate(index: int) -> dict:
+        return {
+            "id": f"openalex:W{index}",
+            "doi": f"https://doi.org/10.1/{index}",
+            "title": f"A study of tail risk number {index}",
+            "published": "2024-01-01T00:00:00+00:00",
+            "best_match": {"score": 0.9 - index / 1000},
+        }
+
+    def test_same_week_runs_only_add_once(self):
+        from scripts import weekly_select as ws
+
+        with mock.patch.dict(os.environ, {"WEEKLY_NEW_TOTAL": "10", "RADAR_COLLECTION_COUNT": "2"}):
+            wednesday = dt.datetime(2026, 10, 14, 1, 0, tzinfo=dt.timezone.utc)
+            previous, seen, stats = ws.select_weekly(
+                [], [self.candidate(i) for i in range(8)], {}, wednesday, last_period=""
+            )
+            self.assertEqual(stats["weekly_new_count"], 5)
+            period = stats["weekly_period"]
+
+            # 同周再跑两次（push 触发），一篇都不能多
+            for offset in (1, 2):
+                previous, seen, stats = ws.select_weekly(
+                    previous,
+                    [self.candidate(100 + offset + i) for i in range(5)],
+                    seen,
+                    wednesday + dt.timedelta(days=offset),
+                    last_period=period,
+                )
+                self.assertEqual(stats["weekly_new_count"], 0)
+                self.assertEqual(len(previous), 5)
+                # 「本期新增」标签必须还在
+                self.assertEqual(sum(1 for item in previous if item["is_new_this_week"]), 5)
+
+    def test_next_week_adds_and_drops_old_labels(self):
+        from scripts import weekly_select as ws
+
+        with mock.patch.dict(os.environ, {"WEEKLY_NEW_TOTAL": "10", "RADAR_COLLECTION_COUNT": "2"}):
+            wednesday = dt.datetime(2026, 10, 14, 1, 0, tzinfo=dt.timezone.utc)
+            previous, seen, stats = ws.select_weekly(
+                [], [self.candidate(i) for i in range(8)], {}, wednesday, last_period=""
+            )
+            previous, seen, stats = ws.select_weekly(
+                previous,
+                [self.candidate(200 + i) for i in range(15)],
+                seen,
+                wednesday + dt.timedelta(days=7),
+                last_period=stats["weekly_period"],
+            )
+            self.assertEqual(stats["weekly_new_count"], 5)
+            self.assertEqual(len(previous), 10)
+            # 上周那 5 篇的标签要自动摘掉
+            self.assertEqual(sum(1 for item in previous if item["is_new_this_week"]), 5)
+
+    def test_explicit_quota_forces_extra_batch(self):
+        from scripts import weekly_select as ws
+
+        with mock.patch.dict(os.environ, {"WEEKLY_NEW_TOTAL": "10", "RADAR_COLLECTION_COUNT": "2"}):
+            wednesday = dt.datetime(2026, 10, 14, 1, 0, tzinfo=dt.timezone.utc)
+            previous, seen, stats = ws.select_weekly(
+                [], [self.candidate(i) for i in range(8)], {}, wednesday, last_period=""
+            )
+            _, _, stats = ws.select_weekly(
+                previous,
+                [self.candidate(300 + i) for i in range(10)],
+                seen,
+                wednesday,
+                weekly_new_count=3,
+                last_period=stats["weekly_period"],
+            )
+            self.assertEqual(stats["weekly_new_count"], 3)
 
 
 if __name__ == "__main__":

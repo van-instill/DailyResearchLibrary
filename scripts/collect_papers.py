@@ -24,7 +24,7 @@ from typing import Any
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from weekly_select import in_window, load_seen, select_weekly  # noqa: E402
+from weekly_select import in_window, load_seen, select_weekly, stored_period  # noqa: E402
 from latexify import latexify_summary, latexify_text  # noqa: E402
 
 
@@ -2438,12 +2438,14 @@ def collect(
         candidates=daily_recent_papers,
         seen=load_seen(existing_payload),
         now=now,
+        last_period=stored_period(existing_payload),
     )
     conference_merged_papers, conference_seen, conference_retention_stats = select_weekly(
         previous=[p for p in (existing_conference_payload.get("papers") or []) if isinstance(p, dict)],
         candidates=conference_recent_papers,
         seen=load_seen(existing_conference_payload),
         now=now,
+        last_period=stored_period(existing_conference_payload),
     )
     daily_merged_papers.sort(key=lambda p: (p["best_match"]["score"], paper_activity_datetime(p)), reverse=True)
     conference_merged_papers.sort(key=lambda p: (p["best_match"]["score"], paper_activity_datetime(p)), reverse=True)
@@ -2556,6 +2558,7 @@ def collect(
         "topics": [topic.__dict__ for topic in topics],
         "papers": daily_merged_papers,
         "seen": daily_seen,
+        "weekly_period": daily_retention_stats.get("weekly_period", ""),
         "stats": {
             **base_stats,
             "paper_count": len(daily_merged_papers),
@@ -2579,6 +2582,7 @@ def collect(
         "topics": [topic.__dict__ for topic in topics],
         "papers": conference_merged_papers,
         "seen": conference_seen,
+        "weekly_period": conference_retention_stats.get("weekly_period", ""),
         "stats": {
             **base_stats,
             "paper_count": len(conference_merged_papers),
