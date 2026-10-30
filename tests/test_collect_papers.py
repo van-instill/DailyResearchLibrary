@@ -941,6 +941,57 @@ class WeeklyPeriodTest(unittest.TestCase):
             )
             self.assertEqual(stats["weekly_new_count"], 3)
 
+    def test_same_week_empty_run_allows_backfill(self):
+        # 某周采集失败「空跑」：last_period 已推进到本期，但本期一篇都没选上。
+        # 此时同周重跑应允许补选（last_period_had_new=False），否则这一周永久缺稿。
+        from scripts import weekly_select as ws
+
+        with mock.patch.dict(os.environ, {"WEEKLY_NEW_TOTAL": "10", "RADAR_COLLECTION_COUNT": "2"}):
+            wednesday = dt.datetime(2026, 10, 14, 1, 0, tzinfo=dt.timezone.utc)
+            # 第一次运行：候选为空 → 空跑，weekly_period 仍是本期，但 0 篇新增
+            previous, seen, stats = ws.select_weekly(
+                [], [], {}, wednesday, last_period=""
+            )
+            self.assertEqual(stats["weekly_new_count"], 0)
+            period = stats["weekly_period"]
+
+            # 采集恢复后同周重跑：last_period == 本期，但 last_period_had_new=False，
+            # 必须允许补选 5 篇
+            previous, seen, stats = ws.select_weekly(
+                previous,
+                [self.candidate(500 + i) for i in range(10)],
+                seen,
+                wednesday + dt.timedelta(days=1),
+                last_period=period,
+                last_period_had_new=False,
+            )
+            self.assertEqual(stats["weekly_new_count"], 5)
+            self.assertEqual(len(previous), 5)
+            self.assertEqual(sum(1 for item in previous if item["is_new_this_week"]), 5)
+
+    def test_same_week_real_run_does_not_backfill(self):
+        # 对照组：本周正常选过稿（last_period_had_new=True），同周重跑仍不新增
+        from scripts import weekly_select as ws
+
+        with mock.patch.dict(os.environ, {"WEEKLY_NEW_TOTAL": "10", "RADAR_COLLECTION_COUNT": "2"}):
+            wednesday = dt.datetime(2026, 10, 14, 1, 0, tzinfo=dt.timezone.utc)
+            previous, seen, stats = ws.select_weekly(
+                [], [self.candidate(i) for i in range(8)], {}, wednesday, last_period=""
+            )
+            self.assertEqual(stats["weekly_new_count"], 5)
+            period = stats["weekly_period"]
+
+            previous, seen, stats = ws.select_weekly(
+                previous,
+                [self.candidate(600 + i) for i in range(10)],
+                seen,
+                wednesday + dt.timedelta(days=1),
+                last_period=period,
+                last_period_had_new=True,
+            )
+            self.assertEqual(stats["weekly_new_count"], 0)
+            self.assertEqual(len(previous), 5)
+
 
 if __name__ == "__main__":
     unittest.main()

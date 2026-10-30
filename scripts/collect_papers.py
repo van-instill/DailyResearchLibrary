@@ -24,7 +24,7 @@ from typing import Any
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from weekly_select import in_window, load_seen, select_weekly, stored_period  # noqa: E402
+from weekly_select import is_current_period, in_window, load_seen, period_key, select_weekly, stored_period  # noqa: E402
 from latexify import latexify_summary, latexify_text  # noqa: E402
 
 
@@ -2448,19 +2448,28 @@ def collect(
     )
     daily_recent_papers = [paper for paper in recent_papers if paper.get("source_type") != "conference"]
     conference_recent_papers = [paper for paper in recent_papers if paper.get("source_type") == "conference"]
+    # 上一期若因采集失败而"空跑"（本期一篇都没选上），本期应允许补选，
+    # 否则那条流水线这一周会永远缺稿。判断依据：上一份数据里本期是否真有新增。
+    _daily_prev = [p for p in (existing_payload.get("papers") or []) if isinstance(p, dict)]
+    _conf_prev = [p for p in (existing_conference_payload.get("papers") or []) if isinstance(p, dict)]
+    _period = period_key(now)
+    daily_last_had_new = any(is_current_period(p, _period) for p in _daily_prev)
+    conf_last_had_new = any(is_current_period(p, _period) for p in _conf_prev)
     daily_merged_papers, daily_seen, daily_retention_stats = select_weekly(
-        previous=[p for p in (existing_payload.get("papers") or []) if isinstance(p, dict)],
+        previous=_daily_prev,
         candidates=daily_recent_papers,
         seen=load_seen(existing_payload),
         now=now,
         last_period=stored_period(existing_payload),
+        last_period_had_new=daily_last_had_new,
     )
     conference_merged_papers, conference_seen, conference_retention_stats = select_weekly(
-        previous=[p for p in (existing_conference_payload.get("papers") or []) if isinstance(p, dict)],
+        previous=_conf_prev,
         candidates=conference_recent_papers,
         seen=load_seen(existing_conference_payload),
         now=now,
         last_period=stored_period(existing_conference_payload),
+        last_period_had_new=conf_last_had_new,
     )
     daily_merged_papers.sort(key=lambda p: (p["best_match"]["score"], paper_activity_datetime(p)), reverse=True)
     conference_merged_papers.sort(key=lambda p: (p["best_match"]["score"], paper_activity_datetime(p)), reverse=True)
