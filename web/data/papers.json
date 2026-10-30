@@ -1,6 +1,6 @@
 {
-  "generated_at": "Fri, 30 Oct 2026 06:39:51 +0000",
-  "generated_at_iso": "2026-10-30T06:39:51.312216+00:00",
+  "generated_at": "Sun, 18 Oct 2026 13:31:08 +0000",
+  "generated_at_iso": "2026-10-18T13:31:08.519562+00:00",
   "config_source": "file",
   "data_kind": "daily",
   "topics": [
@@ -837,7 +837,7 @@
       "first_seen_at": "2026-10-18T11:39:51.749426+00:00",
       "last_seen_at": "2026-10-18T11:39:51.749426+00:00",
       "retained_from_previous_run": true,
-      "is_new_this_week": false,
+      "is_new_this_week": true,
       "chinese_summary": {
         "problem": "局部投影（$\\text{LPs}$）在实证宏观经济学中被广泛用于估计对政策干预的脉冲响应，但摘要指出它们在许多方面仍是黑箱：往往不清楚是何种机制或哪些历史事件驱动了某个具体估计。",
         "method": "作者提出一种新的分解，将 $\\text{LP}$ 估计拆解为历史事件贡献之和，即在每个时间戳上是权重与响应变量实现值的乘积。在最小二乘情形下，摘要说明这些权重有两种解释：其一为净化并标准化后的冲击，其二为被投影的政策干预与样本中过去干预之间的接近度得分；第二种解释自然推广到机器学习方法，其中许多方法给出的脉冲响应虽在预测变量上非线性，但仍通过基于接近度的权重对过去结果进行线性加总。",
@@ -904,7 +904,7 @@
       "first_seen_at": "2026-10-18T11:39:51.749426+00:00",
       "last_seen_at": "2026-10-18T11:39:51.749426+00:00",
       "retained_from_previous_run": true,
-      "is_new_this_week": false,
+      "is_new_this_week": true,
       "chinese_summary": {
         "problem": "双重差分（$\\text{DiD}$）与合成控制（$\\text{SC}$）都是面板数据因果推断中广泛使用的方法，各有不同的优势与局限；论文要提出一种整合两者优势的短面板因果推断方法。",
         "method": "论文提出一种新的短面板因果推断方法，在平行趋势或组别层面 $\\text{SC}$ 条件这两个非嵌套假设中的任一成立下，给出处理组平均处理效应（$\\text{ATT}$）的双重稳健识别策略。基于该识别结果，论文建立估计 $\\text{ATT}$ 的统一半参数框架；识别稳健矩函数在平行趋势假设下满足 Neyman 正交性，但在 $\\text{SC}$ 假设下不满足，因此两种识别策略的渐近方差不同。论文还提出乘子自助法（multiplier bootstrap），在任一假设下一致地近似渐近分布，并将方法扩展到重复截面数据与交错处理设计。",
@@ -972,7 +972,7 @@
       "first_seen_at": "2026-10-18T11:39:51.749426+00:00",
       "last_seen_at": "2026-10-18T11:39:51.749426+00:00",
       "retained_from_previous_run": true,
-      "is_new_this_week": false,
+      "is_new_this_week": true,
       "chinese_summary": {
         "problem": "论文要解决的问题是：高频数据包含被称为市场微观结构噪声（$\\text{MN}$）的观测误差，而本文要在 $\\text{MN}$ 相依（即自相关且与收益率相关）的情形下处理已实现波动率（$\\text{RV}$）的分解问题。",
         "method": "本文假设存在如 Hansen and Lunde[$2006$] 所报告的相依 $\\text{MN}$，即该噪声自相关并与收益率相关；在此基础上扩展 Nagakura and Watanabe[$2015$] 提出的、将 $\\text{RV}$ 分解为真实波动率与 $\\text{MN}$ 影响的状态空间模型；并通过模拟和实际数据对模型进行比较。",
@@ -1041,7 +1041,7 @@
       "first_seen_at": "2026-10-18T11:39:51.749426+00:00",
       "last_seen_at": "2026-10-18T11:39:51.749426+00:00",
       "retained_from_previous_run": true,
-      "is_new_this_week": false,
+      "is_new_this_week": true,
       "chinese_summary": {
         "problem": "在金融风险管理中，$\\text{VaR}$ 估计潜在组合损失但无法反映某一阈值之外的损失；$\\text{ES}$ 通过给出此类超出损失的條件期望弥补这一局限，是更好的尾部风险度量。然而 $\\text{ES}$ 本身不可诱导，不能通过最小化某个评分函数来估计，尽管其与 $\\text{VaR}$ 的联合可诱导性允许联合估计。",
         "method": "基于 $\\text{ES}$ 与 $\\text{VaR}$ 的联合可诱导性，提出条件自回归预期损失（$\\text{CAESar}$）模型，灵活处理动态模式与异方差性，且不对价格收益做分布假设。$\\text{CAESar}$ 系数的优化分三步：通过 $\\text{CAViaR}$ 回归拟合 $\\text{VaR}$ 分量；将 $\\text{ES}$ 表述为自回归过程；在确保单调性约束以避免分位数交叉的条件下联合估计 $\\text{VaR}$ 与 $\\text{ES}$ 系数。",
@@ -1110,7 +1110,7 @@
       "first_seen_at": "2026-10-18T11:39:51.749426+00:00",
       "last_seen_at": "2026-10-18T11:39:51.749426+00:00",
       "retained_from_previous_run": true,
-      "is_new_this_week": false,
+      "is_new_this_week": true,
       "chinese_summary": {
         "problem": "计量经济学与机器学习社区分别发展的随机方法与神经网络方法在金融波动率预测中长期各自演进、相互交流很少，本文试图弥合这一差距。",
         "method": "本文建立 $\\text{GARCH}$ 族模型与其对应神经网络模型之间的等价关系；基于该等价关系提出 $\\text{GARCH}$-$\\text{NN}$ 方法，将 $\\text{GARCH}$ 模型的神经网络对应物作为组件整合进已有神经网络架构，从而把 $\\text{GARCH}$ 模型中固有的波动率典型事实注入神经网络；并开发 $\\text{GARCH}$-$\\text{LSTM}$ 模型来展示 $\\text{GARCH}$-$\\text{NN}$ 方法的能力。",
@@ -1122,327 +1122,6 @@
         "v": 4
       },
       "weekly_period": "2026-W42"
-    },
-    {
-      "id": "2111.10784v1",
-      "source": "arXiv",
-      "title": "Why Synthetic Control estimators are biased and what to do about it: Introducing Relaxed and Penalized Synthetic Controls",
-      "authors": [
-        "Oscar Engelbrektson"
-      ],
-      "summary": "This paper extends the literature on the theoretical properties of synthetic controls to the case of non-linear generative models, showing that the synthetic control estimator is generally biased in such settings. I derive a lower bound for the bias, showing that the only component of it that is affected by the choice of synthetic control is the weighted sum of pairwise differences between the treated unit and the untreated units in the synthetic control. To address this bias, I propose a novel synthetic control estimator that allows for a constant difference of the synthetic control to the treated unit in the pre-treatment period, and that penalizes the pairwise discrepancies. Allowing for a constant offset makes the model more flexible, thus creating a larger set of potential synthetic controls, and the penalization term allows for the selection of the potential solution that will minimize bias. I study the properties of this estimator and propose a data-driven process for parameterizing the penalization term.",
-      "published": "2021-11-21T10:27:29Z",
-      "updated": "2021-11-21T10:27:29Z",
-      "paper_url": "http://arxiv.org/abs/2111.10784v1",
-      "pdf_url": "https://arxiv.org/pdf/2111.10784v1",
-      "categories": [
-        "econ.EM",
-        "stat.ME"
-      ],
-      "seed_topic": "timeseries_causal",
-      "from_window_search": true,
-      "matches": [
-        {
-          "topic_id": "timeseries_causal",
-          "topic_name": "时间序列与因果识别",
-          "score": 0.9,
-          "level": "high",
-          "reason": "AI 判定：合成控制估计量偏差与改进，核心正是合成控制方法；关键词命中：synthetic control",
-          "keyword_hits": [
-            "synthetic control"
-          ],
-          "mechanical_score": 0.394,
-          "llm_score": 90.0,
-          "llm_source": "cache"
-        }
-      ],
-      "best_match": {
-        "topic_id": "timeseries_causal",
-        "topic_name": "时间序列与因果识别",
-        "score": 0.9,
-        "level": "high",
-        "reason": "$\\text{AI}$ 判定：合成控制估计量偏差与改进，核心正是合成控制方法；关键词命中：synthetic control",
-        "keyword_hits": [
-          "synthetic control"
-        ],
-        "mechanical_score": 0.394,
-        "llm_score": 90.0,
-        "llm_source": "cache"
-      },
-      "first_seen_at": "2026-10-23T05:36:00.476706+00:00",
-      "last_seen_at": "2026-10-23T05:36:00.476706+00:00",
-      "retained_from_previous_run": true,
-      "weekly_period": "2026-W43",
-      "is_new_this_week": false,
-      "chinese_summary": {
-        "problem": "论文要解决的问题是：在非线性生成模型下，合成控制估计量是否有偏，以及若有偏应如何应对。",
-        "method": "论文将合成控制理论性质的研究扩展到非线性生成模型的情形，推导了偏差的下界。论文提出一种新的合成控制估计量，允许处理前时期合成控制与处理单元之间存在常数差异，并对成对差异进行惩罚。论文研究了该估计量的性质，并提出一个数据驱动的过程来参数化惩罚项。",
-        "innovation": "论文将合成控制的理论性质分析扩展到非线性生成模型；推导出偏差下界，并指出偏差中受合成控制选择影响的唯一成分是处理单元与合成控制中未处理单元之间成对差异的加权和；提出允许常数偏移并对成对差异施加惩罚的新合成控制估计量，且给出数据驱动的惩罚项参数化过程。",
-        "conclusion": "论文表明，在非线性生成模型下合成控制估计量通常是有偏的；偏差中受合成控制选择影响的唯一成分是处理单元与合成控制中未处理单元之间成对差异的加权和。",
-        "abstract_zh": "本文将关于合成控制理论性质的文献扩展到非线性生成模型的情形，表明合成控制估计量在此类设定下通常是有偏的。我推导了偏差的一个下界，表明其中受合成控制选择影响的唯一成分是处理单元与合成控制中未处理单元之间成对差异的加权和。为解决这一偏差，我提出一种新的合成控制估计量，该估计量允许在预处理时期合成控制与处理单元之间存在常数差异，并对成对差异进行惩罚。允许常数偏移使模型更加灵活，从而产生更大的潜在合成控制集合，而惩罚项允许选择将使偏差最小化的潜在解。我研究了该估计量的性质，并提出一个数据驱动的过程来参数化惩罚项。",
-        "evidence": "This paper extends the literature on the theoretical properties of synthetic controls to the case of non-linear generative models, showing that the synthetic control estimator is generally biased in such settings.",
-        "why_relevant": "直接研究合成控制估计量的偏差与改进，属于合成控制方法核心议题。",
-        "v": 4,
-        "model": "",
-        "at": "2026-10-18T12:08:37+00:00"
-      }
-    },
-    {
-      "id": "2610.31537v1",
-      "source": "arXiv",
-      "title": "Causal inference in staggered adoption panels: The correct comparison set depends on your intervention",
-      "authors": [
-        "Ian Lundberg",
-        "Yaling Xu"
-      ],
-      "summary": "A powerful data structure for causal inference is staggered adoption: many units are observed over many time periods, during which some units adopt an irreversible treatment at various time points while others remain untreated. Popular methods that apply in this setting include difference in difference, fixed effects, matching, and synthetic control. All of these methods compare the future outcomes of treatment adopters and non-adopters to answer the question: for units who adopt treatment, what outcomes would have been realized if they had remained untreated? We show that this question actually hides two very different causal questions of interest. The first is what would have happened under a momentary intervention to prevent treatment at its factual adoption time. The second is what would have happened to a treated unit under a longitudinal ban preventing treatment at all periods until outcome measurement. We show how to answer each question under conditionally ignorable treatment adoption or under parallel trends. We highlight that common methods cannot answer the second question because this question requires a time-varying comparison set with time-varying weights.",
-      "published": "2026-10-22T16:46:04Z",
-      "updated": "2026-10-22T16:46:04Z",
-      "paper_url": "http://arxiv.org/abs/2610.31537v1",
-      "pdf_url": "https://arxiv.org/pdf/2610.31537v1",
-      "categories": [
-        "stat.AP",
-        "econ.EM"
-      ],
-      "seed_topic": "volatility_highfreq",
-      "matches": [
-        {
-          "topic_id": "timeseries_causal",
-          "topic_name": "时间序列与因果识别",
-          "score": 0.88,
-          "level": "high",
-          "reason": "AI 判定：交错采纳面板中DID、合成控制比较集与因果估计目标的理论辨析；关键词命中：synthetic control",
-          "keyword_hits": [
-            "synthetic control"
-          ],
-          "mechanical_score": 0.332,
-          "llm_score": 88.0,
-          "llm_source": "llm",
-          "llm_reason": "直接辨析交错采纳面板中DID与合成控制的比较集与因果估计目标。"
-        }
-      ],
-      "best_match": {
-        "topic_id": "timeseries_causal",
-        "topic_name": "时间序列与因果识别",
-        "score": 0.88,
-        "level": "high",
-        "reason": "$\\text{AI}$ 判定：交错采纳面板中$\\text{DID}$、合成控制比较集与因果估计目标的理论辨析；关键词命中：synthetic control",
-        "keyword_hits": [
-          "synthetic control"
-        ],
-        "mechanical_score": 0.332,
-        "llm_score": 88.0,
-        "llm_source": "llm",
-        "llm_reason": "直接辨析交错采纳面板中$\\text{DID}$与合成控制的比较集与因果估计目标。"
-      },
-      "first_seen_at": "2026-10-23T05:36:00.476706+00:00",
-      "last_seen_at": "2026-10-23T05:36:00.476706+00:00",
-      "retained_from_previous_run": true,
-      "weekly_period": "2026-W43",
-      "is_new_this_week": false,
-      "chinese_summary": {
-        "problem": "在交错采纳（staggered adoption）面板中，双重差分、固定效应、匹配与合成控制等方法都通过比较采纳处理者与未采纳者的未来结果来回答「若这些单位未受处理，结果会如何」，但摘要指出这一问题实际上隐藏了两个非常不同的因果问题。",
-        "method": "论文区分两个因果问题：其一是在事实采纳时点施加瞬时干预以阻止处理的后果；其二是在纵向禁令下阻止所有时期直至结果测量时的后果。论文展示如何在条件可忽略的处理采纳或平行趋势假设下分别回答这两个问题。",
-        "innovation": "论文指出常用方法无法回答第二个问题，因为该问题需要一个具有时变权重的时变比较集；并给出在两个识别假设下分别回答两个因果问题的做法。",
-        "conclusion": "摘要明确主张：常用方法无法回答第二个问题，因为该问题需要一个具有时变权重的时变比较集；两个问题可分别在条件可忽略的处理采纳或平行趋势下回答。",
-        "abstract_zh": "一个用于因果推断的强大数据结构是交错采纳：许多单位在多个时期被观测，在此期间一些单位在不同时点采纳一种不可逆处理，而其他单位保持未处理。适用于这一情形的流行方法包括双重差分、固定效应、匹配和合成控制。所有这些方法都比较处理采纳者与未采纳者的未来结果，以回答这个问题：对于采纳处理的单位，如果它们保持未处理，本会实现什么结果？我们表明，这个问题实际上隐藏了两个非常不同的、令人感兴趣的因果问题。第一个是在事实采纳时施加瞬时干预以阻止处理的后果。第二个是在纵向禁令下阻止所有时期直至结果测量时，一个受处理单位本会发生的后果。我们展示如何在条件可忽略的处理采纳下或在平行趋势下回答每个问题。我们强调，常用方法无法回答第二个问题，因为该问题需要一个具有时变权重的时变比较集。",
-        "evidence": "We highlight that common methods cannot answer the second question because this question requires a time-varying comparison set with time-varying weights.",
-        "why_relevant": "直接辨析交错采纳面板中$\\text{DID}$与合成控制的比较集与因果估计目标。",
-        "v": 4
-      }
-    },
-    {
-      "id": "2609.17170v2",
-      "source": "arXiv",
-      "title": "Causal Inference under Dynamic Selection and Latent Heterogeneity",
-      "authors": [
-        "Weisheng Zhang"
-      ],
-      "summary": "I study dynamic treatment effects in panel data under staggered adoption when treatment timing depends jointly on unobserved time-invariant heterogeneity and time-varying pretreatment covariates, including lagged outcomes. Untreated potential outcomes follow a nonparametric dynamic panel model that allows flexible interactions between time-varying covariates and latent heterogeneity. I use pretreatment outcome histories to find individuals with similar time-invariant latent factors, and the key requirement is that these histories are sufficiently informative about those latent factors. I develop an identification strategy for the dynamic average treatment effect on the treated (ATT) and propose kernel-based doubly robust estimators for the dynamic ATT. I further combine double cross-fitting with undersmoothing and show that, under suitable regularity conditions, the proposed estimators are root-n consistent, asymptotically normal, and asymptotically unbiased. The simulation study demonstrates that the proposed method provides accurate inference across a wide range of data-generating processes. I illustrate the method with an application to the U.S. family planning program studied by Bailey (2012) and reestimate its effect on fertility rates.",
-      "published": "2026-09-15T13:33:19Z",
-      "updated": "2026-10-21T20:29:22Z",
-      "paper_url": "http://arxiv.org/abs/2609.17170v2",
-      "pdf_url": "https://arxiv.org/pdf/2609.17170v2",
-      "categories": [
-        "econ.EM"
-      ],
-      "seed_topic": "volatility_highfreq",
-      "matches": [
-        {
-          "topic_id": "timeseries_causal",
-          "topic_name": "时间序列与因果识别",
-          "score": 0.88,
-          "level": "high",
-          "reason": "AI 判定：交错采纳下动态处理效应与面板识别，双重稳健估计，正属因果识别核心",
-          "keyword_hits": [],
-          "mechanical_score": 0.208,
-          "llm_score": 88.0,
-          "llm_source": "llm",
-          "llm_reason": "交错采纳下的动态处理效应与面板识别，属因果识别核心方法。"
-        }
-      ],
-      "best_match": {
-        "topic_id": "timeseries_causal",
-        "topic_name": "时间序列与因果识别",
-        "score": 0.88,
-        "level": "high",
-        "reason": "$\\text{AI}$ 判定：交错采纳下动态处理效应与面板识别，双重稳健估计，正属因果识别核心",
-        "keyword_hits": [],
-        "mechanical_score": 0.208,
-        "llm_score": 88.0,
-        "llm_source": "llm",
-        "llm_reason": "交错采纳下的动态处理效应与面板识别，属因果识别核心方法。"
-      },
-      "first_seen_at": "2026-10-23T05:36:00.476706+00:00",
-      "last_seen_at": "2026-10-23T05:36:00.476706+00:00",
-      "retained_from_previous_run": true,
-      "weekly_period": "2026-W43",
-      "is_new_this_week": false,
-      "chinese_summary": {
-        "problem": "论文研究面板数据在交错采纳（staggered adoption）下的动态处理效应，其中处理时点同时依赖于不可观测的时不变异质性与时变预处理协变量（包括滞后结果）。",
-        "method": "未处理潜在结果服从非参数动态面板模型，允许时变协变量与潜在异质性之间存在灵活交互。作者利用预处理结果历史寻找具有相似时不变潜在因子的个体，其关键要求是这些历史对潜在因子具有充分信息性。作者为动态 $\\text{ATT}$ 建立识别策略，并提出基于核的双重稳健估计量，进一步将双重交叉拟合与 undersmoothing 结合。",
-        "innovation": "针对处理时点同时依赖不可观测时不变异质性与时变预处理协变量的交错采纳情形，提出动态 $\\text{ATT}$ 的识别策略；提出基于核的双重稳健估计量，并将双重交叉拟合与 undersmoothing 结合。",
-        "conclusion": "在适当的正则条件下，所提出的估计量是根号 $n$ 一致的、渐近正态的且渐近无偏的；模拟研究表明该方法在广泛的数据生成过程中提供准确的推断。",
-        "abstract_zh": "我研究面板数据在交错采纳下的动态处理效应，此时处理时点同时依赖于不可观测的时不变异质性和时变预处理协变量，包括滞后结果。未处理的潜在结果服从一个非参数动态面板模型，该模型允许时变协变量与潜在异质性之间的灵活交互。我利用预处理结果历史来寻找具有相似时不变潜在因子的个体，关键要求是这些历史对潜在因子具有充分的信息性。我为处理组的动态平均处理效应（$\\text{ATT}$）建立识别策略，并提出基于核的动态 $\\text{ATT}$ 双重稳健估计量。我进一步将双重交叉拟合与 undersmoothing 结合，并证明在适当的正则条件下，所提出的估计量是根号 $n$ 一致的、渐近正态的且渐近无偏的。模拟研究表明，所提出的方法在广泛的数据生成过程中提供准确的推断。我用一个应用来说明该方法，该应用针对 Bailey ($2012$) 研究的美国计划生育项目，并重新估计其对生育率的影响。",
-        "evidence": "I further combine double cross-fitting with undersmoothing and show that, under suitable regularity conditions, the proposed estimators are root-n consistent, asymptotically normal, and asymptotically unbiased.",
-        "why_relevant": "交错采纳下的动态处理效应与面板识别，属因果识别核心方法。",
-        "v": 4
-      }
-    },
-    {
-      "id": "2609.20264v1",
-      "source": "arXiv",
-      "title": "Risk-Set Transported Synthetic Control with Difference-in-Differences Adjustment under Staggered Treatment Adoption",
-      "authors": [
-        "Mojtaba Eslami"
-      ],
-      "summary": "In staggered treatment-adoption designs, later-treated units are valid controls for an earlier-treated cohort only until their own treatment begins, so the admissible donor set contracts with event time. Fixing the donor pool at the longest horizon discards temporarily eligible donors, whereas re-estimating synthetic-control weights independently at each horizon can make the counterfactual unstable as donor composition changes. We propose Risk-Set Transported Synthetic Control with Difference-in-Differences Adjustment (RT-SC-DiD). For each cohort and event-time horizon, the estimator fits weights on the currently untreated donors while shrinking them toward a transported reference that reallocates the weight of exiting donors to similar surviving donors. A DiD baseline correction removes persistent level differences. We characterize distortion from horizon-by-horizon reoptimization, derive the loading change induced by naive deletion and renormalization, and give a conditional recursive bound for error propagation under an explicitly assumed regularity condition on the transport map. We also introduce donor-support diagnostics and a donor-only placebo procedure for selecting the transport penalty. In an 80-replication pilot comparison and a separate 40-replication-per-value sensitivity analysis, intermediate transport regularization reduces average RMSE relative to independent horizon-specific estimation and strong anchoring. This evidence supports the method's bias-variance motivation but is not a proved guarantee. RT-SC-DiD is intended for settings where later-treated units provide useful short-horizon information and donor support contracts materially over time. Existing staggered synthetic-control and synthetic difference-in-differences methods do not, to our knowledge, explicitly regularize within-cohort weight sequences toward transported references as risk sets contract.",
-      "published": "2026-07-29T01:10:54Z",
-      "updated": "2026-07-29T01:10:54Z",
-      "paper_url": "http://arxiv.org/abs/2609.20264v1",
-      "pdf_url": "https://arxiv.org/pdf/2609.20264v1",
-      "categories": [
-        "stat.AP",
-        "cs.AI",
-        "econ.EM",
-        "q-fin.ST",
-        "stat.ME"
-      ],
-      "seed_topic": "timeseries_causal",
-      "from_window_search": true,
-      "matches": [
-        {
-          "topic_id": "timeseries_causal",
-          "topic_name": "时间序列与因果识别",
-          "score": 0.88,
-          "level": "high",
-          "reason": "AI 判定：合成控制与双重差分结合，处理交错采纳，属因果识别核心方法；关键词命中：difference-in-differences、synthetic control",
-          "keyword_hits": [
-            "difference-in-differences",
-            "synthetic control"
-          ],
-          "mechanical_score": 0.512,
-          "llm_score": 88.0,
-          "llm_source": "cache"
-        }
-      ],
-      "best_match": {
-        "topic_id": "timeseries_causal",
-        "topic_name": "时间序列与因果识别",
-        "score": 0.88,
-        "level": "high",
-        "reason": "$\\text{AI}$ 判定：合成控制与双重差分结合，处理交错采纳，属因果识别核心方法；关键词命中：difference-in-differences、synthetic control",
-        "keyword_hits": [
-          "difference-in-differences",
-          "synthetic control"
-        ],
-        "mechanical_score": 0.512,
-        "llm_score": 88.0,
-        "llm_source": "cache"
-      },
-      "first_seen_at": "2026-10-23T05:36:00.476706+00:00",
-      "last_seen_at": "2026-10-23T05:36:00.476706+00:00",
-      "retained_from_previous_run": true,
-      "weekly_period": "2026-W43",
-      "is_new_this_week": false,
-      "chinese_summary": {
-        "problem": "在交错处理采纳设计中，后处理单元仅在自身处理开始前是早处理队列的有效控制，因此可允许的供体集合随事件时间收缩；将供体池固定在最长horizon会丢弃暂时合格的供体，而在每个horizon独立重新估计合成控制权重会因供体构成变化而使反事实不稳定。",
-        "method": "提出 Risk-Set Transported Synthetic Control with Difference-in-Differences Adjustment ($\\text{RT}$-$\\text{SC}$-$\\text{DiD}$)。对每个队列和事件时间horizon，估计器在当前未处理供体上拟合权重，同时将其向一个transported reference收缩，该参考把退出供体的权重重新分配给相似的存活供体；并用$\\text{DiD}$基线校正去除持久水平差异。作者刻画了逐horizon重新优化带来的扭曲，推导了朴素删除与重新归一化引起的loading change，并在对transport map显式假设的正则条件下给出误差传播的条件递归界；还引入donor-support diagnostics和donor-only placebo procedure来选择transport penalty。",
-        "innovation": "针对风险集收缩下队列内权重序列，显式地向transported references正则化；刻画逐horizon重新优化的扭曲并推导朴素删除与重新归一化的loading change；给出误差传播的条件递归界，并提出donor-support diagnostics与donor-only placebo procedure用于选择transport penalty。",
-        "conclusion": "在$80$次重复的pilot比较和另一项每个取值$40$次重复的敏感性分析中，intermediate transport regularization相对于独立horizon特定估计和strong anchoring降低了平均$\\text{RMSE}$；该证据支持方法的偏差-方差动机，但不是已证明的保证。",
-        "abstract_zh": "在交错处理采纳设计中，后处理单元仅在自身处理开始前是早处理队列的有效控制，因此可允许的供体集合随事件时间收缩。将供体池固定在最长horizon会丢弃暂时合格的供体，而在每个horizon独立重新估计合成控制权重会因供体构成变化而使反事实不稳定。我们提出 Risk-Set Transported Synthetic Control with Difference-in-Differences Adjustment ($\\text{RT}$-$\\text{SC}$-$\\text{DiD}$)。对每个队列和事件时间horizon，估计器在当前未处理供体上拟合权重，同时将其向一个transported reference收缩，该参考把退出供体的权重重新分配给相似的存活供体。$\\text{DiD}$基线校正去除持久水平差异。我们刻画了逐horizon重新优化带来的扭曲，推导了朴素删除与重新归一化引起的loading change，并在对transport map显式假设的正则条件下给出误差传播的条件递归界。我们还引入donor-support diagnostics和donor-only placebo procedure来选择transport penalty。在$80$次重复的pilot比较和另一项每个取值$40$次重复的敏感性分析中，intermediate transport regularization相对于独立horizon特定估计和strong anchoring降低了平均$\\text{RMSE}$。该证据支持方法的偏差-方差动机，但不是已证明的保证。$\\text{RT}$-$\\text{SC}$-$\\text{DiD}$ intended for settings where later-treated units provide useful short-horizon information and donor support contracts materially over time。据我们所知，现有的交错合成控制和合成双重差分方法没有在风险集收缩时显式地将队列内权重序列向transported references正则化。",
-        "evidence": "In an 80-replication pilot comparison and a separate 40-replication-per-value sensitivity analysis, intermediate transport regularization reduces average RMSE relative to independent horizon-specific estimation and strong anchoring.",
-        "why_relevant": "合成控制与双重差分结合处理交错采纳，属因果识别核心方法。",
-        "v": 4,
-        "model": "",
-        "at": "2026-10-18T12:08:39+00:00"
-      }
-    },
-    {
-      "id": "2604.27035v1",
-      "source": "arXiv",
-      "title": "Doubly robust local projections difference-in-differences",
-      "authors": [
-        "Daniel de Abreu Pereira Uhr",
-        "Guilherme Valle Moura"
-      ],
-      "summary": "This paper develops a doubly robust extension of local-projections difference-in-differences (LP-DiD) for staggered absorbing treatments. The resulting estimator, DRLPDID, preserves the LP-DiD local-stack ATT target and is consistent when either the local untreated-outcome regression or the local treatment-probability model is correctly specified. It also delivers influence-function-based inference for post-treatment summaries and multiplier-bootstrap bands for dynamic paths. In Monte Carlo designs with covariate-driven selection, DRLPDID matches regression-adjusted LP-DiD under outcome-model alignment and clearly outperforms the IPT-only variant under propensity-score misspecification. In the no-fault-divorce application, DRLPDID tracks robust staggered-adoption estimators and is less negative than unadjusted LP-DiD.",
-      "published": "2026-04-29T16:10:04Z",
-      "updated": "2026-04-29T16:10:04Z",
-      "paper_url": "http://arxiv.org/abs/2604.27035v1",
-      "pdf_url": "https://arxiv.org/pdf/2604.27035v1",
-      "categories": [
-        "econ.EM"
-      ],
-      "seed_topic": "timeseries_causal",
-      "from_window_search": true,
-      "matches": [
-        {
-          "topic_id": "timeseries_causal",
-          "topic_name": "时间序列与因果识别",
-          "score": 0.88,
-          "level": "high",
-          "reason": "AI 判定：局部投影双重差分双重稳健估计，正属该方向核心识别方法；关键词命中：local projections、difference-in-differences",
-          "keyword_hits": [
-            "local projections",
-            "difference-in-differences"
-          ],
-          "mechanical_score": 0.346,
-          "llm_score": 88.0,
-          "llm_source": "cache"
-        }
-      ],
-      "best_match": {
-        "topic_id": "timeseries_causal",
-        "topic_name": "时间序列与因果识别",
-        "score": 0.88,
-        "level": "high",
-        "reason": "$\\text{AI}$ 判定：局部投影双重差分双重稳健估计，正属该方向核心识别方法；关键词命中：local projections、difference-in-differences",
-        "keyword_hits": [
-          "local projections",
-          "difference-in-differences"
-        ],
-        "mechanical_score": 0.346,
-        "llm_score": 88.0,
-        "llm_source": "cache"
-      },
-      "first_seen_at": "2026-10-23T05:36:00.476706+00:00",
-      "last_seen_at": "2026-10-23T05:36:00.476706+00:00",
-      "retained_from_previous_run": true,
-      "weekly_period": "2026-W43",
-      "is_new_this_week": false,
-      "chinese_summary": {
-        "problem": "论文针对交错吸收处理（staggered absorbing treatments）情形下的局部投影双重差分（$\\text{LP}$-$\\text{DiD}$），要给出一个双重稳健的扩展估计量。",
-        "method": "论文提出估计量 $\\text{DRLPDID}$，它保留 $\\text{LP}$-$\\text{DiD}$ 的 local-stack $\\text{ATT}$ 目标；当局部未处理结果回归或局部处理概率模型二者之一被正确设定时，该估计量一致。它还给出基于影响函数的后处理汇总推断，以及动态路径的 multiplier-bootstrap 带。",
-        "innovation": "论文将双重稳健性引入 $\\text{LP}$-$\\text{DiD}$，用于交错吸收处理；在保持 $\\text{LP}$-$\\text{DiD}$ 的 local-stack $\\text{ATT}$ 目标的同时，使估计量在局部未处理结果回归或局部处理概率模型任一正确设定下保持一致；并配套提供基于影响函数的后处理汇总推断与动态路径的 multiplier-bootstrap 带。",
-        "conclusion": "在存在协变量驱动选择（covariate-driven selection）的 Monte Carlo 设计中，$\\text{DRLPDID}$ 在结果模型对齐时与回归调整的 $\\text{LP}$-$\\text{DiD}$ 相当，在倾向得分误设定下明显优于仅用 $\\text{IPT}$ 的变体；在 no-fault-divorce 应用中，$\\text{DRLPDID}$ 与稳健的交错采纳估计量走势一致，且比未调整的 $\\text{LP}$-$\\text{DiD}$ 负得更少。",
-        "abstract_zh": "本文为交错吸收处理下的局部投影双重差分（$\\text{LP}$-$\\text{DiD}$）发展了一个双重稳健扩展。所得估计量 $\\text{DRLPDID}$ 保留了 $\\text{LP}$-$\\text{DiD}$ 的 local-stack $\\text{ATT}$ 目标，并在局部未处理结果回归或局部处理概率模型二者之一被正确设定时一致。它还给出基于影响函数的后处理汇总推断，以及动态路径的 multiplier-bootstrap 带。在存在协变量驱动选择的 Monte Carlo 设计中，$\\text{DRLPDID}$ 在结果模型对齐时与回归调整的 $\\text{LP}$-$\\text{DiD}$ 相当，在倾向得分误设定下明显优于仅用 $\\text{IPT}$ 的变体。在 no-fault-divorce 应用中，$\\text{DRLPDID}$ 与稳健的交错采纳估计量走势一致，且比未调整的 $\\text{LP}$-$\\text{DiD}$ 负得更少。",
-        "evidence": "In Monte Carlo designs with covariate-driven selection, DRLPDID matches regression-adjusted LP-DiD under outcome-model alignment and clearly outperforms the IPT-only variant under propensity-score misspecification.",
-        "why_relevant": "局部投影与双重差分结合并加双重稳健识别，正属时间序列因果识别核心方法。",
-        "v": 4,
-        "model": "",
-        "at": "2026-10-18T12:08:40+00:00"
-      }
     },
     {
       "id": "2610.14959v3",
@@ -2211,41 +1890,26 @@
     "2503.11375v3": "2026-10-18T11:39:51.749426+00:00",
     "2408.17187v1": "2026-10-18T11:39:51.749426+00:00",
     "2407.06619v2": "2026-10-18T11:39:51.749426+00:00",
-    "2402.06642v1": "2026-10-18T11:39:51.749426+00:00",
-    "id:2111.10784v1": "2026-10-23T05:36:00.476706+00:00",
-    "t:whysyntheticcontrolestimatorsarebiasedandwhattodoaboutitintroducingrelaxedandpenalizedsyntheticcontrols": "2026-10-23T05:36:00.476706+00:00",
-    "id:2610.31537v1": "2026-10-23T05:36:00.476706+00:00",
-    "t:causalinferenceinstaggeredadoptionpanelsthecorrectcomparisonsetdependsonyourintervention": "2026-10-23T05:36:00.476706+00:00",
-    "id:2609.17170v2": "2026-10-23T05:36:00.476706+00:00",
-    "t:causalinferenceunderdynamicselectionandlatentheterogeneity": "2026-10-23T05:36:00.476706+00:00",
-    "id:2609.20264v1": "2026-10-23T05:36:00.476706+00:00",
-    "t:risksettransportedsyntheticcontrolwithdifferenceindifferencesadjustmentunderstaggeredtreatmentadoption": "2026-10-23T05:36:00.476706+00:00",
-    "id:2604.27035v1": "2026-10-23T05:36:00.476706+00:00",
-    "t:doublyrobustlocalprojectionsdifferenceindifferences": "2026-10-23T05:36:00.476706+00:00",
-    "2111.10784v1": "2026-10-23T05:36:00.476706+00:00",
-    "2610.31537v1": "2026-10-23T05:36:00.476706+00:00",
-    "2609.17170v2": "2026-10-23T05:36:00.476706+00:00",
-    "2609.20264v1": "2026-10-23T05:36:00.476706+00:00",
-    "2604.27035v1": "2026-10-23T05:36:00.476706+00:00"
+    "2402.06642v1": "2026-10-18T11:39:51.749426+00:00"
   },
-  "weekly_period": "2026-W44",
+  "weekly_period": "2026-W42",
   "stats": {
-    "candidate_paper_count": 0,
-    "daily_candidate_paper_count": 0,
+    "candidate_paper_count": 212,
+    "daily_candidate_paper_count": 212,
     "conference_candidate_paper_count": 0,
-    "raw_daily_candidate_count": 0,
-    "window_search_candidate_count": 0,
-    "daily_outside_cutoff_count": 0,
+    "raw_daily_candidate_count": 289,
+    "window_search_candidate_count": 200,
+    "daily_outside_cutoff_count": 11,
     "daily_backfill_days": 14,
-    "daily_backfill_candidate_count": 0,
+    "daily_backfill_candidate_count": 6,
     "daily_backfill_added_count": 0,
     "screen_mode": "llm",
-    "screened_paper_count": 0,
+    "screened_paper_count": 289,
     "min_daily_papers": 10,
-    "filtered_low_relevance_count": 0,
+    "filtered_low_relevance_count": 71,
     "days": 7,
-    "collection_mode": "incremental",
-    "collection_cutoff_iso": "2026-10-23T05:36:00.476706+00:00",
+    "collection_mode": "lookback",
+    "collection_cutoff_iso": "2026-10-11T13:31:08.519562+00:00",
     "max_per_topic": 25,
     "max_new_papers": 60,
     "max_new_conference_papers": 50,
@@ -2263,16 +1927,15 @@
     "source_stats": {
       "arXiv": {
         "type": "arxiv",
-        "successful_fetches": 0,
-        "failed_fetches": 5,
-        "last_error": "HTTP Error 406: Not Acceptable"
+        "successful_fetches": 5,
+        "failed_fetches": 0
       }
     },
     "llm_enabled": true,
     "llm_concurrency": 2,
     "recent_history_days": 45,
-    "successful_fetches": 0,
-    "failed_fetches": 5,
+    "successful_fetches": 5,
+    "failed_fetches": 0,
     "successful_conference_fetches": 0,
     "failed_conference_fetches": 0,
     "skipped_cached_conference_years": 0,
@@ -2291,22 +1954,22 @@
     "conference_arxiv_enrichment_succeeded": 0,
     "conference_arxiv_enrichment_skipped": 0,
     "conference_arxiv_enrichment_last_error": "",
-    "paper_count": 30,
-    "new_paper_count": 0,
-    "weekly_period": "2026-W44",
-    "period_new_count": 0,
+    "paper_count": 25,
+    "new_paper_count": 60,
+    "weekly_period": "2026-W42",
+    "period_new_count": 5,
     "weekly_new_count": 0,
-    "weekly_new_quota": 5,
+    "weekly_new_quota": 0,
     "weekly_new_total": 10,
-    "kept_previous_count": 30,
-    "display_count": 30,
-    "archive_count": 30,
+    "kept_previous_count": 25,
+    "display_count": 25,
+    "archive_count": 25,
     "dropped_from_display_count": 0,
-    "duplicate_candidate_count": 0,
-    "fresh_candidate_count": 0,
+    "duplicate_candidate_count": 16,
+    "fresh_candidate_count": 44,
     "max_stored_papers": 1200,
     "max_data_bytes": 12582912,
-    "data_bytes": 202690,
+    "data_bytes": 171132,
     "storage_trimmed_count": 0,
     "storage_trimmed_by_level": {
       "high": 0,
