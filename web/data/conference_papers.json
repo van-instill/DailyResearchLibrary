@@ -1,6 +1,6 @@
 {
- "generated_at": "Fri, 30 Oct 2026 14:41:25 +0000",
- "generated_at_iso": "2026-10-30T14:41:25.363681+00:00",
+ "generated_at": "Fri, 30 Oct 2026 14:50:36 +0000",
+ "generated_at_iso": "2026-10-30T14:50:36.580250+00:00",
  "config_source": "file",
  "data_kind": "journal",
  "topics": [
@@ -185,6 +185,156 @@
     "at": "2026-10-18T11:43:15+00:00"
    },
    "is_new_this_week": false,
+   "weekly_period": ""
+  },
+  {
+   "id": "openalex:W7134261019",
+   "title": "The Role of Price‐Volatility Cojumps in Volatility Forecasting",
+   "authors": [
+    "Kefu Liao"
+   ],
+   "summary": "This paper investigates whether simultaneous jumps in prices and volatility improve volatility forecasting. Using up‐to‐date high‐frequency S&P 500 and VIX data, we identify price‐volatility cojumps at the intraday granularity and construct upside, downside, and asymmetric measures. Embedding these into the Heterogeneous Autoregressive (HAR) model, we provide new empirical evidence that downside cojumps increase future volatility, upside cojumps reduce volatility. Out‐of‐sample analysis further shows that incorporating these impacts of cojumps significantly enhances HAR model forecasting performance. Moreover, our results reveal that recent price jumps become important predictors of volatility when accompanied by simultaneous volatility jumps, an effect not previously documented in the literature. Finally, we also document the economic interpretation, policy implications, and economic value of price‐volatility cojumps.",
+   "published": "2026-03-09T00:00:00+00:00",
+   "updated": "2026-03-09T00:00:00+00:00",
+   "categories": [
+    "金融学",
+    "Financial Risk and Volatility Modeling",
+    "Stochastic processes and financial applications"
+   ],
+   "paper_url": "https://doi.org/10.1002/fut.70091",
+   "pdf_url": "https://doi.org/10.1002/fut.70091",
+   "source": "Journal of Futures Markets",
+   "source_type": "conference",
+   "venue": "Journal of Futures Markets",
+   "venue_group": "金融学",
+   "doi": "https://doi.org/10.1002/fut.70091",
+   "conference": {
+    "id": "jfm",
+    "name": "Journal of Futures Markets",
+    "year": 2026
+   },
+   "matches": [
+    {
+     "topic_id": "volatility_highfreq",
+     "topic_name": "波动率建模与高频计量",
+     "score": 0.95,
+     "level": "high",
+     "reason": "AI 判定：研究价格-波动率共跳跃与HAR波动率预测，属高频波动率核心主题；关键词命中：volatility forecasting",
+     "keyword_hits": [
+      "volatility forecasting"
+     ],
+     "mechanical_score": 0.306,
+     "llm_score": 95.0,
+     "llm_source": "llm",
+     "llm_reason": "直接研究高频共跳跃与HAR波动率预测，契合波动率建模与高频计量方向。"
+    }
+   ],
+   "best_match": {
+    "topic_id": "volatility_highfreq",
+    "topic_name": "波动率建模与高频计量",
+    "score": 0.95,
+    "level": "high",
+    "reason": "$\\text{AI}$ 判定：研究价格-波动率共跳跃与$\\text{HAR}$波动率预测，属高频波动率核心主题；关键词命中：volatility forecasting",
+    "keyword_hits": [
+     "volatility forecasting"
+    ],
+    "mechanical_score": 0.306,
+    "llm_score": 95.0,
+    "llm_source": "llm",
+    "llm_reason": "直接研究高频共跳跃与$\\text{HAR}$波动率预测，契合波动率建模与高频计量方向。"
+   },
+   "first_seen_at": "2026-10-18T11:05:14.375893+00:00",
+   "last_seen_at": "2026-10-18T11:05:14.375893+00:00",
+   "retained_from_previous_run": true,
+   "is_new_this_week": false,
+   "chinese_summary": {
+    "problem": "论文考察价格与波动率的同步跳跃是否能改进波动率预测。",
+    "method": "使用最新的高频 S&P $500$ 与 $\\text{VIX}$ 数据，在日内粒度上识别价格‐波动率共跳跃，并构造上行、下行与非对称测度。将这些测度嵌入 Heterogeneous Autoregressive ($\\text{HAR}$) 模型进行预测分析。",
+    "innovation": "在日内粒度上识别价格‐波动率共跳跃并构造上行、下行与非对称测度；将这些共跳跃影响嵌入 $\\text{HAR}$ 模型；发现近期价格跳跃在伴随同步波动率跳跃时成为波动率的重要预测变量，该效应此前文献未记录。",
+    "conclusion": "下行共跳跃提高未来波动率，上行共跳跃降低波动率；纳入这些共跳跃影响的 $\\text{HAR}$ 模型样本外预测表现显著提升。",
+    "abstract_zh": "本文考察价格与波动率的同步跳跃是否改进波动率预测。使用最新的高频 S&P $500$ 与 $\\text{VIX}$ 数据，我们在日内粒度上识别价格‐波动率共跳跃，并构造上行、下行与非对称测度。将这些测度嵌入 Heterogeneous Autoregressive ($\\text{HAR}$) 模型，我们提供新的经验证据表明下行共跳跃提高未来波动率，上行共跳跃降低波动率。样本外分析进一步显示，纳入这些共跳跃影响显著提升 $\\text{HAR}$ 模型的预测表现。此外，我们的结果揭示，近期价格跳跃在伴随同步波动率跳跃时成为波动率的重要预测变量，这一效应此前文献未记录。最后，我们还记录了价格‐波动率共跳跃的经济解释、政策含义与经济价值。",
+    "evidence": "Out‐of‐sample analysis further shows that incorporating these impacts of cojumps significantly enhances HAR model forecasting performance.",
+    "why_relevant": "直接研究高频共跳跃与$\\text{HAR}$波动率预测，契合波动率建模与高频计量方向。",
+    "v": 4,
+    "model": "",
+    "at": "2026-10-18T11:43:16+00:00"
+   },
+   "weekly_period": ""
+  },
+  {
+   "id": "openalex:W4414200383",
+   "title": "What the Night Tells the Day: Forecasting Realized Volatility in Chinese Commodity Markets",
+   "authors": [
+    "Xinyue He",
+    "Ziran Li",
+    "Zhepeng Hu"
+   ],
+   "summary": "This study examines the role of after‐hours information in forecasting Chinese commodity futures volatility, exploiting the introduction of a night session that potentially facilitates real‐time responses to information originating in overseas markets. We generate timely forecasts on future daytime realized volatility for 10 commodity futures, using heterogeneous autoregressive (HAR) models augmented with and without past nights' realized variance measures. Our results reveal significant predictive power, both in‐sample and out‐of‐sample, associated with the night‐time realized volatility across markets. In contrast, the inclusion of daily squared overnight returns as an alternative measure provides limited improvements. Furthermore, we document the empirical merit of separately considering the jump and continuous components in the night‐session price variation, with its superior performance being most pronounced over long forecasting horizons. The improved statistical accuracy is also shown to be economically meaningful for a risk‐averse investor and remains robust to changes in the identification, estimation, and forecasting procedure.",
+   "published": "2025-09-15T00:00:00+00:00",
+   "updated": "2025-09-15T00:00:00+00:00",
+   "categories": [
+    "金融学",
+    "Financial Risk and Volatility Modeling",
+    "Market Dynamics and Volatility"
+   ],
+   "paper_url": "https://doi.org/10.1002/fut.70042",
+   "pdf_url": "https://doi.org/10.1002/fut.70042",
+   "source": "Journal of Futures Markets",
+   "source_type": "conference",
+   "venue": "Journal of Futures Markets",
+   "venue_group": "金融学",
+   "doi": "https://doi.org/10.1002/fut.70042",
+   "conference": {
+    "id": "jfm",
+    "name": "Journal of Futures Markets",
+    "year": 2025
+   },
+   "matches": [
+    {
+     "topic_id": "volatility_highfreq",
+     "topic_name": "波动率建模与高频计量",
+     "score": 0.95,
+     "level": "high",
+     "reason": "AI 判定：HAR模型预测已实现波动率并分解跳跃连续成分，核心匹配；关键词命中：realized volatility",
+     "keyword_hits": [
+      "realized volatility"
+     ],
+     "mechanical_score": 0.275,
+     "llm_score": 95.0,
+     "llm_source": "llm",
+     "llm_reason": "直接研究已实现波动率的 HAR 建模、跳跃与连续成分分解及波动率预测。"
+    }
+   ],
+   "best_match": {
+    "topic_id": "volatility_highfreq",
+    "topic_name": "波动率建模与高频计量",
+    "score": 0.95,
+    "level": "high",
+    "reason": "$\\text{AI}$ 判定：$\\text{HAR}$模型预测已实现波动率并分解跳跃连续成分，核心匹配；关键词命中：realized volatility",
+    "keyword_hits": [
+     "realized volatility"
+    ],
+    "mechanical_score": 0.275,
+    "llm_score": 95.0,
+    "llm_source": "llm",
+    "llm_reason": "直接研究已实现波动率的 $\\text{HAR}$ 建模、跳跃与连续成分分解及波动率预测。"
+   },
+   "first_seen_at": "2026-10-18T11:05:14.375893+00:00",
+   "last_seen_at": "2026-10-18T11:05:14.375893+00:00",
+   "retained_from_previous_run": true,
+   "is_new_this_week": false,
+   "chinese_summary": {
+    "problem": "论文考察盘后信息在中国商品期货波动率预测中的作用，并利用夜盘交易的推出，该交易可能有助于对源自海外市场的信息作出实时反应。",
+    "method": "论文对 $10$ 个商品期货生成对未来日间已实现波动率的及时预测，使用异质自回归（$\\text{HAR}$）模型，并在模型中分别加入和不加入过去夜盘的已实现方差度量。论文还单独考虑夜盘价格变动中的跳跃成分与连续成分。",
+    "innovation": "论文利用夜盘交易的推出来考察盘后信息在预测中国商品期货波动率中的作用；论文将夜盘已实现波动率纳入 $\\text{HAR}$ 模型进行预测；论文分别考虑夜盘价格变动中的跳跃成分与连续成分。",
+    "conclusion": "夜盘已实现波动率在各市场都具有显著的样本内和样本外预测能力；相比之下，将日度隔夜收益平方作为替代度量带来的改进有限；单独考虑夜盘价格变动中的跳跃成分与连续成分具有实证价值，其优越表现在长预测期限上最为明显。",
+    "abstract_zh": "本研究考察盘后信息在预测中国商品期货波动率中的作用，利用夜盘交易的推出，该交易可能有助于对源自海外市场的信息作出实时反应。我们使用分别加入和不加入过去夜盘已实现方差度量的异质自回归（$\\text{HAR}$）模型，对 $10$ 个商品期货的未来日间已实现波动率生成及时预测。我们的结果揭示，夜盘已实现波动率在各市场都具有显著的样本内和样本外预测能力。相比之下，将日度隔夜收益平方作为替代度量纳入模型带来的改进有限。此外，我们记录了分别考虑夜盘价格变动中的跳跃成分与连续成分的实证价值，其优越表现在长预测期限上最为明显。改进的统计精度对风险厌恶型投资者也具有经济意义，并且对识别、估计和预测程序的变化保持稳健。",
+    "evidence": "Our results reveal significant predictive power, both in‐sample and out‐of‐sample, associated with the night‐time realized volatility across markets.",
+    "why_relevant": "直接研究已实现波动率的 $\\text{HAR}$ 建模、跳跃与连续成分分解及波动率预测。",
+    "v": 4,
+    "model": "",
+    "at": "2026-10-18T11:43:18+00:00"
+   },
    "weekly_period": ""
   },
   {
@@ -788,6 +938,84 @@
     "at": "2026-10-18T11:43:30+00:00"
    },
    "weekly_period": ""
+  },
+  {
+   "id": "openalex:W3083265813",
+   "title": "Forecasting realized volatility: The role of implied volatility, leverage effect, overnight returns, and volatility of realized volatility",
+   "authors": [
+    "Dimos S. Kambouroudis",
+    "David G. McMillan",
+    "Katerina Tsakou"
+   ],
+   "summary": "We forecast realized volatility extending the heterogeneous autoregressive model (HAR) to include implied volatility (IV), the leverage effect, overnight returns, and the volatility of realized volatility. We analyze 10 international stock indices finding that, although a simple HAR model augmented with IV (HAR‐IV) is more accurate than any HAR model excluding it, all markets support further extensions of the HAR‐IV model. More accurate forecasts are found using overnight returns in all markets except the UK, the volatility of realized volatility in the US, and the leverage effect in five markets. A value‐at‐risk exercise supports the economic significance of our findings.",
+   "published": "2021-07-15T00:00:00+00:00",
+   "updated": "2021-07-15T00:00:00+00:00",
+   "categories": [
+    "金融学",
+    "Financial Risk and Volatility Modeling",
+    "Forecasting Techniques and Applications"
+   ],
+   "paper_url": "https://doi.org/10.1002/fut.22241",
+   "pdf_url": "https://onlinelibrary.wiley.com/doi/pdfdirect/10.1002/fut.22241",
+   "source": "Journal of Futures Markets",
+   "source_type": "conference",
+   "venue": "Journal of Futures Markets",
+   "venue_group": "金融学",
+   "doi": "https://doi.org/10.1002/fut.22241",
+   "conference": {
+    "id": "jfm",
+    "name": "Journal of Futures Markets",
+    "year": 2021
+   },
+   "matches": [
+    {
+     "topic_id": "volatility_highfreq",
+     "topic_name": "波动率建模与高频计量",
+     "score": 0.95,
+     "level": "high",
+     "reason": "AI 判定：扩展HAR模型预测已实现波动率，纳入隐含波动率与杠杆效应，核心属波动率预测。；关键词命中：realized volatility、implied volatility",
+     "keyword_hits": [
+      "realized volatility",
+      "implied volatility"
+     ],
+     "mechanical_score": 0.425,
+     "llm_score": 95.0,
+     "llm_source": "cache",
+     "llm_reason": "该文扩展 HAR 模型预测已实现波动率，并纳入隐含波动率与杠杆效应，直接契合波动率建模与预测方向。"
+    }
+   ],
+   "best_match": {
+    "topic_id": "volatility_highfreq",
+    "topic_name": "波动率建模与高频计量",
+    "score": 0.95,
+    "level": "high",
+    "reason": "$\\text{AI}$ 判定：扩展$\\text{HAR}$模型预测已实现波动率，纳入隐含波动率与杠杆效应，核心属波动率预测。；关键词命中：realized volatility、implied volatility",
+    "keyword_hits": [
+     "realized volatility",
+     "implied volatility"
+    ],
+    "mechanical_score": 0.425,
+    "llm_score": 95.0,
+    "llm_source": "cache",
+    "llm_reason": "该文扩展 $\\text{HAR}$ 模型预测已实现波动率，并纳入隐含波动率与杠杆效应，直接契合波动率建模与预测方向。"
+   },
+   "first_seen_at": "2026-10-18T11:41:54.573051+00:00",
+   "last_seen_at": "2026-10-18T11:41:54.573051+00:00",
+   "retained_from_previous_run": true,
+   "is_new_this_week": false,
+   "chinese_summary": {
+    "problem": "论文要解决的问题是：在预测已实现波动率时，如何把隐含波动率、杠杆效应、隔夜收益和已实现波动率的波动率纳入异质自回归（$\\text{HAR}$）模型。",
+    "method": "论文扩展了异质自回归模型（$\\text{HAR}$），在模型中纳入隐含波动率（$\\text{IV}$）、杠杆效应、隔夜收益以及已实现波动率的波动率。论文分析了 $10$ 个国际股票指数，并比较了仅加入 $\\text{IV}$ 的简单 $\\text{HAR}$ 模型（$\\text{HAR}$-$\\text{IV}$）与不含 $\\text{IV}$ 的 $\\text{HAR}$ 模型，以及 $\\text{HAR}$-$\\text{IV}$ 模型的进一步扩展。",
+    "innovation": "论文将隐含波动率、杠杆效应、隔夜收益和已实现波动率的波动率同时纳入 $\\text{HAR}$ 框架来预测已实现波动率；摘要指出，尽管仅加入 $\\text{IV}$ 的简单 $\\text{HAR}$ 模型（$\\text{HAR}$-$\\text{IV}$）比任何不含 $\\text{IV}$ 的 $\\text{HAR}$ 模型都更准确，但所有市场都支持对 $\\text{HAR}$-$\\text{IV}$ 模型作进一步扩展。",
+    "conclusion": "摘要指出，仅加入 $\\text{IV}$ 的简单 $\\text{HAR}$ 模型（$\\text{HAR}$-$\\text{IV}$）比任何不含 $\\text{IV}$ 的 $\\text{HAR}$ 模型都更准确，且所有市场都支持对 $\\text{HAR}$-$\\text{IV}$ 模型作进一步扩展；除英国外，所有市场使用隔夜收益都能得到更准确的预测，美国使用已实现波动率的波动率能得到更准确的预测，五个市场使用杠杆效应能得到更准确的预测；一项在险价值（$\\text{VaR}$）检验支持这些发现的经济显著性。",
+    "abstract_zh": "我们扩展异质自回归模型（$\\text{HAR}$），纳入隐含波动率（$\\text{IV}$）、杠杆效应、隔夜收益和已实现波动率的波动率，以此来预测已实现波动率。我们分析了 $10$ 个国际股票指数，发现尽管仅加入 $\\text{IV}$ 的简单 $\\text{HAR}$ 模型（$\\text{HAR}$-$\\text{IV}$）比任何不含 $\\text{IV}$ 的 $\\text{HAR}$ 模型都更准确，但所有市场都支持对 $\\text{HAR}$-$\\text{IV}$ 模型作进一步扩展。除英国外，所有市场使用隔夜收益都能得到更准确的预测，美国使用已实现波动率的波动率能得到更准确的预测，五个市场使用杠杆效应能得到更准确的预测。一项在险价值检验支持我们这些发现的经济显著性。",
+    "evidence": "We analyze 10 international stock indices finding that, although a simple HAR model augmented with IV (HAR‐IV) is more accurate than any HAR model excluding it, all markets support further extensions of the HAR‐IV model.",
+    "why_relevant": "该文扩展 $\\text{HAR}$ 模型预测已实现波动率，并纳入隐含波动率与杠杆效应，直接契合波动率建模与预测方向。",
+    "v": 4,
+    "model": "",
+    "at": "2026-10-18T11:43:31+00:00"
+   },
+   "weekly_period": "2026-W42"
   },
   {
    "id": "openalex:W3208587286",
@@ -1838,6 +2066,84 @@
    "weekly_period": ""
   },
   {
+   "id": "openalex:W7171406137",
+   "title": "The Role of Variance Risk Premium in Derivative Pricing: Modeling, Estimation and Impact",
+   "authors": [
+    "Marcos Escobar‐Anel",
+    "Lars Stentoft",
+    "Xize Ye"
+   ],
+   "summary": "This paper estimates a model where variance risk premiums (VRP) is not fully explained by equity risk premiums (ERP). This separation can be detected thanks to a new breed of GARCH models with enough innovations to disconnect returns from variances. This type of risk‐neutralization is compatible with continuous‐time settings. We document that volatility index (VI) term structures, VI futures, and equity options, could be highly sensitive to changes in VRP. When the model is jointly estimated a consistent and sizable VRP emerges; suggesting that joint estimation with VI futures has an edge based on total likelihood and numerical advantage.",
+   "published": "2026-07-26T00:00:00+00:00",
+   "updated": "2026-07-26T00:00:00+00:00",
+   "categories": [
+    "金融学",
+    "Financial Risk and Volatility Modeling",
+    "Stochastic processes and financial applications"
+   ],
+   "paper_url": "https://doi.org/10.1002/fut.70132",
+   "pdf_url": "https://doi.org/10.1002/fut.70132",
+   "source": "Journal of Futures Markets",
+   "source_type": "conference",
+   "venue": "Journal of Futures Markets",
+   "venue_group": "金融学",
+   "doi": "https://doi.org/10.1002/fut.70132",
+   "conference": {
+    "id": "jfm",
+    "name": "Journal of Futures Markets",
+    "year": 2026
+   },
+   "matches": [
+    {
+     "topic_id": "volatility_highfreq",
+     "topic_name": "波动率建模与高频计量",
+     "score": 0.9,
+     "level": "high",
+     "reason": "AI 判定：GARCH模型估计方差风险溢价并联系VI期限结构与期权定价；关键词命中：risk premium、term structure",
+     "keyword_hits": [
+      "risk premium",
+      "term structure"
+     ],
+     "mechanical_score": 0.519,
+     "llm_score": 90.0,
+     "llm_source": "cache",
+     "llm_reason": "涉及 GARCH 模型估计方差风险溢价，并联系 VI 期限结构与期权定价。"
+    }
+   ],
+   "best_match": {
+    "topic_id": "volatility_highfreq",
+    "topic_name": "波动率建模与高频计量",
+    "score": 0.9,
+    "level": "high",
+    "reason": "$\\text{AI}$ 判定：$\\text{GARCH}$模型估计方差风险溢价并联系$\\text{VI}$期限结构与期权定价；关键词命中：risk premium、term structure",
+    "keyword_hits": [
+     "risk premium",
+     "term structure"
+    ],
+    "mechanical_score": 0.519,
+    "llm_score": 90.0,
+    "llm_source": "cache",
+    "llm_reason": "涉及 $\\text{GARCH}$ 模型估计方差风险溢价，并联系 $\\text{VI}$ 期限结构与期权定价。"
+   },
+   "first_seen_at": "2026-10-18T04:51:02.123808+00:00",
+   "last_seen_at": "2026-10-18T11:05:14.375893+00:00",
+   "retained_from_previous_run": true,
+   "chinese_summary": {
+    "problem": "论文要解决的问题是：方差风险溢价（$\\text{VRP}$）并未被股权风险溢价（$\\text{ERP}$）完全解释，需要在一个模型中估计这种分离。",
+    "method": "论文使用一类新的 $\\text{GARCH}$ 模型进行估计，这类模型具有足够多的新息（innovations），从而将收益率与方差解耦。这种风险中性化（risk-neutralization）与连续时间设定相容。模型对波动率指数（$\\text{VI}$）期限结构、$\\text{VI}$ 期货和股票期权进行联合估计。",
+    "innovation": "摘要声称的贡献是：采用具有足够多新息、可将收益率与方差解耦的新一类 $\\text{GARCH}$ 模型，使 $\\text{VRP}$ 与 $\\text{ERP}$ 的分离得以被检测；该风险中性化方式与连续时间设定相容；并指出 $\\text{VI}$ 期限结构、$\\text{VI}$ 期货与股票期权可能对 $\\text{VRP}$ 变化高度敏感。",
+    "conclusion": "当模型被联合估计时，会出现一致且规模可观的 $\\text{VRP}$；这表明基于总似然和数值上的优势，与 $\\text{VI}$ 期货进行联合估计具有优势。",
+    "abstract_zh": "本文估计了一个模型，其中方差风险溢价（$\\text{VRP}$）并未被股权风险溢价（$\\text{ERP}$）完全解释。得益于一类具有足够多新息、可将收益率与方差解耦的新 $\\text{GARCH}$ 模型，这种分离可以被检测到。这种类型的风险中性化与连续时间设定相容。我们记录到，波动率指数（$\\text{VI}$）期限结构、$\\text{VI}$ 期货和股票期权可能对 $\\text{VRP}$ 的变化高度敏感。当模型被联合估计时，会出现一致且规模可观的 $\\text{VRP}$；这表明基于总似然和数值上的优势，与 $\\text{VI}$ 期货进行联合估计具有优势。",
+    "evidence": "When the model is jointly estimated a consistent and sizable VRP emerges; suggesting that joint estimation with VI futures has an edge based on total likelihood and numerical advantage.",
+    "why_relevant": "涉及 $\\text{GARCH}$ 模型估计方差风险溢价，并联系 $\\text{VI}$ 期限结构与期权定价。",
+    "v": 4,
+    "model": "",
+    "at": "2026-10-18T11:43:40+00:00"
+   },
+   "is_new_this_week": false,
+   "weekly_period": ""
+  },
+  {
    "id": "openalex:W4364320763",
    "title": "Can ChatGPT forecast stock price movements? Return predictability and large language models",
    "authors": [
@@ -2136,6 +2442,83 @@
     "abstract_zh": "本文研究允许厚尾、多成分波动率和非单调定价核的离散时间广义自回归条件异方差（$\\text{GARCH}$）与随机波动率（$\\text{SV}$）期权定价模型的弱收敛。我们引入一个一般仿射框架，该框架使得能够基于分布不变的参数收敛速率，同时推导高斯与逆高斯 $\\text{GARCH}$ 模型的新扩散极限。当限制为单成分设定时，我们的极限给出非退化双变量扩散，推广了仿射 $\\text{GARCH}$ 文献中的已有结果。通过采用替代参数收敛速率，我们进一步对两类仿射与非仿射离散时间 $\\text{SV}$ 模型的所有可能极限提供全面分类。具体而言，我们表明在离散时间与连续时间中流行的典型仿射模型类彼此并不类似。我们的理论结果得到一系列数值实验的支持，这些实验考察参数缩放假设与模型特征对欧式期权价格收敛的影响。总体而言，我们发现新的极限扩散产生的期权价格最接近按日频采样的离散时间对应物。",
     "evidence": "Overall, we find that the new limiting diffusions produce option prices that are closest to their discrete-time counterparts sampled at daily frequency.",
     "why_relevant": "直接研究$\\text{GARCH}$与随机波动率模型的连续时间极限及期权定价，契合波动率建模方向。",
+    "v": 4,
+    "model": "",
+    "at": "2026-10-18T11:43:47+00:00"
+   },
+   "is_new_this_week": false,
+   "weekly_period": ""
+  },
+  {
+   "id": "openalex:W7221441913",
+   "title": "Volatility Forecasting: A Fused Filter Algorithm",
+   "authors": [
+    "Haibin Xie",
+    "Junlin Pu",
+    "Dazhen Lan",
+    "Xinyu Wu"
+   ],
+   "summary": "This paper proposes a fused filter algorithm (FFA) for volatility forecasting. The FFA extracts latent volatility by solving a penalized optimization problem, a formulation related to the HP filter and Whittaker–Henderson smoothing. To investigate the empirical performance of the FFA, we apply it to 10 major stock indices and compare its performance, both in‐sample and out‐of‐sample, against different benchmarks. The results show that FFA significantly dominates the benchmark models across different loss functions and horizons, and this dominance mainly concentrates in normal and low‐volatility regimes. A volatility timing strategy is used to evaluate the economic value of the FFA, and the results also confirm its competitiveness in comparison with the benchmark models. In summary, the FFA provides a computationally efficient alternative tool for market volatility filtering and forecasting.",
+   "published": "2026-10-11T00:00:00+00:00",
+   "updated": "2026-10-11T00:00:00+00:00",
+   "categories": [
+    "金融学",
+    "Financial Risk and Volatility Modeling",
+    "Stock Market Forecasting Methods"
+   ],
+   "paper_url": "https://doi.org/10.1002/fut.70146",
+   "pdf_url": "https://onlinelibrary.wiley.com/doi/pdfdirect/10.1002/fut.70146",
+   "source": "Journal of Futures Markets",
+   "source_type": "conference",
+   "venue": "Journal of Futures Markets",
+   "venue_group": "金融学",
+   "doi": "https://doi.org/10.1002/fut.70146",
+   "conference": {
+    "id": "jfm",
+    "name": "Journal of Futures Markets",
+    "year": 2026
+   },
+   "matches": [
+    {
+     "topic_id": "volatility_highfreq",
+     "topic_name": "波动率建模与高频计量",
+     "score": 0.88,
+     "level": "high",
+     "reason": "AI 判定：提出波动率滤波预测算法，多指数样本外检验与波动率择时；关键词命中：volatility forecasting",
+     "keyword_hits": [
+      "volatility forecasting"
+     ],
+     "mechanical_score": 0.244,
+     "llm_score": 88.0,
+     "llm_source": "cache",
+     "llm_reason": "直接涉及波动率滤波与预测，并做多指数样本外检验，契合波动率建模与预测方向。"
+    }
+   ],
+   "best_match": {
+    "topic_id": "volatility_highfreq",
+    "topic_name": "波动率建模与高频计量",
+    "score": 0.88,
+    "level": "high",
+    "reason": "$\\text{AI}$ 判定：提出波动率滤波预测算法，多指数样本外检验与波动率择时；关键词命中：volatility forecasting",
+    "keyword_hits": [
+     "volatility forecasting"
+    ],
+    "mechanical_score": 0.244,
+    "llm_score": 88.0,
+    "llm_source": "cache",
+    "llm_reason": "直接涉及波动率滤波与预测，并做多指数样本外检验，契合波动率建模与预测方向。"
+   },
+   "first_seen_at": "2026-10-18T05:12:14.559673+00:00",
+   "last_seen_at": "2026-10-18T11:05:14.375893+00:00",
+   "retained_from_previous_run": true,
+   "chinese_summary": {
+    "problem": "论文要解决的问题是波动率预测，即提出一种用于波动率预测的融合滤波算法（$\\text{FFA}$）。",
+    "method": "$\\text{FFA}$ 通过求解一个惩罚优化问题来提取潜在波动率，该形式与 $\\text{HP}$ 滤波和 Whittaker–Henderson 平滑相关。作者将其应用于 $10$ 个主要股票指数，并在样本内和样本外与不同基准模型比较表现。",
+    "innovation": "摘要声称的贡献是提出融合滤波算法（$\\text{FFA}$），通过求解与 $\\text{HP}$ 滤波和 Whittaker–Henderson 平滑相关的惩罚优化问题来提取潜在波动率，并将其用于波动率预测。",
+    "conclusion": "结果显示 $\\text{FFA}$ 在不同损失函数和不同期限上显著优于基准模型，且这种优势主要集中在正常和低波动状态；波动率择时策略的结果也确认其相对基准模型具有竞争力。",
+    "abstract_zh": "本文提出一种用于波动率预测的融合滤波算法（$\\text{FFA}$）。$\\text{FFA}$ 通过求解一个惩罚优化问题来提取潜在波动率，该形式与 $\\text{HP}$ 滤波和 Whittaker–Henderson 平滑相关。为了考察 $\\text{FFA}$ 的实证表现，我们将其应用于 $10$ 个主要股票指数，并在样本内和样本外将其表现与不同基准进行比较。结果显示，$\\text{FFA}$ 在不同损失函数和不同期限上显著优于基准模型，且这种优势主要集中在正常和低波动状态。我们使用波动率择时策略评估 $\\text{FFA}$ 的经济价值，结果也确认其相对基准模型具有竞争力。总之，$\\text{FFA}$ 为市场波动率滤波和预测提供了一种计算高效的替代工具。",
+    "evidence": "The results show that FFA significantly dominates the benchmark models across different loss functions and horizons, and this dominance mainly concentrates in normal and low‐volatility regimes.",
+    "why_relevant": "直接涉及波动率滤波与预测，并做多指数样本外检验，契合波动率建模与预测方向。",
     "v": 4,
     "model": "",
     "at": "2026-10-18T11:43:47+00:00"
@@ -2648,8 +3031,8 @@
   "weekly_new_quota": 0,
   "weekly_new_total": 10,
   "kept_previous_count": 35,
-  "display_count": 28,
-  "archive_count": 28,
+  "display_count": 33,
+  "archive_count": 33,
   "dropped_from_display_count": 0,
   "duplicate_candidate_count": 25,
   "fresh_candidate_count": 35,
@@ -2670,6 +3053,6 @@
    "low": 0,
    "unknown": 0
   },
-  "paper_count": 28
+  "paper_count": 33
  }
 }

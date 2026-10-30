@@ -5,7 +5,7 @@
   "per_venue_results": 50,
   "keywords_per_query": 8,
   "max_pages": 1,
-  "comment": "来源：国际期刊目录.md。仅保留 4*/4 期刊，另白名单保留 JFEC 和 Quantitative Finance（3 星但为金融计量核心阵地）。openalex_source_id 留空的会在运行时按 ISSN 现查。window_search=true 时按方向关键词在 2018 至今的全文题录里做相关度召回，而不是只抓最近几个月。",
+  "comment": "来源：国际期刊目录.md。仅保留 4*/4 期刊，另白名单保留 JFEC、Quantitative Finance 和 Journal of Futures Markets（3 星但为金融计量核心阵地）。openalex_source_id 留空的会在运行时按 ISSN 现查。window_search=true 时按方向关键词在 2018 至今的全文题录里做相关度召回，而不是只抓最近几个月。",
   "retain_venues": [
     {
       "name": "Journal of the American Statistical Association",
@@ -179,6 +179,16 @@
       "issn": [
         "0022-2879",
         "1538-4616"
+      ]
+    },
+    {
+      "id": "jfm",
+      "name": "Journal of Futures Markets",
+      "group": "金融学",
+      "rank": "3",
+      "issn": [
+        "0270-7314",
+        "1096-9934"
       ]
     },
     {
