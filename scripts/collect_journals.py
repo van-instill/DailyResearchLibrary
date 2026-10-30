@@ -866,7 +866,7 @@ def collect(
         # 机械分只作为排序初值和兜底，淘汰交给模型
         scored, _ = score_and_filter(unique_candidates, topics, min_score=0.0)
         verdicts = screen_papers(scored, topics, label="journals")
-        min_screen = env_float("SCREEN_MIN_SCORE", 45.0)
+        min_screen = env_float("SCREEN_MIN_SCORE", 60.0)
         kept: list[dict[str, Any]] = []
         dropped = 0
         for paper in scored:

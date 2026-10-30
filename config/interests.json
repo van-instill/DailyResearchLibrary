@@ -39,7 +39,7 @@
         "regression discontinuity",
         "event study"
       ],
-      "arxiv_categories": ["econ.EM", "stat.ME", "stat.AP"]
+      "arxiv_categories": ["econ.EM"]
     },
     {
       "id": "asset_pricing",
@@ -91,7 +91,7 @@
         "default prediction",
         "drawdown"
       ],
-      "arxiv_categories": ["q-fin.RM", "q-fin.ST", "stat.AP"]
+      "arxiv_categories": ["q-fin.RM", "q-fin.ST"]
     }
   ]
 }

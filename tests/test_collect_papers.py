@@ -992,6 +992,44 @@ class WeeklyPeriodTest(unittest.TestCase):
             self.assertEqual(stats["weekly_new_count"], 0)
             self.assertEqual(len(previous), 5)
 
+    def test_excluded_paper_is_dropped_and_not_reselected(self):
+        # 永久排除清单：被排除的论文既要从归档里删掉，也不能再被选回来
+        from scripts import weekly_select as ws
+
+        with mock.patch.dict(os.environ, {"WEEKLY_NEW_TOTAL": "10", "RADAR_COLLECTION_COUNT": "2"}):
+            wednesday = dt.datetime(2026, 10, 14, 1, 0, tzinfo=dt.timezone.utc)
+            # 先正常选一批
+            previous, seen, stats = ws.select_weekly(
+                [], [self.candidate(i) for i in range(8)], {}, wednesday, last_period=""
+            )
+            self.assertEqual(len(previous), 5)
+
+            # 排除 id=openalex:W0 那篇（paper_keys 会小写 id，所以用小写）
+            excluded = {"id:openalex:w0"}
+            # 归档里那篇要被删掉（4 篇保留），且候选里重新出现的 W0 也不能选回来
+            previous, seen, stats = ws.select_weekly(
+                previous,
+                [self.candidate(0)] + [self.candidate(700 + i) for i in range(10)],
+                seen,
+                wednesday + dt.timedelta(days=7),
+                last_period=stats["weekly_period"],
+                excluded_keys=excluded,
+            )
+            kept_ids = {p["id"] for p in previous}
+            self.assertNotIn("openalex:W0", kept_ids)
+            # 上周剩 4 篇 + 本周补选 5 篇（都是新候选，W0 被排除不算）
+            self.assertEqual(len(previous), 4 + 5)
+            self.assertNotIn("openalex:W0", kept_ids)
+
+    def test_load_excluded_keys_normalizes_arxiv_version(self):
+        from scripts import weekly_select as ws
+
+        with mock.patch.dict(os.environ, {"EXCLUDE_PATH": "config/exclude.json"}):
+            keys = ws.load_excluded_keys()
+            # exclude.json 里写的是 2610.22113v1，去版本号后仍能匹配 2610.22113
+            self.assertIn("id:2610.22113", keys)
+            self.assertIn("id:2610.22113v1", keys)
+
 
 if __name__ == "__main__":
     unittest.main()

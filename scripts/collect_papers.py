@@ -24,7 +24,7 @@ from typing import Any
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from weekly_select import is_current_period, in_window, load_seen, period_key, select_weekly, stored_period  # noqa: E402
+from weekly_select import is_current_period, in_window, load_excluded_keys, load_seen, period_key, select_weekly, stored_period  # noqa: E402
 from latexify import latexify_summary, latexify_text  # noqa: E402
 
 
@@ -2384,7 +2384,7 @@ def collect(
     if screen_llm:
         pool = [*recent_papers, *daily_backfill_candidates]
         verdicts = screen_papers(pool, topics, label="arXiv")
-        min_screen = env_float("SCREEN_MIN_SCORE", 45.0)
+        min_screen = env_float("SCREEN_MIN_SCORE", 60.0)
         kept_primary: list[dict[str, Any]] = []
         kept_backfill: list[dict[str, Any]] = []
         for paper in pool:
@@ -2455,6 +2455,7 @@ def collect(
     _period = period_key(now)
     daily_last_had_new = any(is_current_period(p, _period) for p in _daily_prev)
     conf_last_had_new = any(is_current_period(p, _period) for p in _conf_prev)
+    _excluded = load_excluded_keys()
     daily_merged_papers, daily_seen, daily_retention_stats = select_weekly(
         previous=_daily_prev,
         candidates=daily_recent_papers,
@@ -2462,6 +2463,7 @@ def collect(
         now=now,
         last_period=stored_period(existing_payload),
         last_period_had_new=daily_last_had_new,
+        excluded_keys=_excluded,
     )
     conference_merged_papers, conference_seen, conference_retention_stats = select_weekly(
         previous=_conf_prev,
@@ -2470,6 +2472,7 @@ def collect(
         now=now,
         last_period=stored_period(existing_conference_payload),
         last_period_had_new=conf_last_had_new,
+        excluded_keys=_excluded,
     )
     daily_merged_papers.sort(key=lambda p: (p["best_match"]["score"], paper_activity_datetime(p)), reverse=True)
     conference_merged_papers.sort(key=lambda p: (p["best_match"]["score"], paper_activity_datetime(p)), reverse=True)

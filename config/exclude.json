@@ -1,0 +1,10 @@
+{
+  "comment": "永久排除清单：这些论文即使再次被抓到，也不会进入归档。每项填 id（arXiv 编号或 openalex id）或标题。标题按规范化指纹匹配（去空格/符号/大小写）。",
+  "papers": [
+    {
+      "id": "2610.22113v1",
+      "title": "Difference-in-Differences for Heterogeneous Effects of General Treatment Strategies Accounting for Time-Varying Covariates",
+      "reason": "纯统计方法（DiD 推广），无金融应用，用户 2026-10-30 确认移除"
+    }
+  ]
+}
