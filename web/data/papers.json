@@ -1,6 +1,6 @@
 {
-  "generated_at": "Fri, 30 Oct 2026 13:02:25 +0000",
-  "generated_at_iso": "2026-10-30T13:02:25.260239+00:00",
+  "generated_at": "Fri, 30 Oct 2026 13:05:24 +0000",
+  "generated_at_iso": "2026-10-30T13:05:24.775435+00:00",
   "config_source": "file",
   "data_kind": "daily",
   "topics": [
@@ -308,7 +308,7 @@
       },
       "first_seen_at": "2026-10-30T13:02:25.260239+00:00",
       "last_seen_at": "2026-10-30T13:02:25.260239+00:00",
-      "retained_from_previous_run": false,
+      "retained_from_previous_run": true,
       "weekly_period": "2026-W44",
       "is_new_this_week": true,
       "chinese_summary": {
@@ -503,7 +503,7 @@
       },
       "first_seen_at": "2026-10-30T13:02:25.260239+00:00",
       "last_seen_at": "2026-10-30T13:02:25.260239+00:00",
-      "retained_from_previous_run": false,
+      "retained_from_previous_run": true,
       "weekly_period": "2026-W44",
       "is_new_this_week": true,
       "chinese_summary": {
@@ -1367,7 +1367,7 @@
       },
       "first_seen_at": "2026-10-30T13:02:25.260239+00:00",
       "last_seen_at": "2026-10-30T13:02:25.260239+00:00",
-      "retained_from_previous_run": false,
+      "retained_from_previous_run": true,
       "weekly_period": "2026-W44",
       "is_new_this_week": true,
       "chinese_summary": {
@@ -1427,7 +1427,7 @@
       },
       "first_seen_at": "2026-10-30T13:02:25.260239+00:00",
       "last_seen_at": "2026-10-30T13:02:25.260239+00:00",
-      "retained_from_previous_run": false,
+      "retained_from_previous_run": true,
       "weekly_period": "2026-W44",
       "is_new_this_week": true,
       "chinese_summary": {
@@ -1750,7 +1750,7 @@
       },
       "first_seen_at": "2026-10-30T13:02:25.260239+00:00",
       "last_seen_at": "2026-10-30T13:02:25.260239+00:00",
-      "retained_from_previous_run": false,
+      "retained_from_previous_run": true,
       "weekly_period": "2026-W44",
       "is_new_this_week": true,
       "chinese_summary": {
@@ -2558,7 +2558,12 @@
     "id:2610.39636v1": "2026-10-30T13:02:25.260239+00:00",
     "t:informationflowandmarketrisktransformerbasedevidenceonsentimentandvolatilitydynamics": "2026-10-30T13:02:25.260239+00:00",
     "id:2603.27458v1": "2026-10-30T13:02:25.260239+00:00",
-    "t:extremevalueinferenceforcovarandsystemicrisk": "2026-10-30T13:02:25.260239+00:00"
+    "t:extremevalueinferenceforcovarandsystemicrisk": "2026-10-30T13:02:25.260239+00:00",
+    "2401.13179v6": "2026-10-30T13:02:25.260239+00:00",
+    "2610.40047v1": "2026-10-30T13:02:25.260239+00:00",
+    "2610.39995v1": "2026-10-30T13:02:25.260239+00:00",
+    "2610.39636v1": "2026-10-30T13:02:25.260239+00:00",
+    "2603.27458v1": "2026-10-30T13:02:25.260239+00:00"
   },
   "weekly_period": "2026-W44",
   "stats": {
@@ -2577,7 +2582,7 @@
     "filtered_low_relevance_count": 71,
     "days": 7,
     "collection_mode": "lookback",
-    "collection_cutoff_iso": "2026-10-23T13:02:25.260239+00:00",
+    "collection_cutoff_iso": "2026-10-23T13:05:24.775435+00:00",
     "max_per_topic": 25,
     "max_new_papers": 60,
     "max_new_conference_papers": 50,
@@ -2626,18 +2631,18 @@
     "new_paper_count": 60,
     "weekly_period": "2026-W44",
     "period_new_count": 5,
-    "weekly_new_count": 5,
-    "weekly_new_quota": 5,
+    "weekly_new_count": 0,
+    "weekly_new_quota": 0,
     "weekly_new_total": 10,
-    "kept_previous_count": 30,
+    "kept_previous_count": 35,
     "display_count": 35,
     "archive_count": 35,
     "dropped_from_display_count": 0,
-    "duplicate_candidate_count": 18,
-    "fresh_candidate_count": 42,
+    "duplicate_candidate_count": 23,
+    "fresh_candidate_count": 37,
     "max_stored_papers": 1200,
     "max_data_bytes": 12582912,
-    "data_bytes": 236464,
+    "data_bytes": 236739,
     "storage_trimmed_count": 0,
     "storage_trimmed_by_level": {
       "high": 0,
