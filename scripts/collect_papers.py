@@ -29,6 +29,9 @@ from latexify import latexify_summary, latexify_text  # noqa: E402
 
 
 ARXIV_API_URL = "https://export.arxiv.org/api/query"
+# arXiv 官方要求 User-Agent 能定位到维护者（否则可能被限流甚至拒绝）。
+# 之前写的是上游模板仓库 Futuresxy/paper-daily 的地址，与本项目无关，已改为本项目仓库。
+ARXIV_USER_AGENT = "paper-daily-collector/1.0 (+https://github.com/van-instill/DailyResearchLibrary)"
 DBLP_API_URL = os.getenv("DBLP_API_URL", "http://dblp.org/search/publ/api")
 OPENALEX_WORKS_URL = "https://api.openalex.org/works"
 CROSSREF_WORKS_URL = "https://api.crossref.org/works"
@@ -45,7 +48,10 @@ DEFAULT_MAX_NEW_CONFERENCE_PAPERS = 50
 DEFAULT_MAX_STORED_CONFERENCE_PAPERS = 1200
 DEFAULT_MAX_DATA_BYTES = 8 * 1024 * 1024
 DEFAULT_RECENT_HISTORY_DAYS = 45
-TRANSIENT_HTTP_CODES = {429, 500, 502, 503, 504}
+TRANSIENT_HTTP_CODES = {406, 429, 500, 502, 503, 504}
+# arXiv 在请求头不符合预期（如缺 Accept / User-Agent 不可识别）时会回 406 Not Acceptable，
+# 属于可重试的临时性错误：带上正确请求头 + 指数退避后大概率恢复。
+ARXIV_RETRYABLE_HTTP_CODES = {406, 429, 500, 502, 503, 504}
 DBLP_TRANSIENT_HTTP_CODES = {429, 502, 503, 504}
 DEFAULT_SOURCE_TYPES = ["arxiv", "openalex", "crossref"]
 FEED_NAMESPACES = {"atom": "http://www.w3.org/2005/Atom"}
@@ -451,7 +457,7 @@ def arxiv_retry_wait_seconds(exc: Exception, attempt: int) -> float:
 
 def is_retryable_arxiv_error(exc: Exception) -> bool:
     if isinstance(exc, urllib.error.HTTPError):
-        return exc.code in TRANSIENT_HTTP_CODES
+        return exc.code in ARXIV_RETRYABLE_HTTP_CODES
     return isinstance(exc, (TimeoutError, urllib.error.URLError, OSError))
 
 
@@ -464,7 +470,9 @@ def should_retry_arxiv_error(exc: Exception) -> bool:
 
 
 def should_stop_arxiv_fetches(exc: Exception) -> bool:
-    return isinstance(exc, urllib.error.HTTPError) and exc.code in {429, 503}
+    # 406/429/503 都说明 arXiv 现在不想接这个出口的请求，继续撞剩余方向只会更糟，
+    # 停下来等下一期（或等缓存恢复）更稳妥。
+    return isinstance(exc, urllib.error.HTTPError) and exc.code in {406, 429, 503}
 
 
 def parse_arxiv_entries(xml_data: bytes, seed_topic: str = "") -> list[dict[str, Any]]:
@@ -521,7 +529,14 @@ def fetch_arxiv_query(search_query: str, max_results: int, sort_by: str, sort_or
     timeout_seconds = float(os.getenv("ARXIV_TIMEOUT_SECONDS", "90"))
     last_error: Exception | None = None
     for attempt in range(retry_count):
-        req = urllib.request.Request(url, headers={"User-Agent": "paper-daily-collector/1.0 (+https://github.com/Futuresxy/paper-daily)"})
+        req = urllib.request.Request(
+            url,
+            headers={
+                "User-Agent": ARXIV_USER_AGENT,
+                # 显式声明只接受 Atom 结果；某些时刻 arXiv 会对缺 Accept 头的请求回 406。
+                "Accept": "application/atom+xml, application/xml, text/xml, */*",
+            },
+        )
         try:
             with urllib.request.urlopen(req, timeout=timeout_seconds) as resp:
                 xml_data = resp.read()
