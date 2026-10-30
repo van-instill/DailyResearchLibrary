@@ -16,13 +16,16 @@
 from __future__ import annotations
 
 import datetime as dt
+import json
 import os
 import re
+from pathlib import Path
 from typing import Any
 
 DEFAULT_WINDOW_START = "2018-01-01"
 DEFAULT_WEEKLY_NEW_TOTAL = 10
 DEFAULT_COLLECTION_COUNT = 2
+DEFAULT_EXCLUDE_PATH = "config/exclude.json"
 
 
 def env_int(name: str, default: int) -> int:
@@ -109,6 +112,44 @@ def paper_keys(paper: dict[str, Any]) -> list[str]:
 def paper_key(paper: dict[str, Any]) -> str:
     keys = paper_keys(paper)
     return keys[0] if keys else ""
+
+
+def load_excluded_keys(path: str | None = None) -> set[str]:
+    """读取永久排除清单，返回一组可比对的 key（id / arxiv id / 标题指纹）。
+
+    配置文件默认 ``config/exclude.json``，格式见该文件内的 comment。
+    返回的 key 会与 ``paper_keys()`` 生成的 key 做交集判断，所以
+    ``id:``、``doi:``、``t:`` 三种前缀都会生成。
+    """
+    p = Path(path or os.getenv("EXCLUDE_PATH", DEFAULT_EXCLUDE_PATH))
+    keys: set[str] = set()
+    if not p.exists():
+        return keys
+    try:
+        data = json.loads(p.read_text(encoding="utf-8"))
+    except Exception:  # noqa: BLE001
+        return keys
+    for item in data.get("papers") or []:
+        if not isinstance(item, dict):
+            continue
+        pid = str(item.get("id") or "").strip().lower()
+        if pid:
+            keys.add("id:" + pid)
+            # arXiv 编号常带 v1/v2 版本后缀，去掉版本号再存一份
+            keys.add("id:" + re.sub(r"v\d+$", "", pid))
+        doi = normalize_doi(item.get("doi"))
+        if doi:
+            keys.add("doi:" + doi)
+        title = title_key(item.get("title"))
+        if len(title) >= 12:
+            keys.add("t:" + title)
+    return keys
+
+
+def is_excluded(paper: dict[str, Any], excluded_keys: set[str]) -> bool:
+    if not excluded_keys:
+        return False
+    return any(key in excluded_keys for key in paper_keys(paper))
 
 
 def score_of(paper: dict[str, Any]) -> float:
@@ -250,6 +291,7 @@ def select_weekly(
     cap: int | None = None,
     last_period: str | None = None,
     last_period_had_new: bool = True,
+    excluded_keys: set[str] | None = None,
 ) -> tuple[list[dict[str, Any]], dict[str, str], dict[str, Any]]:
     """选出本期列表：`本期新增 N 篇` + `全部历史归档`。
 
@@ -266,6 +308,7 @@ def select_weekly(
     返回 (本期论文列表, 更新后的账本, 统计信息)。
     """
     period = period_key(now)
+    excluded_keys = excluded_keys or set()
     new_quota = weekly_new() if weekly_new_count is None else max(0, weekly_new_count)
     if weekly_new_count is None and last_period and last_period == period and last_period_had_new:
         # 本周已经选过稿了：候选里没见过的论文留到下周，否则改一次代码就多推一批
@@ -276,6 +319,9 @@ def select_weekly(
     seen_keys: set[str] = set()
     for paper in previous:
         if not isinstance(paper, dict):
+            continue
+        if is_excluded(paper, excluded_keys):
+            # 被永久排除的论文：即使已经在归档里，也不再保留
             continue
         keys = paper_keys(paper)
         if not keys:
@@ -293,6 +339,9 @@ def select_weekly(
     duplicates = 0
     for paper in candidates:
         if not isinstance(paper, dict):
+            continue
+        if is_excluded(paper, excluded_keys):
+            # 被永久排除的论文：候选阶段就拦掉，不会再被选回来
             continue
         keys = paper_keys(paper)
         if not keys:

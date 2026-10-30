@@ -134,7 +134,7 @@ jobs:
           ARXIV_WINDOW_SEARCH: ${{ vars.ARXIV_WINDOW_SEARCH || 'true' }}
           ARXIV_WINDOW_RESULTS: ${{ vars.ARXIV_WINDOW_RESULTS || '40' }}
           SCREEN_MODE: ${{ vars.SCREEN_MODE || 'llm' }}
-          SCREEN_MIN_SCORE: ${{ vars.SCREEN_MIN_SCORE || '45' }}
+          SCREEN_MIN_SCORE: ${{ vars.SCREEN_MIN_SCORE || '60' }}
           SCREEN_BATCH_SIZE: ${{ vars.SCREEN_BATCH_SIZE || '6' }}
           SCREEN_CONCURRENCY: ${{ vars.SCREEN_CONCURRENCY || '3' }}
           SCREEN_MAX_PAPERS: ${{ vars.SCREEN_MAX_PAPERS || '1200' }}
@@ -176,7 +176,7 @@ jobs:
           RADAR_COLLECTION_COUNT: ${{ vars.RADAR_COLLECTION_COUNT || '2' }}
           WEEKLY_NEW_PAPERS: ${{ vars.WEEKLY_NEW_PAPERS || '' }}
           SCREEN_MODE: ${{ vars.SCREEN_MODE || 'llm' }}
-          SCREEN_MIN_SCORE: ${{ vars.SCREEN_MIN_SCORE || '45' }}
+          SCREEN_MIN_SCORE: ${{ vars.SCREEN_MIN_SCORE || '60' }}
           SCREEN_BATCH_SIZE: ${{ vars.SCREEN_BATCH_SIZE || '6' }}
           SCREEN_CONCURRENCY: ${{ vars.SCREEN_CONCURRENCY || '3' }}
           SCREEN_MAX_PAPERS: ${{ vars.SCREEN_MAX_PAPERS || '1200' }}

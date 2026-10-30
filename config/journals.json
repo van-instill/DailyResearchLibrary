@@ -62,7 +62,7 @@
     {
       "id": "ect",
       "name": "Econometric Theory",
-      "group": "经济学",
+      "group": "金融计量",
       "rank": "4",
       "issn": [
         "0266-4666",
@@ -72,7 +72,7 @@
     {
       "id": "ecrev",
       "name": "Econometric Reviews",
-      "group": "经济学",
+      "group": "金融计量",
       "rank": "3",
       "issn": [
         "0747-4938",
@@ -80,29 +80,9 @@
       ]
     },
     {
-      "id": "aos",
-      "name": "Annals of Statistics",
-      "group": "统计学",
-      "rank": "4*",
-      "issn": [
-        "0090-5364",
-        "2168-8966"
-      ]
-    },
-    {
-      "id": "jasa",
-      "name": "Journal of the American Statistical Association",
-      "group": "统计学",
-      "rank": "4",
-      "issn": [
-        "0162-1459",
-        "1537-274X"
-      ]
-    },
-    {
       "id": "joe",
       "name": "Journal of Econometrics",
-      "group": "统计学",
+      "group": "金融计量",
       "rank": "4",
       "issn": [
         "0304-4076",
@@ -111,35 +91,15 @@
       "openalex_source_id": "S127742747"
     },
     {
-      "id": "biometrika",
-      "name": "Biometrika",
-      "group": "统计学",
-      "rank": "4",
-      "issn": [
-        "0006-3444",
-        "1464-3510"
-      ]
-    },
-    {
       "id": "jbes",
       "name": "Journal of Business & Economic Statistics",
-      "group": "统计学",
+      "group": "金融计量",
       "rank": "4",
       "issn": [
         "0735-0015",
         "1537-2707"
       ],
       "openalex_source_id": "S18095783"
-    },
-    {
-      "id": "jrssb",
-      "name": "Journal of the Royal Statistical Society: Series B",
-      "group": "统计学",
-      "rank": "4",
-      "issn": [
-        "1369-7412",
-        "1467-9868"
-      ]
     },
     {
       "id": "jf",
