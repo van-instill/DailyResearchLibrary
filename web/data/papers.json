@@ -1,6 +1,6 @@
 {
-  "generated_at": "Fri, 30 Oct 2026 13:59:14 +0000",
-  "generated_at_iso": "2026-10-30T13:59:14.055948+00:00",
+  "generated_at": "Fri, 30 Oct 2026 14:02:57 +0000",
+  "generated_at_iso": "2026-10-30T14:02:57.922111+00:00",
   "config_source": "file",
   "data_kind": "daily",
   "topics": [
@@ -2498,8 +2498,8 @@
   },
   "weekly_period": "2026-W44",
   "stats": {
-    "candidate_paper_count": 164,
-    "daily_candidate_paper_count": 164,
+    "candidate_paper_count": 165,
+    "daily_candidate_paper_count": 165,
     "conference_candidate_paper_count": 0,
     "raw_daily_candidate_count": 273,
     "window_search_candidate_count": 200,
@@ -2510,10 +2510,10 @@
     "screen_mode": "llm",
     "screened_paper_count": 273,
     "min_daily_papers": 10,
-    "filtered_low_relevance_count": 105,
+    "filtered_low_relevance_count": 104,
     "days": 7,
     "collection_mode": "lookback",
-    "collection_cutoff_iso": "2026-10-23T13:59:14.055948+00:00",
+    "collection_cutoff_iso": "2026-10-23T14:02:57.922111+00:00",
     "max_per_topic": 25,
     "max_new_papers": 60,
     "max_new_conference_papers": 50,
