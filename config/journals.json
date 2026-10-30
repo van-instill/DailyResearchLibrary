@@ -5,7 +5,7 @@
   "per_venue_results": 50,
   "keywords_per_query": 8,
   "max_pages": 1,
-  "comment": "来源：国际期刊目录.md（29 本）。openalex_source_id 留空的会在运行时按 ISSN 现查。window_search=true 时按方向关键词在 2018 至今的全文题录里做相关度召回，而不是只抓最近几个月。",
+  "comment": "来源：国际期刊目录.md。仅保留 4*/4 期刊，另白名单保留 JFEC 和 Quantitative Finance（3 星但为金融计量核心阵地）。openalex_source_id 留空的会在运行时按 ISSN 现查。window_search=true 时按方向关键词在 2018 至今的全文题录里做相关度召回，而不是只抓最近几个月。",
   "retain_venues": [
     {
       "name": "Journal of the American Statistical Association",
@@ -73,16 +73,6 @@
       "issn": [
         "0266-4666",
         "1469-4360"
-      ]
-    },
-    {
-      "id": "ecrev",
-      "name": "Econometric Reviews",
-      "group": "金融计量",
-      "rank": "3",
-      "issn": [
-        "0747-4938",
-        "1532-4168"
       ]
     },
     {
@@ -192,16 +182,6 @@
       ]
     },
     {
-      "id": "jfm",
-      "name": "Journal of Futures Markets",
-      "group": "金融学",
-      "rank": "3",
-      "issn": [
-        "0270-7314",
-        "1096-9934"
-      ]
-    },
-    {
       "id": "qf",
       "name": "Quantitative Finance",
       "group": "金融学",
@@ -213,36 +193,6 @@
       "openalex_source_id": "S182689569"
     },
     {
-      "id": "mathfin",
-      "name": "Mathematical Finance",
-      "group": "金融学",
-      "rank": "3",
-      "issn": [
-        "0960-1627",
-        "1467-9965"
-      ]
-    },
-    {
-      "id": "finstoch",
-      "name": "Finance and Stochastics",
-      "group": "金融学",
-      "rank": "3",
-      "issn": [
-        "0949-2984",
-        "1432-1122"
-      ]
-    },
-    {
-      "id": "raps",
-      "name": "Review of Asset Pricing Studies",
-      "group": "金融学",
-      "rank": "3",
-      "issn": [
-        "2045-9920",
-        "2045-9939"
-      ]
-    },
-    {
       "id": "jfec",
       "name": "Journal of Financial Econometrics",
       "group": "金融学",
@@ -250,26 +200,6 @@
       "issn": [
         "1479-8409",
         "1479-8417"
-      ]
-    },
-    {
-      "id": "ime",
-      "name": "Insurance: Mathematics and Economics",
-      "group": "金融学",
-      "rank": "3",
-      "issn": [
-        "0167-6687",
-        "1873-5959"
-      ]
-    },
-    {
-      "id": "siamfin",
-      "name": "SIAM Journal on Financial Mathematics",
-      "group": "金融学",
-      "rank": "2",
-      "issn": [
-        "1945-497X",
-        "1945-4961"
       ]
     }
   ]
