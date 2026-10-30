@@ -1,6 +1,6 @@
 {
-  "generated_at": "Fri, 30 Oct 2026 12:53:35 +0000",
-  "generated_at_iso": "2026-10-30T12:53:35.099017+00:00",
+  "generated_at": "Fri, 30 Oct 2026 12:56:45 +0000",
+  "generated_at_iso": "2026-10-30T12:56:45.397898+00:00",
   "config_source": "file",
   "data_kind": "daily",
   "topics": [
@@ -2245,7 +2245,7 @@
     "filtered_low_relevance_count": 71,
     "days": 7,
     "collection_mode": "lookback",
-    "collection_cutoff_iso": "2026-10-23T12:53:35.099017+00:00",
+    "collection_cutoff_iso": "2026-10-23T12:56:45.397898+00:00",
     "max_per_topic": 25,
     "max_new_papers": 60,
     "max_new_conference_papers": 50,
