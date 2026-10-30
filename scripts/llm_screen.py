@@ -162,12 +162,18 @@ def _build_prompt(batch: list[dict[str, Any]], topics: list[Any]) -> str:
 - 20-39：只在背景、文献综述或应用场景里顺带提到
 - 0-19：无关（其他学科、纯数学/纯理论、没有可迁移的实证或计量内容）
 
-同时给出最匹配的方向 id（必须来自上面列表），以及不超过 40 字的中文理由，说明具体匹配在哪。
+【应用实证硬规则——最重要的一条，必须优先于上面所有分数档】
+我的研究方向是「金融计量」，即用计量/统计方法去研究真实的金融或经济问题。因此：
+- 如果一篇论文是「纯理论/纯方法计量」（只做渐近理论推导、估计量/检验统计量的性质证明、数值模拟 Monte Carlo、或抽象识别理论），且全文【没有】用真实数据（金融数据：股价、收益率、波动率、期权、债券、信用、交易等；或宏观/政策数据：GDP、通胀、政策冲击、微观调查等）做实证应用，则无论它标题里出现了多少 DiD / synthetic control / cointegration / local projection / instrumental variable 这类方法关键词，都必须把 score 压到 40 分以下（一般给 20-35）。
+- 只有当论文（1）用真实金融或宏观/政策数据做了实证，或（2）方法明确为金融资产定价、风险管理、投资组合、市场微观结构等金融场景设计并给出了应用示范，才允许给 60 分以上的高分。
+- 判断依据以摘要为准：摘要里若只有"估计量/一致性/渐近正态/推断/模拟/识别框架"而没有任何真实数据或应用场景，即视为纯理论。
+
+同时给出最匹配的方向 id（必须来自上面列表），一个布尔字段 applied（true=该论文有真实金融或宏观/政策实证应用语境，false=纯理论无应用），以及不超过 40 字的中文理由，说明具体匹配在哪。
 {title_only_note}
 {chr(10).join(papers_block)}
 
 严格输出如下 json（results 数组长度必须等于论文数量，id 要原样返回）：
-{{"results":[{{"id":"论文id","score":0,"topic_id":"方向id","reason":"中文理由"}}]}}"""
+{{"results":[{{"id":"论文id","score":0,"topic_id":"方向id","applied":true,"reason":"中文理由"}}]}}"""
 
 
 def _clamp_score(value: Any) -> float | None:
@@ -224,10 +230,16 @@ def _screen_batch(
                 score = _clamp_score(item.get("score"))
                 if not paper_id or score is None:
                     continue
+                applied = item.get("applied")
+                if isinstance(applied, str):
+                    applied = applied.strip().lower() in {"true", "1", "yes"}
+                elif not isinstance(applied, bool):
+                    applied = None
                 parsed[paper_id] = {
                     "score": score,
                     "topic_id": str(item.get("topic_id") or ""),
                     "reason": normalize_space(str(item.get("reason") or ""))[:120],
+                    "applied": applied,
                 }
             if not parsed:
                 raise ValueError("model returned no usable verdicts")
@@ -448,6 +460,14 @@ def apply_verdict(paper: dict[str, Any], verdict: dict[str, Any], topics: list[A
     match["level"] = _level_from_score(float(verdict["score"]))
     match["llm_score"] = round(float(verdict["score"]), 1)
     match["llm_source"] = verdict.get("source", "llm")
+    if verdict.get("applied") is not None:
+        match["applied"] = bool(verdict["applied"])
+        if not verdict["applied"] and float(verdict["score"]) >= 55:
+            # 硬闸门：LLM 判定「纯理论无金融应用」但分数仍被抬高时，强制压回 low。
+            # 正常情况 prompt 已把此类压到 40 以下；这里兜底防止模型漏判。
+            match["score"] = round(min(float(verdict["score"]) / 100.0, 0.40), 3)
+            match["level"] = "low"
+            match["score_override"] = "non_applied_theory"
     if verdict.get("topic_id"):
         matched = next((t for t in topics if t.id == verdict["topic_id"]), None)
         if matched is not None:

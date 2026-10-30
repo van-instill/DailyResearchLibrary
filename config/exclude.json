@@ -4,7 +4,42 @@
     {
       "id": "2610.22113v1",
       "title": "Difference-in-Differences for Heterogeneous Effects of General Treatment Strategies Accounting for Time-Varying Covariates",
-      "reason": "纯统计方法（DiD 推广），无金融应用，用户 2026-10-30 确认移除"
+      "reason": "纯理论方法（mSNMM 识别估计），无金融/宏观实证应用，用户 2026-10-30 确认移除"
+    },
+    {
+      "id": "2306.03632v2",
+      "title": "Uniform Inference for Cointegrated Vector Autoregressive Processes",
+      "reason": "纯理论（math.ST，协整 VAR 一致推断渐近理论），无真实数据应用，用户 2026-10-30 确认移除"
+    },
+    {
+      "id": "2111.10784v1",
+      "title": "Why Synthetic Control estimators are biased and what to do about it: Introducing Relaxed and Penalized Synthetic Controls",
+      "reason": "纯理论（合成控制估计量偏差下界推导），无金融应用，用户 2026-10-30 确认移除"
+    },
+    {
+      "id": "2503.11375v3",
+      "title": "Difference-in-Differences Meets Synthetic Control: Doubly Robust Identification and Estimation",
+      "reason": "纯理论（短面板因果推断新方法+渐近性质），无金融应用，用户 2026-10-30 确认移除"
+    },
+    {
+      "id": "2609.17170v2",
+      "title": "Causal Inference under Dynamic Selection and Latent Heterogeneity",
+      "reason": "纯理论（动态处理效应识别理论），无金融应用，用户 2026-10-30 确认移除"
+    },
+    {
+      "id": "2609.20264v1",
+      "title": "Risk-Set Transported Synthetic Control with Difference-in-Differences Adjustment under Staggered Treatment Adoption",
+      "reason": "纯理论（donor pool 方法改进），无金融实证，用户 2026-10-30 确认移除"
+    },
+    {
+      "id": "2604.27035v1",
+      "title": "Doubly robust local projections difference-in-differences",
+      "reason": "纯理论（估计量一致性双重稳健），无金融应用，用户 2026-10-30 确认移除"
+    },
+    {
+      "id": "2609.28678v2",
+      "title": "Heterogeneous Policy Effects in Comparative Case Studies with Treated-Unit Microdata",
+      "reason": "纯理论（政策效应识别框架，政策≠金融），用户 2026-10-30 确认移除"
     }
   ]
 }
