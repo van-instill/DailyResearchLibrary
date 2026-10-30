@@ -249,6 +249,7 @@ def select_weekly(
     weekly_new_count: int | None = None,
     cap: int | None = None,
     last_period: str | None = None,
+    last_period_had_new: bool = True,
 ) -> tuple[list[dict[str, Any]], dict[str, str], dict[str, Any]]:
     """选出本期列表：`本期新增 N 篇` + `全部历史归档`。
 
@@ -256,16 +257,18 @@ def select_weekly(
     归档只增不减，所以 new_batch 只是"给本期贴个新标签"，
     keepers 全部原样保留，`is_new_this_week` 用来在前端做区分。
 
-    `last_period` 是上一份数据里记录的期号。等于本期时说明这周已经选过稿了
-    （workflow 被 push 触发重跑、或手动点了一次），此时不再新增，
-    只把数据重新生成一遍。想强制加一批就显式传 `weekly_new_count`。
+    `last_period` 是上一份数据里记录的期号。等于本期时说明这周已经跑过一遍，
+    通常要跳过选稿（workflow 被 push 触发重跑、或手动点了一次），只把数据重新
+    生成一遍。但有一个例外：上一期若因为采集失败而"空跑"（`last_period_had_new`
+    为 False，本期一篇都没选上），此时应该允许补选，否则这一周就永远缺稿了。
+    想强制加一批就显式传 `weekly_new_count`。
 
     返回 (本期论文列表, 更新后的账本, 统计信息)。
     """
     period = period_key(now)
     new_quota = weekly_new() if weekly_new_count is None else max(0, weekly_new_count)
-    if weekly_new_count is None and last_period and last_period == period:
-        # 本周已经选过了：候选里没见过的论文留到下周，否则改一次代码就多推一批
+    if weekly_new_count is None and last_period and last_period == period and last_period_had_new:
+        # 本周已经选过稿了：候选里没见过的论文留到下周，否则改一次代码就多推一批
         new_quota = 0
     archive_cap = 0 if cap is None else max(0, cap)
 
