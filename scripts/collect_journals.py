@@ -913,6 +913,13 @@ def collect(
         for venue in venues
         if venue.get("name")
     }
+    # 已从召回列表移除、但需要保留历史论文的期刊（如 JASA 上的金融高频论文）：
+    # 不再召回新论文，但已收录的不删除。
+    for retain in journal_config.get("retain_venues") or []:
+        if isinstance(retain, dict) and retain.get("name"):
+            canonical_venues.setdefault(
+                venue_key(str(retain["name"])), str(retain["name"])
+            )
     previous_papers = []
     for paper in existing.get("papers") or []:
         if not isinstance(paper, dict) or not paper.get("title"):

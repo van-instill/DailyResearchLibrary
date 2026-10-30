@@ -1,6 +1,6 @@
 {
-  "generated_at": "Fri, 30 Oct 2026 13:31:43 +0000",
-  "generated_at_iso": "2026-10-30T13:31:43.044325+00:00",
+  "generated_at": "Sun, 18 Oct 2026 13:31:08 +0000",
+  "generated_at_iso": "2026-10-18T13:31:08.519562+00:00",
   "config_source": "file",
   "data_kind": "daily",
   "topics": [
@@ -43,7 +43,9 @@
         "event study"
       ],
       "arxiv_categories": [
-        "econ.EM"
+        "econ.EM",
+        "stat.ME",
+        "stat.AP"
       ]
     },
     {
@@ -106,7 +108,8 @@
       ],
       "arxiv_categories": [
         "q-fin.RM",
-        "q-fin.ST"
+        "q-fin.ST",
+        "stat.AP"
       ]
     }
   ],
@@ -251,75 +254,6 @@
       "weekly_period": ""
     },
     {
-      "id": "2401.13179v6",
-      "source": "arXiv",
-      "title": "Realized Stochastic Volatility Models with Skew-t Distributions for Volatility and Tail Risk Forecasting",
-      "authors": [
-        "Makoto Takahashi",
-        "Yuta Yamauchi",
-        "Toshiaki Watanabe",
-        "Yasuhiro Omori"
-      ],
-      "summary": "Volatility forecasts underlie tail risk measures: value-at-risk (VaR) and expected shortfall (ES). This paper compares realized stochastic volatility (RSV) models, which add a realized measure to the stochastic volatility (SV) model, with their SV counterparts under normal, Student's t, two skew-normal, and three skew-t return distributions, and against EGARCH and REGARCH benchmarks. Estimated by Markov chain Monte Carlo on the Dow Jones Industrial Average and the Nikkei 225, the models are compared by their one-day-ahead volatility, VaR, and ES forecasts (the predictive mean for volatility). Adding realized volatility improves volatility forecasts over the main sample for both indices under every proxy and return distribution; the gains are uniformly significant for the Nikkei 225 but, for the Dow Jones, only under the realized variance used in estimation. During the COVID-19 period the gains persist for the Nikkei 225 but vanish for the Dow Jones, where the REGARCH benchmark is best. For VaR and ES the gains are confined to the Nikkei 225 and to the 5% level for the Dow Jones, and few matched-pair differences are significant. Skewed innovations lower the 1% joint loss for the Dow Jones, but no specification dominates across indices, risk levels, and sample periods.",
-      "published": "2024-01-24T01:52:54Z",
-      "updated": "2026-10-28T08:48:45Z",
-      "paper_url": "http://arxiv.org/abs/2401.13179v6",
-      "pdf_url": "https://arxiv.org/pdf/2401.13179v6",
-      "categories": [
-        "econ.EM"
-      ],
-      "seed_topic": "volatility_highfreq",
-      "matches": [
-        {
-          "topic_id": "volatility_highfreq",
-          "topic_name": "波动率建模与高频计量",
-          "score": 0.95,
-          "level": "high",
-          "reason": "AI 判定：已实现随机波动率模型与偏t分布，预测波动率、VaR和ES，高度契合；关键词命中：realized volatility、GARCH、stochastic volatility",
-          "keyword_hits": [
-            "realized volatility",
-            "GARCH",
-            "stochastic volatility"
-          ],
-          "mechanical_score": 0.323,
-          "llm_score": 95.0,
-          "llm_source": "cache",
-          "llm_reason": "直接研究已实现波动率与随机波动率模型的波动率及尾部风险预测。"
-        }
-      ],
-      "best_match": {
-        "topic_id": "volatility_highfreq",
-        "topic_name": "波动率建模与高频计量",
-        "score": 0.95,
-        "level": "high",
-        "reason": "$\\text{AI}$ 判定：已实现随机波动率模型与偏t分布，预测波动率、$\\text{VaR}$和$\\text{ES}$，高度契合；关键词命中：realized volatility、$\\text{GARCH}$、stochastic volatility",
-        "keyword_hits": [
-          "realized volatility",
-          "GARCH",
-          "stochastic volatility"
-        ],
-        "mechanical_score": 0.323,
-        "llm_score": 95.0,
-        "llm_source": "cache",
-        "llm_reason": "直接研究已实现波动率与随机波动率模型的波动率及尾部风险预测。"
-      },
-      "first_seen_at": "2026-10-30T13:02:25.260239+00:00",
-      "last_seen_at": "2026-10-30T13:02:25.260239+00:00",
-      "retained_from_previous_run": true,
-      "weekly_period": "2026-W44",
-      "is_new_this_week": true,
-      "chinese_summary": {
-        "problem": "论文要解决的问题是：波动率预测是尾部风险度量（在险价值 $\\text{VaR}$ 与预期短缺 $\\text{ES}$）的基础，本文比较在多种收益分布下，加入已实现测度的已实现随机波动率（$\\text{RSV}$）模型与其对应的 $\\text{SV}$ 模型，并与 $\\text{EGARCH}$、$\\text{REGARCH}$ 基准进行比较。",
-        "method": "论文在正态、Student's t、两种偏正态和三种偏 t 收益分布下，将已实现测度加入随机波动率（$\\text{SV}$）模型构成 $\\text{RSV}$ 模型，并与 $\\text{SV}$ 对应模型以及 $\\text{EGARCH}$、$\\text{REGARCH}$ 基准比较。模型用马尔可夫链蒙特卡洛估计，样本为道琼斯工业平均指数和日经 $225$，比较一日前的波动率、$\\text{VaR}$ 和 $\\text{ES}$ 预测（波动率取预测均值）。",
-        "innovation": "论文将已实现测度引入 $\\text{SV}$ 模型，并在正态、Student's t、两种偏正态和三种偏 t 共多种收益分布下系统比较 $\\text{RSV}$ 与 $\\text{SV}$，同时对照 $\\text{EGARCH}$ 与 $\\text{REGARCH}$ 基准；在道琼斯与日经 $225$ 上用 $\\text{MCMC}$ 估计，并以一日前波动率、$\\text{VaR}$ 与 $\\text{ES}$ 预测（波动率为预测均值）作为比较口径。",
-        "conclusion": "加入已实现波动率在主样本中对两个指数、在每种代理变量和收益分布下都改善波动率预测；对日经 $225$ 该改进一致显著，对道琼斯仅在估计所用的已实现方差下显著。$\\text{COVID}$-$19$ 期间该改进对日经 $225$ 持续、对道琼斯消失且 $\\text{REGARCH}$ 基准最优；$\\text{VaR}$ 与 $\\text{ES}$ 的改进限于日经 $225$ 以及道琼斯 $5\\%$ 水平，且匹配对差异很少显著；偏斜新息降低道琼斯 $1\\%$ 联合损失，但没有设定在两个指数、风险水平和样本期上全面占优。",
-        "abstract_zh": "波动率预测是尾部风险度量——在险价值（$\\text{VaR}$）与预期短缺（$\\text{ES}$）——的基础。本文在正态、Student's t、两种偏正态和三种偏 t 收益分布下，将加入已实现测度的已实现随机波动率（$\\text{RSV}$）模型与其 $\\text{SV}$ 对应模型进行比较，并与 $\\text{EGARCH}$ 和 $\\text{REGARCH}$ 基准进行比较。模型用马尔可夫链蒙特卡洛在道琼斯工业平均指数和日经 $225$ 上估计，并按一日前波动率、$\\text{VaR}$ 和 $\\text{ES}$ 预测（波动率取预测均值）进行比较。加入已实现波动率在主样本中对两个指数、在每种代理变量和收益分布下都改善波动率预测；该改进对日经 $225$ 一致显著，但对道琼斯仅在估计所用的已实现方差下显著。在 $\\text{COVID}$-$19$ 期间，该改进对日经 $225$ 持续，但对道琼斯消失，此时 $\\text{REGARCH}$ 基准最优。对 $\\text{VaR}$ 和 $\\text{ES}$，改进限于日经 $225$ 以及道琼斯的 $5\\%$ 水平，且匹配对差异很少显著。偏斜新息降低道琼斯的 $1\\%$ 联合损失，但没有设定在两个指数、风险水平和样本期上全面占优。",
-        "evidence": "Adding realized volatility improves volatility forecasts over the main sample for both indices under every proxy and return distribution; the gains are uniformly significant for the Nikkei 225 but, for the Dow Jones, only under the realized variance used in estimation.",
-        "why_relevant": "直接研究已实现波动率与随机波动率模型的波动率及尾部风险预测。",
-        "v": 4
-      }
-    },
-    {
       "id": "2210.04797v3",
       "source": "arXiv",
       "title": "DeepVol: Volatility Forecasting from High-Frequency Data with Dilated Causal Convolutions",
@@ -450,69 +384,6 @@
         "v": 4
       },
       "weekly_period": ""
-    },
-    {
-      "id": "2610.40047v1",
-      "source": "arXiv",
-      "title": "Smooth Threshold GARCH: Quasi Maximum Likelihood Estimation and Empirical Evidence",
-      "authors": [
-        "Jonas Fiedler Frederiksen",
-        "Frederik Vilandt"
-      ],
-      "summary": "It is well established that the volatility of daily stock returns responds asymmetrically to news, as described by the news impact curve (NIC), which relates volatility to the previous return. Empirical studies suggest that (i) volatility reacts more strongly to negative returns than to positive returns of the same magnitude, (ii) the point of asymmetry, where the NIC attains its minimum, is positive, and (iii) returns above this point often do not increase volatility at all. The popular GJR and A-GARCH models each rule out one of these features. We study the Smooth Threshold GARCH (STGARCH) model, which nests both and allows for (i)-(iii) by combining an estimated threshold, the point of asymmetry, with separate slopes on either side of it. Although the likelihood is not twice continuously differentiable in the threshold, we show that the quasi maximum likelihood estimator is consistent and converges at the usual $\\sqrt{n}$-rate, whether or not (iii) holds. If (iii) does not hold, the estimator is asymptotically normal, while if it holds, the slope above the threshold is zero, a value on the boundary of the parameter space, and the limit is non-Gaussian. In that case, the $t$-statistic for (iii) converges to the positive part of a standard normal variable, and the $t$-test of the GJR model remains valid. These results allow us to test the GJR and A-GARCH models, as well as (i)-(iii), within the STGARCH using standard normal critical values. For daily returns on five major stock indices, we reject the GJR model for all five and the A-GARCH model for three, suggesting that the STGARCH improves upon both. Volatility is lowest after returns 0.3-0.6 percentage points above their conditional mean, in line with (i) and (ii). Finally, the hypothesis in (iii) is rejected for two of the five indices.",
-      "published": "2026-10-29T13:43:20Z",
-      "updated": "2026-10-29T13:43:20Z",
-      "paper_url": "http://arxiv.org/abs/2610.40047v1",
-      "pdf_url": "https://arxiv.org/pdf/2610.40047v1",
-      "categories": [
-        "econ.EM"
-      ],
-      "seed_topic": "volatility_highfreq",
-      "matches": [
-        {
-          "topic_id": "volatility_highfreq",
-          "topic_name": "波动率建模与高频计量",
-          "score": 0.92,
-          "level": "high",
-          "reason": "AI 判定：平滑阈值GARCH的拟极大似然估计与波动率非对称性，核心为GARCH建模；关键词命中：GARCH",
-          "keyword_hits": [
-            "GARCH"
-          ],
-          "mechanical_score": 0.212,
-          "llm_score": 92.0,
-          "llm_source": "cache",
-          "llm_reason": "研究 GARCH 类波动率模型的估计与波动率非对称性检验，直接对应 GARCH 建模方向。"
-        }
-      ],
-      "best_match": {
-        "topic_id": "volatility_highfreq",
-        "topic_name": "波动率建模与高频计量",
-        "score": 0.92,
-        "level": "high",
-        "reason": "$\\text{AI}$ 判定：平滑阈值$\\text{GARCH}$的拟极大似然估计与波动率非对称性，核心为$\\text{GARCH}$建模；关键词命中：$\\text{GARCH}$",
-        "keyword_hits": [
-          "GARCH"
-        ],
-        "mechanical_score": 0.212,
-        "llm_score": 92.0,
-        "llm_source": "cache",
-        "llm_reason": "研究 $\\text{GARCH}$ 类波动率模型的估计与波动率非对称性检验，直接对应 $\\text{GARCH}$ 建模方向。"
-      },
-      "first_seen_at": "2026-10-30T13:02:25.260239+00:00",
-      "last_seen_at": "2026-10-30T13:02:25.260239+00:00",
-      "retained_from_previous_run": true,
-      "weekly_period": "2026-W44",
-      "is_new_this_week": true,
-      "chinese_summary": {
-        "problem": "已有研究表明日股票收益的波动率对消息的反应是非对称的，新闻影响曲线（$\\text{NIC}$）具有三个特征：(i) 波动率对同等幅度的负收益反应强于正收益；(ii) $\\text{NIC}$ 取得最小值的非对称点为正；(iii) 高于该点的收益往往完全不增加波动率。而流行的 $\\text{GJR}$ 与 A-$\\text{GARCH}$ 模型各自排除了其中一个特征。",
-        "method": "研究 Smooth Threshold $\\text{GARCH}$（$\\text{STGARCH}$）模型，该模型嵌套 $\\text{GJR}$ 与 A-$\\text{GARCH}$，并通过将估计的阈值（即非对称点）与阈值两侧各自的斜率相结合来允许 (i)-(iii)。尽管似然在阈值处不是二次连续可微的，论文证明拟极大似然估计量是一致的，并以通常的 $\\sqrt{n}$ 速率收敛，无论 (iii) 是否成立。若 (iii) 不成立，估计量渐近正态；若 (iii) 成立，阈值上方的斜率为零，位于参数空间边界，极限为非高斯。",
-        "innovation": "$\\text{STGARCH}$ 同时嵌套 $\\text{GJR}$ 与 A-$\\text{GARCH}$，并允许 (i)-(iii) 三个特征；在似然对阈值非二次连续可微的条件下，给出拟极大似然估计量的一致性、$\\sqrt{n}$ 收敛速率以及分情形（(iii) 成立与否）的极限分布；在 (iii) 成立时，针对 (iii) 的 $t$ 统计量收敛到标准正态变量的正部，且 $\\text{GJR}$ 模型的 $t$ 检验仍然有效；这些结果使得可以在 $\\text{STGARCH}$ 内用标准正态临界值检验 $\\text{GJR}$ 与 A-$\\text{GARCH}$ 模型以及 (i)-(iii)。",
-        "conclusion": "对五个主要股票指数的日收益，五个指数全部拒绝 $\\text{GJR}$ 模型，三个指数拒绝 A-$\\text{GARCH}$ 模型，表明 $\\text{STGARCH}$ 相对二者有所改进；波动率在收益高于其条件均值 $0.3$-$0.6$ 个百分点之后最低，与 (i) 和 (ii) 一致；最后，(iii) 中的假设在五个指数中的两个上被拒绝。",
-        "abstract_zh": "众所周知，日股票收益的波动率对消息的反应是非对称的，这由新闻影响曲线（$\\text{NIC}$）描述，该曲线将波动率与前一期收益联系起来。实证研究表明：(i) 波动率对负收益的反应强于对同等幅度正收益的反应；(ii) 非对称点，即 $\\text{NIC}$ 取得其最小值之处，为正；(iii) 高于该点的收益往往完全不增加波动率。流行的 $\\text{GJR}$ 与 A-$\\text{GARCH}$ 模型各自排除了这些特征中的一个。我们研究 Smooth Threshold $\\text{GARCH}$（$\\text{STGARCH}$）模型，它嵌套了二者，并通过将估计的阈值（即非对称点）与阈值两侧各自的斜率相结合来允许 (i)-(iii)。尽管似然在阈值处不是二次连续可微的，我们证明拟极大似然估计量是一致的，并以通常的 $\\sqrt{n}$ 速率收敛，无论 (iii) 是否成立。若 (iii) 不成立，估计量是渐近正态的；而若 (iii) 成立，阈值上方的斜率为零，这是参数空间边界上的一个值，极限是非高斯的。在这种情况下，针对 (iii) 的 $t$ 统计量收敛到一个标准正态变量的正部，且 $\\text{GJR}$ 模型的 $t$ 检验仍然有效。这些结果使我们能够在 $\\text{STGARCH}$ 内使用标准正态临界值来检验 $\\text{GJR}$ 与 A-$\\text{GARCH}$ 模型以及 (i)-(iii)。对于五个主要股票指数的日收益，我们拒绝了全部五个指数的 $\\text{GJR}$ 模型，并拒绝了三个指数的 A-$\\text{GARCH}$ 模型，这表明 $\\text{STGARCH}$ 相对二者有所改进。在收益高于其条件均值 $0.3$-$0.6$ 个百分点之后，波动率最低，这与 (i) 和 (ii) 一致。最后，(iii) 中的假设在五个指数中的两个上被拒绝。",
-        "evidence": "For daily returns on five major stock indices, we reject the GJR model for all five and the A-GARCH model for three, suggesting that the STGARCH improves upon both.",
-        "why_relevant": "研究 $\\text{GARCH}$ 类波动率模型的估计与波动率非对称性检验，直接对应 $\\text{GARCH}$ 建模方向。",
-        "v": 4
-      }
     },
     {
       "id": "2504.09380v2",
@@ -966,7 +837,7 @@
       "first_seen_at": "2026-10-18T11:39:51.749426+00:00",
       "last_seen_at": "2026-10-18T11:39:51.749426+00:00",
       "retained_from_previous_run": true,
-      "is_new_this_week": false,
+      "is_new_this_week": true,
       "chinese_summary": {
         "problem": "局部投影（$\\text{LPs}$）在实证宏观经济学中被广泛用于估计对政策干预的脉冲响应，但摘要指出它们在许多方面仍是黑箱：往往不清楚是何种机制或哪些历史事件驱动了某个具体估计。",
         "method": "作者提出一种新的分解，将 $\\text{LP}$ 估计拆解为历史事件贡献之和，即在每个时间戳上是权重与响应变量实现值的乘积。在最小二乘情形下，摘要说明这些权重有两种解释：其一为净化并标准化后的冲击，其二为被投影的政策干预与样本中过去干预之间的接近度得分；第二种解释自然推广到机器学习方法，其中许多方法给出的脉冲响应虽在预测变量上非线性，但仍通过基于接近度的权重对过去结果进行线性加总。",
@@ -1033,7 +904,7 @@
       "first_seen_at": "2026-10-18T11:39:51.749426+00:00",
       "last_seen_at": "2026-10-18T11:39:51.749426+00:00",
       "retained_from_previous_run": true,
-      "is_new_this_week": false,
+      "is_new_this_week": true,
       "chinese_summary": {
         "problem": "双重差分（$\\text{DiD}$）与合成控制（$\\text{SC}$）都是面板数据因果推断中广泛使用的方法，各有不同的优势与局限；论文要提出一种整合两者优势的短面板因果推断方法。",
         "method": "论文提出一种新的短面板因果推断方法，在平行趋势或组别层面 $\\text{SC}$ 条件这两个非嵌套假设中的任一成立下，给出处理组平均处理效应（$\\text{ATT}$）的双重稳健识别策略。基于该识别结果，论文建立估计 $\\text{ATT}$ 的统一半参数框架；识别稳健矩函数在平行趋势假设下满足 Neyman 正交性，但在 $\\text{SC}$ 假设下不满足，因此两种识别策略的渐近方差不同。论文还提出乘子自助法（multiplier bootstrap），在任一假设下一致地近似渐近分布，并将方法扩展到重复截面数据与交错处理设计。",
@@ -1101,7 +972,7 @@
       "first_seen_at": "2026-10-18T11:39:51.749426+00:00",
       "last_seen_at": "2026-10-18T11:39:51.749426+00:00",
       "retained_from_previous_run": true,
-      "is_new_this_week": false,
+      "is_new_this_week": true,
       "chinese_summary": {
         "problem": "论文要解决的问题是：高频数据包含被称为市场微观结构噪声（$\\text{MN}$）的观测误差，而本文要在 $\\text{MN}$ 相依（即自相关且与收益率相关）的情形下处理已实现波动率（$\\text{RV}$）的分解问题。",
         "method": "本文假设存在如 Hansen and Lunde[$2006$] 所报告的相依 $\\text{MN}$，即该噪声自相关并与收益率相关；在此基础上扩展 Nagakura and Watanabe[$2015$] 提出的、将 $\\text{RV}$ 分解为真实波动率与 $\\text{MN}$ 影响的状态空间模型；并通过模拟和实际数据对模型进行比较。",
@@ -1170,7 +1041,7 @@
       "first_seen_at": "2026-10-18T11:39:51.749426+00:00",
       "last_seen_at": "2026-10-18T11:39:51.749426+00:00",
       "retained_from_previous_run": true,
-      "is_new_this_week": false,
+      "is_new_this_week": true,
       "chinese_summary": {
         "problem": "在金融风险管理中，$\\text{VaR}$ 估计潜在组合损失但无法反映某一阈值之外的损失；$\\text{ES}$ 通过给出此类超出损失的條件期望弥补这一局限，是更好的尾部风险度量。然而 $\\text{ES}$ 本身不可诱导，不能通过最小化某个评分函数来估计，尽管其与 $\\text{VaR}$ 的联合可诱导性允许联合估计。",
         "method": "基于 $\\text{ES}$ 与 $\\text{VaR}$ 的联合可诱导性，提出条件自回归预期损失（$\\text{CAESar}$）模型，灵活处理动态模式与异方差性，且不对价格收益做分布假设。$\\text{CAESar}$ 系数的优化分三步：通过 $\\text{CAViaR}$ 回归拟合 $\\text{VaR}$ 分量；将 $\\text{ES}$ 表述为自回归过程；在确保单调性约束以避免分位数交叉的条件下联合估计 $\\text{VaR}$ 与 $\\text{ES}$ 系数。",
@@ -1239,7 +1110,7 @@
       "first_seen_at": "2026-10-18T11:39:51.749426+00:00",
       "last_seen_at": "2026-10-18T11:39:51.749426+00:00",
       "retained_from_previous_run": true,
-      "is_new_this_week": false,
+      "is_new_this_week": true,
       "chinese_summary": {
         "problem": "计量经济学与机器学习社区分别发展的随机方法与神经网络方法在金融波动率预测中长期各自演进、相互交流很少，本文试图弥合这一差距。",
         "method": "本文建立 $\\text{GARCH}$ 族模型与其对应神经网络模型之间的等价关系；基于该等价关系提出 $\\text{GARCH}$-$\\text{NN}$ 方法，将 $\\text{GARCH}$ 模型的神经网络对应物作为组件整合进已有神经网络架构，从而把 $\\text{GARCH}$ 模型中固有的波动率典型事实注入神经网络；并开发 $\\text{GARCH}$-$\\text{LSTM}$ 模型来展示 $\\text{GARCH}$-$\\text{NN}$ 方法的能力。",
@@ -1251,517 +1122,6 @@
         "v": 4
       },
       "weekly_period": "2026-W42"
-    },
-    {
-      "id": "2111.10784v1",
-      "source": "arXiv",
-      "title": "Why Synthetic Control estimators are biased and what to do about it: Introducing Relaxed and Penalized Synthetic Controls",
-      "authors": [
-        "Oscar Engelbrektson"
-      ],
-      "summary": "This paper extends the literature on the theoretical properties of synthetic controls to the case of non-linear generative models, showing that the synthetic control estimator is generally biased in such settings. I derive a lower bound for the bias, showing that the only component of it that is affected by the choice of synthetic control is the weighted sum of pairwise differences between the treated unit and the untreated units in the synthetic control. To address this bias, I propose a novel synthetic control estimator that allows for a constant difference of the synthetic control to the treated unit in the pre-treatment period, and that penalizes the pairwise discrepancies. Allowing for a constant offset makes the model more flexible, thus creating a larger set of potential synthetic controls, and the penalization term allows for the selection of the potential solution that will minimize bias. I study the properties of this estimator and propose a data-driven process for parameterizing the penalization term.",
-      "published": "2021-11-21T10:27:29Z",
-      "updated": "2021-11-21T10:27:29Z",
-      "paper_url": "http://arxiv.org/abs/2111.10784v1",
-      "pdf_url": "https://arxiv.org/pdf/2111.10784v1",
-      "categories": [
-        "econ.EM",
-        "stat.ME"
-      ],
-      "seed_topic": "timeseries_causal",
-      "from_window_search": true,
-      "matches": [
-        {
-          "topic_id": "timeseries_causal",
-          "topic_name": "时间序列与因果识别",
-          "score": 0.9,
-          "level": "high",
-          "reason": "AI 判定：合成控制估计量偏差与改进，核心正是合成控制方法；关键词命中：synthetic control",
-          "keyword_hits": [
-            "synthetic control"
-          ],
-          "mechanical_score": 0.394,
-          "llm_score": 90.0,
-          "llm_source": "cache"
-        }
-      ],
-      "best_match": {
-        "topic_id": "timeseries_causal",
-        "topic_name": "时间序列与因果识别",
-        "score": 0.9,
-        "level": "high",
-        "reason": "$\\text{AI}$ 判定：合成控制估计量偏差与改进，核心正是合成控制方法；关键词命中：synthetic control",
-        "keyword_hits": [
-          "synthetic control"
-        ],
-        "mechanical_score": 0.394,
-        "llm_score": 90.0,
-        "llm_source": "cache"
-      },
-      "first_seen_at": "2026-10-23T05:36:00.476706+00:00",
-      "last_seen_at": "2026-10-23T05:36:00.476706+00:00",
-      "retained_from_previous_run": true,
-      "weekly_period": "2026-W43",
-      "is_new_this_week": false,
-      "chinese_summary": {
-        "problem": "论文要解决的问题是：在非线性生成模型下，合成控制估计量是否有偏，以及若有偏应如何应对。",
-        "method": "论文将合成控制理论性质的研究扩展到非线性生成模型的情形，推导了偏差的下界。论文提出一种新的合成控制估计量，允许处理前时期合成控制与处理单元之间存在常数差异，并对成对差异进行惩罚。论文研究了该估计量的性质，并提出一个数据驱动的过程来参数化惩罚项。",
-        "innovation": "论文将合成控制的理论性质分析扩展到非线性生成模型；推导出偏差下界，并指出偏差中受合成控制选择影响的唯一成分是处理单元与合成控制中未处理单元之间成对差异的加权和；提出允许常数偏移并对成对差异施加惩罚的新合成控制估计量，且给出数据驱动的惩罚项参数化过程。",
-        "conclusion": "论文表明，在非线性生成模型下合成控制估计量通常是有偏的；偏差中受合成控制选择影响的唯一成分是处理单元与合成控制中未处理单元之间成对差异的加权和。",
-        "abstract_zh": "本文将关于合成控制理论性质的文献扩展到非线性生成模型的情形，表明合成控制估计量在此类设定下通常是有偏的。我推导了偏差的一个下界，表明其中受合成控制选择影响的唯一成分是处理单元与合成控制中未处理单元之间成对差异的加权和。为解决这一偏差，我提出一种新的合成控制估计量，该估计量允许在预处理时期合成控制与处理单元之间存在常数差异，并对成对差异进行惩罚。允许常数偏移使模型更加灵活，从而产生更大的潜在合成控制集合，而惩罚项允许选择将使偏差最小化的潜在解。我研究了该估计量的性质，并提出一个数据驱动的过程来参数化惩罚项。",
-        "evidence": "This paper extends the literature on the theoretical properties of synthetic controls to the case of non-linear generative models, showing that the synthetic control estimator is generally biased in such settings.",
-        "why_relevant": "直接研究合成控制估计量的偏差与改进，属于合成控制方法核心议题。",
-        "v": 4,
-        "model": "",
-        "at": "2026-10-18T12:08:37+00:00"
-      }
-    },
-    {
-      "id": "2610.39995v1",
-      "source": "arXiv",
-      "title": "How Different are Different Differences-in-Differences? A Large-Scale Meta-Analysis",
-      "authors": [
-        "Peter Hull"
-      ],
-      "summary": "I use AI-assisted replication to assess the empirical importance of negative weights in two-way fixed effects (TWFE) estimation, drawing on 1,346 staggered-adoption specifications from 108 economics papers. TWFE estimates are highly correlated with estimates from modern difference-in-differences methods, with observed sign reversals in 10.8-14.5% of comparisons and greater precision for TWFE. Hierarchical models that account for estimation noise imply a 91-98% correlation between estimands and a 0.6-2.1% probability of obtaining a statistically significant TWFE estimate with the opposite sign from the modern estimand. These findings suggest negative weights may be a less serious problem in practice, and illustrate how AI can support large-scale empirical assessments of new econometric methods.",
-      "published": "2026-10-29T13:16:00Z",
-      "updated": "2026-10-29T13:16:00Z",
-      "paper_url": "http://arxiv.org/abs/2610.39995v1",
-      "pdf_url": "https://arxiv.org/pdf/2610.39995v1",
-      "categories": [
-        "econ.EM"
-      ],
-      "seed_topic": "volatility_highfreq",
-      "matches": [
-        {
-          "topic_id": "timeseries_causal",
-          "topic_name": "时间序列与因果识别",
-          "score": 0.88,
-          "level": "high",
-          "reason": "AI 判定：大规模元分析评估TWFE与DID新估计量负权重问题，核心属因果识别；关键词命中：difference-in-differences",
-          "keyword_hits": [
-            "difference-in-differences"
-          ],
-          "mechanical_score": 0.212,
-          "llm_score": 88.0,
-          "llm_source": "cache",
-          "llm_reason": "直接评估双重差分中 TWFE 负权重问题，属因果识别核心议题。"
-        }
-      ],
-      "best_match": {
-        "topic_id": "timeseries_causal",
-        "topic_name": "时间序列与因果识别",
-        "score": 0.88,
-        "level": "high",
-        "reason": "$\\text{AI}$ 判定：大规模元分析评估$\\text{TWFE}$与$\\text{DID}$新估计量负权重问题，核心属因果识别；关键词命中：difference-in-differences",
-        "keyword_hits": [
-          "difference-in-differences"
-        ],
-        "mechanical_score": 0.212,
-        "llm_score": 88.0,
-        "llm_source": "cache",
-        "llm_reason": "直接评估双重差分中 $\\text{TWFE}$ 负权重问题，属因果识别核心议题。"
-      },
-      "first_seen_at": "2026-10-30T13:02:25.260239+00:00",
-      "last_seen_at": "2026-10-30T13:02:25.260239+00:00",
-      "retained_from_previous_run": true,
-      "weekly_period": "2026-W44",
-      "is_new_this_week": true,
-      "chinese_summary": {
-        "problem": "论文要评估双向固定效应（$\\text{TWFE}$）估计中负权重的经验重要性。",
-        "method": "作者使用 $\\text{AI}$ 辅助复现，基于来自 $108$ 篇经济学论文的 $1{,}346$ 个交错采纳设定。分析将 $\\text{TWFE}$ 估计与现代双重差分方法的估计进行比较，并使用考虑估计噪声的层次模型。",
-        "innovation": "摘要声称的贡献是：对负权重在实际中是否重要进行大规模经验评估，并说明 $\\text{AI}$ 如何支持对新计量经济学方法的大规模经验评估。",
-        "conclusion": "$\\text{TWFE}$ 估计与现代双重差分方法的估计高度相关，在 $10.8$-$14.5\\%$ 的比较中观察到符号反转，且 $\\text{TWFE}$ 精度更高；考虑估计噪声的层次模型意味着估计量之间相关性为 $91$-$98\\%$，得到与现代表述量符号相反的统计显著 $\\text{TWFE}$ 估计的概率为 $0.6$-$2.1\\%$；这些发现表明负权重在实践中可能不是严重问题。",
-        "abstract_zh": "我使用 $\\text{AI}$ 辅助复现来评估双向固定效应（$\\text{TWFE}$）估计中负权重的经验重要性，依据来自 $108$ 篇经济学论文的 $1{,}346$ 个交错采纳设定。$\\text{TWFE}$ 估计与现代双重差分方法的估计高度相关，在 $10.8$-$14.5\\%$ 的比较中观察到符号反转，且 $\\text{TWFE}$ 精度更高。考虑估计噪声的层次模型意味着估计量之间相关性为 $91$-$98\\%$，得到与现代表述量符号相反的统计显著 $\\text{TWFE}$ 估计的概率为 $0.6$-$2.1\\%$。这些发现表明负权重在实践中可能不是严重问题，并说明 $\\text{AI}$ 如何支持对新计量经济学方法的大规模经验评估。",
-        "evidence": "These findings suggest negative weights may be a less serious problem in practice, and illustrate how AI can support large-scale empirical assessments of new econometric methods.",
-        "why_relevant": "直接评估双重差分中 $\\text{TWFE}$ 负权重问题，属因果识别核心议题。",
-        "v": 4
-      }
-    },
-    {
-      "id": "2610.39636v1",
-      "source": "arXiv",
-      "title": "Information Flow and Market Risk: Transformer-Based Evidence on Sentiment and Volatility Dynamics",
-      "authors": [
-        "Szymon Lis",
-        "Robert Ślepaczuk",
-        "Paweł Sakowski"
-      ],
-      "summary": "This study examines whether transformer-based financial news sentiment improves equity volatility forecasts beyond conventional market-based predictors. Using data for eleven US stocks, we compare volatility persistence models with specifications incorporating the VIX, AAII investor sentiment, and news sentiment extracted using ModernFinBERT. The forecasting target is annualized volatility constructed from future averages of trailing 252-session Yang-Zhang estimates, evaluated at horizons of 1, 5, and 22 trading days. Models are assessed through walk-forward testing with expanding and rolling estimation windows, fixed initial hyperparameter selection, and statistical comparisons accounting for multiple testing and serial dependence. Results show that a naive persistence benchmark achieves the lowest average QLIKE loss at all horizons. Although HAR-VIX produces the largest number of individual forecasting wins under expanding windows, it does not achieve the lowest mean loss. Adding text-based sentiment improves HAR forecasts in only two of 33 expanding-window comparisons, and neither improvement remains statistically significant under longer HAC bandwidths. A blinded audit of 2,700 news texts further characterizes the agreement and confidence patterns of ModernFinBERT classifications. The findings do not establish a general incremental forecasting advantage from transformer-based news sentiment. They highlight the importance of strong benchmarks, temporal alignment, robust inference, and careful evaluation of text-derived predictors.",
-      "published": "2026-10-29T08:57:51Z",
-      "updated": "2026-10-29T08:57:51Z",
-      "paper_url": "http://arxiv.org/abs/2610.39636v1",
-      "pdf_url": "https://arxiv.org/pdf/2610.39636v1",
-      "categories": [
-        "q-fin.RM"
-      ],
-      "seed_topic": "risk_extreme",
-      "matches": [
-        {
-          "topic_id": "volatility_highfreq",
-          "topic_name": "波动率建模与高频计量",
-          "score": 0.88,
-          "level": "high",
-          "reason": "AI 判定：新闻情绪与VIX对波动率预测，HAR模型与QLIKE评估",
-          "keyword_hits": [],
-          "mechanical_score": 0.146,
-          "llm_score": 88.0,
-          "llm_source": "cache",
-          "llm_reason": "涉及波动率预测、HAR 模型与 QLIKE 评估，属波动率建模范畴。"
-        }
-      ],
-      "best_match": {
-        "topic_id": "volatility_highfreq",
-        "topic_name": "波动率建模与高频计量",
-        "score": 0.88,
-        "level": "high",
-        "reason": "$\\text{AI}$ 判定：新闻情绪与$\\text{VIX}$对波动率预测，$\\text{HAR}$模型与$\\text{QLIKE}$评估",
-        "keyword_hits": [],
-        "mechanical_score": 0.146,
-        "llm_score": 88.0,
-        "llm_source": "cache",
-        "llm_reason": "涉及波动率预测、$\\text{HAR}$ 模型与 $\\text{QLIKE}$ 评估，属波动率建模范畴。"
-      },
-      "first_seen_at": "2026-10-30T13:02:25.260239+00:00",
-      "last_seen_at": "2026-10-30T13:02:25.260239+00:00",
-      "retained_from_previous_run": true,
-      "weekly_period": "2026-W44",
-      "is_new_this_week": true,
-      "chinese_summary": {
-        "problem": "本研究考察基于 transformer 的金融新闻情绪能否在传统市场类预测变量之外改进股票波动率预测。",
-        "method": "使用十一只美国股票的数据，将波动率持续性模型与纳入 $\\text{VIX}$、$\\text{AAII}$ 投资者情绪以及用 $\\text{ModernFinBERT}$ 提取的新闻情绪的设定进行比较。预测目标是年化波动率，由未来 trailing $252$-session Yang-Zhang 估计的均值构造，并在 $1$、$5$、$22$ 个交易日horizon上评估。模型通过 walk-forward 检验评估，采用扩展与滚动估计窗口、固定初始超参数选择，以及考虑多重检验与序列相关的统计比较。",
-        "innovation": "摘要声称的做法是将基于 transformer 的金融新闻情绪（$\\text{ModernFinBERT}$）与 $\\text{VIX}$、$\\text{AAII}$ 投资者情绪一并纳入波动率持续性模型的比较框架，并在 $1$、$5$、$22$ 个交易日horizon上以 $\\text{QLIKE}$ 损失评估；同时对 $2{,}700$ 条新闻文本进行 blinded audit 以刻画 $\\text{ModernFinBERT}$ 分类的一致性与置信度模式。",
-        "conclusion": "一个 naive persistence benchmark 在所有 horizon 上取得最低的平均 $\\text{QLIKE}$ 损失；$\\text{HAR}$-$\\text{VIX}$ 在扩展窗口下产生最多的单次预测胜出，但未取得最低平均损失；加入文本情绪仅在 $33$ 次扩展窗口比较中的 $2$ 次改进 $\\text{HAR}$ 预测，且这两次改进在更长 $\\text{HAC}$ 带宽下均不统计显著。",
-        "abstract_zh": "本研究考察基于 transformer 的金融新闻情绪能否在传统市场类预测变量之外改进股票波动率预测。使用十一只美国股票的数据，我们将波动率持续性模型与纳入 $\\text{VIX}$、$\\text{AAII}$ 投资者情绪以及用 $\\text{ModernFinBERT}$ 提取的新闻情绪的设定进行比较。预测目标是年化波动率，由未来 trailing $252$-session Yang-Zhang 估计的均值构造，并在 $1$、$5$、$22$ 个交易日horizon上评估。模型通过 walk-forward 检验评估，采用扩展与滚动估计窗口、固定初始超参数选择，以及考虑多重检验与序列相关的统计比较。结果显示，一个 naive persistence benchmark 在所有 horizon 上取得最低的平均 $\\text{QLIKE}$ 损失。尽管 $\\text{HAR}$-$\\text{VIX}$ 在扩展窗口下产生最多的单次预测胜出，但它未取得最低平均损失。加入文本情绪仅在 $33$ 次扩展窗口比较中的 $2$ 次改进 $\\text{HAR}$ 预测，且这两次改进在更长 $\\text{HAC}$ 带宽下均不统计显著。对 $2{,}700$ 条新闻文本的 blinded audit 进一步刻画了 $\\text{ModernFinBERT}$ 分类的一致性与置信度模式。这些发现未能确立基于 transformer 的新闻情绪具有一般性的增量预测优势。它们凸显了强 benchmark、时间对齐、稳健推断以及对文本衍生预测变量进行谨慎评估的重要性。",
-        "evidence": "Results show that a naive persistence benchmark achieves the lowest average QLIKE loss at all horizons.",
-        "why_relevant": "涉及波动率预测、$\\text{HAR}$ 模型与 $\\text{QLIKE}$ 评估，属波动率建模范畴。",
-        "v": 4
-      }
-    },
-    {
-      "id": "2610.31537v1",
-      "source": "arXiv",
-      "title": "Causal inference in staggered adoption panels: The correct comparison set depends on your intervention",
-      "authors": [
-        "Ian Lundberg",
-        "Yaling Xu"
-      ],
-      "summary": "A powerful data structure for causal inference is staggered adoption: many units are observed over many time periods, during which some units adopt an irreversible treatment at various time points while others remain untreated. Popular methods that apply in this setting include difference in difference, fixed effects, matching, and synthetic control. All of these methods compare the future outcomes of treatment adopters and non-adopters to answer the question: for units who adopt treatment, what outcomes would have been realized if they had remained untreated? We show that this question actually hides two very different causal questions of interest. The first is what would have happened under a momentary intervention to prevent treatment at its factual adoption time. The second is what would have happened to a treated unit under a longitudinal ban preventing treatment at all periods until outcome measurement. We show how to answer each question under conditionally ignorable treatment adoption or under parallel trends. We highlight that common methods cannot answer the second question because this question requires a time-varying comparison set with time-varying weights.",
-      "published": "2026-10-22T16:46:04Z",
-      "updated": "2026-10-22T16:46:04Z",
-      "paper_url": "http://arxiv.org/abs/2610.31537v1",
-      "pdf_url": "https://arxiv.org/pdf/2610.31537v1",
-      "categories": [
-        "stat.AP",
-        "econ.EM"
-      ],
-      "seed_topic": "volatility_highfreq",
-      "matches": [
-        {
-          "topic_id": "timeseries_causal",
-          "topic_name": "时间序列与因果识别",
-          "score": 0.88,
-          "level": "high",
-          "reason": "AI 判定：交错采纳面板中DID、合成控制比较集与因果估计目标的理论辨析；关键词命中：synthetic control",
-          "keyword_hits": [
-            "synthetic control"
-          ],
-          "mechanical_score": 0.332,
-          "llm_score": 88.0,
-          "llm_source": "llm",
-          "llm_reason": "直接辨析交错采纳面板中DID与合成控制的比较集与因果估计目标。"
-        }
-      ],
-      "best_match": {
-        "topic_id": "timeseries_causal",
-        "topic_name": "时间序列与因果识别",
-        "score": 0.88,
-        "level": "high",
-        "reason": "$\\text{AI}$ 判定：交错采纳面板中$\\text{DID}$、合成控制比较集与因果估计目标的理论辨析；关键词命中：synthetic control",
-        "keyword_hits": [
-          "synthetic control"
-        ],
-        "mechanical_score": 0.332,
-        "llm_score": 88.0,
-        "llm_source": "llm",
-        "llm_reason": "直接辨析交错采纳面板中$\\text{DID}$与合成控制的比较集与因果估计目标。"
-      },
-      "first_seen_at": "2026-10-23T05:36:00.476706+00:00",
-      "last_seen_at": "2026-10-23T05:36:00.476706+00:00",
-      "retained_from_previous_run": true,
-      "weekly_period": "2026-W43",
-      "is_new_this_week": false,
-      "chinese_summary": {
-        "problem": "在交错采纳（staggered adoption）面板中，双重差分、固定效应、匹配与合成控制等方法都通过比较采纳处理者与未采纳者的未来结果来回答「若这些单位未受处理，结果会如何」，但摘要指出这一问题实际上隐藏了两个非常不同的因果问题。",
-        "method": "论文区分两个因果问题：其一是在事实采纳时点施加瞬时干预以阻止处理的后果；其二是在纵向禁令下阻止所有时期直至结果测量时的后果。论文展示如何在条件可忽略的处理采纳或平行趋势假设下分别回答这两个问题。",
-        "innovation": "论文指出常用方法无法回答第二个问题，因为该问题需要一个具有时变权重的时变比较集；并给出在两个识别假设下分别回答两个因果问题的做法。",
-        "conclusion": "摘要明确主张：常用方法无法回答第二个问题，因为该问题需要一个具有时变权重的时变比较集；两个问题可分别在条件可忽略的处理采纳或平行趋势下回答。",
-        "abstract_zh": "一个用于因果推断的强大数据结构是交错采纳：许多单位在多个时期被观测，在此期间一些单位在不同时点采纳一种不可逆处理，而其他单位保持未处理。适用于这一情形的流行方法包括双重差分、固定效应、匹配和合成控制。所有这些方法都比较处理采纳者与未采纳者的未来结果，以回答这个问题：对于采纳处理的单位，如果它们保持未处理，本会实现什么结果？我们表明，这个问题实际上隐藏了两个非常不同的、令人感兴趣的因果问题。第一个是在事实采纳时施加瞬时干预以阻止处理的后果。第二个是在纵向禁令下阻止所有时期直至结果测量时，一个受处理单位本会发生的后果。我们展示如何在条件可忽略的处理采纳下或在平行趋势下回答每个问题。我们强调，常用方法无法回答第二个问题，因为该问题需要一个具有时变权重的时变比较集。",
-        "evidence": "We highlight that common methods cannot answer the second question because this question requires a time-varying comparison set with time-varying weights.",
-        "why_relevant": "直接辨析交错采纳面板中$\\text{DID}$与合成控制的比较集与因果估计目标。",
-        "v": 4
-      }
-    },
-    {
-      "id": "2609.17170v2",
-      "source": "arXiv",
-      "title": "Causal Inference under Dynamic Selection and Latent Heterogeneity",
-      "authors": [
-        "Weisheng Zhang"
-      ],
-      "summary": "I study dynamic treatment effects in panel data under staggered adoption when treatment timing depends jointly on unobserved time-invariant heterogeneity and time-varying pretreatment covariates, including lagged outcomes. Untreated potential outcomes follow a nonparametric dynamic panel model that allows flexible interactions between time-varying covariates and latent heterogeneity. I use pretreatment outcome histories to find individuals with similar time-invariant latent factors, and the key requirement is that these histories are sufficiently informative about those latent factors. I develop an identification strategy for the dynamic average treatment effect on the treated (ATT) and propose kernel-based doubly robust estimators for the dynamic ATT. I further combine double cross-fitting with undersmoothing and show that, under suitable regularity conditions, the proposed estimators are root-n consistent, asymptotically normal, and asymptotically unbiased. The simulation study demonstrates that the proposed method provides accurate inference across a wide range of data-generating processes. I illustrate the method with an application to the U.S. family planning program studied by Bailey (2012) and reestimate its effect on fertility rates.",
-      "published": "2026-09-15T13:33:19Z",
-      "updated": "2026-10-21T20:29:22Z",
-      "paper_url": "http://arxiv.org/abs/2609.17170v2",
-      "pdf_url": "https://arxiv.org/pdf/2609.17170v2",
-      "categories": [
-        "econ.EM"
-      ],
-      "seed_topic": "volatility_highfreq",
-      "matches": [
-        {
-          "topic_id": "timeseries_causal",
-          "topic_name": "时间序列与因果识别",
-          "score": 0.88,
-          "level": "high",
-          "reason": "AI 判定：交错采纳下动态处理效应与面板识别，双重稳健估计，正属因果识别核心",
-          "keyword_hits": [],
-          "mechanical_score": 0.208,
-          "llm_score": 88.0,
-          "llm_source": "llm",
-          "llm_reason": "交错采纳下的动态处理效应与面板识别，属因果识别核心方法。"
-        }
-      ],
-      "best_match": {
-        "topic_id": "timeseries_causal",
-        "topic_name": "时间序列与因果识别",
-        "score": 0.88,
-        "level": "high",
-        "reason": "$\\text{AI}$ 判定：交错采纳下动态处理效应与面板识别，双重稳健估计，正属因果识别核心",
-        "keyword_hits": [],
-        "mechanical_score": 0.208,
-        "llm_score": 88.0,
-        "llm_source": "llm",
-        "llm_reason": "交错采纳下的动态处理效应与面板识别，属因果识别核心方法。"
-      },
-      "first_seen_at": "2026-10-23T05:36:00.476706+00:00",
-      "last_seen_at": "2026-10-23T05:36:00.476706+00:00",
-      "retained_from_previous_run": true,
-      "weekly_period": "2026-W43",
-      "is_new_this_week": false,
-      "chinese_summary": {
-        "problem": "论文研究面板数据在交错采纳（staggered adoption）下的动态处理效应，其中处理时点同时依赖于不可观测的时不变异质性与时变预处理协变量（包括滞后结果）。",
-        "method": "未处理潜在结果服从非参数动态面板模型，允许时变协变量与潜在异质性之间存在灵活交互。作者利用预处理结果历史寻找具有相似时不变潜在因子的个体，其关键要求是这些历史对潜在因子具有充分信息性。作者为动态 $\\text{ATT}$ 建立识别策略，并提出基于核的双重稳健估计量，进一步将双重交叉拟合与 undersmoothing 结合。",
-        "innovation": "针对处理时点同时依赖不可观测时不变异质性与时变预处理协变量的交错采纳情形，提出动态 $\\text{ATT}$ 的识别策略；提出基于核的双重稳健估计量，并将双重交叉拟合与 undersmoothing 结合。",
-        "conclusion": "在适当的正则条件下，所提出的估计量是根号 $n$ 一致的、渐近正态的且渐近无偏的；模拟研究表明该方法在广泛的数据生成过程中提供准确的推断。",
-        "abstract_zh": "我研究面板数据在交错采纳下的动态处理效应，此时处理时点同时依赖于不可观测的时不变异质性和时变预处理协变量，包括滞后结果。未处理的潜在结果服从一个非参数动态面板模型，该模型允许时变协变量与潜在异质性之间的灵活交互。我利用预处理结果历史来寻找具有相似时不变潜在因子的个体，关键要求是这些历史对潜在因子具有充分的信息性。我为处理组的动态平均处理效应（$\\text{ATT}$）建立识别策略，并提出基于核的动态 $\\text{ATT}$ 双重稳健估计量。我进一步将双重交叉拟合与 undersmoothing 结合，并证明在适当的正则条件下，所提出的估计量是根号 $n$ 一致的、渐近正态的且渐近无偏的。模拟研究表明，所提出的方法在广泛的数据生成过程中提供准确的推断。我用一个应用来说明该方法，该应用针对 Bailey ($2012$) 研究的美国计划生育项目，并重新估计其对生育率的影响。",
-        "evidence": "I further combine double cross-fitting with undersmoothing and show that, under suitable regularity conditions, the proposed estimators are root-n consistent, asymptotically normal, and asymptotically unbiased.",
-        "why_relevant": "交错采纳下的动态处理效应与面板识别，属因果识别核心方法。",
-        "v": 4
-      }
-    },
-    {
-      "id": "2609.20264v1",
-      "source": "arXiv",
-      "title": "Risk-Set Transported Synthetic Control with Difference-in-Differences Adjustment under Staggered Treatment Adoption",
-      "authors": [
-        "Mojtaba Eslami"
-      ],
-      "summary": "In staggered treatment-adoption designs, later-treated units are valid controls for an earlier-treated cohort only until their own treatment begins, so the admissible donor set contracts with event time. Fixing the donor pool at the longest horizon discards temporarily eligible donors, whereas re-estimating synthetic-control weights independently at each horizon can make the counterfactual unstable as donor composition changes. We propose Risk-Set Transported Synthetic Control with Difference-in-Differences Adjustment (RT-SC-DiD). For each cohort and event-time horizon, the estimator fits weights on the currently untreated donors while shrinking them toward a transported reference that reallocates the weight of exiting donors to similar surviving donors. A DiD baseline correction removes persistent level differences. We characterize distortion from horizon-by-horizon reoptimization, derive the loading change induced by naive deletion and renormalization, and give a conditional recursive bound for error propagation under an explicitly assumed regularity condition on the transport map. We also introduce donor-support diagnostics and a donor-only placebo procedure for selecting the transport penalty. In an 80-replication pilot comparison and a separate 40-replication-per-value sensitivity analysis, intermediate transport regularization reduces average RMSE relative to independent horizon-specific estimation and strong anchoring. This evidence supports the method's bias-variance motivation but is not a proved guarantee. RT-SC-DiD is intended for settings where later-treated units provide useful short-horizon information and donor support contracts materially over time. Existing staggered synthetic-control and synthetic difference-in-differences methods do not, to our knowledge, explicitly regularize within-cohort weight sequences toward transported references as risk sets contract.",
-      "published": "2026-07-29T01:10:54Z",
-      "updated": "2026-07-29T01:10:54Z",
-      "paper_url": "http://arxiv.org/abs/2609.20264v1",
-      "pdf_url": "https://arxiv.org/pdf/2609.20264v1",
-      "categories": [
-        "stat.AP",
-        "cs.AI",
-        "econ.EM",
-        "q-fin.ST",
-        "stat.ME"
-      ],
-      "seed_topic": "timeseries_causal",
-      "from_window_search": true,
-      "matches": [
-        {
-          "topic_id": "timeseries_causal",
-          "topic_name": "时间序列与因果识别",
-          "score": 0.88,
-          "level": "high",
-          "reason": "AI 判定：合成控制与双重差分结合，处理交错采纳，属因果识别核心方法；关键词命中：difference-in-differences、synthetic control",
-          "keyword_hits": [
-            "difference-in-differences",
-            "synthetic control"
-          ],
-          "mechanical_score": 0.512,
-          "llm_score": 88.0,
-          "llm_source": "cache"
-        }
-      ],
-      "best_match": {
-        "topic_id": "timeseries_causal",
-        "topic_name": "时间序列与因果识别",
-        "score": 0.88,
-        "level": "high",
-        "reason": "$\\text{AI}$ 判定：合成控制与双重差分结合，处理交错采纳，属因果识别核心方法；关键词命中：difference-in-differences、synthetic control",
-        "keyword_hits": [
-          "difference-in-differences",
-          "synthetic control"
-        ],
-        "mechanical_score": 0.512,
-        "llm_score": 88.0,
-        "llm_source": "cache"
-      },
-      "first_seen_at": "2026-10-23T05:36:00.476706+00:00",
-      "last_seen_at": "2026-10-23T05:36:00.476706+00:00",
-      "retained_from_previous_run": true,
-      "weekly_period": "2026-W43",
-      "is_new_this_week": false,
-      "chinese_summary": {
-        "problem": "在交错处理采纳设计中，后处理单元仅在自身处理开始前是早处理队列的有效控制，因此可允许的供体集合随事件时间收缩；将供体池固定在最长horizon会丢弃暂时合格的供体，而在每个horizon独立重新估计合成控制权重会因供体构成变化而使反事实不稳定。",
-        "method": "提出 Risk-Set Transported Synthetic Control with Difference-in-Differences Adjustment ($\\text{RT}$-$\\text{SC}$-$\\text{DiD}$)。对每个队列和事件时间horizon，估计器在当前未处理供体上拟合权重，同时将其向一个transported reference收缩，该参考把退出供体的权重重新分配给相似的存活供体；并用$\\text{DiD}$基线校正去除持久水平差异。作者刻画了逐horizon重新优化带来的扭曲，推导了朴素删除与重新归一化引起的loading change，并在对transport map显式假设的正则条件下给出误差传播的条件递归界；还引入donor-support diagnostics和donor-only placebo procedure来选择transport penalty。",
-        "innovation": "针对风险集收缩下队列内权重序列，显式地向transported references正则化；刻画逐horizon重新优化的扭曲并推导朴素删除与重新归一化的loading change；给出误差传播的条件递归界，并提出donor-support diagnostics与donor-only placebo procedure用于选择transport penalty。",
-        "conclusion": "在$80$次重复的pilot比较和另一项每个取值$40$次重复的敏感性分析中，intermediate transport regularization相对于独立horizon特定估计和strong anchoring降低了平均$\\text{RMSE}$；该证据支持方法的偏差-方差动机，但不是已证明的保证。",
-        "abstract_zh": "在交错处理采纳设计中，后处理单元仅在自身处理开始前是早处理队列的有效控制，因此可允许的供体集合随事件时间收缩。将供体池固定在最长horizon会丢弃暂时合格的供体，而在每个horizon独立重新估计合成控制权重会因供体构成变化而使反事实不稳定。我们提出 Risk-Set Transported Synthetic Control with Difference-in-Differences Adjustment ($\\text{RT}$-$\\text{SC}$-$\\text{DiD}$)。对每个队列和事件时间horizon，估计器在当前未处理供体上拟合权重，同时将其向一个transported reference收缩，该参考把退出供体的权重重新分配给相似的存活供体。$\\text{DiD}$基线校正去除持久水平差异。我们刻画了逐horizon重新优化带来的扭曲，推导了朴素删除与重新归一化引起的loading change，并在对transport map显式假设的正则条件下给出误差传播的条件递归界。我们还引入donor-support diagnostics和donor-only placebo procedure来选择transport penalty。在$80$次重复的pilot比较和另一项每个取值$40$次重复的敏感性分析中，intermediate transport regularization相对于独立horizon特定估计和strong anchoring降低了平均$\\text{RMSE}$。该证据支持方法的偏差-方差动机，但不是已证明的保证。$\\text{RT}$-$\\text{SC}$-$\\text{DiD}$ intended for settings where later-treated units provide useful short-horizon information and donor support contracts materially over time。据我们所知，现有的交错合成控制和合成双重差分方法没有在风险集收缩时显式地将队列内权重序列向transported references正则化。",
-        "evidence": "In an 80-replication pilot comparison and a separate 40-replication-per-value sensitivity analysis, intermediate transport regularization reduces average RMSE relative to independent horizon-specific estimation and strong anchoring.",
-        "why_relevant": "合成控制与双重差分结合处理交错采纳，属因果识别核心方法。",
-        "v": 4,
-        "model": "",
-        "at": "2026-10-18T12:08:39+00:00"
-      }
-    },
-    {
-      "id": "2604.27035v1",
-      "source": "arXiv",
-      "title": "Doubly robust local projections difference-in-differences",
-      "authors": [
-        "Daniel de Abreu Pereira Uhr",
-        "Guilherme Valle Moura"
-      ],
-      "summary": "This paper develops a doubly robust extension of local-projections difference-in-differences (LP-DiD) for staggered absorbing treatments. The resulting estimator, DRLPDID, preserves the LP-DiD local-stack ATT target and is consistent when either the local untreated-outcome regression or the local treatment-probability model is correctly specified. It also delivers influence-function-based inference for post-treatment summaries and multiplier-bootstrap bands for dynamic paths. In Monte Carlo designs with covariate-driven selection, DRLPDID matches regression-adjusted LP-DiD under outcome-model alignment and clearly outperforms the IPT-only variant under propensity-score misspecification. In the no-fault-divorce application, DRLPDID tracks robust staggered-adoption estimators and is less negative than unadjusted LP-DiD.",
-      "published": "2026-04-29T16:10:04Z",
-      "updated": "2026-04-29T16:10:04Z",
-      "paper_url": "http://arxiv.org/abs/2604.27035v1",
-      "pdf_url": "https://arxiv.org/pdf/2604.27035v1",
-      "categories": [
-        "econ.EM"
-      ],
-      "seed_topic": "timeseries_causal",
-      "from_window_search": true,
-      "matches": [
-        {
-          "topic_id": "timeseries_causal",
-          "topic_name": "时间序列与因果识别",
-          "score": 0.88,
-          "level": "high",
-          "reason": "AI 判定：局部投影双重差分双重稳健估计，正属该方向核心识别方法；关键词命中：local projections、difference-in-differences",
-          "keyword_hits": [
-            "local projections",
-            "difference-in-differences"
-          ],
-          "mechanical_score": 0.346,
-          "llm_score": 88.0,
-          "llm_source": "cache"
-        }
-      ],
-      "best_match": {
-        "topic_id": "timeseries_causal",
-        "topic_name": "时间序列与因果识别",
-        "score": 0.88,
-        "level": "high",
-        "reason": "$\\text{AI}$ 判定：局部投影双重差分双重稳健估计，正属该方向核心识别方法；关键词命中：local projections、difference-in-differences",
-        "keyword_hits": [
-          "local projections",
-          "difference-in-differences"
-        ],
-        "mechanical_score": 0.346,
-        "llm_score": 88.0,
-        "llm_source": "cache"
-      },
-      "first_seen_at": "2026-10-23T05:36:00.476706+00:00",
-      "last_seen_at": "2026-10-23T05:36:00.476706+00:00",
-      "retained_from_previous_run": true,
-      "weekly_period": "2026-W43",
-      "is_new_this_week": false,
-      "chinese_summary": {
-        "problem": "论文针对交错吸收处理（staggered absorbing treatments）情形下的局部投影双重差分（$\\text{LP}$-$\\text{DiD}$），要给出一个双重稳健的扩展估计量。",
-        "method": "论文提出估计量 $\\text{DRLPDID}$，它保留 $\\text{LP}$-$\\text{DiD}$ 的 local-stack $\\text{ATT}$ 目标；当局部未处理结果回归或局部处理概率模型二者之一被正确设定时，该估计量一致。它还给出基于影响函数的后处理汇总推断，以及动态路径的 multiplier-bootstrap 带。",
-        "innovation": "论文将双重稳健性引入 $\\text{LP}$-$\\text{DiD}$，用于交错吸收处理；在保持 $\\text{LP}$-$\\text{DiD}$ 的 local-stack $\\text{ATT}$ 目标的同时，使估计量在局部未处理结果回归或局部处理概率模型任一正确设定下保持一致；并配套提供基于影响函数的后处理汇总推断与动态路径的 multiplier-bootstrap 带。",
-        "conclusion": "在存在协变量驱动选择（covariate-driven selection）的 Monte Carlo 设计中，$\\text{DRLPDID}$ 在结果模型对齐时与回归调整的 $\\text{LP}$-$\\text{DiD}$ 相当，在倾向得分误设定下明显优于仅用 $\\text{IPT}$ 的变体；在 no-fault-divorce 应用中，$\\text{DRLPDID}$ 与稳健的交错采纳估计量走势一致，且比未调整的 $\\text{LP}$-$\\text{DiD}$ 负得更少。",
-        "abstract_zh": "本文为交错吸收处理下的局部投影双重差分（$\\text{LP}$-$\\text{DiD}$）发展了一个双重稳健扩展。所得估计量 $\\text{DRLPDID}$ 保留了 $\\text{LP}$-$\\text{DiD}$ 的 local-stack $\\text{ATT}$ 目标，并在局部未处理结果回归或局部处理概率模型二者之一被正确设定时一致。它还给出基于影响函数的后处理汇总推断，以及动态路径的 multiplier-bootstrap 带。在存在协变量驱动选择的 Monte Carlo 设计中，$\\text{DRLPDID}$ 在结果模型对齐时与回归调整的 $\\text{LP}$-$\\text{DiD}$ 相当，在倾向得分误设定下明显优于仅用 $\\text{IPT}$ 的变体。在 no-fault-divorce 应用中，$\\text{DRLPDID}$ 与稳健的交错采纳估计量走势一致，且比未调整的 $\\text{LP}$-$\\text{DiD}$ 负得更少。",
-        "evidence": "In Monte Carlo designs with covariate-driven selection, DRLPDID matches regression-adjusted LP-DiD under outcome-model alignment and clearly outperforms the IPT-only variant under propensity-score misspecification.",
-        "why_relevant": "局部投影与双重差分结合并加双重稳健识别，正属时间序列因果识别核心方法。",
-        "v": 4,
-        "model": "",
-        "at": "2026-10-18T12:08:40+00:00"
-      }
-    },
-    {
-      "id": "2603.27458v1",
-      "source": "arXiv",
-      "title": "Extreme Value Inference for CoVaR and Systemic Risk",
-      "authors": [
-        "Xiaoting Li",
-        "Harry Joe"
-      ],
-      "summary": "We develop an extreme value framework for CoVaR centered on $v(q \\mid p ; C)$, the copula-adjusted probability level, or equivalently, the CoVaR on the uniform (0,1) scale. We characterize the possible tail regimes of $v(q \\mid p ; C)$ through the limit behavior of the copula conditional distribution and show that these regimes are determined by the joint tail expansions of the copula. This leads to tractable conditions for identifying the tail regime and deriving the asymptotic behavior of $v(q | p ; C)$. Building on this characterization, we propose a minimum-distance estimation approach for CoVaR that accommodates multiple tail regimes. The methodology links CoVaR and $Δ$CoVaR to the underlying joint tail behavior, thereby providing a clear interpretation of these measures in systemic risk analysis. An empirical analysis across U.S. sectors demonstrates the practical value of the approach for assessing systemic risk contributions and exposures with important implications for macroprudential surveillance and risk management.",
-      "published": "2026-03-29T00:45:28Z",
-      "updated": "2026-03-29T00:45:28Z",
-      "paper_url": "http://arxiv.org/abs/2603.27458v1",
-      "pdf_url": "https://arxiv.org/pdf/2603.27458v1",
-      "categories": [
-        "stat.ME"
-      ],
-      "seed_topic": "risk_extreme",
-      "from_window_search": true,
-      "matches": [
-        {
-          "topic_id": "risk_extreme",
-          "topic_name": "风险测度与尾部风险",
-          "score": 0.88,
-          "level": "high",
-          "reason": "AI 判定：用极值理论与Copula对CoVaR做尾部推断，正是系统性尾部风险核心；关键词命中：extreme value、systemic risk、copula",
-          "keyword_hits": [
-            "extreme value",
-            "systemic risk",
-            "copula"
-          ],
-          "mechanical_score": 0.315,
-          "llm_score": 88.0,
-          "llm_source": "cache"
-        }
-      ],
-      "best_match": {
-        "topic_id": "risk_extreme",
-        "topic_name": "风险测度与尾部风险",
-        "score": 0.88,
-        "level": "high",
-        "reason": "$\\text{AI}$ 判定：用极值理论与Copula对$\\text{CoVaR}$做尾部推断，正是系统性尾部风险核心；关键词命中：extreme value、systemic risk、copula",
-        "keyword_hits": [
-          "extreme value",
-          "systemic risk",
-          "copula"
-        ],
-        "mechanical_score": 0.315,
-        "llm_score": 88.0,
-        "llm_source": "cache"
-      },
-      "first_seen_at": "2026-10-30T13:02:25.260239+00:00",
-      "last_seen_at": "2026-10-30T13:02:25.260239+00:00",
-      "retained_from_previous_run": true,
-      "weekly_period": "2026-W44",
-      "is_new_this_week": true,
-      "chinese_summary": {
-        "problem": "论文要解决的问题是：为 $\\text{CoVaR}$ 建立一个极值框架，并刻画 $v(q \\mid p ; C)$（即 copula 调整后的概率水平，或等价地，在均匀 $(0,1)$ 尺度上的 $\\text{CoVaR}$）可能的尾部机制。",
-        "method": "论文通过 copula 条件分布的极限行为刻画 $v(q \\mid p ; C)$ 的可能尾部机制，并表明这些机制由 copula 的联合尾部展开决定。由此得到可处理的条件，用于识别尾部机制并推导 $v(q | p ; C)$ 的渐近行为。在此基础上，论文提出一种适应多种尾部机制的最小距离 $\\text{CoVaR}$ 估计方法。",
-        "innovation": "论文提出一个以 $v(q \\mid p ; C)$ 为中心的 $\\text{CoVaR}$ 极值框架；通过 copula 条件分布的极限行为刻画 $v(q \\mid p ; C)$ 的可能尾部机制，并表明这些机制由 copula 的联合尾部展开决定；给出识别尾部机制与推导 $v(q | p ; C)$ 渐近行为的可处理条件，并提出适应多种尾部机制的最小距离 $\\text{CoVaR}$ 估计方法，将 $\\text{CoVaR}$ 与 $\\Delta$$\\text{CoVaR}$ 联系到潜在的联合尾部行为。",
-        "conclusion": "论文表明 $v(q \\mid p ; C)$ 的可能尾部机制由 copula 的联合尾部展开决定，并由此得到识别尾部机制与推导 $v(q | p ; C)$ 渐近行为的可处理条件；所提方法将 $\\text{CoVaR}$ 与 $\\Delta$$\\text{CoVaR}$ 联系到潜在的联合尾部行为，从而为这些系统性风险度量提供清晰解释。",
-        "abstract_zh": "我们为 $\\text{CoVaR}$ 建立一个极值框架，其中心是 $v(q \\mid p ; C)$，即 copula 调整后的概率水平，或等价地，在均匀 $(0,1)$ 尺度上的 $\\text{CoVaR}$。我们通过 copula 条件分布的极限行为刻画 $v(q \\mid p ; C)$ 的可能尾部机制，并表明这些机制由 copula 的联合尾部展开决定。这引出可处理的条件，用于识别尾部机制并推导 $v(q | p ; C)$ 的渐近行为。基于这一刻画，我们提出一种适应多种尾部机制的最小距离 $\\text{CoVaR}$ 估计方法。该方法将 $\\text{CoVaR}$ 与 $\\Delta$$\\text{CoVaR}$ 联系到潜在的联合尾部行为，从而为这些度量在系统性风险分析中提供清晰的解释。一项跨美国行业的实证分析展示了该方法在评估系统性风险贡献与暴露方面的实用价值，并对宏观审慎监管与风险管理具有重要含义。",
-        "evidence": "Building on this characterization, we propose a minimum-distance estimation approach for CoVaR that accommodates multiple tail regimes.",
-        "why_relevant": "用极值理论与Copula对$\\text{CoVaR}$做尾部推断，直接对应系统性尾部风险研究。",
-        "v": 4,
-        "model": "",
-        "at": "2026-10-18T12:08:42+00:00"
-      }
     },
     {
       "id": "2610.14959v3",
@@ -1952,6 +1312,72 @@
         "abstract_zh": "一条与其自身反向无法区分的路径不携带时间箭头，因此时间不可逆性是从轨迹本身读出有向机制的必要条件。在金融中，它此前只在收益率和波动率等标量序列上被测量。我们将粗粒化限价订单簿路径的不可逆率定义为每个事件的前向与反向对数密度比，并用一个顺序不变 $\\text{MLP}$ 和一个接收相同块的时序卷积网络从三周 Nasdaq market-by-order 数据中估计它。对 $\\text{NVDA}$，顺序不变与顺序敏感估计分别为每事件 $0.036$ 与 $0.054$ nats。二者之差即 ordering increment 为 $0.018$。保留粗粒化一步转移表的替代序列比观测路径少恢复 $30$ percent 的不可逆性。该增量在每一个留出日间日期上对全部十二个符号为正，对 $\\text{NVDA}$ 在每个 session window 内为正。它随粗粒化尺度变化超过十倍。线性得分与任何单一特征组都无法复现完整拟合率。在同日校准的 queue-reactive 模拟器匹配市场的有序率，$0.052$ 对 $0.054$，但其 ordering increment 为 $0.0006$ 对 $0.018$，即用块组成而非块顺序构造出时间不对称性。我们提出将路径不可逆性的 ordering 与 scale profile 作为订单簿模拟器的基准。代码与审计材料见 https://github.com/hjyeo30/lob-irreversibility。",
         "evidence": "For NVDA, the order-invariant and order-sensitive estimates are 0.036 and 0.054 nats per event, respectively.",
         "why_relevant": "直接研究限价订单簿高频路径的不可逆性估计，属微观结构与高频数据建模。",
+        "v": 4
+      },
+      "is_new_this_week": false,
+      "weekly_period": ""
+    },
+    {
+      "id": "2610.22113v1",
+      "source": "arXiv",
+      "title": "Difference-in-Differences for Heterogeneous Effects of General Treatment Strategies Accounting for Time-Varying Covariates",
+      "authors": [
+        "Oliver Dukes",
+        "Zach Shahn",
+        "James Robins",
+        "Andrea Rotnitzky"
+      ],
+      "summary": "We introduce a class of marginal Structural Nested Mean Models (mSNMMs) that enable modeling time-varying effect modification by a subset of covariates required as adjustment variables. We focus on identifiability and estimation under conditional parallel trends assumptions, so mSNMMs are applicable in settings where time-varying Difference-in-Differences (DiD) methods are typically applied. Modeling effect modification by lower dimensional covariates reduces the risk of model misspecification and can improve interpretability relative to previously developed `full SNMMs'. mSNMMs enjoy two key advantages over alternative time-varying DiD methods. First, the parallel trends assumptions that they require are more plausible in the presence of time-varying confounding. Second, they are able to model effects of \\textit{sustained} interventions even when treatment switches on and off in the data. We illustrate the methodology by applying mSNMMs to estimate how the effects of Medicaid expansion (a time-varying treatment) on local uninsurance rates vary with unemployment rate prior to expansion (a time-varying covariate), adjusting for additional time-varying demographic and economic variables.",
+      "published": "2026-10-15T15:53:17Z",
+      "updated": "2026-10-15T15:53:17Z",
+      "paper_url": "http://arxiv.org/abs/2610.22113v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.22113v1",
+      "categories": [
+        "stat.ME"
+      ],
+      "seed_topic": "timeseries_causal",
+      "matches": [
+        {
+          "topic_id": "timeseries_causal",
+          "topic_name": "时间序列与因果识别",
+          "score": 0.75,
+          "level": "medium",
+          "reason": "AI 判定：提出时变协变量下异质性处理效应的DiD识别与估计方法，属因果识别分支；关键词命中：difference-in-differences",
+          "keyword_hits": [
+            "difference-in-differences"
+          ],
+          "mechanical_score": 0.306,
+          "llm_score": 78.0,
+          "llm_source": "cache",
+          "llm_reason": "属双重差分因果识别分支，涉及时变协变量与时变处理下的识别与估计。"
+        }
+      ],
+      "best_match": {
+        "topic_id": "timeseries_causal",
+        "topic_name": "时间序列与因果识别",
+        "score": 0.75,
+        "level": "medium",
+        "reason": "$\\text{AI}$ 判定：提出时变协变量下异质性处理效应的$\\text{DiD}$识别与估计方法，属因果识别分支；关键词命中：difference-in-differences",
+        "keyword_hits": [
+          "difference-in-differences"
+        ],
+        "mechanical_score": 0.306,
+        "llm_score": 78.0,
+        "llm_source": "cache",
+        "llm_reason": "属双重差分因果识别分支，涉及时变协变量与时变处理下的识别与估计。"
+      },
+      "backfilled_from_recent_arxiv": true,
+      "first_seen_at": "2026-10-17T08:22:33.125378+00:00",
+      "last_seen_at": "2026-10-18T11:02:49.948559+00:00",
+      "retained_from_previous_run": true,
+      "chinese_summary": {
+        "problem": "论文要解决的问题是：在条件平行趋势假设下，如何对随时间变化的处理策略的异质性效应进行建模、识别与估计，并且允许效应被一部分同时作为调整变量的协变量所修饰。",
+        "method": "论文引入一类边际结构嵌套均值模型（$\\text{mSNMMs}$），用于建模由一部分需要作为调整变量的协变量所导致的时变效应修饰。论文在条件平行趋势假设下讨论可识别性与估计，因此 $\\text{mSNMMs}$ 适用于通常应用时变双重差分（$\\text{DiD}$）方法的情形。论文用维度更低的协变量来建模效应修饰，并以 Medicaid expansion（时变处理）对当地未保险率的影响如何随扩张前失业率（时变协变量）变化为例进行说明，同时调整其他时变人口与经济变量。",
+        "innovation": "相对此前开发的“full $\\text{SNMMs}$”，用维度更低的协变量建模效应修饰可降低模型误设的风险，并可能提高可解释性。相对其他时变 $\\text{DiD}$ 方法，$\\text{mSNMMs}$ 有两点关键优势：第一，在存在时变混杂时，它们所要求的平行趋势假设更可信；第二，即使处理在数据中时开时关，它们也能对持续干预（sustained interventions）的效应建模。",
+        "conclusion": "摘要明确主张：$\\text{mSNMMs}$ 相对其他时变 $\\text{DiD}$ 方法有两点关键优势，即在存在时变混杂时其所需的平行趋势假设更可信，且即使处理在数据中时开时关也能对持续干预的效应建模；摘要未提及具体数值结果。",
+        "abstract_zh": "我们引入一类边际结构嵌套均值模型（$\\text{mSNMMs}$），它们能够对由一部分需要作为调整变量的协变量所导致的时变效应修饰进行建模。我们聚焦于条件平行趋势假设下的可识别性与估计，因此 $\\text{mSNMMs}$ 适用于通常应用时变双重差分（$\\text{DiD}$）方法的情形。用维度更低的协变量建模效应修饰可降低模型误设的风险，并相对此前开发的“full $\\text{SNMMs}$”提高可解释性。$\\text{mSNMMs}$ 相对其他时变 $\\text{DiD}$ 方法享有两点关键优势。第一，在存在时变混杂时，它们所要求的平行趋势假设更可信。第二，即使处理在数据中时开时关，它们也能对持续干预的效应建模。我们通过将 $\\text{mSNMMs}$ 应用于估计 Medicaid expansion（一种时变处理）对当地未保险率的影响如何随扩张前失业率（一种时变协变量）变化，并调整其他时变人口与经济变量，来说明该方法。",
+        "evidence": "First, the parallel trends assumptions that they require are more plausible in the presence of time-varying confounding.",
+        "why_relevant": "属双重差分因果识别分支，涉及时变协变量与时变处理下的识别与估计。",
         "v": 4
       },
       "is_new_this_week": false,
@@ -2464,56 +1890,26 @@
     "2503.11375v3": "2026-10-18T11:39:51.749426+00:00",
     "2408.17187v1": "2026-10-18T11:39:51.749426+00:00",
     "2407.06619v2": "2026-10-18T11:39:51.749426+00:00",
-    "2402.06642v1": "2026-10-18T11:39:51.749426+00:00",
-    "id:2111.10784v1": "2026-10-23T05:36:00.476706+00:00",
-    "t:whysyntheticcontrolestimatorsarebiasedandwhattodoaboutitintroducingrelaxedandpenalizedsyntheticcontrols": "2026-10-23T05:36:00.476706+00:00",
-    "id:2610.31537v1": "2026-10-23T05:36:00.476706+00:00",
-    "t:causalinferenceinstaggeredadoptionpanelsthecorrectcomparisonsetdependsonyourintervention": "2026-10-23T05:36:00.476706+00:00",
-    "id:2609.17170v2": "2026-10-23T05:36:00.476706+00:00",
-    "t:causalinferenceunderdynamicselectionandlatentheterogeneity": "2026-10-23T05:36:00.476706+00:00",
-    "id:2609.20264v1": "2026-10-23T05:36:00.476706+00:00",
-    "t:risksettransportedsyntheticcontrolwithdifferenceindifferencesadjustmentunderstaggeredtreatmentadoption": "2026-10-23T05:36:00.476706+00:00",
-    "id:2604.27035v1": "2026-10-23T05:36:00.476706+00:00",
-    "t:doublyrobustlocalprojectionsdifferenceindifferences": "2026-10-23T05:36:00.476706+00:00",
-    "2111.10784v1": "2026-10-23T05:36:00.476706+00:00",
-    "2610.31537v1": "2026-10-23T05:36:00.476706+00:00",
-    "2609.17170v2": "2026-10-23T05:36:00.476706+00:00",
-    "2609.20264v1": "2026-10-23T05:36:00.476706+00:00",
-    "2604.27035v1": "2026-10-23T05:36:00.476706+00:00",
-    "id:2401.13179v6": "2026-10-30T13:02:25.260239+00:00",
-    "t:realizedstochasticvolatilitymodelswithskewtdistributionsforvolatilityandtailriskforecasting": "2026-10-30T13:02:25.260239+00:00",
-    "id:2610.40047v1": "2026-10-30T13:02:25.260239+00:00",
-    "t:smooththresholdgarchquasimaximumlikelihoodestimationandempiricalevidence": "2026-10-30T13:02:25.260239+00:00",
-    "id:2610.39995v1": "2026-10-30T13:02:25.260239+00:00",
-    "t:howdifferentaredifferentdifferencesindifferencesalargescalemetaanalysis": "2026-10-30T13:02:25.260239+00:00",
-    "id:2610.39636v1": "2026-10-30T13:02:25.260239+00:00",
-    "t:informationflowandmarketrisktransformerbasedevidenceonsentimentandvolatilitydynamics": "2026-10-30T13:02:25.260239+00:00",
-    "id:2603.27458v1": "2026-10-30T13:02:25.260239+00:00",
-    "t:extremevalueinferenceforcovarandsystemicrisk": "2026-10-30T13:02:25.260239+00:00",
-    "2401.13179v6": "2026-10-30T13:02:25.260239+00:00",
-    "2610.40047v1": "2026-10-30T13:02:25.260239+00:00",
-    "2610.39995v1": "2026-10-30T13:02:25.260239+00:00",
-    "2610.39636v1": "2026-10-30T13:02:25.260239+00:00",
-    "2603.27458v1": "2026-10-30T13:02:25.260239+00:00"
+    "2402.06642v1": "2026-10-18T11:39:51.749426+00:00"
   },
-  "weekly_period": "2026-W44",
+  "weekly_period": "2026-W42",
   "stats": {
-    "candidate_paper_count": 164,
-    "daily_candidate_paper_count": 164,
+    "candidate_paper_count": 212,
+    "daily_candidate_paper_count": 212,
     "conference_candidate_paper_count": 0,
-    "raw_daily_candidate_count": 273,
+    "raw_daily_candidate_count": 289,
     "window_search_candidate_count": 200,
     "daily_outside_cutoff_count": 11,
     "daily_backfill_days": 14,
-    "daily_backfill_candidate_count": 4,
+    "daily_backfill_candidate_count": 6,
     "daily_backfill_added_count": 0,
     "screen_mode": "llm",
-    "screened_paper_count": 273,
+    "screened_paper_count": 289,
     "min_daily_papers": 10,
-    "filtered_low_relevance_count": 105,
+    "filtered_low_relevance_count": 71,
     "days": 7,
     "collection_mode": "lookback",
-    "collection_cutoff_iso": "2026-10-23T13:31:43.044325+00:00",
+    "collection_cutoff_iso": "2026-10-11T13:31:08.519562+00:00",
     "max_per_topic": 25,
     "max_new_papers": 60,
     "max_new_conference_papers": 50,
@@ -2558,22 +1954,22 @@
     "conference_arxiv_enrichment_succeeded": 0,
     "conference_arxiv_enrichment_skipped": 0,
     "conference_arxiv_enrichment_last_error": "",
-    "paper_count": 34,
+    "paper_count": 25,
     "new_paper_count": 60,
-    "weekly_period": "2026-W44",
+    "weekly_period": "2026-W42",
     "period_new_count": 5,
     "weekly_new_count": 0,
     "weekly_new_quota": 0,
     "weekly_new_total": 10,
-    "kept_previous_count": 34,
-    "display_count": 34,
-    "archive_count": 34,
+    "kept_previous_count": 25,
+    "display_count": 25,
+    "archive_count": 25,
     "dropped_from_display_count": 0,
-    "duplicate_candidate_count": 23,
-    "fresh_candidate_count": 37,
+    "duplicate_candidate_count": 16,
+    "fresh_candidate_count": 44,
     "max_stored_papers": 1200,
     "max_data_bytes": 12582912,
-    "data_bytes": 230238,
+    "data_bytes": 171132,
     "storage_trimmed_count": 0,
     "storage_trimmed_by_level": {
       "high": 0,

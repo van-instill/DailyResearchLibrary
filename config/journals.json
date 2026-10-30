@@ -6,6 +6,12 @@
   "keywords_per_query": 8,
   "max_pages": 1,
   "comment": "来源：国际期刊目录.md（29 本）。openalex_source_id 留空的会在运行时按 ISSN 现查。window_search=true 时按方向关键词在 2018 至今的全文题录里做相关度召回，而不是只抓最近几个月。",
+  "retain_venues": [
+    {
+      "name": "Journal of the American Statistical Association",
+      "note": "已从召回列表移除（纯统计期刊），但保留已收录的金融高频/微观结构方向论文（粗糙噪声、市场微观结构噪声）"
+    }
+  ],
   "venues": [
     {
       "id": "qje",

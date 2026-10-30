@@ -1,6 +1,6 @@
 {
-  "generated_at": "Fri, 30 Oct 2026 13:33:11 +0000",
-  "generated_at_iso": "2026-10-30T13:33:11.546149+00:00",
+  "generated_at": "Sun, 18 Oct 2026 13:32:31 +0000",
+  "generated_at_iso": "2026-10-18T13:32:31.706892+00:00",
   "config_source": "file",
   "data_kind": "journal",
   "topics": [
@@ -43,7 +43,9 @@
         "event study"
       ],
       "arxiv_categories": [
-        "econ.EM"
+        "econ.EM",
+        "stat.ME",
+        "stat.AP"
       ]
     },
     {
@@ -106,7 +108,8 @@
       ],
       "arxiv_categories": [
         "q-fin.RM",
-        "q-fin.ST"
+        "q-fin.ST",
+        "stat.AP"
       ]
     }
   ],
@@ -1002,7 +1005,7 @@
       "first_seen_at": "2026-10-18T11:41:54.573051+00:00",
       "last_seen_at": "2026-10-18T11:41:54.573051+00:00",
       "retained_from_previous_run": true,
-      "is_new_this_week": false,
+      "is_new_this_week": true,
       "chinese_summary": {
         "problem": "论文要解决的问题是：在预测已实现波动率时，如何把隐含波动率、杠杆效应、隔夜收益和已实现波动率的波动率纳入异质自回归（$\\text{HAR}$）模型。",
         "method": "论文扩展了异质自回归模型（$\\text{HAR}$），在模型中纳入隐含波动率（$\\text{IV}$）、杠杆效应、隔夜收益以及已实现波动率的波动率。论文分析了 $10$ 个国际股票指数，并比较了仅加入 $\\text{IV}$ 的简单 $\\text{HAR}$ 模型（$\\text{HAR}$-$\\text{IV}$）与不含 $\\text{IV}$ 的 $\\text{HAR}$ 模型，以及 $\\text{HAR}$-$\\text{IV}$ 模型的进一步扩展。",
@@ -1078,7 +1081,7 @@
       "first_seen_at": "2026-10-18T11:41:54.573051+00:00",
       "last_seen_at": "2026-10-18T11:41:54.573051+00:00",
       "retained_from_previous_run": true,
-      "is_new_this_week": false,
+      "is_new_this_week": true,
       "chinese_summary": {
         "problem": "论文要解决的是对半鞅资产价格过程的潜在即期波动率进行非参数推断的问题。",
         "method": "论文提出一种新理论，将局部估计块大小 $k$ 视为固定，而非基于局部估计块内观测数递增的渐近概念。由此得到的即期波动率估计量不再具有一致性，但该理论允许在任何给定时间点构造渐近有效且易于计算的逐点置信区间。将理论扩展到估计块数量增长的高维推断设定，进一步允许构造波动率路径的一致置信带。",
@@ -1156,7 +1159,7 @@
       "first_seen_at": "2026-10-18T11:41:54.573051+00:00",
       "last_seen_at": "2026-10-18T11:41:54.573051+00:00",
       "retained_from_previous_run": true,
-      "is_new_this_week": false,
+      "is_new_this_week": true,
       "chinese_summary": {
         "problem": "论文要解决的问题是波动率预测中的衰减偏差（attenuation bias）效应的建模。",
         "method": "论文依赖对 Hansen 等提出的 Realized $\\text{GARCH}$ 模型的适当推广。在这些推广中，滞后已实现测度对当前条件方差的影响，按照该测度在特定时点自身的准确度进行加权。这一特征使得在滞后波动率被更准确测量时，可以赋予其更高的权重。",
@@ -1233,7 +1236,7 @@
       "first_seen_at": "2026-10-18T11:41:54.573051+00:00",
       "last_seen_at": "2026-10-18T11:41:54.573051+00:00",
       "retained_from_previous_run": true,
-      "is_new_this_week": false,
+      "is_new_this_week": true,
       "chinese_summary": {
         "problem": "已实现波动率测度受测量误差影响，论文要在此基础上刻画收益率与已实现测度同潜在条件方差之间的关系。",
         "method": "论文引入一族离散时间随机波动率模型，包含两个测量方程，分别把观测到的收益率和已实现测度与潜在条件方差联系起来。针对该类模型，论文建立了半解析期权定价框架；对模型的基本设定，给出解析滤波与平滑递推；对其更丰富的变体，给出有效的 $\\text{MCMC}$ 算法。",
@@ -1312,7 +1315,7 @@
       "first_seen_at": "2026-10-18T11:41:54.573051+00:00",
       "last_seen_at": "2026-10-18T11:41:54.573051+00:00",
       "retained_from_previous_run": true,
-      "is_new_this_week": false,
+      "is_new_this_week": true,
       "chinese_summary": {
         "problem": "本研究要考察日内跳跃与日间跳跃对原油期货价格已实现波动率的影响。",
         "method": "研究设计了马尔可夫区制转换（$\\text{MS}$）混合数据抽样（$\\text{MIDAS}$）模型，并在此基础上探索日内与日间跳跃对原油期货价格已实现波动率的影响。样本内估计使用 $\\text{MIDAS}$ 模型，样本外评估则使用基于 Time-of-Day 波动率模式（$\\text{TOD}$）检验并结合马尔可夫区制转换 $\\text{MIDAS}$ 的模型（$\\text{MS}$-$\\text{MIDAS}$-$\\text{TOD}$）。",
@@ -1326,221 +1329,6 @@
         "at": "2026-10-18T11:43:38+00:00"
       },
       "weekly_period": "2026-W42"
-    },
-    {
-      "id": "openalex:W4323059233",
-      "title": "Local Projection-Based Inference under General Conditions",
-      "authors": [
-        "Ke‐Li Xu"
-      ],
-      "summary": "This article develops the uniform asymptotic theory for local projection (LP) regression when the true lag order of the model is unknown and potentially infinite. The theory allows for varying degrees of persistence in the data, growing response horizons, and general conditionally heteroskedastic martingale-difference shocks. Based on the theory, we make two main contributions. First, we show that LPs can achieve semiparametric efficiency at a given horizon under classical assumptions on the data, provided that the controlled lag order diverges. Thus, the commonly perceived efficiency loss of LPs can become asymptotically negligible with many controls. Second, we propose LP-based inference procedures for (level and cumulated) impulse responses that possess robustness properties not shared by existing methods. Inference methods using two distinct standard errors are considered. The uniform validity for the first method depends on a zero fourth-order cumulant condition on shocks, while that of the second holds more generally for conditionally heteroskedastic martingale-difference shocks. We propose a bootstrap procedure that improves finite-sample performance and extend the standard error construction to structural responses.",
-      "published": "2026-04-30T00:00:00+00:00",
-      "updated": "2026-04-30T00:00:00+00:00",
-      "categories": [
-        "经济学",
-        "Monetary Policy and Economic Impact",
-        "Spatial and Panel Data Analysis"
-      ],
-      "paper_url": "https://doi.org/10.1093/restud/rdag034",
-      "pdf_url": "https://doi.org/10.2139/ssrn.4372388",
-      "source": "Review of Economic Studies",
-      "source_type": "conference",
-      "venue": "Review of Economic Studies",
-      "venue_group": "经济学",
-      "doi": "https://doi.org/10.1093/restud/rdag034",
-      "conference": {
-        "id": "restud",
-        "name": "Review of Economic Studies",
-        "year": 2026
-      },
-      "matches": [
-        {
-          "topic_id": "timeseries_causal",
-          "topic_name": "时间序列与因果识别",
-          "score": 0.92,
-          "level": "high",
-          "reason": "AI 判定：局部投影回归的均匀渐近推断理论，正是该方向核心计量识别方法",
-          "keyword_hits": [],
-          "mechanical_score": 0.156,
-          "llm_score": 92.0,
-          "llm_source": "cache"
-        }
-      ],
-      "best_match": {
-        "topic_id": "timeseries_causal",
-        "topic_name": "时间序列与因果识别",
-        "score": 0.92,
-        "level": "high",
-        "reason": "$\\text{AI}$ 判定：局部投影回归的均匀渐近推断理论，正是该方向核心计量识别方法",
-        "keyword_hits": [],
-        "mechanical_score": 0.156,
-        "llm_score": 92.0,
-        "llm_source": "cache"
-      },
-      "first_seen_at": "2026-10-23T05:37:40.092208+00:00",
-      "last_seen_at": "2026-10-23T05:37:40.092208+00:00",
-      "retained_from_previous_run": true,
-      "weekly_period": "2026-W43",
-      "is_new_this_week": false,
-      "chinese_summary": {
-        "problem": "论文要解决的问题是：当模型的真实滞后阶数未知且可能为无穷时，为局部投影（$\\text{LP}$）回归建立均匀渐近理论。",
-        "method": "该理论允许数据具有不同程度的持续性、响应期限不断增长，以及一般的条件异方差鞅差冲击。基于该理论，作者提出使用两种不同标准误的推断方法，并提出一种改善有限样本表现的 bootstrap 程序，同时将标准误构造推广到结构响应。",
-        "innovation": "第一，证明在经典数据假设下，若受控滞后阶数发散，$\\text{LP}$ 在给定期限上可达到半参数效率，因此通常认为的 $\\text{LP}$ 效率损失在控制变量很多时可渐近忽略；第二，提出对（水平与累积）脉冲响应具有现有方法所不具备的稳健性的基于 $\\text{LP}$ 的推断程序；第三，提出改善有限样本表现的 bootstrap 程序并将标准误构造推广到结构响应。",
-        "conclusion": "摘要指出，$\\text{LP}$ 在给定期限上可达到半参数效率，前提是对数据的经典假设成立且受控滞后阶数发散；第一种推断方法的均匀有效性依赖于冲击的四阶累积量为零条件，第二种方法的均匀有效性对条件异方差鞅差冲击更一般地成立。",
-        "abstract_zh": "本文在模型的真实滞后阶数未知且可能为无穷时，为局部投影（$\\text{LP}$）回归建立均匀渐近理论。该理论允许数据具有不同程度的持续性、响应期限不断增长，以及一般的条件异方差鞅差冲击。基于该理论，我们作出两个主要贡献。第一，我们证明，在关于数据的经典假设下，只要受控滞后阶数发散，$\\text{LP}$ 在给定期限上就能达到半参数效率。因此，通常认为的 $\\text{LP}$ 效率损失在控制变量很多时可变得渐近可忽略。第二，我们提出针对（水平与累积）脉冲响应的基于 $\\text{LP}$ 的推断程序，这些程序具有现有方法所不具备的稳健性质。我们考虑了使用两种不同标准误的推断方法。第一种方法的均匀有效性依赖于关于冲击的四阶累积量为零的条件，而第二种方法的均匀有效性对条件异方差鞅差冲击更一般地成立。我们提出一种改善有限样本表现的 bootstrap 程序，并将标准误构造推广到结构响应。",
-        "evidence": "First, we show that LPs can achieve semiparametric efficiency at a given horizon under classical assumptions on the data, provided that the controlled lag order diverges.",
-        "why_relevant": "局部投影的均匀渐近推断理论，直接对应研究方向中的 local projections 与脉冲响应识别。",
-        "v": 4,
-        "model": "",
-        "at": "2026-10-18T12:09:44+00:00"
-      }
-    },
-    {
-      "id": "openalex:W7150988825",
-      "title": "RANDOMIZED TESTING FOR JUMP DETECTION",
-      "authors": [
-        "Yucheng Sun"
-      ],
-      "summary": "This article proposes sequential randomized tests to locate the presence of jumps on the paths of efficient asset prices in a continuous-time model. The randomized statistics are generated by artificially adding randomness to the robust approximations of the locally averaged returns of the efficient price. In the case of finite activity jumps, we derive the asymptotic distribution of the maximum of all the local statistics unaffected by jumps, which makes it feasible to control the limiting probability of the global type I error and demonstrate the power of the test. We also present the theoretical results to illustrate the behaviors of the test statistics in the presence of infinite activity jumps. Simulation studies indicate the favorable performance of the proposed test in finite samples, and we also apply the test to the stock price data of Apple and Microsoft.",
-      "published": "2026-04-06T00:00:00+00:00",
-      "updated": "2026-04-06T00:00:00+00:00",
-      "categories": [
-        "经济学",
-        "Stochastic processes and financial applications",
-        "Financial Markets and Investment Strategies"
-      ],
-      "paper_url": "https://doi.org/10.1017/s0266466626100425",
-      "pdf_url": "https://doi.org/10.1017/s0266466626100425",
-      "source": "Econometric Theory",
-      "source_type": "conference",
-      "venue": "Econometric Theory",
-      "venue_group": "经济学",
-      "doi": "https://doi.org/10.1017/s0266466626100425",
-      "conference": {
-        "id": "ect",
-        "name": "Econometric Theory",
-        "year": 2026
-      },
-      "matches": [
-        {
-          "topic_id": "volatility_highfreq",
-          "topic_name": "波动率建模与高频计量",
-          "score": 0.92,
-          "level": "high",
-          "reason": "AI 判定：提出随机化检验检测有效价格跳跃，属高频跳跃检测核心方法；关键词命中：jump detection",
-          "keyword_hits": [
-            "jump detection"
-          ],
-          "mechanical_score": 0.244,
-          "llm_score": 92.0,
-          "llm_source": "cache"
-        }
-      ],
-      "best_match": {
-        "topic_id": "volatility_highfreq",
-        "topic_name": "波动率建模与高频计量",
-        "score": 0.92,
-        "level": "high",
-        "reason": "$\\text{AI}$ 判定：提出随机化检验检测有效价格跳跃，属高频跳跃检测核心方法；关键词命中：jump detection",
-        "keyword_hits": [
-          "jump detection"
-        ],
-        "mechanical_score": 0.244,
-        "llm_score": 92.0,
-        "llm_source": "cache"
-      },
-      "first_seen_at": "2026-10-23T05:37:40.092208+00:00",
-      "last_seen_at": "2026-10-23T05:37:40.092208+00:00",
-      "retained_from_previous_run": true,
-      "weekly_period": "2026-W43",
-      "is_new_this_week": false,
-      "chinese_summary": {
-        "problem": "论文要在连续时间模型下，定位有效资产价格路径上是否存在跳跃。",
-        "method": "论文提出序贯随机化检验，通过对有效价格局部平均收益的稳健近似人为加入随机性来构造随机化统计量。在有限活跃跳跃情形下，论文推导了不受跳跃影响的所有局部统计量最大值的渐近分布，从而可以控制全局第一类错误的极限概率并展示检验的功效；论文还给出了理论结果，用以说明统计量在无限活跃跳跃存在时的行为。",
-        "innovation": "论文提出用序贯随机化检验来定位有效资产价格路径上的跳跃，并通过向局部平均收益的稳健近似中人为加入随机性来生成随机化统计量；在有限活跃跳跃情形下推导了不受跳跃影响的局部统计量最大值的渐近分布，从而能够控制全局第一类错误的极限概率并展示检验功效；论文还给出理论结果以说明检验统计量在无限活跃跳跃存在时的行为。",
-        "conclusion": "仿真研究表明所提出的检验在有限样本下表现良好，论文还将该检验应用于苹果和微软的股票价格数据。",
-        "abstract_zh": "本文提出序贯随机化检验，用以在连续时间模型中定位有效资产价格路径上跳跃的存在。随机化统计量通过对有效价格局部平均收益的稳健近似人为加入随机性来生成。在有限活跃跳跃的情形下，我们推导了不受跳跃影响的所有局部统计量最大值的渐近分布，这使得控制全局第一类错误的极限概率并展示检验的功效成为可行。我们还给出理论结果，以说明检验统计量在无限活跃跳跃存在时的行为。仿真研究表明所提出的检验在有限样本下表现良好，我们还将该检验应用于苹果和微软的股票价格数据。",
-        "evidence": "Simulation studies indicate the favorable performance of the proposed test in finite samples, and we also apply the test to the stock price data of Apple and Microsoft.",
-        "why_relevant": "该论文研究高频价格路径上的跳跃检测，直接对应我的跳跃检测与高频数据建模方向。",
-        "v": 4,
-        "model": "",
-        "at": "2026-10-18T12:09:43+00:00"
-      }
-    },
-    {
-      "id": "openalex:W7130375669",
-      "title": "High-Dimensional Multivariate Realized Volatility Forecasting with Community Network Structure",
-      "authors": [
-        "Sixuan He",
-        "Cheng Liu"
-      ],
-      "summary": "We introduce the Community Network Heterogeneous Autoregressive model with Quarticity (CNHARQ), a novel framework that integrates network-based information to enhance the forecasting of multivariate realized volatilities. To address the curse of dimensionality, we propose a Correlation-Based Stochastic Block Model (CBSBM) to uncover latent community structures from the correlation network of realized volatilities of N assets. This approach reduces the number of unknown parameters in the model from O(N2) to O(NK), where K≪N denotes the number of communities. Empirical analysis demonstrates that the CBSBM captures dynamic community structures, revealing shifts in the co-movement of asset volatilities over time. Furthermore, the CBSBM-based community structure outperforms the conventional Global Industry Classification Standard (GICS) in out-of-sample volatility forecasting, highlighting the superior forecasting power of network-based correlations over traditional industry classification schemes.",
-      "published": "2026-02-18T00:00:00+00:00",
-      "updated": "2026-02-18T00:00:00+00:00",
-      "categories": [
-        "统计学",
-        "Financial Risk and Volatility Modeling",
-        "Complex Systems and Time Series Analysis"
-      ],
-      "paper_url": "https://doi.org/10.1080/07350015.2026.2632810",
-      "pdf_url": "https://doi.org/10.1080/07350015.2026.2632810",
-      "source": "Journal of Business & Economic Statistics",
-      "source_type": "conference",
-      "venue": "Journal of Business & Economic Statistics",
-      "venue_group": "统计学",
-      "doi": "https://doi.org/10.1080/07350015.2026.2632810",
-      "conference": {
-        "id": "jbes",
-        "name": "Journal of Business & Economic Statistics",
-        "year": 2026
-      },
-      "matches": [
-        {
-          "topic_id": "volatility_highfreq",
-          "topic_name": "波动率建模与高频计量",
-          "score": 0.92,
-          "level": "high",
-          "reason": "AI 判定：多变量已实现波动率预测，网络社区结构降维，属高频波动率建模核心；关键词命中：realized volatility、volatility forecasting",
-          "keyword_hits": [
-            "realized volatility",
-            "volatility forecasting"
-          ],
-          "mechanical_score": 0.456,
-          "llm_score": 92.0,
-          "llm_source": "cache"
-        }
-      ],
-      "best_match": {
-        "topic_id": "volatility_highfreq",
-        "topic_name": "波动率建模与高频计量",
-        "score": 0.92,
-        "level": "high",
-        "reason": "$\\text{AI}$ 判定：多变量已实现波动率预测，网络社区结构降维，属高频波动率建模核心；关键词命中：realized volatility、volatility forecasting",
-        "keyword_hits": [
-          "realized volatility",
-          "volatility forecasting"
-        ],
-        "mechanical_score": 0.456,
-        "llm_score": 92.0,
-        "llm_source": "cache"
-      },
-      "first_seen_at": "2026-10-23T05:37:40.092208+00:00",
-      "last_seen_at": "2026-10-23T05:37:40.092208+00:00",
-      "retained_from_previous_run": true,
-      "weekly_period": "2026-W43",
-      "is_new_this_week": false,
-      "chinese_summary": {
-        "problem": "论文要解决的是多变量已实现波动率预测中的维数灾难问题，即模型中未知参数过多。",
-        "method": "论文提出 Community Network Heterogeneous Autoregressive model with Quarticity（$\\text{CNHARQ}$）框架，将网络信息整合进多变量已实现波动率的预测。为处理维数灾难，论文提出 Correlation-Based Stochastic Block Model（$\\text{CBSBM}$），从 $N$ 个资产已实现波动率的相关网络中挖掘潜在的社区结构，把模型未知参数数量从 $O(N^2)$ 降到 $O(NK)$，其中 $K\\ll N$ 表示社区数。",
-        "innovation": "提出 $\\text{CNHARQ}$ 框架，把网络信息用于多变量已实现波动率预测；提出 $\\text{CBSBM}$，从已实现波动率相关网络中挖掘潜在社区结构，将未知参数数量从 $O(N^2)$ 降至 $O(NK)$（$K\\ll N$）；实证表明基于 $\\text{CBSBM}$ 的社区结构在样本外波动率预测中优于传统 $\\text{GICS}$ 行业分类。",
-        "conclusion": "实证分析表明 $\\text{CBSBM}$ 能刻画动态社区结构，揭示资产波动率共同变动随时间的变化；基于 $\\text{CBSBM}$ 的社区结构在样本外波动率预测中优于传统 Global Industry Classification Standard（$\\text{GICS}$），说明基于网络的相関比传统行业分类方案具有更强的预测能力。",
-        "abstract_zh": "我们引入带 Quarticity 的社区网络异质自回归模型（$\\text{CNHARQ}$），这是一个整合网络信息以增强多变量已实现波动率预测的新框架。为解决维数灾难，我们提出基于相关性的随机块模型（$\\text{CBSBM}$），从 $N$ 个资产已实现波动率的相关网络中挖掘潜在的社区结构。该方法将模型中未知参数的数量从 $O(N^2)$ 降至 $O(NK)$，其中 $K\\ll N$ 表示社区数。实证分析表明，$\\text{CBSBM}$ 能刻画动态社区结构，揭示资产波动率共同变动随时间的变化。此外，基于 $\\text{CBSBM}$ 的社区结构在样本外波动率预测中优于传统的 Global Industry Classification Standard（$\\text{GICS}$），凸显了基于网络的相関相对于传统行业分类方案的更强预测能力。",
-        "evidence": "Furthermore, the CBSBM-based community structure outperforms the conventional Global Industry Classification Standard (GICS) in out-of-sample volatility forecasting, highlighting the superior forecasting power of network-based correlations over traditional industry classification schemes.",
-        "why_relevant": "直接研究多变量已实现波动率预测与网络社区结构降维，属高频波动率建模核心。",
-        "v": 4,
-        "model": "",
-        "at": "2026-10-18T12:09:46+00:00"
-      }
     },
     {
       "id": "openalex:W3093157437",
@@ -1613,386 +1401,6 @@
       },
       "is_new_this_week": false,
       "weekly_period": ""
-    },
-    {
-      "id": "openalex:W4392531587",
-      "title": "Jump detection in high-frequency order prices",
-      "authors": [
-        "Markus Bibinger",
-        "Nikolaus Hautsch",
-        "Alexander Ristig"
-      ],
-      "summary": "We propose methods to infer jumps of a semi-martingale, which describes long-term price dynamics, based on discrete, noisy, high-frequency observations. Different to the classical model of additive, centered market microstructure noise, we consider one-sided microstructure noise for order prices in a limit order book. We develop methods to estimate, locate and test for jumps using local minima of best ask quotes. We provide a local jump test and show that we can consistently estimate jump sizes and jump times. One main contribution is a global test for jumps. We establish the asymptotic properties and optimality of this test. We derive the asymptotic distribution of a maximum statistic under the null hypothesis of no jumps based on extreme value theory. We prove consistency under the alternative hypothesis. The rate of convergence for local alternatives is determined and shown to be much faster than optimal rates for the standard market microstructure noise model. This allows the identification of smaller jumps. In the process, we establish uniform consistency for spot volatility estimation under one-sided noise. Online jump detection based on the new approach is shown to achieve a speed advantage compared to standard methods applied to mid quotes. A simulation study sheds light on the finite-sample implementation and properties of the new approach and draws a comparison to a popular method for market microstructure noise. We showcase how our new approach helps to improve jump detection in an empirical analysis of intra-daily limit order book data.",
-      "published": "2025-11-14T00:00:00+00:00",
-      "updated": "2025-11-14T00:00:00+00:00",
-      "categories": [
-        "统计学",
-        "Stochastic processes and financial applications",
-        "Financial Markets and Investment Strategies"
-      ],
-      "paper_url": "https://doi.org/10.1016/j.jeconom.2025.106133",
-      "pdf_url": "https://doi.org/10.1016/j.jeconom.2025.106133",
-      "source": "Journal of Econometrics",
-      "source_type": "conference",
-      "venue": "Journal of Econometrics",
-      "venue_group": "统计学",
-      "doi": "https://doi.org/10.1016/j.jeconom.2025.106133",
-      "conference": {
-        "id": "joe",
-        "name": "Journal of Econometrics",
-        "year": 2025
-      },
-      "matches": [
-        {
-          "topic_id": "volatility_highfreq",
-          "topic_name": "波动率建模与高频计量",
-          "score": 0.92,
-          "level": "high",
-          "reason": "AI 判定：限价订单簿单边噪声下高频跳跃检测与即期波动率估计，核心匹配；关键词命中：jump detection、market microstructure、limit order book",
-          "keyword_hits": [
-            "jump detection",
-            "market microstructure",
-            "limit order book"
-          ],
-          "mechanical_score": 0.775,
-          "llm_score": 92.0,
-          "llm_source": "cache"
-        }
-      ],
-      "best_match": {
-        "topic_id": "volatility_highfreq",
-        "topic_name": "波动率建模与高频计量",
-        "score": 0.92,
-        "level": "high",
-        "reason": "$\\text{AI}$ 判定：限价订单簿单边噪声下高频跳跃检测与即期波动率估计，核心匹配；关键词命中：jump detection、market microstructure、limit order book",
-        "keyword_hits": [
-          "jump detection",
-          "market microstructure",
-          "limit order book"
-        ],
-        "mechanical_score": 0.775,
-        "llm_score": 92.0,
-        "llm_source": "cache"
-      },
-      "first_seen_at": "2026-10-23T05:37:40.092208+00:00",
-      "last_seen_at": "2026-10-23T05:37:40.092208+00:00",
-      "retained_from_previous_run": true,
-      "weekly_period": "2026-W43",
-      "is_new_this_week": false,
-      "chinese_summary": {
-        "problem": "论文要解决的问题是基于离散、带噪的高频观测，推断描述长期价格动态的半鞅的跳跃；与经典的加性、中心化市场微观结构噪声模型不同，本文考虑限价订单簿中订单价格的一侧微观结构噪声。",
-        "method": "论文提出使用最优卖价报价的局部最小值来估计、定位和检验跳跃的方法，并提供一个局部跳跃检验，证明可以一致地估计跳跃大小和跳跃时间。主要贡献之一是一个全局跳跃检验，作者建立该检验的渐近性质和最优性，基于极值理论推导无跳跃原假设下最大值统计量的渐近分布，并证明备择假设下的一致性。",
-        "innovation": "相对已有工作，本文针对限价订单簿订单价格的一侧微观结构噪声（而非经典的加性中心化噪声）提出跳跃推断方法；给出基于最优卖价局部最小值的估计、定位与检验方法，并建立全局跳跃检验的渐近性质与最优性；推导局部备择的收敛速度并表明其远快于标准市场微观结构噪声模型的最优速度，从而允许识别更小的跳跃；在此过程中建立一侧噪声下即期波动率估计的一致一致性。",
-        "conclusion": "论文证明局部备择的收敛速度远快于标准市场微观结构噪声模型的最优速度，这允许识别更小的跳跃；并表明基于新方法的在线跳跃检测相比应用于中间报价的标准方法具有速度优势。",
-        "abstract_zh": "我们提出基于离散、带噪的高频观测来推断描述长期价格动态的半鞅的跳跃的方法。与经典的加性、中心化市场微观结构噪声模型不同，我们考虑限价订单簿中订单价格的一侧微观结构噪声。我们开发使用最优卖价报价的局部最小值来估计、定位和检验跳跃的方法。我们提供一个局部跳跃检验，并证明我们可以一致地估计跳跃大小和跳跃时间。一个主要贡献是一个全局跳跃检验。我们建立该检验的渐近性质和最优性。我们基于极值理论推导无跳跃原假设下最大值统计量的渐近分布。我们证明备择假设下的一致性。确定局部备择的收敛速度，并表明其远快于标准市场微观结构噪声模型的最优速度。这允许识别更小的跳跃。在此过程中，我们建立一侧噪声下即期波动率估计的一致一致性。基于新方法的在线跳跃检测被表明相比应用于中间报价的标准方法具有速度优势。一项模拟研究揭示新方法的有限样本实现和性质，并与一种流行的市场微观结构噪声方法进行比较。我们展示我们的新方法如何在日内限价订单簿数据的实证分析中帮助改进跳跃检测。",
-        "evidence": "The rate of convergence for local alternatives is determined and shown to be much faster than optimal rates for the standard market microstructure noise model.",
-        "why_relevant": "直接研究限价订单簿高频数据下的跳跃检测与即期波动率估计，与高频计量和微观结构噪声方向高度契合。",
-        "v": 4,
-        "model": "",
-        "at": "2026-10-18T12:09:50+00:00"
-      }
-    },
-    {
-      "id": "openalex:W4411177270",
-      "title": "Bayesian nonparametric modelling of stochastic volatility",
-      "authors": [
-        "Efthimios Nikolakopoulos"
-      ],
-      "summary": "This paper introduces a novel discrete-time stochastic volatility model that employs a countably infinite mixture of AR(1) processes, with a Dirichlet process prior, to nonparametrically model the latent volatility. Realized variance (RV) is incorporated as an ex post signal to enhance volatility estimation. The model effectively captures fat tails and asymmetry in both return and log(RV) conditional distributions. Empirical analysis of three major stock indices provides strong evidence supporting the nonparametric stochastic volatility. The results reveal that the volatility equation components exhibit significant variation over time, enabling the estimation of a more dynamic volatility process that better accommodates extreme returns and variance shocks. The new model delivers out-of-sample density forecasts with strong evidence of improvement, particularly for returns, log(RV), and the left region of the return distribution, including negative returns and extreme movements below −1% and −2%. The new approach provides improvements in forecasting the tail-risk measures of value-at-risk and expected shortfall.",
-      "published": "2025-06-03T00:00:00+00:00",
-      "updated": "2025-06-03T00:00:00+00:00",
-      "categories": [
-        "金融学",
-        "Financial Risk and Volatility Modeling",
-        "Stochastic processes and financial applications"
-      ],
-      "paper_url": "https://doi.org/10.1080/14697688.2025.2509561",
-      "pdf_url": "https://doi.org/10.1080/14697688.2025.2509561",
-      "source": "Quantitative Finance",
-      "source_type": "conference",
-      "venue": "Quantitative Finance",
-      "venue_group": "金融学",
-      "doi": "https://doi.org/10.1080/14697688.2025.2509561",
-      "conference": {
-        "id": "qf",
-        "name": "Quantitative Finance",
-        "year": 2025
-      },
-      "matches": [
-        {
-          "topic_id": "volatility_highfreq",
-          "topic_name": "波动率建模与高频计量",
-          "score": 0.92,
-          "level": "high",
-          "reason": "AI 判定：贝叶斯非参数随机波动率模型，结合已实现方差并预测VaR/ES；关键词命中：expected shortfall",
-          "keyword_hits": [
-            "expected shortfall"
-          ],
-          "mechanical_score": 0.369,
-          "llm_score": 92.0,
-          "llm_source": "cache",
-          "llm_reason": "该论文属于随机波动率建模，并结合已实现方差进行波动率估计与预测，与我的研究方向高度相关。"
-        }
-      ],
-      "best_match": {
-        "topic_id": "volatility_highfreq",
-        "topic_name": "波动率建模与高频计量",
-        "score": 0.92,
-        "level": "high",
-        "reason": "$\\text{AI}$ 判定：贝叶斯非参数随机波动率模型，结合已实现方差并预测$\\text{VaR}$/$\\text{ES}$；关键词命中：expected shortfall",
-        "keyword_hits": [
-          "expected shortfall"
-        ],
-        "mechanical_score": 0.369,
-        "llm_score": 92.0,
-        "llm_source": "cache",
-        "llm_reason": "该论文属于随机波动率建模，并结合已实现方差进行波动率估计与预测，与我的研究方向高度相关。"
-      },
-      "first_seen_at": "2026-10-30T06:40:51.877926+00:00",
-      "last_seen_at": "2026-10-30T06:40:51.877926+00:00",
-      "retained_from_previous_run": true,
-      "weekly_period": "2026-W44",
-      "is_new_this_week": true,
-      "chinese_summary": {
-        "problem": "论文要解决的问题是：如何用可数无限混合的 $\\text{AR(1)}$ 过程与 Dirichlet 过程先验，对潜在波动率进行非参数建模，并把已实现方差（$\\text{RV}$）作为事后信号纳入以增强波动率估计。",
-        "method": "论文提出一种新的离散时间随机波动率模型，采用带 Dirichlet 过程先验的可数无限 $\\text{AR(1)}$ 过程混合，对潜在波动率做非参数建模。模型将已实现方差（$\\text{RV}$）作为事后信号纳入，以增强波动率估计。该模型刻画了收益率与 $\\log(\\mathrm{RV})$ 条件分布中的厚尾与不对称性。",
-        "innovation": "论文声称的创新点包括：用带 Dirichlet 过程先验的可数无限 $\\text{AR(1)}$ 过程混合对潜在波动率进行非参数建模；将已实现方差（$\\text{RV}$）作为事后信号纳入以增强波动率估计；模型能够刻画收益率与 $\\log(\\mathrm{RV})$ 条件分布中的厚尾与不对称性。",
-        "conclusion": "对三个主要股票指数的实证分析提供了支持非参数随机波动率的强证据；结果表明波动率方程各组成部分随时间呈现显著变化，从而能够估计出更具动态性的波动率过程，更好地容纳极端收益率与方差冲击。新模型给出的样本外密度预测有强烈改进证据，尤其针对收益率、$\\log(\\mathrm{RV})$ 以及收益率分布的左尾区域，包括负收益率和低于 $-1\\%$ 与 $-2\\%$ 的极端变动；新方法在预测风险价值与预期损失这两项尾部风险度量方面也有改进。",
-        "abstract_zh": "本文引入一种新的离散时间随机波动率模型，该模型采用带 Dirichlet 过程先验的可数无限 $\\text{AR(1)}$ 过程混合，对潜在波动率进行非参数建模。已实现方差（$\\text{RV}$）被作为事后信号纳入，以增强波动率估计。该模型有效刻画了收益率与 $\\log(\\mathrm{RV})$ 条件分布中的厚尾与不对称性。对三个主要股票指数的实证分析提供了支持非参数随机波动率的强证据。结果表明，波动率方程各组成部分随时间呈现显著变化，从而能够估计出更具动态性的波动率过程，更好地容纳极端收益率与方差冲击。新模型给出的样本外密度预测有强烈改进证据，尤其针对收益率、$\\log(\\mathrm{RV})$ 以及收益率分布的左尾区域，包括负收益率和低于 $-1\\%$ 与 $-2\\%$ 的极端变动。新方法在预测风险价值与预期损失这两项尾部风险度量方面提供了改进。",
-        "evidence": "The new approach provides improvements in forecasting the tail-risk measures of value-at-risk and expected shortfall.",
-        "why_relevant": "该论文属于随机波动率建模，并结合已实现方差进行波动率估计与预测，与我的研究方向高度相关。",
-        "v": 4,
-        "model": "",
-        "at": "2026-10-30T06:41:55+00:00"
-      }
-    },
-    {
-      "id": "openalex:W4412917118",
-      "title": "Testing mean stationarity of intraday volatility curves",
-      "authors": [
-        "Torben G. Andersen",
-        "Yingwen Tan",
-        "Viktor Todorov",
-        "Zhiyuan Zhang"
-      ],
-      "summary": "We develop a test for mean stationarity of latent volatility curves using high‐frequency data. To derive the asymptotic test size and power, we establish a functional invariance principle for semimartingales under a strong mixing condition. The power properties are analyzed under alternatives featuring deterministic trends in the volatility curve dynamics. Application to S&P 500 futures data provides strong evidence of nonstationary variation in the volatility pattern, with implications for real‐time risk management and market activity measurement, including identification of spot volatility and the size of price jumps.",
-      "published": "2025-01-01T00:00:00+00:00",
-      "updated": "2025-01-01T00:00:00+00:00",
-      "categories": [
-        "经济学",
-        "Financial Risk and Volatility Modeling",
-        "Stochastic processes and financial applications"
-      ],
-      "paper_url": "https://doi.org/10.3982/qe2644",
-      "pdf_url": "https://www.econometricsociety.org/publications/quantitative-economics/2025/07/01/Testing-Mean-Stationarity-of-Intraday-Volatility-Curves/supp/QE2644SUPP.pdf",
-      "source": "Quantitative Economics",
-      "source_type": "conference",
-      "venue": "Quantitative Economics",
-      "venue_group": "经济学",
-      "doi": "https://doi.org/10.3982/qe2644",
-      "conference": {
-        "id": "qe",
-        "name": "Quantitative Economics",
-        "year": 2025
-      },
-      "matches": [
-        {
-          "topic_id": "volatility_highfreq",
-          "topic_name": "波动率建模与高频计量",
-          "score": 0.92,
-          "level": "high",
-          "reason": "AI 判定：高频数据下日内波动率曲线的均值平稳性检验，直接对应高频波动率建模",
-          "keyword_hits": [],
-          "mechanical_score": 0.156,
-          "llm_score": 92.0,
-          "llm_source": "cache",
-          "llm_reason": "直接研究高频数据下日内波动率曲线的均值平稳性检验，属于高频波动率建模与检验。"
-        }
-      ],
-      "best_match": {
-        "topic_id": "volatility_highfreq",
-        "topic_name": "波动率建模与高频计量",
-        "score": 0.92,
-        "level": "high",
-        "reason": "$\\text{AI}$ 判定：高频数据下日内波动率曲线的均值平稳性检验，直接对应高频波动率建模",
-        "keyword_hits": [],
-        "mechanical_score": 0.156,
-        "llm_score": 92.0,
-        "llm_source": "cache",
-        "llm_reason": "直接研究高频数据下日内波动率曲线的均值平稳性检验，属于高频波动率建模与检验。"
-      },
-      "first_seen_at": "2026-10-30T06:40:51.877926+00:00",
-      "last_seen_at": "2026-10-30T06:40:51.877926+00:00",
-      "retained_from_previous_run": true,
-      "weekly_period": "2026-W44",
-      "is_new_this_week": true,
-      "chinese_summary": {
-        "problem": "论文针对高频数据下潜在波动率曲线的均值平稳性检验问题。",
-        "method": "论文构建了一个基于高频数据的潜在波动率曲线均值平稳性检验。为推导渐近检验的 size 与 power，作者在强混合条件下建立了半鞅的函数不变性原理。并在波动率曲线动态含有确定性趋势的备择假设下分析了检验的 power 性质。",
-        "innovation": "论文提出了针对潜在波动率曲线均值平稳性的检验；在强混合条件下为半鞅建立了函数不变性原理，以推导渐近检验的 size 与 power；并在波动率曲线动态含确定性趋势的备择假设下分析了 power 性质。",
-        "conclusion": "对 S&P $500$ 期货数据的应用提供了波动率模式存在非平稳变化的强证据，这对实时风险管理和市场活动度量具有含义，包括识别即期波动率和价格跳跃的规模。",
-        "abstract_zh": "我们利用高频数据开发了一个针对潜在波动率曲线均值平稳性的检验。为推导渐近检验的 size 与 power，我们在强混合条件下为半鞅建立了一个函数不变性原理。在波动率曲线动态含有确定性趋势的备择假设下分析了 power 性质。对 S&P $500$ 期货数据的应用提供了波动率模式存在非平稳变化的强证据，这对实时风险管理和市场活动度量具有含义，包括识别即期波动率和价格跳跃的规模。",
-        "evidence": "Application to S&P 500 futures data provides strong evidence of nonstationary variation in the volatility pattern, with implications for real‐time risk management and market activity measurement, including identification of spot volatility and the size of price jumps.",
-        "why_relevant": "直接研究高频数据下日内波动率曲线的均值平稳性检验，属于高频波动率建模与检验。",
-        "v": 4,
-        "model": "",
-        "at": "2026-10-30T06:41:54+00:00"
-      }
-    },
-    {
-      "id": "openalex:W3106043818",
-      "title": "Dynamic factor, leverage and realized covariances in multivariate stochastic volatility",
-      "authors": [
-        "Yuta Yamauchi",
-        "Yasuhiro Omori"
-      ],
-      "summary": "In the stochastic volatility models for multivariate daily stock returns, it has been found that the estimates of parameters become unstable as the dimension of returns increases. To solve this problem, we focus on the factor structure of multiple returns and consider two additional sources of information: first, the stock index associated with the market factor and, second, the realized covariance matrix calculated from high-frequency data. The proposed dynamic factor model with the leverage effect and realized measures is applied to 10 top stocks composing the exchange traded fund linked with the investment return of the S&P 500 index and the model is shown to have a stable advantage in portfolio performance.",
-      "published": "2023-06-22T00:00:00+00:00",
-      "updated": "2023-06-22T00:00:00+00:00",
-      "categories": [
-        "经济学",
-        "Financial Risk and Volatility Modeling",
-        "Stochastic processes and financial applications"
-      ],
-      "paper_url": "https://doi.org/10.1080/07474938.2023.2209007",
-      "pdf_url": "https://arxiv.org/pdf/2011.06909",
-      "source": "Econometric Reviews",
-      "source_type": "conference",
-      "venue": "Econometric Reviews",
-      "venue_group": "经济学",
-      "doi": "https://doi.org/10.1080/07474938.2023.2209007",
-      "conference": {
-        "id": "ecrev",
-        "name": "Econometric Reviews",
-        "year": 2023
-      },
-      "matches": [
-        {
-          "topic_id": "volatility_highfreq",
-          "topic_name": "波动率建模与高频计量",
-          "score": 0.92,
-          "level": "high",
-          "reason": "AI 判定：多元随机波动率因子模型结合杠杆效应与高频已实现协方差；关键词命中：stochastic volatility、high-frequency data",
-          "keyword_hits": [
-            "stochastic volatility",
-            "high-frequency data"
-          ],
-          "mechanical_score": 0.519,
-          "llm_score": 92.0,
-          "llm_source": "cache",
-          "llm_reason": "多元随机波动率因子模型结合杠杆效应与高频已实现协方差，契合波动率建模与高频计量。"
-        }
-      ],
-      "best_match": {
-        "topic_id": "volatility_highfreq",
-        "topic_name": "波动率建模与高频计量",
-        "score": 0.92,
-        "level": "high",
-        "reason": "$\\text{AI}$ 判定：多元随机波动率因子模型结合杠杆效应与高频已实现协方差；关键词命中：stochastic volatility、high-frequency data",
-        "keyword_hits": [
-          "stochastic volatility",
-          "high-frequency data"
-        ],
-        "mechanical_score": 0.519,
-        "llm_score": 92.0,
-        "llm_source": "cache",
-        "llm_reason": "多元随机波动率因子模型结合杠杆效应与高频已实现协方差，契合波动率建模与高频计量。"
-      },
-      "first_seen_at": "2026-10-30T06:40:51.877926+00:00",
-      "last_seen_at": "2026-10-30T06:40:51.877926+00:00",
-      "retained_from_previous_run": true,
-      "weekly_period": "2026-W44",
-      "is_new_this_week": true,
-      "chinese_summary": {
-        "problem": "在多变量日度股票收益的随机波动率模型中，随着收益维度的增加，参数估计会变得不稳定。",
-        "method": "作者关注多个收益的因子结构，并考虑两个额外的信息来源：与市场因子相关的股票指数，以及由高频数据计算得到的已实现协方差矩阵。所提出的带杠杆效应和已实现测度的动态因子模型被应用于构成与 S&P $500$ 指数投资收益挂钩的交易所交易基金的 $10$ 只头部股票。",
-        "innovation": "作者利用多个收益的因子结构，并引入与市场因子相关的股票指数和由高频数据计算的已实现协方差矩阵这两个额外信息来源，构建了带杠杆效应和已实现测度的动态因子模型。",
-        "conclusion": "将该模型应用于构成与 S&P $500$ 指数投资收益挂钩的交易所交易基金的 $10$ 只头部股票后，模型在投资组合表现上显示出稳定的优势。",
-        "abstract_zh": "在多变量日度股票收益的随机波动率模型中，已经发现随着收益维度的增加，参数估计会变得不稳定。为了解决这个问题，我们关注多个收益的因子结构，并考虑两个额外的信息来源：第一，与市场因子相关的股票指数；第二，由高频数据计算得到的已实现协方差矩阵。所提出的带杠杆效应和已实现测度的动态因子模型被应用于构成与 S&P $500$ 指数投资收益挂钩的交易所交易基金的 $10$ 只头部股票，并且该模型在投资组合表现上显示出稳定的优势。",
-        "evidence": "The proposed dynamic factor model with the leverage effect and realized measures is applied to 10 top stocks composing the exchange traded fund linked with the investment return of the S&P 500 index and the model is shown to have a stable advantage in portfolio performance.",
-        "why_relevant": "多元随机波动率因子模型结合杠杆效应与高频已实现协方差，契合波动率建模与高频计量。",
-        "v": 4,
-        "model": "",
-        "at": "2026-10-30T06:41:58+00:00"
-      }
-    },
-    {
-      "id": "openalex:W4292800989",
-      "title": "Consistent estimation for fractional stochastic volatility model under high‐frequency asymptotics",
-      "authors": [
-        "Masaaki Fukasawa",
-        "Tetsuya Takabatake",
-        "Rebecca Westphal"
-      ],
-      "summary": "We develop a statistical theory for a continuous time approximately log‐normal fractional stochastic volatility model to examine whether the volatility is rough, that is, whether the Hurst parameter is less than one half. We construct a quasi‐likelihood estimator and apply it to realized volatility time series. Our quasi‐likelihood is based on the error distribution of the realized volatility and a Whittle‐type approximation to the auto‐covariance of the log‐volatility process. We prove the consistency of our estimator under high‐frequency asymptotics, and examine by simulations its finite sample performance. Our empirical study suggests that the volatility of the time series examined is indeed rough.",
-      "published": "2022-08-23T00:00:00+00:00",
-      "updated": "2022-08-23T00:00:00+00:00",
-      "categories": [
-        "金融学",
-        "Stochastic processes and financial applications",
-        "Financial Risk and Volatility Modeling"
-      ],
-      "paper_url": "https://doi.org/10.1111/mafi.12354",
-      "pdf_url": "https://doi.org/10.1111/mafi.12354",
-      "source": "Mathematical Finance",
-      "source_type": "conference",
-      "venue": "Mathematical Finance",
-      "venue_group": "金融学",
-      "doi": "https://doi.org/10.1111/mafi.12354",
-      "conference": {
-        "id": "mathfin",
-        "name": "Mathematical Finance",
-        "year": 2022
-      },
-      "matches": [
-        {
-          "topic_id": "volatility_highfreq",
-          "topic_name": "波动率建模与高频计量",
-          "score": 0.92,
-          "level": "high",
-          "reason": "AI 判定：粗糙分数随机波动率模型，基于已实现波动率与高频渐近的拟似然估计，核心贴合；关键词命中：realized volatility、stochastic volatility",
-          "keyword_hits": [
-            "realized volatility",
-            "stochastic volatility"
-          ],
-          "mechanical_score": 0.456,
-          "llm_score": 92.0,
-          "llm_source": "cache",
-          "llm_reason": "该文基于已实现波动率与高频渐近估计分数随机波动率，直接契合波动率建模与高频计量方向。"
-        }
-      ],
-      "best_match": {
-        "topic_id": "volatility_highfreq",
-        "topic_name": "波动率建模与高频计量",
-        "score": 0.92,
-        "level": "high",
-        "reason": "$\\text{AI}$ 判定：粗糙分数随机波动率模型，基于已实现波动率与高频渐近的拟似然估计，核心贴合；关键词命中：realized volatility、stochastic volatility",
-        "keyword_hits": [
-          "realized volatility",
-          "stochastic volatility"
-        ],
-        "mechanical_score": 0.456,
-        "llm_score": 92.0,
-        "llm_source": "cache",
-        "llm_reason": "该文基于已实现波动率与高频渐近估计分数随机波动率，直接契合波动率建模与高频计量方向。"
-      },
-      "first_seen_at": "2026-10-30T06:40:51.877926+00:00",
-      "last_seen_at": "2026-10-30T06:40:51.877926+00:00",
-      "retained_from_previous_run": true,
-      "weekly_period": "2026-W44",
-      "is_new_this_week": true,
-      "chinese_summary": {
-        "problem": "论文要检验波动率是否是粗糙的，即 Hurst 参数是否小于二分之一，并为此建立一个连续时间、近似对数正态的分数随机波动率模型的统计理论。",
-        "method": "作者构造了一个拟似然估计量，并将其应用于已实现波动率时间序列。该拟似然基于已实现波动率的误差分布，以及对对数波动率过程自协方差的 Whittle 型近似。作者在高频渐近下证明了估计量的一致性，并通过模拟考察其有限样本表现。",
-        "innovation": "摘要声称的贡献是：为连续时间近似对数正态分数随机波动率模型建立统计理论；构造基于已实现波动率误差分布与对数波动率自协方差 Whittle 型近似的拟似然估计量；在高频渐近下证明该估计量的一致性。",
-        "conclusion": "作者在高频渐近下证明了估计量的一致性，并通过模拟考察其有限样本表现；实证研究提示所考察时间序列的波动率确实是粗糙的。",
-        "abstract_zh": "我们为一个连续时间近似对数正态的分数随机波动率模型建立统计理论，以检验波动率是否是粗糙的，即 Hurst 参数是否小于二分之一。我们构造一个拟似然估计量，并将其应用于已实现波动率时间序列。我们的拟似然基于已实现波动率的误差分布，以及对对数波动率过程自协方差的 Whittle 型近似。我们在高频渐近下证明我们估计量的一致性，并通过模拟考察其有限样本表现。我们的实证研究提示，所考察时间序列的波动率确实是粗糙的。",
-        "evidence": "Our empirical study suggests that the volatility of the time series examined is indeed rough.",
-        "why_relevant": "该文基于已实现波动率与高频渐近估计分数随机波动率，直接契合波动率建模与高频计量方向。",
-        "v": 4,
-        "model": "",
-        "at": "2026-10-30T06:42:00+00:00"
-      }
     },
     {
       "id": "openalex:W7221756071",
@@ -2836,70 +2244,20 @@
     "openalex:w2939489631": "2026-10-18T11:41:54.573051+00:00",
     "10.1080/07350015.2019.1604371": "2026-10-18T11:41:54.573051+00:00",
     "openalex:w3084432689": "2026-10-18T11:41:54.573051+00:00",
-    "10.1080/14697688.2020.1805505": "2026-10-18T11:41:54.573051+00:00",
-    "doi:10.1093/restud/rdag034": "2026-10-23T05:37:40.092208+00:00",
-    "id:openalex:w4323059233": "2026-10-23T05:37:40.092208+00:00",
-    "t:localprojectionbasedinferenceundergeneralconditions": "2026-10-23T05:37:40.092208+00:00",
-    "doi:10.1017/s0266466626100425": "2026-10-23T05:37:40.092208+00:00",
-    "id:openalex:w7150988825": "2026-10-23T05:37:40.092208+00:00",
-    "t:randomizedtestingforjumpdetection": "2026-10-23T05:37:40.092208+00:00",
-    "doi:10.1080/07350015.2026.2632810": "2026-10-23T05:37:40.092208+00:00",
-    "id:openalex:w7130375669": "2026-10-23T05:37:40.092208+00:00",
-    "t:highdimensionalmultivariaterealizedvolatilityforecastingwithcommunitynetworkstructure": "2026-10-23T05:37:40.092208+00:00",
-    "doi:10.1080/01621459.2026.2622104": "2026-10-23T05:37:40.092208+00:00",
-    "id:openalex:w7128432205": "2026-10-23T05:37:40.092208+00:00",
-    "t:theexplicativemarketmicrostructurenoise": "2026-10-23T05:37:40.092208+00:00",
-    "doi:10.1016/j.jeconom.2025.106133": "2026-10-23T05:37:40.092208+00:00",
-    "id:openalex:w4392531587": "2026-10-23T05:37:40.092208+00:00",
-    "t:jumpdetectioninhighfrequencyorderprices": "2026-10-23T05:37:40.092208+00:00",
-    "openalex:w4323059233": "2026-10-23T05:37:40.092208+00:00",
-    "10.1093/restud/rdag034": "2026-10-23T05:37:40.092208+00:00",
-    "openalex:w7150988825": "2026-10-23T05:37:40.092208+00:00",
-    "10.1017/s0266466626100425": "2026-10-23T05:37:40.092208+00:00",
-    "openalex:w7130375669": "2026-10-23T05:37:40.092208+00:00",
-    "10.1080/07350015.2026.2632810": "2026-10-23T05:37:40.092208+00:00",
-    "openalex:w7128432205": "2026-10-23T05:37:40.092208+00:00",
-    "10.1080/01621459.2026.2622104": "2026-10-23T05:37:40.092208+00:00",
-    "openalex:w4392531587": "2026-10-23T05:37:40.092208+00:00",
-    "10.1016/j.jeconom.2025.106133": "2026-10-23T05:37:40.092208+00:00",
-    "doi:10.1080/14697688.2025.2509561": "2026-10-30T06:40:51.877926+00:00",
-    "id:openalex:w4411177270": "2026-10-30T06:40:51.877926+00:00",
-    "t:bayesiannonparametricmodellingofstochasticvolatility": "2026-10-30T06:40:51.877926+00:00",
-    "doi:10.3982/qe2644": "2026-10-30T06:40:51.877926+00:00",
-    "id:openalex:w4412917118": "2026-10-30T06:40:51.877926+00:00",
-    "t:testingmeanstationarityofintradayvolatilitycurves": "2026-10-30T06:40:51.877926+00:00",
-    "doi:10.1080/01621459.2024.2428466": "2026-10-30T06:40:51.877926+00:00",
-    "id:openalex:w4404528793": "2026-10-30T06:40:51.877926+00:00",
-    "t:whenfrictionsarefractionalroughnoiseinhighfrequencydata": "2026-10-30T06:40:51.877926+00:00",
-    "doi:10.1080/07474938.2023.2209007": "2026-10-30T06:40:51.877926+00:00",
-    "id:openalex:w3106043818": "2026-10-30T06:40:51.877926+00:00",
-    "t:dynamicfactorleverageandrealizedcovariancesinmultivariatestochasticvolatility": "2026-10-30T06:40:51.877926+00:00",
-    "doi:10.1111/mafi.12354": "2026-10-30T06:40:51.877926+00:00",
-    "id:openalex:w4292800989": "2026-10-30T06:40:51.877926+00:00",
-    "t:consistentestimationforfractionalstochasticvolatilitymodelunderhighfrequencyasymptotics": "2026-10-30T06:40:51.877926+00:00",
-    "openalex:w4411177270": "2026-10-30T06:40:51.877926+00:00",
-    "10.1080/14697688.2025.2509561": "2026-10-30T06:40:51.877926+00:00",
-    "openalex:w4412917118": "2026-10-30T06:40:51.877926+00:00",
-    "10.3982/qe2644": "2026-10-30T06:40:51.877926+00:00",
-    "openalex:w4404528793": "2026-10-30T06:40:51.877926+00:00",
-    "10.1080/01621459.2024.2428466": "2026-10-30T06:40:51.877926+00:00",
-    "openalex:w3106043818": "2026-10-30T06:40:51.877926+00:00",
-    "10.1080/07474938.2023.2209007": "2026-10-30T06:40:51.877926+00:00",
-    "openalex:w4292800989": "2026-10-30T06:40:51.877926+00:00",
-    "10.1111/mafi.12354": "2026-10-30T06:40:51.877926+00:00"
+    "10.1080/14697688.2020.1805505": "2026-10-18T11:41:54.573051+00:00"
   },
-  "weekly_period": "2026-W44",
+  "weekly_period": "2026-W42",
   "stats": {
-    "candidate_paper_count": 1223,
+    "candidate_paper_count": 1423,
     "new_paper_count": 60,
-    "filtered_low_relevance_count": 528,
-    "venue_count": 25,
-    "lookback_days": 3224,
+    "filtered_low_relevance_count": 373,
+    "venue_count": 29,
+    "lookback_days": 3212,
     "from_publication_date": "2018-01-01",
     "window_search_terms": 40,
     "llm_enabled": true,
     "screen_mode": "llm",
-    "screened_paper_count": 1223,
+    "screened_paper_count": 1423,
     "source_stats": {
       "Quarterly Journal of Economics": {
         "type": "openalex_journal",
@@ -2936,14 +2294,34 @@
         "source_id": "https://openalex.org/S134988049",
         "fetched": 50
       },
+      "Annals of Statistics": {
+        "type": "openalex_journal",
+        "source_id": "https://openalex.org/S119757635",
+        "fetched": 50
+      },
+      "Journal of the American Statistical Association": {
+        "type": "openalex_journal",
+        "source_id": "https://openalex.org/S4394736638",
+        "fetched": 50
+      },
       "Journal of Econometrics": {
         "type": "openalex_journal",
         "source_id": "S127742747",
         "fetched": 50
       },
+      "Biometrika": {
+        "type": "openalex_journal",
+        "source_id": "https://openalex.org/S172180718",
+        "fetched": 50
+      },
       "Journal of Business & Economic Statistics": {
         "type": "openalex_journal",
         "source_id": "S18095783",
+        "fetched": 50
+      },
+      "Journal of the Royal Statistical Society: Series B": {
+        "type": "openalex_journal",
+        "source_id": "https://openalex.org/S145009937",
         "fetched": 50
       },
       "Journal of Finance": {
@@ -3028,29 +2406,29 @@
       }
     },
     "collection_mode": "incremental",
-    "high_count": 33,
-    "with_abstract_count": 33,
-    "weekly_period": "2026-W44",
-    "period_new_count": 4,
+    "high_count": 25,
+    "with_abstract_count": 25,
+    "weekly_period": "2026-W42",
+    "period_new_count": 5,
     "weekly_new_count": 0,
     "weekly_new_quota": 0,
     "weekly_new_total": 10,
-    "kept_previous_count": 33,
-    "display_count": 33,
-    "archive_count": 33,
+    "kept_previous_count": 25,
+    "display_count": 25,
+    "archive_count": 25,
     "dropped_from_display_count": 0,
-    "duplicate_candidate_count": 25,
-    "fresh_candidate_count": 35,
+    "duplicate_candidate_count": 17,
+    "fresh_candidate_count": 43,
     "summary_jobs": 0,
     "summary_succeeded": 0,
     "summary_failed": 0,
-    "summary_cache_hits": 33,
+    "summary_cache_hits": 25,
     "preprint_checked": 0,
     "preprint_filled": 0,
     "preprint_cache_hits": 0,
     "max_stored_papers": 1200,
     "max_data_bytes": 12582912,
-    "data_bytes": 229521,
+    "data_bytes": 178670,
     "storage_trimmed_count": 0,
     "storage_trimmed_by_level": {
       "high": 0,
@@ -3058,6 +2436,6 @@
       "low": 0,
       "unknown": 0
     },
-    "paper_count": 33
+    "paper_count": 25
   }
 }
