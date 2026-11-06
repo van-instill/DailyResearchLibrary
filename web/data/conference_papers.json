@@ -1,6 +1,6 @@
 {
-  "generated_at": "Fri, 30 Oct 2026 14:52:50 +0000",
-  "generated_at_iso": "2026-10-30T14:52:50.781953+00:00",
+  "generated_at": "Fri, 06 Nov 2026 07:32:44 +0000",
+  "generated_at_iso": "2026-11-06T07:32:44.626343+00:00",
   "config_source": "file",
   "data_kind": "journal",
   "topics": [
@@ -1824,7 +1824,7 @@
       "last_seen_at": "2026-10-30T06:40:51.877926+00:00",
       "retained_from_previous_run": true,
       "weekly_period": "2026-W44",
-      "is_new_this_week": true,
+      "is_new_this_week": false,
       "chinese_summary": {
         "problem": "论文要解决的问题是：如何用可数无限混合的 $\\text{AR(1)}$ 过程与 Dirichlet 过程先验，对潜在波动率进行非参数建模，并把已实现方差（$\\text{RV}$）作为事后信号纳入以增强波动率估计。",
         "method": "论文提出一种新的离散时间随机波动率模型，采用带 Dirichlet 过程先验的可数无限 $\\text{AR(1)}$ 过程混合，对潜在波动率做非参数建模。模型将已实现方差（$\\text{RV}$）作为事后信号纳入，以增强波动率估计。该模型刻画了收益率与 $\\log(\\mathrm{RV})$ 条件分布中的厚尾与不对称性。",
@@ -1897,7 +1897,7 @@
       "last_seen_at": "2026-10-30T06:40:51.877926+00:00",
       "retained_from_previous_run": true,
       "weekly_period": "2026-W44",
-      "is_new_this_week": true,
+      "is_new_this_week": false,
       "chinese_summary": {
         "problem": "论文针对高频数据下潜在波动率曲线的均值平稳性检验问题。",
         "method": "论文构建了一个基于高频数据的潜在波动率曲线均值平稳性检验。为推导渐近检验的 size 与 power，作者在强混合条件下建立了半鞅的函数不变性原理。并在波动率曲线动态含有确定性趋势的备择假设下分析了检验的 power 性质。",
@@ -1975,7 +1975,7 @@
       "last_seen_at": "2026-10-30T06:40:51.877926+00:00",
       "retained_from_previous_run": true,
       "weekly_period": "2026-W44",
-      "is_new_this_week": true,
+      "is_new_this_week": false,
       "chinese_summary": {
         "problem": "高频金融数据分析常受噪声干扰；本文由日内收益率数据驱动，其中市场微观结构噪声显得粗糙，即最好用局部表现为分数布朗运动的连续时间随机过程来刻画。",
         "method": "假设潜在的有效价格过程服从连续 Itô 半鞅，作者推导了噪声粗糙度参数以及积分价格波动率和噪声波动率的一致性估计量与渐近置信区间，且覆盖这些量可识别的所有情形。",
@@ -1987,6 +1987,363 @@
         "v": 4,
         "model": "",
         "at": "2026-10-30T06:41:57+00:00"
+      }
+    },
+    {
+      "id": "openalex:W4283387379",
+      "title": "How much should we trust staggered difference-in-differences estimates?",
+      "authors": [
+        "Andrew C. Baker",
+        "David F. Larcker",
+        "Charles C. Y. Wang"
+      ],
+      "summary": "We explain when and how staggered difference-in-differences regression estimators, commonly applied to assess the impact of policy changes, are biased. These biases are likely to be relevant for a large portion of research settings in finance, accounting, and law that rely on staggered treatment timing, and can result in Type-I and Type-II errors. We summarize three alternative estimators developed in the econometrics and applied literature for addressing these biases, including their differences and tradeoffs. We apply these estimators to re-examine prior published results and show, in many cases, the alternative causal estimates or inferences differ substantially from prior papers.",
+      "published": "2022-02-22T00:00:00+00:00",
+      "updated": "2022-02-22T00:00:00+00:00",
+      "categories": [
+        "金融学",
+        "Advanced Causal Inference Techniques",
+        "Spatial and Panel Data Analysis"
+      ],
+      "paper_url": "https://doi.org/10.1016/j.jfineco.2022.01.004",
+      "pdf_url": "https://www.sciencedirect.com/science/article/pii/S0304405X22000204/pdf",
+      "source": "Journal of Financial Economics",
+      "source_type": "conference",
+      "venue": "Journal of Financial Economics",
+      "venue_group": "金融学",
+      "doi": "https://doi.org/10.1016/j.jfineco.2022.01.004",
+      "conference": {
+        "id": "jfe",
+        "name": "Journal of Financial Economics",
+        "year": 2022
+      },
+      "matches": [
+        {
+          "topic_id": "timeseries_causal",
+          "topic_name": "时间序列与因果识别",
+          "score": 0.92,
+          "level": "high",
+          "reason": "AI 判定：交错DID估计偏误与替代估计量，核心因果识别方法；关键词命中：difference-in-differences",
+          "keyword_hits": [
+            "difference-in-differences"
+          ],
+          "mechanical_score": 0.256,
+          "llm_score": 92.0,
+          "llm_source": "cache",
+          "llm_reason": "直接讨论交错DID估计偏误与替代识别方法，属于因果识别核心议题。"
+        }
+      ],
+      "best_match": {
+        "topic_id": "timeseries_causal",
+        "topic_name": "时间序列与因果识别",
+        "score": 0.92,
+        "level": "high",
+        "reason": "$\\text{AI}$ 判定：交错$\\text{DID}$估计偏误与替代估计量，核心因果识别方法；关键词命中：difference-in-differences",
+        "keyword_hits": [
+          "difference-in-differences"
+        ],
+        "mechanical_score": 0.256,
+        "llm_score": 92.0,
+        "llm_source": "cache",
+        "llm_reason": "直接讨论交错$\\text{DID}$估计偏误与替代识别方法，属于因果识别核心议题。"
+      },
+      "first_seen_at": "2026-11-06T07:32:44.626343+00:00",
+      "last_seen_at": "2026-11-06T07:32:44.626343+00:00",
+      "retained_from_previous_run": false,
+      "weekly_period": "2026-W45",
+      "is_new_this_week": true,
+      "chinese_summary": {
+        "problem": "论文要解释交错双重差分回归估计量在何时以及如何产生偏误，这些偏误可能影响金融、会计和法律领域大量依赖交错处理时点的研究设定，并可能导致第一类错误和第二类错误。",
+        "method": "论文总结计量经济学与应用文献中为处理这些偏误而提出的三种替代估计量，并说明它们之间的差异与权衡；随后应用这些估计量重新检验此前已发表的结果。",
+        "innovation": "论文解释交错双重差分回归估计量何时以及如何有偏；总结三种替代估计量及其差异与权衡；并将这些估计量应用于重新检验此前已发表的结果。",
+        "conclusion": "这些偏误可能影响金融、会计和法律领域大量依赖交错处理时点的研究设定，并可能导致第一类错误和第二类错误；在重新检验此前已发表的结果时，许多情况下替代因果估计或推断与先前论文存在实质性差异。",
+        "abstract_zh": "我们解释交错双重差分回归估计量——通常用于评估政策变化的影响——在何时以及如何产生偏误。这些偏误可能与金融、会计和法律领域大量依赖交错处理时点的研究设定相关，并可能导致第一类错误和第二类错误。我们总结了计量经济学与应用文献中为处理这些偏误而提出的三种替代估计量，包括它们的差异与权衡。我们将这些估计量应用于重新检验此前已发表的结果，并表明在许多情况下，替代因果估计或推断与先前论文存在实质性差异。",
+        "evidence": "We apply these estimators to re-examine prior published results and show, in many cases, the alternative causal estimates or inferences differ substantially from prior papers.",
+        "why_relevant": "直接讨论交错$\\text{DID}$估计偏误与替代识别方法，属于因果识别核心议题。",
+        "v": 4
+      }
+    },
+    {
+      "id": "openalex:W3046044289",
+      "title": "Local Projection Inference Is Simpler and More Robust Than You Think",
+      "authors": [
+        "José Luis Montiel Olea",
+        "Mikkel Plagborg‐Møller"
+      ],
+      "summary": "Applied macroeconomists often compute confidence intervals for impulse responses using local projections, that is, direct linear regressions of future outcomes on current covariates. This paper proves that local projection inference robustly handles two issues that commonly arise in applications: highly persistent data and the estimation of impulse responses at long horizons. We consider local projections that control for lags of the variables in the regression. We show that lag‐augmented local projections with normal critical values are asymptotically valid uniformly over (i) both stationary and non‐stationary data, and also over (ii) a wide range of response horizons. Moreover, lag augmentation obviates the need to correct standard errors for serial correlation in the regression residuals. Hence, local projection inference is arguably both simpler than previously thought and more robust than standard autoregressive inference, whose validity is known to depend sensitively on the persistence of the data and on the length of the horizon.",
+      "published": "2021-01-01T00:00:00+00:00",
+      "updated": "2021-01-01T00:00:00+00:00",
+      "categories": [
+        "经济学",
+        "Monetary Policy and Economic Impact",
+        "Advanced Causal Inference Techniques"
+      ],
+      "paper_url": "https://doi.org/10.3982/ecta18756",
+      "pdf_url": "https://arxiv.org/pdf/2007.13888",
+      "source": "Econometrica",
+      "source_type": "conference",
+      "venue": "Econometrica",
+      "venue_group": "经济学",
+      "doi": "https://doi.org/10.3982/ecta18756",
+      "conference": {
+        "id": "econometrica",
+        "name": "Econometrica",
+        "year": 2021
+      },
+      "matches": [
+        {
+          "topic_id": "timeseries_causal",
+          "topic_name": "时间序列与因果识别",
+          "score": 0.92,
+          "level": "high",
+          "reason": "AI 判定：局部投影脉冲响应推断，正是该方向核心计量识别方法；关键词命中：local projections",
+          "keyword_hits": [
+            "local projections"
+          ],
+          "mechanical_score": 0.306,
+          "llm_score": 92.0,
+          "llm_source": "cache",
+          "llm_reason": "局部投影脉冲响应推断正是时间序列因果识别的核心方法。"
+        }
+      ],
+      "best_match": {
+        "topic_id": "timeseries_causal",
+        "topic_name": "时间序列与因果识别",
+        "score": 0.92,
+        "level": "high",
+        "reason": "$\\text{AI}$ 判定：局部投影脉冲响应推断，正是该方向核心计量识别方法；关键词命中：local projections",
+        "keyword_hits": [
+          "local projections"
+        ],
+        "mechanical_score": 0.306,
+        "llm_score": 92.0,
+        "llm_source": "cache",
+        "llm_reason": "局部投影脉冲响应推断正是时间序列因果识别的核心方法。"
+      },
+      "first_seen_at": "2026-11-06T07:32:44.626343+00:00",
+      "last_seen_at": "2026-11-06T07:32:44.626343+00:00",
+      "retained_from_previous_run": false,
+      "weekly_period": "2026-W45",
+      "is_new_this_week": true,
+      "chinese_summary": {
+        "problem": "应用宏观经济学家常用局部投影（即把未来结果直接对当期协变量做线性回归）计算脉冲响应的置信区间，而应用中常出现数据高度持续与在长 horizons 上估计脉冲响应这两个问题。",
+        "method": "论文考虑控制回归中变量滞后项的局部投影，并证明带滞后增广（lag-augmented）的局部投影配合正态临界值，在（i）平稳与非平稳数据上以及（ii）广泛的响应 horizons 范围内一致渐近有效。此外，滞后增广免除了对回归残差序列相关修正标准误的需要。",
+        "innovation": "论文证明局部投影推断能稳健处理高度持续数据与长 horizons 估计脉冲响应这两个应用常见问题；并表明滞后增广的局部投影配合正态临界值在平稳与非平稳数据上、在广泛响应 horizons 上一致渐近有效；同时指出滞后增广免除了对残差序列相关修正标准误的需要。",
+        "conclusion": "带滞后增广、使用正态临界值的局部投影在平稳与非平稳数据上以及在广泛响应 horizons 范围内一致渐近有效，且滞后增广免除了对残差序列相关修正标准误的需要；因此局部投影推断可以说既比先前认为的更简单，也比标准自回归推断更稳健，后者的有效性已知敏感地依赖于数据的持续性和 horizon 的长度。",
+        "abstract_zh": "应用宏观经济学家常使用局部投影计算脉冲响应的置信区间，即把未来结果直接对当期协变量做线性回归。本文证明局部投影推断能稳健处理应用中常见的两个问题：高度持续的数据与在长 horizons 上估计脉冲响应。我们考虑控制回归中变量滞后项的局部投影。我们证明，带滞后增广的局部投影配合正态临界值，在（i）平稳与非平稳数据上，以及在（ii）广泛的响应 horizons 范围内，一致渐近有效。此外，滞后增广免除了对回归残差序列相关修正标准误的需要。因此，局部投影推断可以说既比先前认为的更简单，也比标准自回归推断更稳健，后者的有效性已知敏感地依赖于数据的持续性和 horizon 的长度。",
+        "evidence": "We show that lag‐augmented local projections with normal critical values are asymptotically valid uniformly over (i) both stationary and non‐stationary data, and also over (ii) a wide range of response horizons.",
+        "why_relevant": "局部投影脉冲响应推断正是时间序列因果识别的核心方法。",
+        "v": 4
+      }
+    },
+    {
+      "id": "openalex:W4384571245",
+      "title": "Bootstrapping Laplace Transforms of Volatility",
+      "authors": [
+        "Ulrich Hounyo",
+        "Zhi Liu",
+        "Rasmus T. Varneskov"
+      ],
+      "summary": "This paper studies inference for the realized Laplace transform (RLT) of volatility in a fixed-span setting using bootstrap methods. Specifically, since standard wild bootstrap procedures deliver inconsistent inference, we propose a local Gaussian (LG) bootstrap, establish its first-order asymptotic validity, and use Edgeworth expansions to show that the LG bootstrap inference achieves second-order asymptotic refinements. Moreover, we provide new Laplace transform-based estimators of the spot variance as well as the covariance, correlation and beta between two semimartingales, and adapt our bootstrap procedure to the requisite scenario. We establish central limit theory for our estimators and first-order asymptotic validity of their associated bootstrap methods. Simulations demonstrate that the LG bootstrap outperforms existing feasible inference theory and wild bootstrap procedures in finite samples. Finally, we illustrate the use of the new methods by examining the coherence between stocks and bonds during the global financial crisis of 2008 as well as the COVID-19 pandemic stock sell-off during 2020, and by a forecasting exercise.",
+      "published": "2020-01-01T00:00:00+00:00",
+      "updated": "2020-01-01T00:00:00+00:00",
+      "categories": [
+        "经济学",
+        "Financial Risk and Volatility Modeling",
+        "Stochastic processes and financial applications"
+      ],
+      "paper_url": "https://doi.org/10.2139/ssrn.3523293",
+      "pdf_url": "https://doi.org/10.3982/qe1929",
+      "source": "Quantitative Economics",
+      "source_type": "conference",
+      "venue": "Quantitative Economics",
+      "venue_group": "经济学",
+      "doi": "https://doi.org/10.2139/ssrn.3523293",
+      "conference": {
+        "id": "qe",
+        "name": "Quantitative Economics",
+        "year": 2020
+      },
+      "matches": [
+        {
+          "topic_id": "volatility_highfreq",
+          "topic_name": "波动率建模与高频计量",
+          "score": 0.92,
+          "level": "high",
+          "reason": "AI 判定：已实现拉普拉斯变换波动率推断、spot variance与协方差估计及预测，核心属高频波动率建模",
+          "keyword_hits": [],
+          "mechanical_score": 0.156,
+          "llm_score": 92.0,
+          "llm_source": "cache",
+          "llm_reason": "研究已实现拉普拉斯变换波动率推断、spot variance与协方差估计及预测，属高频波动率建模。"
+        }
+      ],
+      "best_match": {
+        "topic_id": "volatility_highfreq",
+        "topic_name": "波动率建模与高频计量",
+        "score": 0.92,
+        "level": "high",
+        "reason": "$\\text{AI}$ 判定：已实现拉普拉斯变换波动率推断、spot variance与协方差估计及预测，核心属高频波动率建模",
+        "keyword_hits": [],
+        "mechanical_score": 0.156,
+        "llm_score": 92.0,
+        "llm_source": "cache",
+        "llm_reason": "研究已实现拉普拉斯变换波动率推断、spot variance与协方差估计及预测，属高频波动率建模。"
+      },
+      "first_seen_at": "2026-11-06T07:32:44.626343+00:00",
+      "last_seen_at": "2026-11-06T07:32:44.626343+00:00",
+      "retained_from_previous_run": false,
+      "weekly_period": "2026-W45",
+      "is_new_this_week": true,
+      "chinese_summary": {
+        "problem": "论文研究在固定跨度（fixed-span）设定下，对波动率的已实现拉普拉斯变换（$\\text{RLT}$）进行推断的问题；摘要指出标准 wild bootstrap 程序会给出不一致的推断。",
+        "method": "论文提出局部高斯（$\\text{LG}$）bootstrap，并建立其一阶渐近有效性，同时用 Edgeworth 展开说明 $\\text{LG}$ bootstrap 推断达到二阶渐近精炼。论文还给出基于拉普拉斯变换的 spot variance 以及两个半鞅之间协方差、相关性和 beta 的新估计量，并将 bootstrap 程序适配到相应场景，为估计量建立中心极限定理及其 bootstrap 方法的一阶渐近有效性。",
+        "innovation": "针对标准 wild bootstrap 推断不一致的问题，提出局部高斯（$\\text{LG}$）bootstrap 并证明其一阶渐近有效性与二阶渐近精炼；提供新的基于拉普拉斯变换的 spot variance 以及协方差、相关性、beta 估计量，并将 bootstrap 程序适配到这些场景；为这些估计量建立中心极限定理及相应 bootstrap 方法的一阶渐近有效性。",
+        "conclusion": "模拟表明 $\\text{LG}$ bootstrap 在有限样本中优于现有可行推断理论和 wild bootstrap 程序；论文还通过考察 $2008$ 年全球金融危机以及 $2020$ 年 $\\text{COVID}$-$19$ 大流行股票抛售期间股票与债券之间的 coherence，以及一项预测练习，说明了新方法的用途。",
+        "abstract_zh": "本文研究在固定跨度设定下，使用 bootstrap 方法对波动率的已实现拉普拉斯变换（$\\text{RLT}$）进行推断。具体而言，由于标准 wild bootstrap 程序会给出不一致的推断，我们提出一种局部高斯（$\\text{LG}$）bootstrap，建立其一阶渐近有效性，并使用 Edgeworth 展开表明 $\\text{LG}$ bootstrap 推断达到二阶渐近精炼。此外，我们提供新的基于拉普拉斯变换的 spot variance 估计量，以及两个半鞅之间的协方差、相关性和 beta 估计量，并将我们的 bootstrap 程序适配到所需场景。我们为我们的估计量建立中心极限定理，并建立其相关 bootstrap 方法的一阶渐近有效性。模拟表明，$\\text{LG}$ bootstrap 在有限样本中优于现有可行推断理论和 wild bootstrap 程序。最后，我们通过考察 $2008$ 年全球金融危机以及 $2020$ 年 $\\text{COVID}$-$19$ 大流行股票抛售期间股票与债券之间的 coherence，以及通过一项预测练习，说明新方法的用途。",
+        "evidence": "Simulations demonstrate that the LG bootstrap outperforms existing feasible inference theory and wild bootstrap procedures in finite samples.",
+        "why_relevant": "研究已实现拉普拉斯变换波动率推断、spot variance与协方差估计及预测，属高频波动率建模。",
+        "v": 4
+      }
+    },
+    {
+      "id": "openalex:W3123808625",
+      "title": "Good Volatility, Bad Volatility, and the Cross Section of Stock Returns",
+      "authors": [
+        "Tim Bollerslev",
+        "Sophia Zhengzi Li",
+        "Bingzhi Zhao"
+      ],
+      "summary": "Based on intraday data for a large cross-section of individual stocks and newly developed econometric procedures, we decompose the realized variation for each of the stocks into separate so-called realized up and down semi-variance measures, or “good” and “bad” volatilities, associated with positive and negative high-frequency price increments, respectively. Sorting the individual stocks into portfolios based on their normalized good minus bad volatilities results in economically large and highly statistically significant differences in the subsequent portfolio returns. These differences remain significant after controlling for other firm characteristics and explanatory variables previously associated with the cross-section of expected stock returns",
+      "published": "2019-01-30T00:00:00+00:00",
+      "updated": "2019-01-30T00:00:00+00:00",
+      "categories": [
+        "金融学",
+        "Financial Markets and Investment Strategies",
+        "Financial Risk and Volatility Modeling"
+      ],
+      "paper_url": "https://doi.org/10.1017/s0022109019000097",
+      "pdf_url": "https://doi.org/10.2139/ssrn.2565660",
+      "source": "Journal of Financial and Quantitative Analysis",
+      "source_type": "conference",
+      "venue": "Journal of Financial and Quantitative Analysis",
+      "venue_group": "金融学",
+      "doi": "https://doi.org/10.1017/s0022109019000097",
+      "conference": {
+        "id": "jfqa",
+        "name": "Journal of Financial and Quantitative Analysis",
+        "year": 2019
+      },
+      "matches": [
+        {
+          "topic_id": "volatility_highfreq",
+          "topic_name": "波动率建模与高频计量",
+          "score": 0.92,
+          "level": "high",
+          "reason": "AI 判定：日内已实现半方差分解并检验横截面收益，核心为高频波动率",
+          "keyword_hits": [],
+          "mechanical_score": 0.188,
+          "llm_score": 92.0,
+          "llm_source": "cache",
+          "llm_reason": "直接涉及已实现半方差分解与高频波动率的横截面定价检验。"
+        }
+      ],
+      "best_match": {
+        "topic_id": "volatility_highfreq",
+        "topic_name": "波动率建模与高频计量",
+        "score": 0.92,
+        "level": "high",
+        "reason": "$\\text{AI}$ 判定：日内已实现半方差分解并检验横截面收益，核心为高频波动率",
+        "keyword_hits": [],
+        "mechanical_score": 0.188,
+        "llm_score": 92.0,
+        "llm_source": "cache",
+        "llm_reason": "直接涉及已实现半方差分解与高频波动率的横截面定价检验。"
+      },
+      "first_seen_at": "2026-11-06T07:32:44.626343+00:00",
+      "last_seen_at": "2026-11-06T07:32:44.626343+00:00",
+      "retained_from_previous_run": false,
+      "weekly_period": "2026-W45",
+      "is_new_this_week": true,
+      "chinese_summary": {
+        "problem": "论文要解决的问题是：如何基于日内数据把个股的已实现变差分解为与正、负高频价格增量相对应的已实现上行与下行半方差（即“好”波动率与“坏”波动率），并考察其横截面收益含义。",
+        "method": "论文使用大横截面的个股日内数据，并采用新近发展的计量经济学程序，将每只股票的已实现变差分解为分别对应正、负高频价格增量的已实现上行半方差与下行半方差，即“好”波动率与“坏”波动率。随后按归一化的“好减坏”波动率对个股排序并构建组合，考察其后续组合收益差异。",
+        "innovation": "论文基于日内数据与新近发展的计量经济学程序，把每只股票的已实现变差分解为与正、负高频价格增量相对应的已实现上行与下行半方差，即“好”波动率与“坏”波动率；并按归一化的“好减坏”波动率对个股排序构建组合，考察后续组合收益差异。",
+        "conclusion": "按归一化的“好减坏”波动率对个股排序构建组合，会带来经济上很大且高度统计显著的后续组合收益差异；在控制其他公司特征以及此前与预期股票收益横截面相关的解释变量后，这些差异仍然显著。",
+        "abstract_zh": "基于大横截面个股的日内数据和新近发展的计量经济学程序，我们将每只股票的已实现变差分解为分别与正、负高频价格增量相对应的所谓已实现上行与下行半方差测度，即“好”波动率与“坏”波动率。按归一化的“好减坏”波动率对个股排序构建组合，会带来经济上很大且高度统计显著的后续组合收益差异。在控制其他公司特征以及此前与预期股票收益横截面相关的解释变量后，这些差异仍然显著。",
+        "evidence": "Sorting the individual stocks into portfolios based on their normalized good minus bad volatilities results in economically large and highly statistically significant differences in the subsequent portfolio returns.",
+        "why_relevant": "直接涉及已实现半方差分解与高频波动率的横截面定价检验。",
+        "v": 4
+      }
+    },
+    {
+      "id": "openalex:W2499063677",
+      "title": "Volume, Volatility, and Public News Announcements",
+      "authors": [
+        "Tim Bollerslev",
+        "Jia Li",
+        "Yuan Xue"
+      ],
+      "summary": "We provide new empirical evidence for the way in which financial markets process information. Our results rely critically on high-frequency intraday price and volume data for the S&P 500 equity portfolio and U.S. Treasury bonds, along with new econometric techniques, for making inference on the relationship between trading intensity and spot volatility around public news announcements. Consistent with the predictions derived from a theoretical model in which investors agree to disagree, our estimates for the intraday volume-volatility elasticity around important news announcements are systematically below unity. Our elasticity estimates also decrease significantly with measures of disagreements in beliefs, economic uncertainty, and textual-based sentiment, further highlighting the key role played by differences-of-opinion.",
+      "published": "2018-01-16T00:00:00+00:00",
+      "updated": "2018-01-16T00:00:00+00:00",
+      "categories": [
+        "经济学",
+        "Financial Markets and Investment Strategies",
+        "Financial Risk and Volatility Modeling"
+      ],
+      "paper_url": "https://doi.org/10.1093/restud/rdy003",
+      "pdf_url": "https://pure.au.dk/portal/en/publications/fba1bd34-3cc8-4d34-9ead-cb6a47387074",
+      "source": "Review of Economic Studies",
+      "source_type": "conference",
+      "venue": "Review of Economic Studies",
+      "venue_group": "经济学",
+      "doi": "https://doi.org/10.1093/restud/rdy003",
+      "conference": {
+        "id": "restud",
+        "name": "Review of Economic Studies",
+        "year": 2018
+      },
+      "matches": [
+        {
+          "topic_id": "volatility_highfreq",
+          "topic_name": "波动率建模与高频计量",
+          "score": 0.92,
+          "level": "high",
+          "reason": "AI 判定：用高频日内数据估计公告前后成交量-波动率弹性，核心属高频波动率建模",
+          "keyword_hits": [],
+          "mechanical_score": 0.125,
+          "llm_score": 92.0,
+          "llm_source": "cache",
+          "llm_reason": "用高频日内数据估计公告前后成交量-波动率弹性，属高频波动率建模。"
+        }
+      ],
+      "best_match": {
+        "topic_id": "volatility_highfreq",
+        "topic_name": "波动率建模与高频计量",
+        "score": 0.92,
+        "level": "high",
+        "reason": "$\\text{AI}$ 判定：用高频日内数据估计公告前后成交量-波动率弹性，核心属高频波动率建模",
+        "keyword_hits": [],
+        "mechanical_score": 0.125,
+        "llm_score": 92.0,
+        "llm_source": "cache",
+        "llm_reason": "用高频日内数据估计公告前后成交量-波动率弹性，属高频波动率建模。"
+      },
+      "first_seen_at": "2026-11-06T07:32:44.626343+00:00",
+      "last_seen_at": "2026-11-06T07:32:44.626343+00:00",
+      "retained_from_previous_run": false,
+      "weekly_period": "2026-W45",
+      "is_new_this_week": true,
+      "chinese_summary": {
+        "problem": "论文要解决的是金融市场如何加工信息的问题，具体聚焦于公共新闻公告前后交易强度与即期波动率之间的关系。",
+        "method": "论文依赖 S&P $500$ 股票组合与美国国债的高频日内价格和成交量数据，并采用新的计量经济技术，对公共新闻公告前后交易强度与即期波动率之间的关系进行推断。",
+        "innovation": "论文提供了关于金融市场如何加工信息的新经验证据；其推断关键依赖于高频日内价格与成交量数据以及新的计量经济技术，用于刻画公共新闻公告前后交易强度与即期波动率的关系。",
+        "conclusion": "与投资者“agree to disagree”的理论模型预测一致，论文对重要新闻公告前后日内成交量-波动率弹性的估计系统性地低于 $1$；弹性估计也随信念分歧、经济不确定性和基于文本的情绪等度量而显著下降。",
+        "abstract_zh": "我们为金融市场加工信息的方式提供了新的经验证据。我们的结果关键依赖于 S&P $500$ 股票组合与美国国债的高频日内价格和成交量数据，以及新的计量经济技术，用于对公共新闻公告前后交易强度与即期波动率之间的关系进行推断。与一个投资者“agree to disagree”的理论模型所推导的预测一致，我们对重要新闻公告前后日内成交量-波动率弹性的估计系统性地低于 $1$。我们的弹性估计也随信念分歧、经济不确定性和基于文本的情绪等度量而显著下降，进一步凸显了意见分歧所起的关键作用。",
+        "evidence": "Consistent with the predictions derived from a theoretical model in which investors agree to disagree, our estimates for the intraday volume-volatility elasticity around important news announcements are systematically below unity.",
+        "why_relevant": "用高频日内数据估计公告前后成交量-波动率弹性，属高频波动率建模。",
+        "v": 4
       }
     },
     {
@@ -2881,15 +3238,30 @@
     "openalex:w3106043818": "2026-10-30T06:40:51.877926+00:00",
     "10.1080/07474938.2023.2209007": "2026-10-30T06:40:51.877926+00:00",
     "openalex:w4292800989": "2026-10-30T06:40:51.877926+00:00",
-    "10.1111/mafi.12354": "2026-10-30T06:40:51.877926+00:00"
+    "10.1111/mafi.12354": "2026-10-30T06:40:51.877926+00:00",
+    "doi:10.1016/j.jfineco.2022.01.004": "2026-11-06T07:32:44.626343+00:00",
+    "id:openalex:w4283387379": "2026-11-06T07:32:44.626343+00:00",
+    "t:howmuchshouldwetruststaggereddifferenceindifferencesestimates": "2026-11-06T07:32:44.626343+00:00",
+    "doi:10.3982/ecta18756": "2026-11-06T07:32:44.626343+00:00",
+    "id:openalex:w3046044289": "2026-11-06T07:32:44.626343+00:00",
+    "t:localprojectioninferenceissimplerandmorerobustthanyouthink": "2026-11-06T07:32:44.626343+00:00",
+    "doi:10.2139/ssrn.3523293": "2026-11-06T07:32:44.626343+00:00",
+    "id:openalex:w4384571245": "2026-11-06T07:32:44.626343+00:00",
+    "t:bootstrappinglaplacetransformsofvolatility": "2026-11-06T07:32:44.626343+00:00",
+    "doi:10.1017/s0022109019000097": "2026-11-06T07:32:44.626343+00:00",
+    "id:openalex:w3123808625": "2026-11-06T07:32:44.626343+00:00",
+    "t:goodvolatilitybadvolatilityandthecrosssectionofstockreturns": "2026-11-06T07:32:44.626343+00:00",
+    "doi:10.1093/restud/rdy003": "2026-11-06T07:32:44.626343+00:00",
+    "id:openalex:w2499063677": "2026-11-06T07:32:44.626343+00:00",
+    "t:volumevolatilityandpublicnewsannouncements": "2026-11-06T07:32:44.626343+00:00"
   },
-  "weekly_period": "2026-W44",
+  "weekly_period": "2026-W45",
   "stats": {
     "candidate_paper_count": 923,
     "new_paper_count": 57,
-    "filtered_low_relevance_count": 377,
+    "filtered_low_relevance_count": 385,
     "venue_count": 19,
-    "lookback_days": 3224,
+    "lookback_days": 3231,
     "from_publication_date": "2018-01-01",
     "window_search_terms": 40,
     "llm_enabled": true,
@@ -2993,21 +3365,21 @@
       }
     },
     "collection_mode": "incremental",
-    "high_count": 33,
-    "with_abstract_count": 33,
-    "weekly_period": "2026-W44",
-    "period_new_count": 3,
-    "weekly_new_count": 0,
-    "weekly_new_quota": 0,
+    "high_count": 38,
+    "with_abstract_count": 38,
+    "weekly_period": "2026-W45",
+    "period_new_count": 5,
+    "weekly_new_count": 5,
+    "weekly_new_quota": 5,
     "weekly_new_total": 10,
     "kept_previous_count": 33,
-    "display_count": 33,
-    "archive_count": 33,
+    "display_count": 38,
+    "archive_count": 38,
     "dropped_from_display_count": 0,
     "duplicate_candidate_count": 23,
     "fresh_candidate_count": 34,
-    "summary_jobs": 0,
-    "summary_succeeded": 0,
+    "summary_jobs": 5,
+    "summary_succeeded": 5,
     "summary_failed": 0,
     "summary_cache_hits": 33,
     "preprint_checked": 0,
@@ -3015,7 +3387,7 @@
     "preprint_cache_hits": 0,
     "max_stored_papers": 1200,
     "max_data_bytes": 12582912,
-    "data_bytes": 229263,
+    "data_bytes": 258839,
     "storage_trimmed_count": 0,
     "storage_trimmed_by_level": {
       "high": 0,
@@ -3023,6 +3395,6 @@
       "low": 0,
       "unknown": 0
     },
-    "paper_count": 33
+    "paper_count": 38
   }
 }

@@ -1,6 +1,6 @@
 {
-  "generated_at": "Fri, 30 Oct 2026 14:51:27 +0000",
-  "generated_at_iso": "2026-10-30T14:51:27.060255+00:00",
+  "generated_at": "Fri, 06 Nov 2026 07:30:56 +0000",
+  "generated_at_iso": "2026-11-06T07:30:56.319766+00:00",
   "config_source": "file",
   "data_kind": "daily",
   "topics": [
@@ -307,7 +307,7 @@
       "last_seen_at": "2026-10-30T13:02:25.260239+00:00",
       "retained_from_previous_run": true,
       "weekly_period": "2026-W44",
-      "is_new_this_week": true,
+      "is_new_this_week": false,
       "chinese_summary": {
         "problem": "论文要解决的问题是：波动率预测是尾部风险度量（在险价值 $\\text{VaR}$ 与预期短缺 $\\text{ES}$）的基础，本文比较在多种收益分布下，加入已实现测度的已实现随机波动率（$\\text{RSV}$）模型与其对应的 $\\text{SV}$ 模型，并与 $\\text{EGARCH}$、$\\text{REGARCH}$ 基准进行比较。",
         "method": "论文在正态、Student's t、两种偏正态和三种偏 t 收益分布下，将已实现测度加入随机波动率（$\\text{SV}$）模型构成 $\\text{RSV}$ 模型，并与 $\\text{SV}$ 对应模型以及 $\\text{EGARCH}$、$\\text{REGARCH}$ 基准比较。模型用马尔可夫链蒙特卡洛估计，样本为道琼斯工业平均指数和日经 $225$，比较一日前的波动率、$\\text{VaR}$ 和 $\\text{ES}$ 预测（波动率取预测均值）。",
@@ -452,6 +452,72 @@
       "weekly_period": ""
     },
     {
+      "id": "2611.07287v1",
+      "source": "arXiv",
+      "title": "Neural Realized Measures: Forecast-Supervised Intraday Aggregation for Volatility Forecasting",
+      "authors": [
+        "Brian Sing Fan Chan",
+        "Jennifer So Kuen Chan"
+      ],
+      "summary": "High-frequency volatility forecasting typically separates measurement from prediction: intraday observations are first compressed into a daily realized measure using a fixed aggregation rule, and the resulting statistic is then passed to a forecasting model. This conventional pipeline therefore treats measure construction as forecast-agnostic preprocessing. We ask whether the aggregation stage itself can instead be learned from the downstream forecasting objective while preserving the statistical structure of established realized measures. We propose Neural Realized Measures (NRM), a primitive-preserving, forecast-supervised aggregation framework that retains the original measure-specific intraday contributions but replaces uniform aggregation with positive, mean-normalized context-dependent weights. Uniform weights exactly recover the corresponding raw realized measure (RRM), so the classical construction is nested as a special case. Because NRM remains an explicit weighted sum of established primitive contributions, it also retains direct bar-level attribution. Across SF, HAR, and MIDAS forecasting specifications, NRM is evaluated against corresponding RRM specifications under controlled comparisons. In Heston simulations, NRM reduces RMSE for both contemporaneous and next-day latent integrated variance across all evaluated primitive--regime combinations. On six cryptocurrencies using five-minute data, NRM improves QLIKE in all 54 paired out-of-sample comparisons, with mean gains of 7.23\\%, 8.15\\%, and 9.22\\% under SF, HAR, and MIDAS, respectively. Validation-selected NRM specifications also achieve the lowest mean QLIKE across the six assets among the evaluated approaches. Ablation and SHAP analyses reveal systematic time-of-day and nonlinear local-context effects in the learned allocation.",
+      "published": "2026-11-05T01:10:44Z",
+      "updated": "2026-11-05T01:10:44Z",
+      "paper_url": "http://arxiv.org/abs/2611.07287v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.07287v1",
+      "categories": [
+        "q-fin.ST",
+        "stat.ML"
+      ],
+      "seed_topic": "volatility_highfreq",
+      "matches": [
+        {
+          "topic_id": "volatility_highfreq",
+          "topic_name": "波动率建模与高频计量",
+          "score": 0.92,
+          "level": "high",
+          "reason": "AI 判定：已实现测度与高频波动率预测，核心贴合该方向；关键词命中：volatility forecasting",
+          "keyword_hits": [
+            "volatility forecasting"
+          ],
+          "mechanical_score": 0.311,
+          "llm_score": 92.0,
+          "llm_source": "llm",
+          "applied": true,
+          "llm_reason": "直接研究已实现测度构建与高频波动率预测，属核心议题。"
+        }
+      ],
+      "best_match": {
+        "topic_id": "volatility_highfreq",
+        "topic_name": "波动率建模与高频计量",
+        "score": 0.92,
+        "level": "high",
+        "reason": "$\\text{AI}$ 判定：已实现测度与高频波动率预测，核心贴合该方向；关键词命中：volatility forecasting",
+        "keyword_hits": [
+          "volatility forecasting"
+        ],
+        "mechanical_score": 0.311,
+        "llm_score": 92.0,
+        "llm_source": "llm",
+        "applied": true,
+        "llm_reason": "直接研究已实现测度构建与高频波动率预测，属核心议题。"
+      },
+      "first_seen_at": "2026-11-06T07:30:56.319766+00:00",
+      "last_seen_at": "2026-11-06T07:30:56.319766+00:00",
+      "retained_from_previous_run": false,
+      "weekly_period": "2026-W45",
+      "is_new_this_week": true,
+      "chinese_summary": {
+        "problem": "高频波动率预测通常把测量与预测分离：先用固定聚合规则把日内观测压缩成日度已实现测度，再把该统计量送入预测模型，因此测度构建被视为与预测目标无关的预处理。论文追问聚合阶段本身能否在下游预测目标下被学习，同时保留既有已实现测度的统计结构。",
+        "method": "论文提出 Neural Realized Measures（$\\text{NRM}$），一个 primitive-preserving、forecast-supervised 的聚合框架，保留原有的测度特定日内贡献，但用正的、均值归一化的、依赖上下文的权重替代均匀聚合。均匀权重可精确还原对应的原始已实现测度（$\\text{RRM}$），因此经典构建作为特例被嵌套。由于 $\\text{NRM}$ 仍是既有原始贡献的显式加权和，它也保留了直接的 bar 级归因。论文在 $\\text{SF}$、$\\text{HAR}$ 和 $\\text{MIDAS}$ 预测设定下，将 $\\text{NRM}$ 与对应的 $\\text{RRM}$ 设定在受控比较中评估。",
+        "innovation": "论文声称的创新是：把聚合阶段本身从下游预测目标中学习，而非当作与预测无关的预处理；该聚合保持 primitive-preserving，即保留原有测度特定的日内贡献，并以正的、均值归一化的上下文相关权重替代均匀聚合，使均匀权重下的经典 $\\text{RRM}$ 作为嵌套特例被精确还原；同时因 $\\text{NRM}$ 仍是显式加权和而保留 bar 级归因。",
+        "conclusion": "在 Heston 模拟中，$\\text{NRM}$ 在所有被评估的 primitive--regime 组合上降低了同期与次日潜在积分方差的 $\\text{RMSE}$；在使用五分钟数据的六种加密货币上，$\\text{NRM}$ 在全部 $54$ 组配对样本外比较中改善 $\\text{QLIKE}$，在 $\\text{SF}$、$\\text{HAR}$ 和 $\\text{MIDAS}$ 下平均增益分别为 $7.23$\\%、$8.15$\\% 和 $9.22$\\%；验证集选出的 $\\text{NRM}$ 设定在六种资产中也取得所评估方法中最低的平均 $\\text{QLIKE}$。",
+        "abstract_zh": "高频波动率预测通常将测量与预测分离：日内观测首先使用固定聚合规则被压缩为日度已实现测度，然后所得统计量被传递给预测模型。因此这一传统流程将测度构建视为与预测无关的预处理。我们追问聚合阶段本身是否能够改为从下游预测目标中学习，同时保留既有已实现测度的统计结构。我们提出 Neural Realized Measures（$\\text{NRM}$），一个 primitive-preserving、forecast-supervised 的聚合框架，它保留原有的测度特定日内贡献，但用正的、均值归一化的、依赖上下文的权重替代均匀聚合。均匀权重可精确还原对应的原始已实现测度（$\\text{RRM}$），因此经典构建作为特例被嵌套。由于 $\\text{NRM}$ 仍是既有原始贡献的显式加权和，它也保留了直接的 bar 级归因。在 $\\text{SF}$、$\\text{HAR}$ 和 $\\text{MIDAS}$ 预测设定下，$\\text{NRM}$ 在受控比较中与对应的 $\\text{RRM}$ 设定进行评估。在 Heston 模拟中，$\\text{NRM}$ 在所有被评估的 primitive--regime 组合上降低了同期与次日潜在积分方差的 $\\text{RMSE}$。在使用五分钟数据的六种加密货币上，$\\text{NRM}$ 在全部 $54$ 组配对样本外比较中改善 $\\text{QLIKE}$，在 $\\text{SF}$、$\\text{HAR}$ 和 $\\text{MIDAS}$ 下平均增益分别为 $7.23$\\%、$8.15$\\% 和 $9.22$\\%。验证集选出的 $\\text{NRM}$ 设定在六种资产中也取得所评估方法中最低的平均 $\\text{QLIKE}$。消融与 $\\text{SHAP}$ 分析揭示了学习到的分配中存在系统性的日内时段效应与非线性局部上下文效应。",
+        "evidence": "On six cryptocurrencies using five-minute data, NRM improves QLIKE in all 54 paired out-of-sample comparisons, with mean gains of 7.23\\%, 8.15\\%, and 9.22\\% under SF, HAR, and MIDAS, respectively.",
+        "why_relevant": "直接研究已实现测度构建与高频波动率预测，属核心议题。",
+        "v": 4
+      }
+    },
+    {
       "id": "2610.40047v1",
       "source": "arXiv",
       "title": "Smooth Threshold GARCH: Quasi Maximum Likelihood Estimation and Empirical Evidence",
@@ -502,7 +568,7 @@
       "last_seen_at": "2026-10-30T13:02:25.260239+00:00",
       "retained_from_previous_run": true,
       "weekly_period": "2026-W44",
-      "is_new_this_week": true,
+      "is_new_this_week": false,
       "chinese_summary": {
         "problem": "已有研究表明日股票收益的波动率对消息的反应是非对称的，新闻影响曲线（$\\text{NIC}$）具有三个特征：(i) 波动率对同等幅度的负收益反应强于正收益；(ii) $\\text{NIC}$ 取得最小值的非对称点为正；(iii) 高于该点的收益往往完全不增加波动率。而流行的 $\\text{GJR}$ 与 A-$\\text{GARCH}$ 模型各自排除了其中一个特征。",
         "method": "研究 Smooth Threshold $\\text{GARCH}$（$\\text{STGARCH}$）模型，该模型嵌套 $\\text{GJR}$ 与 A-$\\text{GARCH}$，并通过将估计的阈值（即非对称点）与阈值两侧各自的斜率相结合来允许 (i)-(iii)。尽管似然在阈值处不是二次连续可微的，论文证明拟极大似然估计量是一致的，并以通常的 $\\sqrt{n}$ 速率收敛，无论 (iii) 是否成立。若 (iii) 不成立，估计量渐近正态；若 (iii) 成立，阈值上方的斜率为零，位于参数空间边界，极限为非高斯。",
@@ -1121,6 +1187,139 @@
       "weekly_period": "2026-W42"
     },
     {
+      "id": "2611.07120v1",
+      "source": "arXiv",
+      "title": "A Rough Instantaneous Squared VIX Model for Term Structure and Option Pricing",
+      "authors": [
+        "Tianfeng Yang",
+        "Wen Su",
+        "Blanka Horvath"
+      ],
+      "summary": "The VIX term structure provides forward-looking measures of market uncertainty across horizons, while VIX options allow investors to hedge volatility risk. This paper proposes a rough instantaneous squared VIX (RISVIX) model by introducing fractional memory into the conventional Markovian framework. We derive an explicit representation of the VIX term structure governed by Mittag--Leffler decay and a semi-closed-form pricing formula for VIX options based on an affine Fourier--Laplace transform. These results support a two-step calibration procedure that estimates memory, mean reversion, and date-specific initial states from VIX term-structure indices before calibrating the remaining distributional parameters to VIX option prices. Using daily VIX term-structure indices and VIX option quotes from January 2018 to June 2025, we find that RISVIX improves upon the Markovian benchmark in fitting the VIX term structure, with larger gains during elevated-volatility periods and for its slope and curvature. RISVIX also improves out-of-sample option pricing, reducing MSE and MAE by 13.06\\% and 6.33\\%, respectively, with larger gains at shorter maturities and in high-VIX states. These findings suggest that the gains from fractional memory are particularly pronounced when volatility is elevated and can be obtained within a tractable direct model of VIX derivatives. Comparisons with additional benchmarks from the recent literature also show improvements to varying degrees in both VIX term-structure fitting and option pricing.",
+      "published": "2026-11-04T20:34:55Z",
+      "updated": "2026-11-04T20:34:55Z",
+      "paper_url": "http://arxiv.org/abs/2611.07120v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.07120v1",
+      "categories": [
+        "q-fin.PR",
+        "q-fin.MF"
+      ],
+      "seed_topic": "asset_pricing",
+      "from_window_search": true,
+      "matches": [
+        {
+          "topic_id": "volatility_highfreq",
+          "topic_name": "波动率建模与高频计量",
+          "score": 0.88,
+          "level": "high",
+          "reason": "AI 判定：粗糙VIX期限结构与期权定价，用真实VIX及期权数据校准；关键词命中：option pricing、term structure",
+          "keyword_hits": [
+            "option pricing",
+            "term structure"
+          ],
+          "mechanical_score": 0.308,
+          "llm_score": 88.0,
+          "llm_source": "llm",
+          "applied": true,
+          "llm_reason": "涉及 VIX 期限结构、期权定价与波动率建模，与波动率预测和隐含波动率方向相关。"
+        }
+      ],
+      "best_match": {
+        "topic_id": "volatility_highfreq",
+        "topic_name": "波动率建模与高频计量",
+        "score": 0.88,
+        "level": "high",
+        "reason": "$\\text{AI}$ 判定：粗糙$\\text{VIX}$期限结构与期权定价，用真实$\\text{VIX}$及期权数据校准；关键词命中：option pricing、term structure",
+        "keyword_hits": [
+          "option pricing",
+          "term structure"
+        ],
+        "mechanical_score": 0.308,
+        "llm_score": 88.0,
+        "llm_source": "llm",
+        "applied": true,
+        "llm_reason": "涉及 $\\text{VIX}$ 期限结构、期权定价与波动率建模，与波动率预测和隐含波动率方向相关。"
+      },
+      "first_seen_at": "2026-11-06T07:30:56.319766+00:00",
+      "last_seen_at": "2026-11-06T07:30:56.319766+00:00",
+      "retained_from_previous_run": false,
+      "weekly_period": "2026-W45",
+      "is_new_this_week": true,
+      "chinese_summary": {
+        "problem": "论文要解决的是如何刻画 $\\text{VIX}$ 期限结构并据此为 $\\text{VIX}$ 期权定价的问题；摘要指出 $\\text{VIX}$ 期限结构提供跨期限的前瞻性市场不确定性度量，而 $\\text{VIX}$ 期权使投资者能够对冲波动率风险。",
+        "method": "论文在传统马尔可夫框架中引入分数阶记忆，提出粗糙瞬时平方 $\\text{VIX}$（$\\text{RISVIX}$）模型。论文推导出由 Mittag--Leffler 衰减支配的 $\\text{VIX}$ 期限结构显式表示，以及基于仿射 Fourier--Laplace 变换的 $\\text{VIX}$ 期权半闭式定价公式。这些结果支持一个两步校准程序：先从 $\\text{VIX}$ 期限结构指数估计记忆、均值回复和日期特定的初始状态，再将剩余分布参数校准到 $\\text{VIX}$ 期权价格。",
+        "innovation": "论文通过在传统马尔可夫框架中引入分数阶记忆，提出 $\\text{RISVIX}$ 模型；推导出由 Mittag--Leffler 衰减支配的 $\\text{VIX}$ 期限结构显式表示，以及基于仿射 Fourier--Laplace 变换的 $\\text{VIX}$ 期权半闭式定价公式；并给出相应的两步校准程序。",
+        "conclusion": "使用 $2018$ 年 $1$ 月至 $2025$ 年 $6$ 月的日度 $\\text{VIX}$ 期限结构指数和 $\\text{VIX}$ 期权报价，$\\text{RISVIX}$ 在拟合 $\\text{VIX}$ 期限结构上优于马尔可夫基准，在波动率升高时期以及对其斜率和曲率的拟合上收益更大；$\\text{RISVIX}$ 还改进了样本外期权定价，使 $\\text{MSE}$ 和 $\\text{MAE}$ 分别降低 $13.06$\\% 和 $6.33$\\%，在较短期限和高 $\\text{VIX}$ 状态下收益更大。",
+        "abstract_zh": "$\\text{VIX}$ 期限结构提供跨期限的前瞻性市场不确定性度量，而 $\\text{VIX}$ 期权使投资者能够对冲波动率风险。本文通过在传统马尔可夫框架中引入分数阶记忆，提出一个粗糙瞬时平方 $\\text{VIX}$（$\\text{RISVIX}$）模型。我们推导出由 Mittag--Leffler 衰减支配的 $\\text{VIX}$ 期限结构的显式表示，以及基于仿射 Fourier--Laplace 变换的 $\\text{VIX}$ 期权的半闭式定价公式。这些结果支持一个两步校准程序，该程序先从 $\\text{VIX}$ 期限结构指数估计记忆、均值回复和日期特定的初始状态，再将剩余分布参数校准到 $\\text{VIX}$ 期权价格。使用 $2018$ 年 $1$ 月至 $2025$ 年 $6$ 月的日度 $\\text{VIX}$ 期限结构指数和 $\\text{VIX}$ 期权报价，我们发现 $\\text{RISVIX}$ 在拟合 $\\text{VIX}$ 期限结构上优于马尔可夫基准，在波动率升高时期以及对其斜率和曲率的拟合上收益更大。$\\text{RISVIX}$ 还改进了样本外期权定价，使 $\\text{MSE}$ 和 $\\text{MAE}$ 分别降低 $13.06$\\% 和 $6.33$\\%，在较短期限和高 $\\text{VIX}$ 状态下收益更大。这些发现表明，分数阶记忆带来的收益在波动率升高时尤为明显，并且可以在一个易于处理的 $\\text{VIX}$ 衍生品直接模型中获得。与近期文献中其他基准的比较也显示，在 $\\text{VIX}$ 期限结构拟合和期权定价两方面均有不同程度的改进。",
+        "evidence": "RISVIX also improves out-of-sample option pricing, reducing MSE and MAE by 13.06\\% and 6.33\\%, respectively, with larger gains at shorter maturities and in high-VIX states.",
+        "why_relevant": "涉及 $\\text{VIX}$ 期限结构、期权定价与波动率建模，与波动率预测和隐含波动率方向相关。",
+        "v": 4
+      }
+    },
+    {
+      "id": "2611.05778v1",
+      "source": "arXiv",
+      "title": "Neural Score-Driven Volatility and Risk Forecasting",
+      "authors": [
+        "Qianli Zhao",
+        "Chao Wang",
+        "Minh-Ngoc Tran",
+        "Richard Gerlach"
+      ],
+      "summary": "We develop a score-driven volatility model in which no particular parametric innovation distribution needs to be specified. The proposed method relies on a lightweight neural network to represent the negative score of the innovation density. By integrating and normalizing the learned score and imposing location-scale identification, we recover a flexible innovation density that can accommodate asymmetry, including negative skewness commonly observed in financial returns. Two estimation procedures are considered. A two-step procedure estimates the neural score by score matching and subsequently fits the volatility recursion with the identified density held fixed. A one-step procedure jointly refines the neural and volatility parameters under the conditional likelihood. We illustrate the practical relevance of the proposed method using eight international equity indices, with a separate evaluation of the high-volatility first half of 2020. The results show that the neural score-driven models are competitive with Gaussian and Student-$t$ GAS benchmarks that require a prespecified parametric innovation distribution, with particularly strong performance during the COVID-19 period.",
+      "published": "2026-11-04T00:31:23Z",
+      "updated": "2026-11-04T00:31:23Z",
+      "paper_url": "http://arxiv.org/abs/2611.05778v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.05778v1",
+      "categories": [
+        "econ.EM"
+      ],
+      "seed_topic": "timeseries_causal",
+      "matches": [
+        {
+          "topic_id": "volatility_highfreq",
+          "topic_name": "波动率建模与高频计量",
+          "score": 0.88,
+          "level": "high",
+          "reason": "AI 判定：神经得分驱动波动率模型，用八个股指实证并评估2020高波动期",
+          "keyword_hits": [],
+          "mechanical_score": 0.312,
+          "llm_score": 88.0,
+          "llm_source": "llm",
+          "applied": true,
+          "llm_reason": "神经得分驱动波动率模型属于波动率建模，且评估高波动期，与研究方向相关。"
+        }
+      ],
+      "best_match": {
+        "topic_id": "volatility_highfreq",
+        "topic_name": "波动率建模与高频计量",
+        "score": 0.88,
+        "level": "high",
+        "reason": "$\\text{AI}$ 判定：神经得分驱动波动率模型，用八个股指实证并评估$2020$高波动期",
+        "keyword_hits": [],
+        "mechanical_score": 0.312,
+        "llm_score": 88.0,
+        "llm_source": "llm",
+        "applied": true,
+        "llm_reason": "神经得分驱动波动率模型属于波动率建模，且评估高波动期，与研究方向相关。"
+      },
+      "first_seen_at": "2026-11-06T07:30:56.319766+00:00",
+      "last_seen_at": "2026-11-06T07:30:56.319766+00:00",
+      "retained_from_previous_run": false,
+      "weekly_period": "2026-W45",
+      "is_new_this_week": true,
+      "chinese_summary": {
+        "problem": "论文要解决的问题是：开发一个不需要指定特定参数化新息分布的得分驱动波动率模型。",
+        "method": "所提方法依赖一个轻量级神经网络来表示新息密度的负得分。通过对学习到的得分进行积分和归一化，并施加位置-尺度识别，恢复出一个能容纳不对称性（包括金融收益中常见的负偏度）的灵活新息密度。考虑两种估计程序：两步法先用得分匹配估计神经得分，然后在识别出的密度固定下拟合波动率递归；一步法在条件似然下联合精炼神经参数和波动率参数。",
+        "innovation": "相对已有工作，具体创新点包括：$1$）提出无需指定参数化新息分布的得分驱动波动率模型，用轻量级神经网络表示负得分；$2$）通过积分、归一化和位置-尺度识别恢复灵活新息密度，可容纳不对称性；$3$）给出两步法和一步法两种估计程序。",
+        "conclusion": "结果表明，神经得分驱动模型与需要预先指定参数化新息分布的高斯和 Student-$t$ $\\text{GAS}$ 基准相比具有竞争力，在 $\\text{COVID}$-$19$ 期间表现尤其强劲。",
+        "abstract_zh": "我们开发了一个得分驱动波动率模型，其中不需要指定任何特定的参数化新息分布。所提方法依赖一个轻量级神经网络来表示新息密度的负得分。通过对学习到的得分进行积分和归一化，并施加位置-尺度识别，我们恢复出一个灵活的新息密度，它可以容纳不对称性，包括金融收益中常见的负偏度。考虑了两种估计程序。两步法先通过得分匹配估计神经得分，随后在识别出的密度保持固定的情况下拟合波动率递归。一步法在条件似然下联合精炼神经参数和波动率参数。我们使用八个国际股票指数来说明所提方法的实际相关性，并单独评估了$2020$年高波动的上半年。结果表明，神经得分驱动模型与需要预先指定参数化新息分布的高斯和 Student-$t$ $\\text{GAS}$ 基准相比具有竞争力，在 $\\text{COVID}$-$19$ 期间表现尤其强劲。",
+        "evidence": "The results show that the neural score-driven models are competitive with Gaussian and Student-$t$ GAS benchmarks that require a prespecified parametric innovation distribution, with particularly strong performance during the COVID-19 period.",
+        "why_relevant": "神经得分驱动波动率模型属于波动率建模，且评估高波动期，与研究方向相关。",
+        "v": 4
+      }
+    },
+    {
       "id": "2610.39995v1",
       "source": "arXiv",
       "title": "How Different are Different Differences-in-Differences? A Large-Scale Meta-Analysis",
@@ -1170,7 +1369,7 @@
       "last_seen_at": "2026-10-30T13:02:25.260239+00:00",
       "retained_from_previous_run": true,
       "weekly_period": "2026-W44",
-      "is_new_this_week": true,
+      "is_new_this_week": false,
       "chinese_summary": {
         "problem": "论文要评估双向固定效应（$\\text{TWFE}$）估计中负权重的经验重要性。",
         "method": "作者使用 $\\text{AI}$ 辅助复现，基于来自 $108$ 篇经济学论文的 $1{,}346$ 个交错采纳设定。分析将 $\\text{TWFE}$ 估计与现代双重差分方法的估计进行比较，并使用考虑估计噪声的层次模型。",
@@ -1230,7 +1429,7 @@
       "last_seen_at": "2026-10-30T13:02:25.260239+00:00",
       "retained_from_previous_run": true,
       "weekly_period": "2026-W44",
-      "is_new_this_week": true,
+      "is_new_this_week": false,
       "chinese_summary": {
         "problem": "本研究考察基于 transformer 的金融新闻情绪能否在传统市场类预测变量之外改进股票波动率预测。",
         "method": "使用十一只美国股票的数据，将波动率持续性模型与纳入 $\\text{VIX}$、$\\text{AAII}$ 投资者情绪以及用 $\\text{ModernFinBERT}$ 提取的新闻情绪的设定进行比较。预测目标是年化波动率，由未来 trailing $252$-session Yang-Zhang 估计的均值构造，并在 $1$、$5$、$22$ 个交易日horizon上评估。模型通过 walk-forward 检验评估，采用扩展与滚动估计窗口、固定初始超参数选择，以及考虑多重检验与序列相关的统计比较。",
@@ -1360,7 +1559,7 @@
       "last_seen_at": "2026-10-30T13:02:25.260239+00:00",
       "retained_from_previous_run": true,
       "weekly_period": "2026-W44",
-      "is_new_this_week": true,
+      "is_new_this_week": false,
       "chinese_summary": {
         "problem": "论文要解决的问题是：为 $\\text{CoVaR}$ 建立一个极值框架，并刻画 $v(q \\mid p ; C)$（即 copula 调整后的概率水平，或等价地，在均匀 $(0,1)$ 尺度上的 $\\text{CoVaR}$）可能的尾部机制。",
         "method": "论文通过 copula 条件分布的极限行为刻画 $v(q \\mid p ; C)$ 的可能尾部机制，并表明这些机制由 copula 的联合尾部展开决定。由此得到可处理的条件，用于识别尾部机制并推导 $v(q | p ; C)$ 的渐近行为。在此基础上，论文提出一种适应多种尾部机制的最小距离 $\\text{CoVaR}$ 估计方法。",
@@ -1372,6 +1571,143 @@
         "v": 4,
         "model": "",
         "at": "2026-10-18T12:08:42+00:00"
+      }
+    },
+    {
+      "id": "2512.19484v1",
+      "source": "arXiv",
+      "title": "Structured Event Representation and Stock Return Predictability",
+      "authors": [
+        "Gang Li",
+        "Dandan Qiao",
+        "Mingxuan Zheng"
+      ],
+      "summary": "We find that event features extracted by large language models (LLMs) are effective for text-based stock return prediction. Using a pre-trained LLM to extract event features from news articles, we propose a novel deep learning model based on structured event representation (SER) and attention mechanisms to predict stock returns in the cross-section. Our SER-based model provides superior performance compared with other existing text-driven models to forecast stock returns out of sample and offers highly interpretable feature structures to examine the mechanisms underlying the stock return predictability. We further provide various implications based on SER and highlight the crucial benefit of structured model inputs in stock return predictability.",
+      "published": "2025-12-22T15:40:27Z",
+      "updated": "2025-12-22T15:40:27Z",
+      "paper_url": "http://arxiv.org/abs/2512.19484v1",
+      "pdf_url": "https://arxiv.org/pdf/2512.19484v1",
+      "categories": [
+        "econ.GN",
+        "cs.CE",
+        "stat.ML"
+      ],
+      "seed_topic": "financial_ml_text",
+      "from_window_search": true,
+      "matches": [
+        {
+          "topic_id": "financial_ml_text",
+          "topic_name": "金融机器学习与文本数据",
+          "score": 0.88,
+          "level": "high",
+          "reason": "AI 判定：用LLM抽取事件特征做横截面股票收益预测，属金融机器学习与文本方向核心；关键词命中：stock return prediction",
+          "keyword_hits": [
+            "stock return prediction"
+          ],
+          "mechanical_score": 0.31,
+          "llm_score": 88.0,
+          "llm_source": "cache"
+        }
+      ],
+      "best_match": {
+        "topic_id": "financial_ml_text",
+        "topic_name": "金融机器学习与文本数据",
+        "score": 0.88,
+        "level": "high",
+        "reason": "$\\text{AI}$ 判定：用$\\text{LLM}$抽取事件特征做横截面股票收益预测，属金融机器学习与文本方向核心；关键词命中：stock return prediction",
+        "keyword_hits": [
+          "stock return prediction"
+        ],
+        "mechanical_score": 0.31,
+        "llm_score": 88.0,
+        "llm_source": "cache"
+      },
+      "first_seen_at": "2026-11-06T07:30:56.319766+00:00",
+      "last_seen_at": "2026-11-06T07:30:56.319766+00:00",
+      "retained_from_previous_run": false,
+      "weekly_period": "2026-W45",
+      "is_new_this_week": true,
+      "chinese_summary": {
+        "problem": "论文要解决的问题是：由大语言模型（$\\text{LLMs}$）抽取的事件特征是否对基于文本的股票收益预测有效。",
+        "method": "使用预训练的大语言模型从新闻文章中抽取事件特征，并提出一个基于结构化事件表示（$\\text{SER}$）与注意力机制的新型深度学习模型，用于预测横截面股票收益。",
+        "innovation": "提出基于结构化事件表示（$\\text{SER}$）与注意力机制的深度学习模型，用预训练大语言模型从新闻文章中抽取事件特征；该模型提供高度可解释的特征结构，用于考察股票收益可预测性背后的机制；并强调结构化模型输入在股票收益可预测性中的关键益处。",
+        "conclusion": "摘要指出，由大语言模型抽取的事件特征对基于文本的股票收益预测是有效的；基于 $\\text{SER}$ 的模型在样本外预测股票收益方面优于其他现有文本驱动模型，并提供高度可解释的特征结构以考察股票收益可预测性背后的机制。",
+        "abstract_zh": "我们发现，由大语言模型（$\\text{LLMs}$）抽取的事件特征对基于文本的股票收益预测是有效的。我们使用一个预训练的大语言模型从新闻文章中抽取事件特征，并提出一个基于结构化事件表示（$\\text{SER}$）与注意力机制的新型深度学习模型，用于预测横截面股票收益。我们的基于 $\\text{SER}$ 的模型在样本外预测股票收益方面，相比其他现有文本驱动模型提供了更优的表现，并提供高度可解释的特征结构，以考察股票收益可预测性背后的机制。我们进一步基于 $\\text{SER}$ 给出多种含义，并强调结构化模型输入在股票收益可预测性中的关键益处。",
+        "evidence": "Our SER-based model provides superior performance compared with other existing text-driven models to forecast stock returns out of sample and offers highly interpretable feature structures to examine the mechanisms underlying the stock return predictability.",
+        "why_relevant": "用$\\text{LLM}$抽取事件特征做横截面股票收益预测，属金融机器学习与文本方向核心。",
+        "v": 4,
+        "model": "",
+        "at": "2026-10-18T12:08:42+00:00"
+      }
+    },
+    {
+      "id": "2512.12250v1",
+      "source": "arXiv",
+      "title": "Stochastic Volatility Modelling with LSTM Networks: A Hybrid Approach for S&P 500 Index Volatility Forecasting",
+      "authors": [
+        "Anna Perekhodko",
+        "Robert Ślepaczuk"
+      ],
+      "summary": "Accurate volatility forecasting is essential in banking, investment, and risk management, because expectations about future market movements directly influence current decisions. This study proposes a hybrid modelling framework that integrates a Stochastic Volatility model with a Long Short Term Memory neural network. The SV model improves statistical precision and captures latent volatility dynamics, especially in response to unforeseen events, while the LSTM network enhances the model's ability to detect complex nonlinear patterns in financial time series. The forecasting is conducted using daily data from the S and P 500 index, covering the period from January 1 1998 to December 31 2024. A rolling window approach is employed to train the model and generate one step ahead volatility forecasts. The performance of the hybrid SV-LSTM model is evaluated through both statistical testing and investment simulations. The results show that the hybrid approach outperforms both the standalone SV and LSTM models and contributes to the development of volatility modelling techniques, providing a foundation for improving risk assessment and strategic investment planning in the context of the S and P 500.",
+      "published": "2025-12-13T09:21:43Z",
+      "updated": "2025-12-13T09:21:43Z",
+      "paper_url": "http://arxiv.org/abs/2512.12250v1",
+      "pdf_url": "https://arxiv.org/pdf/2512.12250v1",
+      "categories": [
+        "q-fin.TR",
+        "cs.AI",
+        "cs.LG",
+        "cs.NE",
+        "q-fin.PM"
+      ],
+      "seed_topic": "volatility_highfreq",
+      "from_window_search": true,
+      "matches": [
+        {
+          "topic_id": "volatility_highfreq",
+          "topic_name": "波动率建模与高频计量",
+          "score": 0.88,
+          "level": "high",
+          "reason": "AI 判定：SV与LSTM混合预测标普500波动率，核心为随机波动率建模；关键词命中：stochastic volatility、volatility forecasting",
+          "keyword_hits": [
+            "stochastic volatility",
+            "volatility forecasting"
+          ],
+          "mechanical_score": 0.32,
+          "llm_score": 88.0,
+          "llm_source": "cache",
+          "llm_reason": "直接涉及随机波动率建模与波动率预测，契合波动率建模方向。"
+        }
+      ],
+      "best_match": {
+        "topic_id": "volatility_highfreq",
+        "topic_name": "波动率建模与高频计量",
+        "score": 0.88,
+        "level": "high",
+        "reason": "$\\text{AI}$ 判定：$\\text{SV}$与$\\text{LSTM}$混合预测标普$500$波动率，核心为随机波动率建模；关键词命中：stochastic volatility、volatility forecasting",
+        "keyword_hits": [
+          "stochastic volatility",
+          "volatility forecasting"
+        ],
+        "mechanical_score": 0.32,
+        "llm_score": 88.0,
+        "llm_source": "cache",
+        "llm_reason": "直接涉及随机波动率建模与波动率预测，契合波动率建模方向。"
+      },
+      "first_seen_at": "2026-11-06T07:30:56.319766+00:00",
+      "last_seen_at": "2026-11-06T07:30:56.319766+00:00",
+      "retained_from_previous_run": false,
+      "weekly_period": "2026-W45",
+      "is_new_this_week": true,
+      "chinese_summary": {
+        "problem": "准确的波动率预测在银行、投资和风险管理中至关重要，因为对未来市场走势的预期会直接影响当前决策。本研究要解决的是如何提升 S&P $500$ 指数波动率预测的准确性。",
+        "method": "研究提出一个混合建模框架，将随机波动率（$\\text{SV}$）模型与长短期记忆（$\\text{LSTM}$）神经网络相结合。$\\text{SV}$ 模型提高统计精度并刻画潜在波动率动态，$\\text{LSTM}$ 网络增强模型检测金融时间序列中复杂非线性模式的能力。预测使用 S&P $500$ 指数从 $1998$ 年 $1$ 月 $1$ 日到 $2024$ 年 $12$ 月 $31$ 日的日度数据，采用滚动窗口方法训练模型并生成一步向前波动率预测，并通过统计检验和投资模拟评估混合 $\\text{SV}$-$\\text{LSTM}$ 模型的性能。",
+        "innovation": "摘要声称的贡献是：提出将随机波动率模型与 $\\text{LSTM}$ 神经网络整合的混合建模框架；该框架中 $\\text{SV}$ 模型提升统计精度并刻画潜在波动率动态（尤其对未预见事件的响应），$\\text{LSTM}$ 网络增强对金融时间序列复杂非线性模式的检测能力；混合方法在性能上优于单独的 $\\text{SV}$ 模型和 $\\text{LSTM}$ 模型。",
+        "conclusion": "结果表明，混合方法优于单独的 $\\text{SV}$ 模型和 $\\text{LSTM}$ 模型，并有助于波动率建模技术的发展，为在 S&P $500$ 背景下改进风险评估和战略投资规划提供基础。",
+        "abstract_zh": "准确的波动率预测在银行、投资和风险管理中至关重要，因为对未来市场走势的预期会直接影响当前决策。本研究提出一个混合建模框架，将随机波动率模型与长短期记忆神经网络相结合。$\\text{SV}$ 模型提高统计精度并刻画潜在波动率动态，尤其是在对未预见事件的响应中，而 $\\text{LSTM}$ 网络增强模型检测金融时间序列中复杂非线性模式的能力。预测使用 S&P $500$ 指数的日度数据进行，覆盖从 $1998$ 年 $1$ 月 $1$ 日到 $2024$ 年 $12$ 月 $31$ 日的时期。采用滚动窗口方法来训练模型并生成一步向前波动率预测。混合 $\\text{SV}$-$\\text{LSTM}$ 模型的性能通过统计检验和投资模拟进行评估。结果表明，混合方法优于单独的 $\\text{SV}$ 模型和 $\\text{LSTM}$ 模型，并有助于波动率建模技术的发展，为在 S&P $500$ 背景下改进风险评估和战略投资规划提供基础。",
+        "evidence": "The results show that the hybrid approach outperforms both the standalone SV and LSTM models and contributes to the development of volatility modelling techniques, providing a foundation for improving risk assessment and strategic investment planning in the context of the S and P 500.",
+        "why_relevant": "直接涉及随机波动率建模与波动率预测，契合波动率建模方向。",
+        "v": 4
       }
     },
     {
@@ -2046,26 +2382,36 @@
     "2610.40047v1": "2026-10-30T13:02:25.260239+00:00",
     "2610.39995v1": "2026-10-30T13:02:25.260239+00:00",
     "2610.39636v1": "2026-10-30T13:02:25.260239+00:00",
-    "2603.27458v1": "2026-10-30T13:02:25.260239+00:00"
+    "2603.27458v1": "2026-10-30T13:02:25.260239+00:00",
+    "id:2611.07287v1": "2026-11-06T07:30:56.319766+00:00",
+    "t:neuralrealizedmeasuresforecastsupervisedintradayaggregationforvolatilityforecasting": "2026-11-06T07:30:56.319766+00:00",
+    "id:2611.07120v1": "2026-11-06T07:30:56.319766+00:00",
+    "t:aroughinstantaneoussquaredvixmodelfortermstructureandoptionpricing": "2026-11-06T07:30:56.319766+00:00",
+    "id:2611.05778v1": "2026-11-06T07:30:56.319766+00:00",
+    "t:neuralscoredrivenvolatilityandriskforecasting": "2026-11-06T07:30:56.319766+00:00",
+    "id:2512.19484v1": "2026-11-06T07:30:56.319766+00:00",
+    "t:structuredeventrepresentationandstockreturnpredictability": "2026-11-06T07:30:56.319766+00:00",
+    "id:2512.12250v1": "2026-11-06T07:30:56.319766+00:00",
+    "t:stochasticvolatilitymodellingwithlstmnetworksahybridapproachforsp500indexvolatilityforecasting": "2026-11-06T07:30:56.319766+00:00"
   },
-  "weekly_period": "2026-W44",
+  "weekly_period": "2026-W45",
   "stats": {
-    "candidate_paper_count": 164,
-    "daily_candidate_paper_count": 164,
+    "candidate_paper_count": 162,
+    "daily_candidate_paper_count": 162,
     "conference_candidate_paper_count": 0,
-    "raw_daily_candidate_count": 273,
+    "raw_daily_candidate_count": 282,
     "window_search_candidate_count": 200,
-    "daily_outside_cutoff_count": 12,
+    "daily_outside_cutoff_count": 7,
     "daily_backfill_days": 14,
-    "daily_backfill_candidate_count": 4,
+    "daily_backfill_candidate_count": 2,
     "daily_backfill_added_count": 0,
     "screen_mode": "llm",
-    "screened_paper_count": 273,
+    "screened_paper_count": 282,
     "min_daily_papers": 10,
-    "filtered_low_relevance_count": 105,
+    "filtered_low_relevance_count": 118,
     "days": 7,
-    "collection_mode": "lookback",
-    "collection_cutoff_iso": "2026-10-23T14:51:27.060255+00:00",
+    "collection_mode": "incremental",
+    "collection_cutoff_iso": "2026-10-30T14:51:27.060255+00:00",
     "max_per_topic": 25,
     "max_new_papers": 60,
     "max_new_conference_papers": 50,
@@ -2110,22 +2456,22 @@
     "conference_arxiv_enrichment_succeeded": 0,
     "conference_arxiv_enrichment_skipped": 0,
     "conference_arxiv_enrichment_last_error": "",
-    "paper_count": 27,
+    "paper_count": 32,
     "new_paper_count": 60,
-    "weekly_period": "2026-W44",
+    "weekly_period": "2026-W45",
     "period_new_count": 5,
-    "weekly_new_count": 0,
-    "weekly_new_quota": 0,
+    "weekly_new_count": 5,
+    "weekly_new_quota": 5,
     "weekly_new_total": 10,
     "kept_previous_count": 27,
-    "display_count": 27,
-    "archive_count": 27,
+    "display_count": 32,
+    "archive_count": 32,
     "dropped_from_display_count": 0,
-    "duplicate_candidate_count": 18,
-    "fresh_candidate_count": 37,
+    "duplicate_candidate_count": 14,
+    "fresh_candidate_count": 41,
     "max_stored_papers": 1200,
     "max_data_bytes": 12582912,
-    "data_bytes": 188338,
+    "data_bytes": 222082,
     "storage_trimmed_count": 0,
     "storage_trimmed_by_level": {
       "high": 0,
