@@ -258,7 +258,7 @@ python -m http.server 8000 --directory web
 
 ### `config/journals.json`
 
-默认收录 `国际期刊目录.md` 里的 **29 本**，按 `group` 分成经济学（7）、统计学（6）、金融学（16），每条带 `rank`（4\* / 4 / 3 / 2）。
+当前收录 **19 本**：6 本 4\* + 10 本 4 星，外加白名单 3 本 3 星（`Quantitative Finance`、`Journal of Financial Econometrics`、`Journal of Futures Markets`——这三本是金融计量/波动率方向的主阵地，评级不高但最对口）。每条带 `rank`（4\* / 4 / 3 / 2），`group` 分成经济学、统计学、金融计量、金融学。
 
 加期刊需要两个东西：ISSN（[portal.issn.org](https://portal.issn.org) 查）和 OpenAlex 来源 ID。
 
@@ -271,6 +271,34 @@ curl "https://api.openalex.org/sources?filter=issn:0022-1082&select=id,display_n
 `per_venue_results` 默认 50：单刊在一轮里最多取多少条「标题/摘要命中方向关键词」的记录。29 本 × 50 ≈ 1400 条候选，够 AI 阅卷挑出最合适的 5 篇。调太大只会让请求变慢，因为每周只新增 5 篇。
 
 `window_search: true` 时走的是「2018 起 + `title_and_abstract.search` 关键词 OR」的召回路子。关掉它就退回旧的「按出版日期倒序取最近 N 条」——那样永远看不到 2018–2024 的论文。
+
+### `config/target_schools.json`
+
+找导师用的一作/二作院校高亮清单，默认 11 所（Princeton、MIT、Stanford、Chicago、NYU、Columbia、Cornell、UC Berkeley、CMU、Northwestern、Duke）。
+
+```json
+{
+  "key": "mit",
+  "en": "MIT",
+  "zh": "麻省理工学院",
+  "focus": "OR、Statistics、Finance 相关",
+  "aliases": ["Massachusetts Institute of Technology", "MIT"]
+}
+```
+
+- `aliases` 是对 OpenAlex `institutions.display_name` 的匹配词，按**整词**匹配——`Smithsonian` 不会因为含 `mit` 被误判，`Northeastern` 也不会命中 `Northwestern`
+- 改清单**不用重跑采集**：机构名缓存在 `.paper-cache/affiliations.json`，换一份 aliases 重新跑 `python scripts/affiliations.py --root .` 就会按新清单重新判定
+- arXiv 的 API 不带作者单位，脚本按 `10.48550/arXiv.<id>` 去 OpenAlex 换一次；顶刊是 OpenAlex 采的，`authorships` 里本来就有，不额外发请求
+
+## 删掉不想看的论文
+
+卡片右下角有「删除」按钮，点了立刻从列表消失。要让它在**仓库里也永久消失**，点顶栏的「已删除 N」→「同步到仓库」：
+
+1. 网页会打开一个标题为 **`Excluded Papers`** 的 GitHub 新建 issue，正文里是一段 JSON
+2. 你按下提交，Actions 检测到这条 issue，用 `scripts/sync_exclusions.py` 把里面的 id/标题合并进 `config/exclude.json`，顺手回一句评论并关掉 issue
+3. 同一次运行会重新生成数据，这几篇就被剔掉了；以后每周的候选池里也不会再出现
+
+所以删除是**两步**：本地立刻生效（存浏览器 localStorage），同步一次就永久生效。不同步的话，换设备或清缓存后会重新出现。
 
 ## 常用可调参数
 
@@ -295,7 +323,7 @@ curl "https://api.openalex.org/sources?filter=issn:0022-1082&select=id,display_n
 | `MIN_JOURNAL_SCORE` | 0.18 | 顶刊最低机械相关性分（AI 阅卷关闭时生效） |
 | `ARXIV_QUERY_MODE` | category | `category` = 只按分类召回（推荐，配合 AI 阅卷）；`strict` = 关键词 AND 分类；`keyword` = 只按关键词 |
 | `SCREEN_MODE` | llm | `llm` 用模型阅卷；`rules` 退回纯机械评分 |
-| `SCREEN_MIN_SCORE` | 45 | AI 分低于此值淘汰（0-100）。想多看调到 35，只看硬核调到 60 |
+| `SCREEN_MIN_SCORE` | 60 | AI 分低于此值淘汰（0-100）。想多看调到 45，只看硬核调到 70 |
 | `SCREEN_BATCH_SIZE` | 6 | 每次请求塞几篇，越大越省钱但越容易输出截断 |
 | `SCREEN_MAX_PAPERS` | 1200 | 单轮最多阅卷多少篇，超出部分保留机械评分 |
 | `SCREEN_TRUNCATE_BY` | score | 候选超过上限时按什么截断：`score`（宽窗口推荐）或 `recency` |
