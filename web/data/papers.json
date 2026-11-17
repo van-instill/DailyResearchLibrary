@@ -1,6 +1,6 @@
 {
-  "generated_at": "Tue, 17 Nov 2026 07:47:10 +0000",
-  "generated_at_iso": "2026-11-17T07:47:10.761289+00:00",
+  "generated_at": "Tue, 17 Nov 2026 08:09:58 +0000",
+  "generated_at_iso": "2026-11-17T08:09:58.040534+00:00",
   "config_source": "file",
   "data_kind": "daily",
   "topics": [
@@ -2221,7 +2221,7 @@
       },
       "first_seen_at": "2026-11-17T07:47:10.761289+00:00",
       "last_seen_at": "2026-11-17T07:47:10.761289+00:00",
-      "retained_from_previous_run": false,
+      "retained_from_previous_run": true,
       "weekly_period": "2026-W47",
       "is_new_this_week": true,
       "chinese_summary": {
@@ -2638,7 +2638,7 @@
       },
       "first_seen_at": "2026-11-17T07:47:10.761289+00:00",
       "last_seen_at": "2026-11-17T07:47:10.761289+00:00",
-      "retained_from_previous_run": false,
+      "retained_from_previous_run": true,
       "weekly_period": "2026-W47",
       "is_new_this_week": true,
       "chinese_summary": {
@@ -2711,7 +2711,7 @@
       },
       "first_seen_at": "2026-11-17T07:47:10.761289+00:00",
       "last_seen_at": "2026-11-17T07:47:10.761289+00:00",
-      "retained_from_previous_run": false,
+      "retained_from_previous_run": true,
       "weekly_period": "2026-W47",
       "is_new_this_week": true,
       "chinese_summary": {
@@ -2787,7 +2787,7 @@
       },
       "first_seen_at": "2026-11-17T07:47:10.761289+00:00",
       "last_seen_at": "2026-11-17T07:47:10.761289+00:00",
-      "retained_from_previous_run": false,
+      "retained_from_previous_run": true,
       "weekly_period": "2026-W47",
       "is_new_this_week": true,
       "chinese_summary": {
@@ -2876,7 +2876,7 @@
       },
       "first_seen_at": "2026-11-17T07:47:10.761289+00:00",
       "last_seen_at": "2026-11-17T07:47:10.761289+00:00",
-      "retained_from_previous_run": false,
+      "retained_from_previous_run": true,
       "weekly_period": "2026-W47",
       "is_new_this_week": true,
       "chinese_summary": {
@@ -3733,7 +3733,12 @@
     "id:2409.15320v3": "2026-11-17T07:47:10.761289+00:00",
     "t:globalstockmarketvolatilityforecastingincorporatingdynamicgraphsandalltradingdays": "2026-11-17T07:47:10.761289+00:00",
     "id:2404.18029v2": "2026-11-17T07:47:10.761289+00:00",
-    "t:valueatriskandexpectilebasedsystemicriskmeasuresandsecondorderasymptoticswithapplicationstodiversification": "2026-11-17T07:47:10.761289+00:00"
+    "t:valueatriskandexpectilebasedsystemicriskmeasuresandsecondorderasymptoticswithapplicationstodiversification": "2026-11-17T07:47:10.761289+00:00",
+    "2609.01183v2": "2026-11-17T07:47:10.761289+00:00",
+    "2510.08085v1": "2026-11-17T07:47:10.761289+00:00",
+    "2503.20249v4": "2026-11-17T07:47:10.761289+00:00",
+    "2409.15320v3": "2026-11-17T07:47:10.761289+00:00",
+    "2404.18029v2": "2026-11-17T07:47:10.761289+00:00"
   },
   "weekly_period": "2026-W47",
   "stats": {
@@ -3752,7 +3757,7 @@
     "filtered_low_relevance_count": 115,
     "days": 7,
     "collection_mode": "lookback",
-    "collection_cutoff_iso": "2026-11-10T07:47:10.761289+00:00",
+    "collection_cutoff_iso": "2026-11-10T08:09:58.040534+00:00",
     "max_per_topic": 25,
     "max_new_papers": 60,
     "max_new_conference_papers": 50,
@@ -3801,19 +3806,19 @@
     "new_paper_count": 60,
     "weekly_period": "2026-W47",
     "period_new_count": 5,
-    "weekly_new_count": 5,
-    "weekly_new_quota": 5,
+    "weekly_new_count": 0,
+    "weekly_new_quota": 0,
     "weekly_new_total": 10,
-    "kept_previous_count": 37,
+    "kept_previous_count": 42,
     "display_count": 42,
     "archive_count": 42,
     "dropped_from_display_count": 0,
-    "duplicate_candidate_count": 21,
-    "fresh_candidate_count": 34,
+    "duplicate_candidate_count": 26,
+    "fresh_candidate_count": 29,
     "target_school_paper_count": 2,
     "max_stored_papers": 1200,
     "max_data_bytes": 12582912,
-    "data_bytes": 299776,
+    "data_bytes": 300051,
     "storage_trimmed_count": 0,
     "storage_trimmed_by_level": {
       "high": 0,
