@@ -1,6 +1,6 @@
 {
-  "generated_at": "Fri, 30 Oct 2026 14:52:50 +0000",
-  "generated_at_iso": "2026-10-30T14:52:50.781953+00:00",
+  "generated_at": "Tue, 17 Nov 2026 07:49:13 +0000",
+  "generated_at_iso": "2026-11-17T07:49:13.164554+00:00",
   "config_source": "file",
   "data_kind": "journal",
   "topics": [
@@ -2185,7 +2185,7 @@
       "last_seen_at": "2026-10-30T06:40:51.877926+00:00",
       "retained_from_previous_run": true,
       "weekly_period": "2026-W44",
-      "is_new_this_week": true,
+      "is_new_this_week": false,
       "chinese_summary": {
         "problem": "论文要解决的问题是：如何用可数无限混合的 $\\text{AR(1)}$ 过程与 Dirichlet 过程先验，对潜在波动率进行非参数建模，并把已实现方差（$\\text{RV}$）作为事后信号纳入以增强波动率估计。",
         "method": "论文提出一种新的离散时间随机波动率模型，采用带 Dirichlet 过程先验的可数无限 $\\text{AR(1)}$ 过程混合，对潜在波动率做非参数建模。模型将已实现方差（$\\text{RV}$）作为事后信号纳入，以增强波动率估计。该模型刻画了收益率与 $\\log(\\mathrm{RV})$ 条件分布中的厚尾与不对称性。",
@@ -2266,7 +2266,7 @@
       "last_seen_at": "2026-10-30T06:40:51.877926+00:00",
       "retained_from_previous_run": true,
       "weekly_period": "2026-W44",
-      "is_new_this_week": true,
+      "is_new_this_week": false,
       "chinese_summary": {
         "problem": "论文针对高频数据下潜在波动率曲线的均值平稳性检验问题。",
         "method": "论文构建了一个基于高频数据的潜在波动率曲线均值平稳性检验。为推导渐近检验的 size 与 power，作者在强混合条件下建立了半鞅的函数不变性原理。并在波动率曲线动态含有确定性趋势的备择假设下分析了检验的 power 性质。",
@@ -2382,7 +2382,7 @@
       "last_seen_at": "2026-10-30T06:40:51.877926+00:00",
       "retained_from_previous_run": true,
       "weekly_period": "2026-W44",
-      "is_new_this_week": true,
+      "is_new_this_week": false,
       "chinese_summary": {
         "problem": "高频金融数据分析常受噪声干扰；本文由日内收益率数据驱动，其中市场微观结构噪声显得粗糙，即最好用局部表现为分数布朗运动的连续时间随机过程来刻画。",
         "method": "假设潜在的有效价格过程服从连续 Itô 半鞅，作者推导了噪声粗糙度参数以及积分价格波动率和噪声波动率的一致性估计量与渐近置信区间，且覆盖这些量可识别的所有情形。",
@@ -2422,6 +2422,503 @@
           "school": "Columbia",
           "school_zh": "哥伦比亚大学",
           "inst": "Columbia University"
+        }
+      ]
+    },
+    {
+      "id": "openalex:W4283387379",
+      "title": "How much should we trust staggered difference-in-differences estimates?",
+      "authors": [
+        "Andrew C. Baker",
+        "David F. Larcker",
+        "Charles C. Y. Wang"
+      ],
+      "summary": "We explain when and how staggered difference-in-differences regression estimators, commonly applied to assess the impact of policy changes, are biased. These biases are likely to be relevant for a large portion of research settings in finance, accounting, and law that rely on staggered treatment timing, and can result in Type-I and Type-II errors. We summarize three alternative estimators developed in the econometrics and applied literature for addressing these biases, including their differences and tradeoffs. We apply these estimators to re-examine prior published results and show, in many cases, the alternative causal estimates or inferences differ substantially from prior papers.",
+      "published": "2022-02-22T00:00:00+00:00",
+      "updated": "2022-02-22T00:00:00+00:00",
+      "categories": [
+        "金融学",
+        "Advanced Causal Inference Techniques",
+        "Spatial and Panel Data Analysis"
+      ],
+      "paper_url": "https://doi.org/10.1016/j.jfineco.2022.01.004",
+      "pdf_url": "https://www.sciencedirect.com/science/article/pii/S0304405X22000204/pdf",
+      "source": "Journal of Financial Economics",
+      "source_type": "conference",
+      "venue": "Journal of Financial Economics",
+      "venue_group": "金融学",
+      "doi": "https://doi.org/10.1016/j.jfineco.2022.01.004",
+      "conference": {
+        "id": "jfe",
+        "name": "Journal of Financial Economics",
+        "year": 2022
+      },
+      "matches": [
+        {
+          "topic_id": "timeseries_causal",
+          "topic_name": "时间序列与因果识别",
+          "score": 0.92,
+          "level": "high",
+          "reason": "AI 判定：交错DID估计偏误与替代估计量，核心因果识别方法；关键词命中：difference-in-differences",
+          "keyword_hits": [
+            "difference-in-differences"
+          ],
+          "mechanical_score": 0.256,
+          "llm_score": 92.0,
+          "llm_source": "cache",
+          "llm_reason": "直接讨论交错DID估计偏误与替代识别方法，属于因果识别核心议题。"
+        }
+      ],
+      "best_match": {
+        "topic_id": "timeseries_causal",
+        "topic_name": "时间序列与因果识别",
+        "score": 0.92,
+        "level": "high",
+        "reason": "$\\text{AI}$ 判定：交错$\\text{DID}$估计偏误与替代估计量，核心因果识别方法；关键词命中：difference-in-differences",
+        "keyword_hits": [
+          "difference-in-differences"
+        ],
+        "mechanical_score": 0.256,
+        "llm_score": 92.0,
+        "llm_source": "cache",
+        "llm_reason": "直接讨论交错$\\text{DID}$估计偏误与替代识别方法，属于因果识别核心议题。"
+      },
+      "first_seen_at": "2026-11-06T07:32:44.626343+00:00",
+      "last_seen_at": "2026-11-06T07:32:44.626343+00:00",
+      "retained_from_previous_run": true,
+      "weekly_period": "2026-W45",
+      "is_new_this_week": false,
+      "chinese_summary": {
+        "problem": "论文要解释交错双重差分回归估计量在何时以及如何产生偏误，这些偏误可能影响金融、会计和法律领域大量依赖交错处理时点的研究设定，并可能导致第一类错误和第二类错误。",
+        "method": "论文总结计量经济学与应用文献中为处理这些偏误而提出的三种替代估计量，并说明它们之间的差异与权衡；随后应用这些估计量重新检验此前已发表的结果。",
+        "innovation": "论文解释交错双重差分回归估计量何时以及如何有偏；总结三种替代估计量及其差异与权衡；并将这些估计量应用于重新检验此前已发表的结果。",
+        "conclusion": "这些偏误可能影响金融、会计和法律领域大量依赖交错处理时点的研究设定，并可能导致第一类错误和第二类错误；在重新检验此前已发表的结果时，许多情况下替代因果估计或推断与先前论文存在实质性差异。",
+        "abstract_zh": "我们解释交错双重差分回归估计量——通常用于评估政策变化的影响——在何时以及如何产生偏误。这些偏误可能与金融、会计和法律领域大量依赖交错处理时点的研究设定相关，并可能导致第一类错误和第二类错误。我们总结了计量经济学与应用文献中为处理这些偏误而提出的三种替代估计量，包括它们的差异与权衡。我们将这些估计量应用于重新检验此前已发表的结果，并表明在许多情况下，替代因果估计或推断与先前论文存在实质性差异。",
+        "evidence": "We apply these estimators to re-examine prior published results and show, in many cases, the alternative causal estimates or inferences differ substantially from prior papers.",
+        "why_relevant": "直接讨论交错$\\text{DID}$估计偏误与替代识别方法，属于因果识别核心议题。",
+        "v": 4,
+        "model": "",
+        "at": "2026-11-06T07:33:30+00:00"
+      },
+      "author_institutions": [
+        {
+          "name": "Andrew C. Baker",
+          "insts": [
+            "Stanford University"
+          ]
+        },
+        {
+          "name": "David F. Larcker",
+          "insts": [
+            "Stanford University"
+          ]
+        },
+        {
+          "name": "Charles C. Y. Wang",
+          "insts": [
+            "Harvard University"
+          ]
+        }
+      ],
+      "author_schools": [
+        {
+          "i": 0,
+          "name": "Andrew C. Baker",
+          "school": "Stanford",
+          "school_zh": "斯坦福大学",
+          "inst": "Stanford University"
+        },
+        {
+          "i": 1,
+          "name": "David F. Larcker",
+          "school": "Stanford",
+          "school_zh": "斯坦福大学",
+          "inst": "Stanford University"
+        }
+      ]
+    },
+    {
+      "id": "openalex:W3046044289",
+      "title": "Local Projection Inference Is Simpler and More Robust Than You Think",
+      "authors": [
+        "José Luis Montiel Olea",
+        "Mikkel Plagborg‐Møller"
+      ],
+      "summary": "Applied macroeconomists often compute confidence intervals for impulse responses using local projections, that is, direct linear regressions of future outcomes on current covariates. This paper proves that local projection inference robustly handles two issues that commonly arise in applications: highly persistent data and the estimation of impulse responses at long horizons. We consider local projections that control for lags of the variables in the regression. We show that lag‐augmented local projections with normal critical values are asymptotically valid uniformly over (i) both stationary and non‐stationary data, and also over (ii) a wide range of response horizons. Moreover, lag augmentation obviates the need to correct standard errors for serial correlation in the regression residuals. Hence, local projection inference is arguably both simpler than previously thought and more robust than standard autoregressive inference, whose validity is known to depend sensitively on the persistence of the data and on the length of the horizon.",
+      "published": "2021-01-01T00:00:00+00:00",
+      "updated": "2021-01-01T00:00:00+00:00",
+      "categories": [
+        "经济学",
+        "Monetary Policy and Economic Impact",
+        "Advanced Causal Inference Techniques"
+      ],
+      "paper_url": "https://doi.org/10.3982/ecta18756",
+      "pdf_url": "https://arxiv.org/pdf/2007.13888",
+      "source": "Econometrica",
+      "source_type": "conference",
+      "venue": "Econometrica",
+      "venue_group": "经济学",
+      "doi": "https://doi.org/10.3982/ecta18756",
+      "conference": {
+        "id": "econometrica",
+        "name": "Econometrica",
+        "year": 2021
+      },
+      "matches": [
+        {
+          "topic_id": "timeseries_causal",
+          "topic_name": "时间序列与因果识别",
+          "score": 0.92,
+          "level": "high",
+          "reason": "AI 判定：局部投影脉冲响应推断，正是该方向核心计量识别方法；关键词命中：local projections",
+          "keyword_hits": [
+            "local projections"
+          ],
+          "mechanical_score": 0.306,
+          "llm_score": 92.0,
+          "llm_source": "cache",
+          "llm_reason": "局部投影脉冲响应推断正是时间序列因果识别的核心方法。"
+        }
+      ],
+      "best_match": {
+        "topic_id": "timeseries_causal",
+        "topic_name": "时间序列与因果识别",
+        "score": 0.92,
+        "level": "high",
+        "reason": "$\\text{AI}$ 判定：局部投影脉冲响应推断，正是该方向核心计量识别方法；关键词命中：local projections",
+        "keyword_hits": [
+          "local projections"
+        ],
+        "mechanical_score": 0.306,
+        "llm_score": 92.0,
+        "llm_source": "cache",
+        "llm_reason": "局部投影脉冲响应推断正是时间序列因果识别的核心方法。"
+      },
+      "first_seen_at": "2026-11-06T07:32:44.626343+00:00",
+      "last_seen_at": "2026-11-06T07:32:44.626343+00:00",
+      "retained_from_previous_run": true,
+      "weekly_period": "2026-W45",
+      "is_new_this_week": false,
+      "chinese_summary": {
+        "problem": "应用宏观经济学家常用局部投影（即把未来结果直接对当期协变量做线性回归）计算脉冲响应的置信区间，而应用中常出现数据高度持续与在长 horizons 上估计脉冲响应这两个问题。",
+        "method": "论文考虑控制回归中变量滞后项的局部投影，并证明带滞后增广（lag-augmented）的局部投影配合正态临界值，在（i）平稳与非平稳数据上以及（ii）广泛的响应 horizons 范围内一致渐近有效。此外，滞后增广免除了对回归残差序列相关修正标准误的需要。",
+        "innovation": "论文证明局部投影推断能稳健处理高度持续数据与长 horizons 估计脉冲响应这两个应用常见问题；并表明滞后增广的局部投影配合正态临界值在平稳与非平稳数据上、在广泛响应 horizons 上一致渐近有效；同时指出滞后增广免除了对残差序列相关修正标准误的需要。",
+        "conclusion": "带滞后增广、使用正态临界值的局部投影在平稳与非平稳数据上以及在广泛响应 horizons 范围内一致渐近有效，且滞后增广免除了对残差序列相关修正标准误的需要；因此局部投影推断可以说既比先前认为的更简单，也比标准自回归推断更稳健，后者的有效性已知敏感地依赖于数据的持续性和 horizon 的长度。",
+        "abstract_zh": "应用宏观经济学家常使用局部投影计算脉冲响应的置信区间，即把未来结果直接对当期协变量做线性回归。本文证明局部投影推断能稳健处理应用中常见的两个问题：高度持续的数据与在长 horizons 上估计脉冲响应。我们考虑控制回归中变量滞后项的局部投影。我们证明，带滞后增广的局部投影配合正态临界值，在（i）平稳与非平稳数据上，以及在（ii）广泛的响应 horizons 范围内，一致渐近有效。此外，滞后增广免除了对回归残差序列相关修正标准误的需要。因此，局部投影推断可以说既比先前认为的更简单，也比标准自回归推断更稳健，后者的有效性已知敏感地依赖于数据的持续性和 horizon 的长度。",
+        "evidence": "We show that lag‐augmented local projections with normal critical values are asymptotically valid uniformly over (i) both stationary and non‐stationary data, and also over (ii) a wide range of response horizons.",
+        "why_relevant": "局部投影脉冲响应推断正是时间序列因果识别的核心方法。",
+        "v": 4,
+        "model": "",
+        "at": "2026-11-06T07:33:32+00:00"
+      },
+      "author_institutions": [
+        {
+          "name": "José Luis Montiel Olea",
+          "insts": [
+            "Columbia University"
+          ]
+        },
+        {
+          "name": "Mikkel Plagborg‐Møller",
+          "insts": [
+            "Princeton University"
+          ]
+        }
+      ],
+      "author_schools": [
+        {
+          "i": 0,
+          "name": "José Luis Montiel Olea",
+          "school": "Columbia",
+          "school_zh": "哥伦比亚大学",
+          "inst": "Columbia University"
+        },
+        {
+          "i": 1,
+          "name": "Mikkel Plagborg‐Møller",
+          "school": "Princeton",
+          "school_zh": "普林斯顿大学",
+          "inst": "Princeton University"
+        }
+      ]
+    },
+    {
+      "id": "openalex:W4384571245",
+      "title": "Bootstrapping Laplace Transforms of Volatility",
+      "authors": [
+        "Ulrich Hounyo",
+        "Zhi Liu",
+        "Rasmus T. Varneskov"
+      ],
+      "summary": "This paper studies inference for the realized Laplace transform (RLT) of volatility in a fixed-span setting using bootstrap methods. Specifically, since standard wild bootstrap procedures deliver inconsistent inference, we propose a local Gaussian (LG) bootstrap, establish its first-order asymptotic validity, and use Edgeworth expansions to show that the LG bootstrap inference achieves second-order asymptotic refinements. Moreover, we provide new Laplace transform-based estimators of the spot variance as well as the covariance, correlation and beta between two semimartingales, and adapt our bootstrap procedure to the requisite scenario. We establish central limit theory for our estimators and first-order asymptotic validity of their associated bootstrap methods. Simulations demonstrate that the LG bootstrap outperforms existing feasible inference theory and wild bootstrap procedures in finite samples. Finally, we illustrate the use of the new methods by examining the coherence between stocks and bonds during the global financial crisis of 2008 as well as the COVID-19 pandemic stock sell-off during 2020, and by a forecasting exercise.",
+      "published": "2020-01-01T00:00:00+00:00",
+      "updated": "2020-01-01T00:00:00+00:00",
+      "categories": [
+        "经济学",
+        "Financial Risk and Volatility Modeling",
+        "Stochastic processes and financial applications"
+      ],
+      "paper_url": "https://doi.org/10.2139/ssrn.3523293",
+      "pdf_url": "https://doi.org/10.3982/qe1929",
+      "source": "Quantitative Economics",
+      "source_type": "conference",
+      "venue": "Quantitative Economics",
+      "venue_group": "经济学",
+      "doi": "https://doi.org/10.2139/ssrn.3523293",
+      "conference": {
+        "id": "qe",
+        "name": "Quantitative Economics",
+        "year": 2020
+      },
+      "matches": [
+        {
+          "topic_id": "volatility_highfreq",
+          "topic_name": "波动率建模与高频计量",
+          "score": 0.92,
+          "level": "high",
+          "reason": "AI 判定：已实现拉普拉斯变换波动率推断、spot variance与协方差估计及预测，核心属高频波动率建模",
+          "keyword_hits": [],
+          "mechanical_score": 0.156,
+          "llm_score": 92.0,
+          "llm_source": "cache",
+          "llm_reason": "研究已实现拉普拉斯变换波动率推断、spot variance与协方差估计及预测，属高频波动率建模。"
+        }
+      ],
+      "best_match": {
+        "topic_id": "volatility_highfreq",
+        "topic_name": "波动率建模与高频计量",
+        "score": 0.92,
+        "level": "high",
+        "reason": "$\\text{AI}$ 判定：已实现拉普拉斯变换波动率推断、spot variance与协方差估计及预测，核心属高频波动率建模",
+        "keyword_hits": [],
+        "mechanical_score": 0.156,
+        "llm_score": 92.0,
+        "llm_source": "cache",
+        "llm_reason": "研究已实现拉普拉斯变换波动率推断、spot variance与协方差估计及预测，属高频波动率建模。"
+      },
+      "first_seen_at": "2026-11-06T07:32:44.626343+00:00",
+      "last_seen_at": "2026-11-06T07:32:44.626343+00:00",
+      "retained_from_previous_run": true,
+      "weekly_period": "2026-W45",
+      "is_new_this_week": false,
+      "chinese_summary": {
+        "problem": "论文研究在固定跨度（fixed-span）设定下，对波动率的已实现拉普拉斯变换（$\\text{RLT}$）进行推断的问题；摘要指出标准 wild bootstrap 程序会给出不一致的推断。",
+        "method": "论文提出局部高斯（$\\text{LG}$）bootstrap，并建立其一阶渐近有效性，同时用 Edgeworth 展开说明 $\\text{LG}$ bootstrap 推断达到二阶渐近精炼。论文还给出基于拉普拉斯变换的 spot variance 以及两个半鞅之间协方差、相关性和 beta 的新估计量，并将 bootstrap 程序适配到相应场景，为估计量建立中心极限定理及其 bootstrap 方法的一阶渐近有效性。",
+        "innovation": "针对标准 wild bootstrap 推断不一致的问题，提出局部高斯（$\\text{LG}$）bootstrap 并证明其一阶渐近有效性与二阶渐近精炼；提供新的基于拉普拉斯变换的 spot variance 以及协方差、相关性、beta 估计量，并将 bootstrap 程序适配到这些场景；为这些估计量建立中心极限定理及相应 bootstrap 方法的一阶渐近有效性。",
+        "conclusion": "模拟表明 $\\text{LG}$ bootstrap 在有限样本中优于现有可行推断理论和 wild bootstrap 程序；论文还通过考察 $2008$ 年全球金融危机以及 $2020$ 年 $\\text{COVID}$-$19$ 大流行股票抛售期间股票与债券之间的 coherence，以及一项预测练习，说明了新方法的用途。",
+        "abstract_zh": "本文研究在固定跨度设定下，使用 bootstrap 方法对波动率的已实现拉普拉斯变换（$\\text{RLT}$）进行推断。具体而言，由于标准 wild bootstrap 程序会给出不一致的推断，我们提出一种局部高斯（$\\text{LG}$）bootstrap，建立其一阶渐近有效性，并使用 Edgeworth 展开表明 $\\text{LG}$ bootstrap 推断达到二阶渐近精炼。此外，我们提供新的基于拉普拉斯变换的 spot variance 估计量，以及两个半鞅之间的协方差、相关性和 beta 估计量，并将我们的 bootstrap 程序适配到所需场景。我们为我们的估计量建立中心极限定理，并建立其相关 bootstrap 方法的一阶渐近有效性。模拟表明，$\\text{LG}$ bootstrap 在有限样本中优于现有可行推断理论和 wild bootstrap 程序。最后，我们通过考察 $2008$ 年全球金融危机以及 $2020$ 年 $\\text{COVID}$-$19$ 大流行股票抛售期间股票与债券之间的 coherence，以及通过一项预测练习，说明新方法的用途。",
+        "evidence": "Simulations demonstrate that the LG bootstrap outperforms existing feasible inference theory and wild bootstrap procedures in finite samples.",
+        "why_relevant": "研究已实现拉普拉斯变换波动率推断、spot variance与协方差估计及预测，属高频波动率建模。",
+        "v": 4,
+        "model": "",
+        "at": "2026-11-06T07:33:34+00:00"
+      },
+      "author_institutions": [
+        {
+          "name": "Ulrich Hounyo",
+          "insts": [
+            "State University of New York",
+            "University at Albany, State University of New York"
+          ]
+        },
+        {
+          "name": "Zhi Liu",
+          "insts": [
+            "University of Macau"
+          ]
+        },
+        {
+          "name": "Rasmus T. Varneskov",
+          "insts": [
+            "Copenhagen Business School"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "openalex:W3123808625",
+      "title": "Good Volatility, Bad Volatility, and the Cross Section of Stock Returns",
+      "authors": [
+        "Tim Bollerslev",
+        "Sophia Zhengzi Li",
+        "Bingzhi Zhao"
+      ],
+      "summary": "Based on intraday data for a large cross-section of individual stocks and newly developed econometric procedures, we decompose the realized variation for each of the stocks into separate so-called realized up and down semi-variance measures, or “good” and “bad” volatilities, associated with positive and negative high-frequency price increments, respectively. Sorting the individual stocks into portfolios based on their normalized good minus bad volatilities results in economically large and highly statistically significant differences in the subsequent portfolio returns. These differences remain significant after controlling for other firm characteristics and explanatory variables previously associated with the cross-section of expected stock returns",
+      "published": "2019-01-30T00:00:00+00:00",
+      "updated": "2019-01-30T00:00:00+00:00",
+      "categories": [
+        "金融学",
+        "Financial Markets and Investment Strategies",
+        "Financial Risk and Volatility Modeling"
+      ],
+      "paper_url": "https://doi.org/10.1017/s0022109019000097",
+      "pdf_url": "https://doi.org/10.2139/ssrn.2565660",
+      "source": "Journal of Financial and Quantitative Analysis",
+      "source_type": "conference",
+      "venue": "Journal of Financial and Quantitative Analysis",
+      "venue_group": "金融学",
+      "doi": "https://doi.org/10.1017/s0022109019000097",
+      "conference": {
+        "id": "jfqa",
+        "name": "Journal of Financial and Quantitative Analysis",
+        "year": 2019
+      },
+      "matches": [
+        {
+          "topic_id": "volatility_highfreq",
+          "topic_name": "波动率建模与高频计量",
+          "score": 0.92,
+          "level": "high",
+          "reason": "AI 判定：日内已实现半方差分解并检验横截面收益，核心为高频波动率",
+          "keyword_hits": [],
+          "mechanical_score": 0.188,
+          "llm_score": 92.0,
+          "llm_source": "cache",
+          "llm_reason": "直接涉及已实现半方差分解与高频波动率的横截面定价检验。"
+        }
+      ],
+      "best_match": {
+        "topic_id": "volatility_highfreq",
+        "topic_name": "波动率建模与高频计量",
+        "score": 0.92,
+        "level": "high",
+        "reason": "$\\text{AI}$ 判定：日内已实现半方差分解并检验横截面收益，核心为高频波动率",
+        "keyword_hits": [],
+        "mechanical_score": 0.188,
+        "llm_score": 92.0,
+        "llm_source": "cache",
+        "llm_reason": "直接涉及已实现半方差分解与高频波动率的横截面定价检验。"
+      },
+      "first_seen_at": "2026-11-06T07:32:44.626343+00:00",
+      "last_seen_at": "2026-11-06T07:32:44.626343+00:00",
+      "retained_from_previous_run": true,
+      "weekly_period": "2026-W45",
+      "is_new_this_week": false,
+      "chinese_summary": {
+        "problem": "论文要解决的问题是：如何基于日内数据把个股的已实现变差分解为与正、负高频价格增量相对应的已实现上行与下行半方差（即“好”波动率与“坏”波动率），并考察其横截面收益含义。",
+        "method": "论文使用大横截面的个股日内数据，并采用新近发展的计量经济学程序，将每只股票的已实现变差分解为分别对应正、负高频价格增量的已实现上行半方差与下行半方差，即“好”波动率与“坏”波动率。随后按归一化的“好减坏”波动率对个股排序并构建组合，考察其后续组合收益差异。",
+        "innovation": "论文基于日内数据与新近发展的计量经济学程序，把每只股票的已实现变差分解为与正、负高频价格增量相对应的已实现上行与下行半方差，即“好”波动率与“坏”波动率；并按归一化的“好减坏”波动率对个股排序构建组合，考察后续组合收益差异。",
+        "conclusion": "按归一化的“好减坏”波动率对个股排序构建组合，会带来经济上很大且高度统计显著的后续组合收益差异；在控制其他公司特征以及此前与预期股票收益横截面相关的解释变量后，这些差异仍然显著。",
+        "abstract_zh": "基于大横截面个股的日内数据和新近发展的计量经济学程序，我们将每只股票的已实现变差分解为分别与正、负高频价格增量相对应的所谓已实现上行与下行半方差测度，即“好”波动率与“坏”波动率。按归一化的“好减坏”波动率对个股排序构建组合，会带来经济上很大且高度统计显著的后续组合收益差异。在控制其他公司特征以及此前与预期股票收益横截面相关的解释变量后，这些差异仍然显著。",
+        "evidence": "Sorting the individual stocks into portfolios based on their normalized good minus bad volatilities results in economically large and highly statistically significant differences in the subsequent portfolio returns.",
+        "why_relevant": "直接涉及已实现半方差分解与高频波动率的横截面定价检验。",
+        "v": 4,
+        "model": "",
+        "at": "2026-11-06T07:33:35+00:00"
+      }
+    },
+    {
+      "id": "openalex:W2499063677",
+      "title": "Volume, Volatility, and Public News Announcements",
+      "authors": [
+        "Tim Bollerslev",
+        "Jia Li",
+        "Yuan Xue"
+      ],
+      "summary": "We provide new empirical evidence for the way in which financial markets process information. Our results rely critically on high-frequency intraday price and volume data for the S&P 500 equity portfolio and U.S. Treasury bonds, along with new econometric techniques, for making inference on the relationship between trading intensity and spot volatility around public news announcements. Consistent with the predictions derived from a theoretical model in which investors agree to disagree, our estimates for the intraday volume-volatility elasticity around important news announcements are systematically below unity. Our elasticity estimates also decrease significantly with measures of disagreements in beliefs, economic uncertainty, and textual-based sentiment, further highlighting the key role played by differences-of-opinion.",
+      "published": "2018-01-16T00:00:00+00:00",
+      "updated": "2018-01-16T00:00:00+00:00",
+      "categories": [
+        "经济学",
+        "Financial Markets and Investment Strategies",
+        "Financial Risk and Volatility Modeling"
+      ],
+      "paper_url": "https://doi.org/10.1093/restud/rdy003",
+      "pdf_url": "https://pure.au.dk/portal/en/publications/fba1bd34-3cc8-4d34-9ead-cb6a47387074",
+      "source": "Review of Economic Studies",
+      "source_type": "conference",
+      "venue": "Review of Economic Studies",
+      "venue_group": "经济学",
+      "doi": "https://doi.org/10.1093/restud/rdy003",
+      "conference": {
+        "id": "restud",
+        "name": "Review of Economic Studies",
+        "year": 2018
+      },
+      "matches": [
+        {
+          "topic_id": "volatility_highfreq",
+          "topic_name": "波动率建模与高频计量",
+          "score": 0.92,
+          "level": "high",
+          "reason": "AI 判定：用高频日内数据估计公告前后成交量-波动率弹性，核心属高频波动率建模",
+          "keyword_hits": [],
+          "mechanical_score": 0.125,
+          "llm_score": 92.0,
+          "llm_source": "cache",
+          "llm_reason": "用高频日内数据估计公告前后成交量-波动率弹性，属高频波动率建模。"
+        }
+      ],
+      "best_match": {
+        "topic_id": "volatility_highfreq",
+        "topic_name": "波动率建模与高频计量",
+        "score": 0.92,
+        "level": "high",
+        "reason": "$\\text{AI}$ 判定：用高频日内数据估计公告前后成交量-波动率弹性，核心属高频波动率建模",
+        "keyword_hits": [],
+        "mechanical_score": 0.125,
+        "llm_score": 92.0,
+        "llm_source": "cache",
+        "llm_reason": "用高频日内数据估计公告前后成交量-波动率弹性，属高频波动率建模。"
+      },
+      "first_seen_at": "2026-11-06T07:32:44.626343+00:00",
+      "last_seen_at": "2026-11-06T07:32:44.626343+00:00",
+      "retained_from_previous_run": true,
+      "weekly_period": "2026-W45",
+      "is_new_this_week": false,
+      "chinese_summary": {
+        "problem": "论文要解决的是金融市场如何加工信息的问题，具体聚焦于公共新闻公告前后交易强度与即期波动率之间的关系。",
+        "method": "论文依赖 S&P $500$ 股票组合与美国国债的高频日内价格和成交量数据，并采用新的计量经济技术，对公共新闻公告前后交易强度与即期波动率之间的关系进行推断。",
+        "innovation": "论文提供了关于金融市场如何加工信息的新经验证据；其推断关键依赖于高频日内价格与成交量数据以及新的计量经济技术，用于刻画公共新闻公告前后交易强度与即期波动率的关系。",
+        "conclusion": "与投资者“agree to disagree”的理论模型预测一致，论文对重要新闻公告前后日内成交量-波动率弹性的估计系统性地低于 $1$；弹性估计也随信念分歧、经济不确定性和基于文本的情绪等度量而显著下降。",
+        "abstract_zh": "我们为金融市场加工信息的方式提供了新的经验证据。我们的结果关键依赖于 S&P $500$ 股票组合与美国国债的高频日内价格和成交量数据，以及新的计量经济技术，用于对公共新闻公告前后交易强度与即期波动率之间的关系进行推断。与一个投资者“agree to disagree”的理论模型所推导的预测一致，我们对重要新闻公告前后日内成交量-波动率弹性的估计系统性地低于 $1$。我们的弹性估计也随信念分歧、经济不确定性和基于文本的情绪等度量而显著下降，进一步凸显了意见分歧所起的关键作用。",
+        "evidence": "Consistent with the predictions derived from a theoretical model in which investors agree to disagree, our estimates for the intraday volume-volatility elasticity around important news announcements are systematically below unity.",
+        "why_relevant": "用高频日内数据估计公告前后成交量-波动率弹性，属高频波动率建模。",
+        "v": 4,
+        "model": "",
+        "at": "2026-11-06T07:33:37+00:00"
+      },
+      "author_institutions": [
+        {
+          "name": "Tim Bollerslev B",
+          "insts": [
+            "Duke University"
+          ]
+        },
+        {
+          "name": "Jia Li",
+          "insts": [
+            "Duke University"
+          ]
+        },
+        {
+          "name": "Yuan Xue",
+          "insts": [
+            "Duke University"
+          ]
+        }
+      ],
+      "author_schools": [
+        {
+          "i": 0,
+          "name": "Tim Bollerslev B",
+          "school": "Duke",
+          "school_zh": "杜克大学",
+          "inst": "Duke University"
+        },
+        {
+          "i": 1,
+          "name": "Jia Li",
+          "school": "Duke",
+          "school_zh": "杜克大学",
+          "inst": "Duke University"
+        },
+        {
+          "i": 2,
+          "name": "Yuan Xue",
+          "school": "Duke",
+          "school_zh": "杜克大学",
+          "inst": "Duke University"
         }
       ]
     },
@@ -2903,6 +3400,774 @@
       ]
     },
     {
+      "id": "openalex:W4409727018",
+      "title": "Uncertainty Quantification in Synthetic Controls with Staggered Treatment Adoption",
+      "authors": [
+        "Matias D. Cattaneo",
+        "Yingjie Feng",
+        "Filippo Palomba",
+        "Rocío Titiunik"
+      ],
+      "summary": "We propose principled prediction intervals to quantify the uncertainty of a large class of synthetic control predictions (or estimators) in settings with staggered treatment adoption, offering precise non-asymptotic coverage probability guarantees. From a methodological perspective, we provide a detailed discussion of different causal quantities to be predicted, which we call causal predictands, allowing for multiple treated units with treatment adoption at possibly different points in time. We illustrate our methodology with an empirical application studying the effects of economic liberalization on real GDP per capita for Sub-Saharan African countries. Companion software packages are provided in Python, R, and Stata.",
+      "published": "2025-04-21T00:00:00+00:00",
+      "updated": "2025-04-21T00:00:00+00:00",
+      "categories": [
+        "经济学",
+        "Advanced Causal Inference Techniques",
+        "Spatial and Panel Data Analysis"
+      ],
+      "paper_url": "https://doi.org/10.1162/rest_a_01588",
+      "pdf_url": "https://arxiv.org/pdf/2210.05026",
+      "source": "Review of Economics and Statistics",
+      "source_type": "conference",
+      "venue": "Review of Economics and Statistics",
+      "venue_group": "经济学",
+      "doi": "https://doi.org/10.1162/rest_a_01588",
+      "conference": {
+        "id": "restat",
+        "name": "Review of Economics and Statistics",
+        "year": 2025
+      },
+      "matches": [
+        {
+          "topic_id": "timeseries_causal",
+          "topic_name": "时间序列与因果识别",
+          "score": 0.9,
+          "level": "high",
+          "reason": "AI 判定：交错处理下的合成控制预测区间，正是合成控制因果识别方法；关键词命中：synthetic control",
+          "keyword_hits": [
+            "synthetic control"
+          ],
+          "mechanical_score": 0.244,
+          "llm_score": 90.0,
+          "llm_source": "cache",
+          "llm_reason": "直接研究交错处理下的合成控制预测区间，属于合成控制因果识别方法。"
+        }
+      ],
+      "best_match": {
+        "topic_id": "timeseries_causal",
+        "topic_name": "时间序列与因果识别",
+        "score": 0.9,
+        "level": "high",
+        "reason": "$\\text{AI}$ 判定：交错处理下的合成控制预测区间，正是合成控制因果识别方法；关键词命中：synthetic control",
+        "keyword_hits": [
+          "synthetic control"
+        ],
+        "mechanical_score": 0.244,
+        "llm_score": 90.0,
+        "llm_source": "cache",
+        "llm_reason": "直接研究交错处理下的合成控制预测区间，属于合成控制因果识别方法。"
+      },
+      "first_seen_at": "2026-11-13T07:31:11.407340+00:00",
+      "last_seen_at": "2026-11-13T07:31:11.407340+00:00",
+      "retained_from_previous_run": true,
+      "weekly_period": "2026-W46",
+      "is_new_this_week": false,
+      "chinese_summary": {
+        "problem": "论文要解决的问题是在交错处理采纳（staggered treatment adoption）的设定下，如何为一大类合成控制预测（或估计量）量化不确定性。",
+        "method": "论文提出有原则的预测区间（principled prediction intervals）来量化合成控制预测的不确定性，并提供精确的非渐近覆盖概率保证（precise non-asymptotic coverage probability guarantees）。方法上详细讨论了不同的因果待预测量（causal predictands），允许存在多个处理单位且处理采纳时点可能不同。",
+        "innovation": "论文的贡献在于：针对交错处理采纳设定下的合成控制预测，提出具有非渐近覆盖概率保证的预测区间；详细讨论并允许存在多个处理单位且处理采纳时点不同的因果待预测量；并提供 Python、R 和 Stata 的配套软件包。",
+        "conclusion": "论文提出的预测区间为一大类合成控制预测（或估计量）提供了精确的非渐近覆盖概率保证，并允许存在多个处理单位且处理采纳时点可能不同。",
+        "abstract_zh": "我们提出有原则的预测区间，用于在交错处理采纳的设定下量化一大类合成控制预测（或估计量）的不确定性，并提供精确的非渐近覆盖概率保证。从方法论角度，我们详细讨论了不同的待预测因果量，我们称之为因果待预测量，允许存在多个处理单位且处理采纳时点可能不同。我们用一项研究经济自由化对撒哈拉以南非洲国家实际人均 $\\text{GDP}$ 影响的实证应用来说明我们的方法。我们提供了 Python、R 和 Stata 的配套软件包。",
+        "evidence": "We propose principled prediction intervals to quantify the uncertainty of a large class of synthetic control predictions (or estimators) in settings with staggered treatment adoption, offering precise non-asymptotic coverage probability guarantees.",
+        "why_relevant": "直接研究交错处理下的合成控制预测区间，属于合成控制因果识别方法。",
+        "v": 4,
+        "model": "",
+        "at": "2026-11-13T07:31:50+00:00"
+      },
+      "author_institutions": [
+        {
+          "name": "Matias D. Cattaneo",
+          "insts": [
+            "Princeton University"
+          ]
+        },
+        {
+          "name": "Yingjie Feng",
+          "insts": [
+            "Tsinghua University"
+          ]
+        },
+        {
+          "name": "Filippo Palomba",
+          "insts": [
+            "Princeton University"
+          ]
+        }
+      ],
+      "author_schools": [
+        {
+          "i": 0,
+          "name": "Matias D. Cattaneo",
+          "school": "Princeton",
+          "school_zh": "普林斯顿大学",
+          "inst": "Princeton University"
+        },
+        {
+          "i": 2,
+          "name": "Filippo Palomba",
+          "school": "Princeton",
+          "school_zh": "普林斯顿大学",
+          "inst": "Princeton University"
+        }
+      ]
+    },
+    {
+      "id": "openalex:W4409727003",
+      "title": "Nonparametric Time Varying IV-SVARs: Estimation and Inference",
+      "authors": [
+        "Robin Braun",
+        "George Kapetanios",
+        "Massimiliano Giuseppe Marcellino"
+      ],
+      "summary": "This paper studies the estimation and inference of time-varying impulse response functions in structural vector autoregressions (SVARs) identified with external instruments. Building on kernel estimators that allow for nonparametric time variation, we derive the asymptotic distributions of the relevant quantities. Our estimators are simple and computationally trivial and allow for potentially weak instruments. Simulations suggest satisfactory empirical coverage even in relatively small samples as long as the underlying parameter instabilities are sufficiently smooth. We illustrate the methods by studying the time-varying effects of global oil supply news shocks on US industrial production.",
+      "published": "2025-04-21T00:00:00+00:00",
+      "updated": "2025-04-21T00:00:00+00:00",
+      "categories": [
+        "经济学",
+        "Monetary Policy and Economic Impact",
+        "Market Dynamics and Volatility"
+      ],
+      "paper_url": "https://doi.org/10.1162/rest_a_01589",
+      "pdf_url": "https://doi.org/10.1162/rest_a_01589",
+      "source": "Review of Economics and Statistics",
+      "source_type": "conference",
+      "venue": "Review of Economics and Statistics",
+      "venue_group": "经济学",
+      "doi": "https://doi.org/10.1162/rest_a_01589",
+      "conference": {
+        "id": "restat",
+        "name": "Review of Economics and Statistics",
+        "year": 2025
+      },
+      "matches": [
+        {
+          "topic_id": "timeseries_causal",
+          "topic_name": "时间序列与因果识别",
+          "score": 0.9,
+          "level": "high",
+          "reason": "AI 判定：外部工具变量识别的时变SVAR与脉冲响应估计推断；关键词命中：vector autoregression",
+          "keyword_hits": [
+            "vector autoregression"
+          ],
+          "mechanical_score": 0.244,
+          "llm_score": 90.0,
+          "llm_source": "cache",
+          "llm_reason": "直接涉及工具变量识别的SVAR与时变脉冲响应估计推断，契合时间序列因果识别方向。"
+        }
+      ],
+      "best_match": {
+        "topic_id": "timeseries_causal",
+        "topic_name": "时间序列与因果识别",
+        "score": 0.9,
+        "level": "high",
+        "reason": "$\\text{AI}$ 判定：外部工具变量识别的时变$\\text{SVAR}$与脉冲响应估计推断；关键词命中：vector autoregression",
+        "keyword_hits": [
+          "vector autoregression"
+        ],
+        "mechanical_score": 0.244,
+        "llm_score": 90.0,
+        "llm_source": "cache",
+        "llm_reason": "直接涉及工具变量识别的$\\text{SVAR}$与时变脉冲响应估计推断，契合时间序列因果识别方向。"
+      },
+      "first_seen_at": "2026-11-13T07:31:11.407340+00:00",
+      "last_seen_at": "2026-11-13T07:31:11.407340+00:00",
+      "retained_from_previous_run": true,
+      "weekly_period": "2026-W46",
+      "is_new_this_week": false,
+      "chinese_summary": {
+        "problem": "论文研究的是在以外生工具变量识别的结构向量自回归（$\\text{SVAR}$）中，时变脉冲响应函数的估计与推断问题。",
+        "method": "论文基于允许非参数时变的核估计量，推导了相关量的渐近分布。论文称其估计量简单且计算上微不足道，并允许工具变量可能较弱。",
+        "innovation": "论文在允许非参数时变的核估计量基础上，推导了相关量的渐近分布；其估计量简单、计算上微不足道，并允许工具变量可能较弱。",
+        "conclusion": "模拟表明，只要潜在的参数不稳定性足够平滑，即使在相对较小的样本中，经验覆盖率也令人满意；论文通过研究全球石油供应新闻冲击对美国工业生产的时变效应来说明这些方法。",
+        "abstract_zh": "本文研究了在以外生工具变量识别的结构向量自回归（$\\text{SVAR}$）中，时变脉冲响应函数的估计与推断。在允许非参数时变的核估计量基础上，我们推导了相关量的渐近分布。我们的估计量简单且计算上微不足道，并允许工具变量可能较弱。模拟表明，只要潜在的参数不稳定性足够平滑，即使在相对较小的样本中，经验覆盖率也令人满意。我们通过研究全球石油供应新闻冲击对美国工业生产的时变效应来说明这些方法。",
+        "evidence": "Simulations suggest satisfactory empirical coverage even in relatively small samples as long as the underlying parameter instabilities are sufficiently smooth.",
+        "why_relevant": "直接涉及工具变量识别的$\\text{SVAR}$与时变脉冲响应估计推断，契合时间序列因果识别方向。",
+        "v": 4,
+        "model": "",
+        "at": "2026-11-13T07:31:50+00:00"
+      },
+      "author_institutions": [
+        {
+          "name": "Robin Braun",
+          "insts": [
+            "Federal Reserve Board of Governors"
+          ]
+        },
+        {
+          "name": "George Kapetanios",
+          "insts": [
+            "King's College London"
+          ]
+        },
+        {
+          "name": "Massimiliano Giuseppe Marcellino",
+          "insts": [
+            "Bocconi University"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "openalex:W4400780171",
+      "title": "Anomaly Time",
+      "authors": [
+        "Boone Bowles",
+        "Adam V. Reed",
+        "Matthew C. Ringgenberg",
+        "Jacob R. Thornock"
+      ],
+      "summary": "We examine the timing of returns around the publication of anomaly trading signals. Using a database that captures when information is first publicly released, we show that anomaly returns are concentrated in the first month after information release dates, and these returns decay soon thereafter. We also show that the academic convention of forming portfolios in June underestimates predictability because it uses stale information, which makes some anomalies appear insignificant. In contrast, we show many anomalies do predict returns if portfolios are formed immediately after information releases. Finally, we develop guidance on forming portfolios without using stale information.",
+      "published": "2024-07-18T00:00:00+00:00",
+      "updated": "2024-07-18T00:00:00+00:00",
+      "categories": [
+        "金融学",
+        "Financial Markets and Investment Strategies",
+        "Stock Market Forecasting Methods"
+      ],
+      "paper_url": "https://doi.org/10.1111/jofi.13372",
+      "pdf_url": "https://doi.org/10.2139/ssrn.3069026",
+      "source": "Journal of Finance",
+      "source_type": "conference",
+      "venue": "Journal of Finance",
+      "venue_group": "金融学",
+      "doi": "https://doi.org/10.1111/jofi.13372",
+      "conference": {
+        "id": "jf",
+        "name": "Journal of Finance",
+        "year": 2024
+      },
+      "matches": [
+        {
+          "topic_id": "asset_pricing",
+          "topic_name": "资产定价与因子实证",
+          "score": 0.9,
+          "level": "high",
+          "reason": "AI 判定：研究异象收益公布时点与可预测性，核心资产定价异象问题；关键词命中：anomaly",
+          "keyword_hits": [
+            "anomaly"
+          ],
+          "mechanical_score": 0.256,
+          "llm_score": 90.0,
+          "llm_source": "cache",
+          "llm_reason": "直接研究异象收益的时点与可预测性，属于横截面收益异象核心议题。"
+        }
+      ],
+      "best_match": {
+        "topic_id": "asset_pricing",
+        "topic_name": "资产定价与因子实证",
+        "score": 0.9,
+        "level": "high",
+        "reason": "$\\text{AI}$ 判定：研究异象收益公布时点与可预测性，核心资产定价异象问题；关键词命中：anomaly",
+        "keyword_hits": [
+          "anomaly"
+        ],
+        "mechanical_score": 0.256,
+        "llm_score": 90.0,
+        "llm_source": "cache",
+        "llm_reason": "直接研究异象收益的时点与可预测性，属于横截面收益异象核心议题。"
+      },
+      "first_seen_at": "2026-11-13T07:31:11.407340+00:00",
+      "last_seen_at": "2026-11-13T07:31:11.407340+00:00",
+      "retained_from_previous_run": true,
+      "weekly_period": "2026-W46",
+      "is_new_this_week": false,
+      "chinese_summary": {
+        "problem": "论文研究异象交易信号公布前后收益的时间分布，并指出学术上六月建组合的惯例因使用陈旧信息而低估可预测性，使一些异象显得不显著。",
+        "method": "使用一个记录信息首次公开发布时间的数据库，考察信息发布日之后异象收益的时序变化；并对比在信息发布后立即建组合与按六月惯例建组合的结果，进而提出避免使用陈旧信息的建组合指引。",
+        "innovation": "利用捕捉信息首次公开发布时间的数据库考察异象收益时点；揭示六月建组合惯例因使用陈旧信息而低估可预测性、使部分异象显得不显著；提出避免使用陈旧信息的建组合指引。",
+        "conclusion": "异象收益集中在信息发布日后的第一个月，随后很快衰减；六月建组合的学术惯例因使用陈旧信息而低估可预测性，使一些异象显得不显著；若在信息发布后立即建组合，许多异象确实能预测收益。",
+        "abstract_zh": "我们考察异象交易信号公布前后收益的时间分布。使用一个捕捉信息首次公开发布时间的数据库，我们表明异象收益集中在信息发布日后的第一个月，并且这些收益在此后很快衰减。我们还表明，六月建组合的学术惯例低估了可预测性，因为它使用了陈旧信息，这使得一些异象显得不显著。相反，我们表明如果组合在信息发布后立即建立，许多异象确实能预测收益。最后，我们提出了关于在不使用陈旧信息的情况下建立组合的指引。",
+        "evidence": "Using a database that captures when information is first publicly released, we show that anomaly returns are concentrated in the first month after information release dates, and these returns decay soon thereafter.",
+        "why_relevant": "直接研究异象收益的时点与可预测性，属于横截面收益异象核心议题。",
+        "v": 4,
+        "model": "",
+        "at": "2026-11-13T07:31:53+00:00"
+      },
+      "author_institutions": [
+        {
+          "name": "Adam V. Reed",
+          "insts": [
+            "University of North Carolina at Chapel Hill"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "openalex:W4400797107",
+      "title": "Very Noisy Option Prices and Inference Regarding the Volatility Risk Premium",
+      "authors": [
+        "Jefferson Duarte",
+        "CHRISTOPHER S. JONES",
+        "Junbo L. Wang"
+      ],
+      "summary": "The stylized fact that volatility is not priced in individual equity options does not withstand scrutiny. First, we show that the average return of heavily traded deep out‐of‐the‐money call options on stocks is −116 basis points per day. Second, Fama‐MacBeth estimates of the volatility risk premium in stock options are similar to those in S&P 500 Index call options. Third, the mean return of heavily traded delta‐hedged at‐the‐money calls (puts) is −23 (−30) basis points. Fourth, the variance risk premium in stock options is negative. Our analysis highlights the importance of microstructure biases and robustness in empirical work with options.",
+      "published": "2024-07-17T00:00:00+00:00",
+      "updated": "2024-07-17T00:00:00+00:00",
+      "categories": [
+        "金融学",
+        "Stochastic processes and financial applications",
+        "Financial Markets and Investment Strategies"
+      ],
+      "paper_url": "https://doi.org/10.1111/jofi.13365",
+      "pdf_url": "https://doi.org/10.2139/ssrn.4167308",
+      "source": "Journal of Finance",
+      "source_type": "conference",
+      "venue": "Journal of Finance",
+      "venue_group": "金融学",
+      "doi": "https://doi.org/10.1111/jofi.13365",
+      "conference": {
+        "id": "jf",
+        "name": "Journal of Finance",
+        "year": 2024
+      },
+      "matches": [
+        {
+          "topic_id": "volatility_highfreq",
+          "topic_name": "波动率建模与高频计量",
+          "score": 0.9,
+          "level": "high",
+          "reason": "AI 判定：期权隐含波动率与波动率风险溢价，兼及微观结构偏差；关键词命中：risk premium",
+          "keyword_hits": [
+            "risk premium"
+          ],
+          "mechanical_score": 0.338,
+          "llm_score": 90.0,
+          "llm_source": "cache",
+          "llm_reason": "直接涉及期权隐含波动率、波动率风险溢价与微观结构偏差，与研究方向高度匹配。"
+        }
+      ],
+      "best_match": {
+        "topic_id": "volatility_highfreq",
+        "topic_name": "波动率建模与高频计量",
+        "score": 0.9,
+        "level": "high",
+        "reason": "$\\text{AI}$ 判定：期权隐含波动率与波动率风险溢价，兼及微观结构偏差；关键词命中：risk premium",
+        "keyword_hits": [
+          "risk premium"
+        ],
+        "mechanical_score": 0.338,
+        "llm_score": 90.0,
+        "llm_source": "cache",
+        "llm_reason": "直接涉及期权隐含波动率、波动率风险溢价与微观结构偏差，与研究方向高度匹配。"
+      },
+      "first_seen_at": "2026-11-13T07:31:11.407340+00:00",
+      "last_seen_at": "2026-11-13T07:31:11.407340+00:00",
+      "retained_from_previous_run": true,
+      "weekly_period": "2026-W46",
+      "is_new_this_week": false,
+      "chinese_summary": {
+        "problem": "论文要解决的问题是：波动率在个股期权中不被定价这一典型事实是否经得起检验。",
+        "method": "论文使用Fama-$\\text{MacBeth}$估计方法，考察股票期权中的波动率风险溢价，并与S&P $500$指数看涨期权中的波动率风险溢价进行比较；同时分析深度价外看涨期权、Delta对冲平值看涨与看跌期权的平均收益，以及股票期权中的方差风险溢价。",
+        "innovation": "论文指出波动率在个股期权中不被定价的典型事实经不起检验；通过考察重度交易期权的平均收益、Fama-$\\text{MacBeth}$估计的波动率风险溢价、Delta对冲期权的平均收益以及方差风险溢价，提供了与既有认识不同的证据；并强调微观结构偏差与稳健性在期权实证研究中的重要性。",
+        "conclusion": "摘要明确写出：重度交易的深度价外股票看涨期权的平均收益为每日$-116$个基点；股票期权中波动率风险溢价的Fama-$\\text{MacBeth}$估计与S&P $500$指数看涨期权中的类似；重度交易的Delta对冲平值看涨（看跌）期权的平均收益为$-23$（$-30$）个基点；股票期权中的方差风险溢价为负。",
+        "abstract_zh": "波动率在个股期权中不被定价这一典型事实经不起检验。第一，我们表明，重度交易的深度价外股票看涨期权的平均收益为每日$-116$个基点。第二，股票期权中波动率风险溢价的Fama-$\\text{MacBeth}$估计与S&P $500$指数看涨期权中的类似。第三，重度交易的Delta对冲平值看涨（看跌）期权的平均收益为$-23$（$-30$）个基点。第四，股票期权中的方差风险溢价为负。我们的分析强调了微观结构偏差与稳健性在期权实证研究中的重要性。",
+        "evidence": "First, we show that the average return of heavily traded deep out‐of‐the‐money call options on stocks is −116 basis points per day.",
+        "why_relevant": "直接涉及期权隐含波动率、波动率风险溢价与微观结构偏差，与研究方向高度匹配。",
+        "v": 4,
+        "model": "",
+        "at": "2026-11-13T07:31:54+00:00"
+      },
+      "author_institutions": [
+        {
+          "name": "Jefferson Duarte",
+          "insts": [
+            "Rice University"
+          ]
+        },
+        {
+          "name": "Junbo L. Wang",
+          "insts": [
+            "University of Southern California",
+            "Louisiana State University",
+            "Rice University"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "openalex:W4388069793",
+      "title": "High-Frequency Tail Risk Premium and Stock Return Predictability",
+      "authors": [
+        "Caio Ibsen Rodrigues De Almeida",
+        "Kym Ardison",
+        "Gustavo Freire",
+        "René García",
+        "Piotr Orłowski"
+      ],
+      "summary": "We propose a novel measure of the market return tail risk premium based on minimum-distance state price densities recovered from high-frequency data. The tail risk premium extracted from intra-day S&P 500 returns predicts the market equity and variance risk premiums and expected excess returns on a cross section of characteristics-sorted portfolios. Additionally, we describe the differential role of the quantity of tail risk, and of the tail premium, in shaping the future distribution of index returns. Our results are robust to controlling for established measures of variance and tail risk, and of risk premiums, in the predictive models.",
+      "published": "2023-10-31T00:00:00+00:00",
+      "updated": "2023-10-31T00:00:00+00:00",
+      "categories": [
+        "金融学",
+        "Financial Markets and Investment Strategies",
+        "Financial Risk and Volatility Modeling"
+      ],
+      "paper_url": "https://doi.org/10.1017/s0022109023001199",
+      "pdf_url": "https://www.cambridge.org/core/services/aop-cambridge-core/content/view/EB298DC2E22D7106D69C606A8EA46F7E/S0022109023001199a.pdf/div-class-title-high-frequency-tail-risk-premium-and-stock-return-predictability-div.pdf",
+      "source": "Journal of Financial and Quantitative Analysis",
+      "source_type": "conference",
+      "venue": "Journal of Financial and Quantitative Analysis",
+      "venue_group": "金融学",
+      "doi": "https://doi.org/10.1017/s0022109023001199",
+      "conference": {
+        "id": "jfqa",
+        "name": "Journal of Financial and Quantitative Analysis",
+        "year": 2023
+      },
+      "matches": [
+        {
+          "topic_id": "volatility_highfreq",
+          "topic_name": "波动率建模与高频计量",
+          "score": 0.9,
+          "level": "high",
+          "reason": "AI 判定：用高频日内数据恢复状态价格密度提取尾部风险溢价，核心为高频数据与波动率/尾部风险建模。；关键词命中：risk premium、return predictability",
+          "keyword_hits": [
+            "risk premium",
+            "return predictability"
+          ],
+          "mechanical_score": 0.55,
+          "llm_score": 90.0,
+          "llm_source": "cache",
+          "llm_reason": "用高频日内数据恢复状态价格密度并提取尾部风险溢价，直接关联高频数据与波动率风险建模。"
+        }
+      ],
+      "best_match": {
+        "topic_id": "volatility_highfreq",
+        "topic_name": "波动率建模与高频计量",
+        "score": 0.9,
+        "level": "high",
+        "reason": "$\\text{AI}$ 判定：用高频日内数据恢复状态价格密度提取尾部风险溢价，核心为高频数据与波动率/尾部风险建模。；关键词命中：risk premium、return predictability",
+        "keyword_hits": [
+          "risk premium",
+          "return predictability"
+        ],
+        "mechanical_score": 0.55,
+        "llm_score": 90.0,
+        "llm_source": "cache",
+        "llm_reason": "用高频日内数据恢复状态价格密度并提取尾部风险溢价，直接关联高频数据与波动率风险建模。"
+      },
+      "first_seen_at": "2026-11-13T07:31:11.407340+00:00",
+      "last_seen_at": "2026-11-13T07:31:11.407340+00:00",
+      "retained_from_previous_run": true,
+      "weekly_period": "2026-W46",
+      "is_new_this_week": false,
+      "chinese_summary": {
+        "problem": "论文提出一种基于高频数据恢复的最小距离状态价格密度来度量市场收益尾部风险溢价，并考察该溢价对市场股权溢价、方差风险溢价以及特征排序组合预期超额收益的预测能力。",
+        "method": "从高频数据中恢复最小距离状态价格密度，并据此构造市场收益尾部风险溢价这一新度量。该尾部风险溢价从日内 S&P $500$ 收益中提取，用于预测市场股权溢价、方差风险溢价以及一组特征排序组合的预期超额收益。摘要还描述了尾部风险的数量与尾部溢价在塑造指数收益未来分布中的不同作用。",
+        "innovation": "提出一种基于高频数据恢复的最小距离状态价格密度来构造市场收益尾部风险溢价的新度量；将该尾部风险溢价用于预测市场股权溢价、方差风险溢价和特征排序组合的预期超额收益；并刻画尾部风险的数量与尾部溢价在塑造指数收益未来分布中的不同作用。",
+        "conclusion": "从日内 S&P $500$ 收益中提取的尾部风险溢价能够预测市场股权溢价、方差风险溢价以及一组特征排序组合的预期超额收益；在预测模型中控制已有的方差与尾部风险度量以及风险溢价度量后，结果依然稳健。",
+        "abstract_zh": "我们提出一种基于从高频数据中恢复的最小距离状态价格密度的市场收益尾部风险溢价的新度量。从日内 S&P $500$ 收益中提取的尾部风险溢价能够预测市场股权溢价和方差风险溢价，以及一组特征排序组合的预期超额收益。此外，我们描述了尾部风险的数量与尾部溢价在塑造指数收益未来分布中的不同作用。在预测模型中控制已有的方差与尾部风险度量以及风险溢价度量后，我们的结果依然稳健。",
+        "evidence": "The tail risk premium extracted from intra-day S&P 500 returns predicts the market equity and variance risk premiums and expected excess returns on a cross section of characteristics-sorted portfolios.",
+        "why_relevant": "用高频日内数据恢复状态价格密度并提取尾部风险溢价，直接关联高频数据与波动率风险建模。",
+        "v": 4,
+        "model": "",
+        "at": "2026-11-13T07:31:56+00:00"
+      },
+      "author_institutions": [
+        {
+          "name": "Caio Ibsen Rodrigues De Almeida",
+          "insts": [
+            "Princeton University"
+          ]
+        },
+        {
+          "name": "Gustavo Freire",
+          "insts": [
+            "Tinbergen Institute",
+            "Erasmus University Rotterdam"
+          ]
+        }
+      ],
+      "author_schools": [
+        {
+          "i": 0,
+          "name": "Caio Ibsen Rodrigues De Almeida",
+          "school": "Princeton",
+          "school_zh": "普林斯顿大学",
+          "inst": "Princeton University"
+        }
+      ]
+    },
+    {
+      "id": "openalex:W4324122991",
+      "title": "Synthetic Control as Online Linear Regression",
+      "authors": [
+        "Jiafeng Chen"
+      ],
+      "summary": "This paper notes a simple connection between synthetic control and online learning. Specifically, we recognize synthetic control as an instance of Follow‐The‐Leader (FTL). Standard results in online convex optimization then imply that, even when outcomes are chosen by an adversary, synthetic control predictions of counterfactual outcomes for the treated unit perform almost as well as an oracle weighted average of control units' outcomes. Synthetic control on differenced data performs almost as well as oracle weighted difference‐in‐differences, potentially making it an attractive choice in practice. We argue that this observation further supports the use of synthetic control estimators in comparative case studies.",
+      "published": "2023-01-01T00:00:00+00:00",
+      "updated": "2023-01-01T00:00:00+00:00",
+      "categories": [
+        "经济学",
+        "Advanced Causal Inference Techniques",
+        "Statistical Methods and Inference"
+      ],
+      "paper_url": "https://doi.org/10.3982/ecta20720",
+      "pdf_url": "https://arxiv.org/pdf/2202.08426",
+      "source": "Econometrica",
+      "source_type": "conference",
+      "venue": "Econometrica",
+      "venue_group": "经济学",
+      "doi": "https://doi.org/10.3982/ecta20720",
+      "conference": {
+        "id": "econometrica",
+        "name": "Econometrica",
+        "year": 2023
+      },
+      "author_institutions": [
+        {
+          "name": "Jiafeng Chen",
+          "insts": [
+            "Harvard University"
+          ]
+        }
+      ],
+      "matches": [
+        {
+          "topic_id": "timeseries_causal",
+          "topic_name": "时间序列与因果识别",
+          "score": 0.9,
+          "level": "high",
+          "reason": "AI 判定：合成控制法理论刻画，正是因果识别方向的核心方法；关键词命中：synthetic control",
+          "keyword_hits": [
+            "synthetic control"
+          ],
+          "mechanical_score": 0.338,
+          "llm_score": 90.0,
+          "llm_source": "cache",
+          "llm_reason": "合成控制是因果识别的核心方法，本文给出其在线学习理论刻画。"
+        }
+      ],
+      "best_match": {
+        "topic_id": "timeseries_causal",
+        "topic_name": "时间序列与因果识别",
+        "score": 0.9,
+        "level": "high",
+        "reason": "$\\text{AI}$ 判定：合成控制法理论刻画，正是因果识别方向的核心方法；关键词命中：synthetic control",
+        "keyword_hits": [
+          "synthetic control"
+        ],
+        "mechanical_score": 0.338,
+        "llm_score": 90.0,
+        "llm_source": "cache",
+        "llm_reason": "合成控制是因果识别的核心方法，本文给出其在线学习理论刻画。"
+      },
+      "first_seen_at": "2026-11-17T07:49:13.164554+00:00",
+      "last_seen_at": "2026-11-17T07:49:13.164554+00:00",
+      "retained_from_previous_run": false,
+      "weekly_period": "2026-W47",
+      "is_new_this_week": true,
+      "chinese_summary": {
+        "problem": "论文要指出合成控制与在线学习之间的一个简单联系，即把合成控制识别为 Follow-The-Leader ($\\text{FTL}$) 的一个实例。",
+        "method": "论文将合成控制识别为 Follow-The-Leader ($\\text{FTL}$) 的一个实例，并借助在线凸优化的标准结果进行分析；分析覆盖结果由对手选择的情形，并考察对差分数据施加合成控制的情形。",
+        "innovation": "论文指出合成控制与在线学习之间的一个简单联系，把合成控制识别为 Follow-The-Leader ($\\text{FTL}$) 的一个实例；借助在线凸优化的标准结果给出合成控制预测的性能保证；并据此主张这一观察进一步支持在比较案例研究中使用合成控制估计量。",
+        "conclusion": "即使结果由对手选择，合成控制对处理单元反事实结果的预测几乎与对照单元结果的 oracle 加权平均一样好；对差分数据施加的合成控制几乎与 oracle 加权双重差分一样好，这可能使其在实践中成为有吸引力的选择。",
+        "abstract_zh": "本文指出合成控制与在线学习之间的一个简单联系。具体而言，我们将合成控制识别为 Follow-The-Leader ($\\text{FTL}$) 的一个实例。在线凸优化的标准结果由此表明，即使结果由对手选择，合成控制对处理单元反事实结果的预测也几乎与对照单元结果的 oracle 加权平均一样好。对差分数据施加的合成控制几乎与 oracle 加权双重差分一样好，这可能使其在实践中成为有吸引力的选择。我们主张，这一观察进一步支持在比较案例研究中使用合成控制估计量。",
+        "evidence": "Standard results in online convex optimization then imply that, even when outcomes are chosen by an adversary, synthetic control predictions of counterfactual outcomes for the treated unit perform almost as well as an oracle weighted average of control units' outcomes.",
+        "why_relevant": "合成控制是因果识别的核心方法，本文给出其在线学习理论刻画。",
+        "v": 4
+      }
+    },
+    {
+      "id": "openalex:W3122402351",
+      "title": "Factors That Fit the Time Series and Cross-Section of Stock Returns",
+      "authors": [
+        "Martin Lettau A",
+        "Markus Pelger"
+      ],
+      "summary": "We propose a new method for estimating latent asset pricing factors that fit the time series and cross-section of expected returns. Our estimator generalizes principal component analysis (PCA) by including a penalty on the pricing error in expected returns. Our approach finds weak factors with high Sharpe ratios that PCA cannot detect. We discover five factors with economic meaning that explain well the cross-section and time series of characteristic-sorted portfolio returns. The out-of-sample maximum Sharpe ratio of our factors is twice as large as with PCA with substantially smaller pricing errors. Our factors imply that a significant amount of characteristic information is redundant. Authors have furnished an Internet Appendix, which is available on the Oxford University Press Web site next to the link to the final published paper online.",
+      "published": "2020-02-13T00:00:00+00:00",
+      "updated": "2020-02-13T00:00:00+00:00",
+      "categories": [
+        "金融学",
+        "Financial Markets and Investment Strategies",
+        "Financial Risk and Volatility Modeling"
+      ],
+      "paper_url": "https://doi.org/10.1093/rfs/hhaa020",
+      "pdf_url": "https://doi.org/10.2139/ssrn.3211106",
+      "source": "Review of Financial Studies",
+      "source_type": "conference",
+      "venue": "Review of Financial Studies",
+      "venue_group": "金融学",
+      "doi": "https://doi.org/10.1093/rfs/hhaa020",
+      "conference": {
+        "id": "rfs",
+        "name": "Review of Financial Studies",
+        "year": 2020
+      },
+      "author_institutions": [
+        {
+          "name": "Martin Lettau A",
+          "insts": [
+            "Center for Economic and Policy Research",
+            "University of California, Berkeley"
+          ]
+        },
+        {
+          "name": "Markus Pelger",
+          "insts": [
+            "Stanford University"
+          ]
+        }
+      ],
+      "matches": [
+        {
+          "topic_id": "asset_pricing",
+          "topic_name": "资产定价与因子实证",
+          "score": 0.9,
+          "level": "high",
+          "reason": "AI 判定：提出估计潜在定价因子的新方法，直接研究因子模型与横截面收益；关键词命中：asset pricing、cross-section of stock returns",
+          "keyword_hits": [
+            "asset pricing",
+            "cross-section of stock returns"
+          ],
+          "mechanical_score": 0.7,
+          "llm_score": 90.0,
+          "llm_source": "cache",
+          "llm_reason": "直接研究因子模型与横截面收益，提出估计潜在定价因子的新方法。"
+        }
+      ],
+      "best_match": {
+        "topic_id": "asset_pricing",
+        "topic_name": "资产定价与因子实证",
+        "score": 0.9,
+        "level": "high",
+        "reason": "$\\text{AI}$ 判定：提出估计潜在定价因子的新方法，直接研究因子模型与横截面收益；关键词命中：asset pricing、cross-section of stock returns",
+        "keyword_hits": [
+          "asset pricing",
+          "cross-section of stock returns"
+        ],
+        "mechanical_score": 0.7,
+        "llm_score": 90.0,
+        "llm_source": "cache",
+        "llm_reason": "直接研究因子模型与横截面收益，提出估计潜在定价因子的新方法。"
+      },
+      "first_seen_at": "2026-11-17T07:49:13.164554+00:00",
+      "last_seen_at": "2026-11-17T07:49:13.164554+00:00",
+      "retained_from_previous_run": false,
+      "weekly_period": "2026-W47",
+      "is_new_this_week": true,
+      "chinese_summary": {
+        "problem": "论文要解决的问题是如何估计同时拟合期望收益的时间序列和横截面的潜在资产定价因子。",
+        "method": "论文提出一种新的估计方法，该估计器通过在主成分分析（$\\text{PCA}$）中加入对期望收益定价误差的惩罚来推广$\\text{PCA}$。该方法能够找到$\\text{PCA}$无法检测到的具有高夏普比率的弱因子。",
+        "innovation": "相对已有工作，论文的创新在于：提出在$\\text{PCA}$中加入定价误差惩罚的估计器以推广$\\text{PCA}$；能够发现$\\text{PCA}$无法检测的具有高夏普比率的弱因子；发现五个具有经济含义的因子，能很好地解释特征排序组合收益的横截面和时间序列。",
+        "conclusion": "论文发现五个具有经济含义的因子能很好地解释特征排序组合收益的横截面和时间序列；这些因子的样本外最大夏普比率是$\\text{PCA}$的两倍，且定价误差显著更小；这些因子意味着大量特征信息是冗余的。",
+        "abstract_zh": "我们提出一种新方法，用于估计同时拟合期望收益的时间序列和横截面的潜在资产定价因子。我们的估计器通过加入对期望收益定价误差的惩罚来推广主成分分析（$\\text{PCA}$）。我们的方法找到$\\text{PCA}$无法检测到的具有高夏普比率的弱因子。我们发现五个具有经济含义的因子，它们能很好地解释特征排序组合收益的横截面和时间序列。我们的因子的样本外最大夏普比率是$\\text{PCA}$的两倍，且定价误差显著更小。我们的因子意味着大量特征信息是冗余的。作者提供了互联网附录，可在牛津大学出版社网站最终发表论文链接旁获取。",
+        "evidence": "The out-of-sample maximum Sharpe ratio of our factors is twice as large as with PCA with substantially smaller pricing errors.",
+        "why_relevant": "直接研究因子模型与横截面收益，提出估计潜在定价因子的新方法。",
+        "v": 4
+      },
+      "author_schools": [
+        {
+          "i": 0,
+          "name": "Martin Lettau A",
+          "school": "UC Berkeley",
+          "school_zh": "加州大学伯克利分校",
+          "inst": "University of California, Berkeley"
+        },
+        {
+          "i": 1,
+          "name": "Markus Pelger",
+          "school": "Stanford",
+          "school_zh": "斯坦福大学",
+          "inst": "Stanford University"
+        }
+      ]
+    },
+    {
+      "id": "openalex:W4213328821",
+      "title": "Risk Price Variation: The Missing Half of Empirical Asset Pricing",
+      "authors": [
+        "Andrew J. Patton",
+        "Brian Weller"
+      ],
+      "summary": "",
+      "published": "2018-01-01T00:00:00+00:00",
+      "updated": "2018-01-01T00:00:00+00:00",
+      "categories": [
+        "金融学",
+        "Financial Markets and Investment Strategies",
+        "Financial Risk and Volatility Modeling"
+      ],
+      "paper_url": "https://doi.org/10.1093/rfs/hhac012",
+      "pdf_url": "https://doi.org/10.2139/ssrn.3192846",
+      "source": "Review of Financial Studies",
+      "source_type": "conference",
+      "venue": "Review of Financial Studies",
+      "venue_group": "金融学",
+      "doi": "https://doi.org/10.1093/rfs/hhac012",
+      "conference": {
+        "id": "rfs",
+        "name": "Review of Financial Studies",
+        "year": 2018
+      },
+      "author_institutions": [
+        {
+          "name": "Andrew J. Patton",
+          "insts": [
+            "Duke University"
+          ]
+        },
+        {
+          "name": "Brian Weller",
+          "insts": [
+            "Amazon (United States)"
+          ]
+        }
+      ],
+      "matches": [
+        {
+          "topic_id": "asset_pricing",
+          "topic_name": "资产定价与因子实证",
+          "score": 0.9,
+          "level": "high",
+          "reason": "AI 判定：研究风险价格横截面异质性，提出聚类分组与风险溢价差异检验，核心资产定价；关键词命中：asset pricing",
+          "keyword_hits": [
+            "asset pricing"
+          ],
+          "mechanical_score": 0.275,
+          "llm_score": 90.0,
+          "llm_source": "cache"
+        }
+      ],
+      "best_match": {
+        "topic_id": "asset_pricing",
+        "topic_name": "资产定价与因子实证",
+        "score": 0.9,
+        "level": "high",
+        "reason": "$\\text{AI}$ 判定：研究风险价格横截面异质性，提出聚类分组与风险溢价差异检验，核心资产定价；关键词命中：asset pricing",
+        "keyword_hits": [
+          "asset pricing"
+        ],
+        "mechanical_score": 0.275,
+        "llm_score": 90.0,
+        "llm_source": "cache"
+      },
+      "first_seen_at": "2026-11-17T07:49:13.164554+00:00",
+      "last_seen_at": "2026-11-17T07:49:13.164554+00:00",
+      "retained_from_previous_run": false,
+      "weekly_period": "2026-W47",
+      "is_new_this_week": true,
+      "chinese_summary": {
+        "problem": "出版商未向开放索引提供这篇 Review of Financial Studies 文章的摘要，目前只有题录信息。",
+        "method": "请打开原文链接查看模型设定、识别策略与实证设计。",
+        "innovation": "缺少摘要，无法可靠判断创新点，已避免让模型凭标题猜测。",
+        "conclusion": "缺少摘要，无法给出可靠结论，请阅读原文。",
+        "evidence": "",
+        "why_relevant": "$\\text{AI}$ 判定：研究风险价格横截面异质性，提出聚类分组与风险溢价差异检验，核心资产定价；关键词命中：asset pricing"
+      },
+      "author_schools": [
+        {
+          "i": 0,
+          "name": "Andrew J. Patton",
+          "school": "Duke",
+          "school_zh": "杜克大学",
+          "inst": "Duke University"
+        }
+      ]
+    },
+    {
       "id": "openalex:W7222162541",
       "title": "ON THE RELATION BETWEEN DISCRETE- AND CONTINUOUS-TIME AFFINE OPTION PRICING MODELS",
       "authors": [
@@ -3194,6 +4459,200 @@
           ]
         }
       ]
+    },
+    {
+      "id": "openalex:W4293998610",
+      "title": "Common Idiosyncratic Quantile Factors and Asset Prices",
+      "authors": [
+        "Jozef Baruník",
+        "Matěj Nevrla"
+      ],
+      "summary": "We investigate whether the tails of firm-level idiosyncratic return distributions are driven by common shocks. We use quantile factor analysis to extract such common idiosyncratic quantile factors with asymmetric pricing effects, and we find a significant premium for innovations to the lower-tail factor: high-exposure stocks outperform low-exposure stocks by approximately 7%–8% per year. This premium remains significant even when controlling for standard factors, idiosyncratic volatility, and tail-risk measures. The downside factor strengthens when intermediary capital is weak and market liquidity is low, and the associated increase in risk predicts higher aggregate market excess returns.",
+      "published": "2026-06-10T00:00:00+00:00",
+      "updated": "2026-06-10T00:00:00+00:00",
+      "categories": [
+        "金融学",
+        "Financial Markets and Investment Strategies",
+        "Financial Risk and Volatility Modeling"
+      ],
+      "paper_url": "https://doi.org/10.1017/s002210902610307x",
+      "pdf_url": "https://doi.org/10.1017/s002210902610307x",
+      "source": "Journal of Financial and Quantitative Analysis",
+      "source_type": "conference",
+      "venue": "Journal of Financial and Quantitative Analysis",
+      "venue_group": "金融学",
+      "doi": "https://doi.org/10.1017/s002210902610307x",
+      "conference": {
+        "id": "jfqa",
+        "name": "Journal of Financial and Quantitative Analysis",
+        "year": 2026
+      },
+      "author_institutions": [
+        {
+          "name": "Jozef Baruník",
+          "insts": [
+            "Charles University",
+            "Czech Academy of Sciences, Institute of Information Theory and Automation"
+          ]
+        },
+        {
+          "name": "Matěj Nevrla",
+          "insts": [
+            "University of Liverpool",
+            "Czech Academy of Sciences, Institute of Information Theory and Automation"
+          ]
+        }
+      ],
+      "matches": [
+        {
+          "topic_id": "asset_pricing",
+          "topic_name": "资产定价与因子实证",
+          "score": 0.88,
+          "level": "high",
+          "reason": "AI 判定：分位数因子提取与横截面收益异象，核心属资产定价因子实证",
+          "keyword_hits": [],
+          "mechanical_score": 0.25,
+          "llm_score": 88.0,
+          "llm_source": "cache",
+          "llm_reason": "直接涉及因子提取与横截面收益异象，属资产定价因子实证。"
+        }
+      ],
+      "best_match": {
+        "topic_id": "asset_pricing",
+        "topic_name": "资产定价与因子实证",
+        "score": 0.88,
+        "level": "high",
+        "reason": "$\\text{AI}$ 判定：分位数因子提取与横截面收益异象，核心属资产定价因子实证",
+        "keyword_hits": [],
+        "mechanical_score": 0.25,
+        "llm_score": 88.0,
+        "llm_source": "cache",
+        "llm_reason": "直接涉及因子提取与横截面收益异象，属资产定价因子实证。"
+      },
+      "first_seen_at": "2026-11-17T07:49:13.164554+00:00",
+      "last_seen_at": "2026-11-17T07:49:13.164554+00:00",
+      "retained_from_previous_run": false,
+      "weekly_period": "2026-W47",
+      "is_new_this_week": true,
+      "chinese_summary": {
+        "problem": "论文要考察企业层面特质收益分布的尾部是否由共同冲击驱动。",
+        "method": "论文使用分位数因子分析，提取具有非对称定价效应的共同特质分位数因子，并检验这些因子创新在横截面上的定价。",
+        "innovation": "论文将分位数因子分析用于从企业层面特质收益分布的尾部提取共同特质分位数因子，并刻画其非对称定价效应；摘要还声称，在控制标准因子、特质波动率和尾部风险度量后，低尾因子溢价仍然显著。",
+        "conclusion": "摘要报告低尾因子创新的溢价显著：高暴露股票每年比低暴露股票高出约 $7\\%$–$8\\%$；该溢价在控制标准因子、特质波动率和尾部风险度量后仍显著；当中介资本较弱、市场流动性较低时，下行因子增强，且相关风险上升可预测更高的总体市场超额收益。",
+        "abstract_zh": "我们考察企业层面特质收益分布的尾部是否由共同冲击驱动。我们使用分位数因子分析提取这类具有非对称定价效应的共同特质分位数因子，并发现低尾因子创新的显著溢价：高暴露股票每年比低暴露股票高出约 $7\\%$–$8\\%$。即使控制标准因子、特质波动率和尾部风险度量，这一溢价仍然显著。当中介资本较弱且市场流动性较低时，下行因子增强，且相关风险上升可预测更高的总体市场超额收益。",
+        "evidence": "We use quantile factor analysis to extract such common idiosyncratic quantile factors with asymmetric pricing effects, and we find a significant premium for innovations to the lower-tail factor: high-exposure stocks outperform low-exposure stocks by approximately 7%–8% per year.",
+        "why_relevant": "直接涉及因子提取与横截面收益异象，属资产定价因子实证。",
+        "v": 4
+      }
+    },
+    {
+      "id": "openalex:W4297910699",
+      "title": "Tail risk and asset prices in the short-term",
+      "authors": [
+        "Caio Ibsen Rodrigues De Almeida",
+        "Gustavo Freire",
+        "René García",
+        "Rodrigo Hizmeri"
+      ],
+      "summary": "We combine high-frequency stock returns with risk-neutralization to extract the daily common component of tail risks perceived by investors in the cross-section of firms. Our tail risk measure significantly predicts the equity premium and variance risk premium at short horizons. Furthermore, a long–short portfolio built by sorting stocks on their recent exposure to tail risk generates abnormal returns with respect to standard factor models. Incorporating investors’ preferences via risk-neutralization is fundamental to our findings: the predictive power of the physical tail risk is weaker and generally subsumed by its risk-neutral counterpart.",
+      "published": "2026-04-13T00:00:00+00:00",
+      "updated": "2026-04-13T00:00:00+00:00",
+      "categories": [
+        "金融学",
+        "Financial Markets and Investment Strategies",
+        "Financial Risk and Volatility Modeling"
+      ],
+      "paper_url": "https://doi.org/10.1093/rof/rfag014",
+      "pdf_url": "https://doi.org/10.2139/ssrn.4216981",
+      "source": "Review of Finance",
+      "source_type": "conference",
+      "venue": "Review of Finance",
+      "venue_group": "金融学",
+      "doi": "https://doi.org/10.1093/rof/rfag014",
+      "conference": {
+        "id": "rof",
+        "name": "Review of Finance",
+        "year": 2026
+      },
+      "author_institutions": [
+        {
+          "name": "Caio Ibsen Rodrigues De Almeida",
+          "insts": [
+            "Princeton University"
+          ]
+        },
+        {
+          "name": "Gustavo Freire",
+          "insts": [
+            "NOVA School of Business and Economics",
+            "Universidade Nova de Lisboa",
+            "Erasmus University Rotterdam"
+          ]
+        },
+        {
+          "name": "René García",
+          "insts": [
+            "Toulouse School of Economics",
+            "Université de Montréal"
+          ]
+        }
+      ],
+      "matches": [
+        {
+          "topic_id": "risk_extreme",
+          "topic_name": "风险测度与尾部风险",
+          "score": 0.88,
+          "level": "high",
+          "reason": "AI 判定：用高频收益提取横截面尾部风险，预测股权溢价并构造尾部风险组合，核心即尾部风险定价；关键词命中：factor model、risk premium",
+          "keyword_hits": [
+            "factor model",
+            "risk premium"
+          ],
+          "mechanical_score": 0.55,
+          "llm_score": 88.0,
+          "llm_source": "cache",
+          "llm_reason": "论文核心是尾部风险测度与定价，直接匹配风险测度与尾部风险研究方向。"
+        }
+      ],
+      "best_match": {
+        "topic_id": "risk_extreme",
+        "topic_name": "风险测度与尾部风险",
+        "score": 0.88,
+        "level": "high",
+        "reason": "$\\text{AI}$ 判定：用高频收益提取横截面尾部风险，预测股权溢价并构造尾部风险组合，核心即尾部风险定价；关键词命中：factor model、risk premium",
+        "keyword_hits": [
+          "factor model",
+          "risk premium"
+        ],
+        "mechanical_score": 0.55,
+        "llm_score": 88.0,
+        "llm_source": "cache",
+        "llm_reason": "论文核心是尾部风险测度与定价，直接匹配风险测度与尾部风险研究方向。"
+      },
+      "first_seen_at": "2026-11-17T07:49:13.164554+00:00",
+      "last_seen_at": "2026-11-17T07:49:13.164554+00:00",
+      "retained_from_previous_run": false,
+      "weekly_period": "2026-W47",
+      "is_new_this_week": true,
+      "chinese_summary": {
+        "problem": "论文要解决的问题是如何从高频股票收益中提取投资者在横截面上感知的尾部风险的每日共同成分，并检验其对资产价格的预测能力。",
+        "method": "论文将高频股票收益与风险中性化相结合，提取横截面上企业尾部风险的每日共同成分。然后检验该尾部风险测度对股权溢价和方差风险溢价的短期预测能力，并构建基于尾部风险暴露排序的多空组合。",
+        "innovation": "论文的创新点包括：结合高频收益与风险中性化提取横截面尾部风险的每日共同成分；发现该尾部风险测度在短期显著预测股权溢价和方差风险溢价；构建基于尾部风险暴露排序的多空组合，该组合相对于标准因子模型产生异常收益；并强调通过风险中性化纳入投资者偏好是发现的关键，因为物理尾部风险的预测能力较弱且通常被其风险中性对应物所涵盖。",
+        "conclusion": "尾部风险测度显著预测短期股权溢价和方差风险溢价；按近期尾部风险暴露排序构建的多空组合相对于标准因子模型产生异常收益；物理尾部风险的预测能力较弱且通常被风险中性对应物所涵盖。",
+        "abstract_zh": "我们将高频股票收益与风险中性化相结合，以提取投资者在横截面上感知的尾部风险的每日共同成分。我们的尾部风险测度在短期显著预测股权溢价和方差风险溢价。此外，通过按股票近期对尾部风险的暴露进行排序构建的多空组合，相对于标准因子模型产生异常收益。通过风险中性化纳入投资者偏好对我们的发现至关重要：物理尾部风险的预测能力较弱，且通常被其风险中性对应物所涵盖。",
+        "evidence": "Our tail risk measure significantly predicts the equity premium and variance risk premium at short horizons.",
+        "why_relevant": "论文核心是尾部风险测度与定价，直接匹配风险测度与尾部风险研究方向。",
+        "v": 4
+      },
+      "author_schools": [
+        {
+          "i": 0,
+          "name": "Caio Ibsen Rodrigues De Almeida",
+          "school": "Princeton",
+          "school_zh": "普林斯顿大学",
+          "inst": "Princeton University"
+        }
+      ]
     }
   ],
   "seen": {
@@ -3473,20 +4932,84 @@
     "openalex:w3106043818": "2026-10-30T06:40:51.877926+00:00",
     "10.1080/07474938.2023.2209007": "2026-10-30T06:40:51.877926+00:00",
     "openalex:w4292800989": "2026-10-30T06:40:51.877926+00:00",
-    "10.1111/mafi.12354": "2026-10-30T06:40:51.877926+00:00"
+    "10.1111/mafi.12354": "2026-10-30T06:40:51.877926+00:00",
+    "doi:10.1016/j.jfineco.2022.01.004": "2026-11-06T07:32:44.626343+00:00",
+    "id:openalex:w4283387379": "2026-11-06T07:32:44.626343+00:00",
+    "t:howmuchshouldwetruststaggereddifferenceindifferencesestimates": "2026-11-06T07:32:44.626343+00:00",
+    "doi:10.3982/ecta18756": "2026-11-06T07:32:44.626343+00:00",
+    "id:openalex:w3046044289": "2026-11-06T07:32:44.626343+00:00",
+    "t:localprojectioninferenceissimplerandmorerobustthanyouthink": "2026-11-06T07:32:44.626343+00:00",
+    "doi:10.2139/ssrn.3523293": "2026-11-06T07:32:44.626343+00:00",
+    "id:openalex:w4384571245": "2026-11-06T07:32:44.626343+00:00",
+    "t:bootstrappinglaplacetransformsofvolatility": "2026-11-06T07:32:44.626343+00:00",
+    "doi:10.1017/s0022109019000097": "2026-11-06T07:32:44.626343+00:00",
+    "id:openalex:w3123808625": "2026-11-06T07:32:44.626343+00:00",
+    "t:goodvolatilitybadvolatilityandthecrosssectionofstockreturns": "2026-11-06T07:32:44.626343+00:00",
+    "doi:10.1093/restud/rdy003": "2026-11-06T07:32:44.626343+00:00",
+    "id:openalex:w2499063677": "2026-11-06T07:32:44.626343+00:00",
+    "t:volumevolatilityandpublicnewsannouncements": "2026-11-06T07:32:44.626343+00:00",
+    "openalex:w4283387379": "2026-11-06T07:32:44.626343+00:00",
+    "10.1016/j.jfineco.2022.01.004": "2026-11-06T07:32:44.626343+00:00",
+    "openalex:w3046044289": "2026-11-06T07:32:44.626343+00:00",
+    "10.3982/ecta18756": "2026-11-06T07:32:44.626343+00:00",
+    "openalex:w4384571245": "2026-11-06T07:32:44.626343+00:00",
+    "10.2139/ssrn.3523293": "2026-11-06T07:32:44.626343+00:00",
+    "openalex:w3123808625": "2026-11-06T07:32:44.626343+00:00",
+    "10.1017/s0022109019000097": "2026-11-06T07:32:44.626343+00:00",
+    "openalex:w2499063677": "2026-11-06T07:32:44.626343+00:00",
+    "10.1093/restud/rdy003": "2026-11-06T07:32:44.626343+00:00",
+    "doi:10.1162/rest_a_01588": "2026-11-13T07:31:11.407340+00:00",
+    "id:openalex:w4409727018": "2026-11-13T07:31:11.407340+00:00",
+    "t:uncertaintyquantificationinsyntheticcontrolswithstaggeredtreatmentadoption": "2026-11-13T07:31:11.407340+00:00",
+    "doi:10.1162/rest_a_01589": "2026-11-13T07:31:11.407340+00:00",
+    "id:openalex:w4409727003": "2026-11-13T07:31:11.407340+00:00",
+    "t:nonparametrictimevaryingivsvarsestimationandinference": "2026-11-13T07:31:11.407340+00:00",
+    "doi:10.1111/jofi.13372": "2026-11-13T07:31:11.407340+00:00",
+    "id:openalex:w4400780171": "2026-11-13T07:31:11.407340+00:00",
+    "doi:10.1111/jofi.13365": "2026-11-13T07:31:11.407340+00:00",
+    "id:openalex:w4400797107": "2026-11-13T07:31:11.407340+00:00",
+    "t:verynoisyoptionpricesandinferenceregardingthevolatilityriskpremium": "2026-11-13T07:31:11.407340+00:00",
+    "doi:10.1017/s0022109023001199": "2026-11-13T07:31:11.407340+00:00",
+    "id:openalex:w4388069793": "2026-11-13T07:31:11.407340+00:00",
+    "t:highfrequencytailriskpremiumandstockreturnpredictability": "2026-11-13T07:31:11.407340+00:00",
+    "openalex:w4409727018": "2026-11-13T07:31:11.407340+00:00",
+    "10.1162/rest_a_01588": "2026-11-13T07:31:11.407340+00:00",
+    "openalex:w4409727003": "2026-11-13T07:31:11.407340+00:00",
+    "10.1162/rest_a_01589": "2026-11-13T07:31:11.407340+00:00",
+    "openalex:w4400780171": "2026-11-13T07:31:11.407340+00:00",
+    "10.1111/jofi.13372": "2026-11-13T07:31:11.407340+00:00",
+    "openalex:w4400797107": "2026-11-13T07:31:11.407340+00:00",
+    "10.1111/jofi.13365": "2026-11-13T07:31:11.407340+00:00",
+    "openalex:w4388069793": "2026-11-13T07:31:11.407340+00:00",
+    "10.1017/s0022109023001199": "2026-11-13T07:31:11.407340+00:00",
+    "doi:10.3982/ecta20720": "2026-11-17T07:49:13.164554+00:00",
+    "id:openalex:w4324122991": "2026-11-17T07:49:13.164554+00:00",
+    "t:syntheticcontrolasonlinelinearregression": "2026-11-17T07:49:13.164554+00:00",
+    "doi:10.1093/rfs/hhaa020": "2026-11-17T07:49:13.164554+00:00",
+    "id:openalex:w3122402351": "2026-11-17T07:49:13.164554+00:00",
+    "t:factorsthatfitthetimeseriesandcrosssectionofstockreturns": "2026-11-17T07:49:13.164554+00:00",
+    "doi:10.1093/rfs/hhac012": "2026-11-17T07:49:13.164554+00:00",
+    "id:openalex:w4213328821": "2026-11-17T07:49:13.164554+00:00",
+    "t:riskpricevariationthemissinghalfofempiricalassetpricing": "2026-11-17T07:49:13.164554+00:00",
+    "doi:10.1017/s002210902610307x": "2026-11-17T07:49:13.164554+00:00",
+    "id:openalex:w4293998610": "2026-11-17T07:49:13.164554+00:00",
+    "t:commonidiosyncraticquantilefactorsandassetprices": "2026-11-17T07:49:13.164554+00:00",
+    "doi:10.1093/rof/rfag014": "2026-11-17T07:49:13.164554+00:00",
+    "id:openalex:w4297910699": "2026-11-17T07:49:13.164554+00:00",
+    "t:tailriskandassetpricesintheshortterm": "2026-11-17T07:49:13.164554+00:00"
   },
-  "weekly_period": "2026-W44",
+  "weekly_period": "2026-W47",
   "stats": {
-    "candidate_paper_count": 923,
+    "candidate_paper_count": 932,
     "new_paper_count": 57,
-    "filtered_low_relevance_count": 377,
+    "filtered_low_relevance_count": 391,
     "venue_count": 19,
-    "lookback_days": 3224,
+    "lookback_days": 3242,
     "from_publication_date": "2018-01-01",
     "window_search_terms": 40,
     "llm_enabled": true,
     "screen_mode": "llm",
-    "screened_paper_count": 923,
+    "screened_paper_count": 932,
     "source_stats": {
       "Quarterly Journal of Economics": {
         "type": "openalex_journal",
@@ -3546,7 +5069,7 @@
       "Review of Finance": {
         "type": "openalex_journal",
         "source_id": "https://openalex.org/S131117787",
-        "fetched": 23
+        "fetched": 32
       },
       "Journal of Financial and Quantitative Analysis": {
         "type": "openalex_journal",
@@ -3585,29 +5108,30 @@
       }
     },
     "collection_mode": "incremental",
-    "high_count": 33,
-    "with_abstract_count": 33,
-    "weekly_period": "2026-W44",
-    "period_new_count": 3,
-    "weekly_new_count": 0,
-    "weekly_new_quota": 0,
+    "high_count": 48,
+    "with_abstract_count": 47,
+    "target_school_paper_count": 11,
+    "weekly_period": "2026-W47",
+    "period_new_count": 5,
+    "weekly_new_count": 5,
+    "weekly_new_quota": 5,
     "weekly_new_total": 10,
-    "kept_previous_count": 33,
-    "display_count": 33,
-    "archive_count": 33,
+    "kept_previous_count": 43,
+    "display_count": 48,
+    "archive_count": 48,
     "dropped_from_display_count": 0,
-    "duplicate_candidate_count": 23,
-    "fresh_candidate_count": 34,
-    "summary_jobs": 0,
-    "summary_succeeded": 0,
+    "duplicate_candidate_count": 33,
+    "fresh_candidate_count": 24,
+    "summary_jobs": 4,
+    "summary_succeeded": 4,
     "summary_failed": 0,
-    "summary_cache_hits": 33,
-    "preprint_checked": 0,
+    "summary_cache_hits": 43,
+    "preprint_checked": 1,
     "preprint_filled": 0,
     "preprint_cache_hits": 0,
     "max_stored_papers": 1200,
     "max_data_bytes": 12582912,
-    "data_bytes": 229263,
+    "data_bytes": 334995,
     "storage_trimmed_count": 0,
     "storage_trimmed_by_level": {
       "high": 0,
@@ -3615,6 +5139,6 @@
       "low": 0,
       "unknown": 0
     },
-    "paper_count": 33
+    "paper_count": 48
   }
 }
