@@ -1,6 +1,6 @@
 {
-  "generated_at": "Tue, 17 Nov 2026 08:11:22 +0000",
-  "generated_at_iso": "2026-11-17T08:11:22.317220+00:00",
+  "generated_at": "Tue, 17 Nov 2026 08:34:24 +0000",
+  "generated_at_iso": "2026-11-17T08:34:24.941563+00:00",
   "config_source": "file",
   "data_kind": "journal",
   "topics": [
@@ -3890,88 +3890,6 @@
       ]
     },
     {
-      "id": "openalex:W4324122991",
-      "title": "Synthetic Control as Online Linear Regression",
-      "authors": [
-        "Jiafeng Chen"
-      ],
-      "summary": "This paper notes a simple connection between synthetic control and online learning. Specifically, we recognize synthetic control as an instance of Follow‐The‐Leader (FTL). Standard results in online convex optimization then imply that, even when outcomes are chosen by an adversary, synthetic control predictions of counterfactual outcomes for the treated unit perform almost as well as an oracle weighted average of control units' outcomes. Synthetic control on differenced data performs almost as well as oracle weighted difference‐in‐differences, potentially making it an attractive choice in practice. We argue that this observation further supports the use of synthetic control estimators in comparative case studies.",
-      "published": "2023-01-01T00:00:00+00:00",
-      "updated": "2023-01-01T00:00:00+00:00",
-      "categories": [
-        "经济学",
-        "Advanced Causal Inference Techniques",
-        "Statistical Methods and Inference"
-      ],
-      "paper_url": "https://doi.org/10.3982/ecta20720",
-      "pdf_url": "https://arxiv.org/pdf/2202.08426",
-      "source": "Econometrica",
-      "source_type": "conference",
-      "venue": "Econometrica",
-      "venue_group": "经济学",
-      "doi": "https://doi.org/10.3982/ecta20720",
-      "conference": {
-        "id": "econometrica",
-        "name": "Econometrica",
-        "year": 2023
-      },
-      "author_institutions": [
-        {
-          "name": "Jiafeng Chen",
-          "insts": [
-            "Harvard University"
-          ]
-        }
-      ],
-      "matches": [
-        {
-          "topic_id": "timeseries_causal",
-          "topic_name": "时间序列与因果识别",
-          "score": 0.9,
-          "level": "high",
-          "reason": "AI 判定：合成控制法理论刻画，正是因果识别方向的核心方法；关键词命中：synthetic control",
-          "keyword_hits": [
-            "synthetic control"
-          ],
-          "mechanical_score": 0.338,
-          "llm_score": 90.0,
-          "llm_source": "cache",
-          "llm_reason": "合成控制是因果识别的核心方法，本文给出其在线学习理论刻画。"
-        }
-      ],
-      "best_match": {
-        "topic_id": "timeseries_causal",
-        "topic_name": "时间序列与因果识别",
-        "score": 0.9,
-        "level": "high",
-        "reason": "$\\text{AI}$ 判定：合成控制法理论刻画，正是因果识别方向的核心方法；关键词命中：synthetic control",
-        "keyword_hits": [
-          "synthetic control"
-        ],
-        "mechanical_score": 0.338,
-        "llm_score": 90.0,
-        "llm_source": "cache",
-        "llm_reason": "合成控制是因果识别的核心方法，本文给出其在线学习理论刻画。"
-      },
-      "first_seen_at": "2026-11-17T07:49:13.164554+00:00",
-      "last_seen_at": "2026-11-17T07:49:13.164554+00:00",
-      "retained_from_previous_run": true,
-      "weekly_period": "2026-W47",
-      "is_new_this_week": true,
-      "chinese_summary": {
-        "problem": "论文要指出合成控制与在线学习之间的一个简单联系，即把合成控制识别为 Follow-The-Leader ($\\text{FTL}$) 的一个实例。",
-        "method": "论文将合成控制识别为 Follow-The-Leader ($\\text{FTL}$) 的一个实例，并借助在线凸优化的标准结果进行分析；分析覆盖结果由对手选择的情形，并考察对差分数据施加合成控制的情形。",
-        "innovation": "论文指出合成控制与在线学习之间的一个简单联系，把合成控制识别为 Follow-The-Leader ($\\text{FTL}$) 的一个实例；借助在线凸优化的标准结果给出合成控制预测的性能保证；并据此主张这一观察进一步支持在比较案例研究中使用合成控制估计量。",
-        "conclusion": "即使结果由对手选择，合成控制对处理单元反事实结果的预测几乎与对照单元结果的 oracle 加权平均一样好；对差分数据施加的合成控制几乎与 oracle 加权双重差分一样好，这可能使其在实践中成为有吸引力的选择。",
-        "abstract_zh": "本文指出合成控制与在线学习之间的一个简单联系。具体而言，我们将合成控制识别为 Follow-The-Leader ($\\text{FTL}$) 的一个实例。在线凸优化的标准结果由此表明，即使结果由对手选择，合成控制对处理单元反事实结果的预测也几乎与对照单元结果的 oracle 加权平均一样好。对差分数据施加的合成控制几乎与 oracle 加权双重差分一样好，这可能使其在实践中成为有吸引力的选择。我们主张，这一观察进一步支持在比较案例研究中使用合成控制估计量。",
-        "evidence": "Standard results in online convex optimization then imply that, even when outcomes are chosen by an adversary, synthetic control predictions of counterfactual outcomes for the treated unit perform almost as well as an oracle weighted average of control units' outcomes.",
-        "why_relevant": "合成控制是因果识别的核心方法，本文给出其在线学习理论刻画。",
-        "v": 4,
-        "model": "",
-        "at": "2026-11-17T07:49:57+00:00"
-      }
-    },
-    {
       "id": "openalex:W3122402351",
       "title": "Factors That Fit the Time Series and Cross-Section of Stock Returns",
       "authors": [
@@ -5125,30 +5043,30 @@
       }
     },
     "collection_mode": "incremental",
-    "high_count": 48,
-    "with_abstract_count": 47,
+    "high_count": 47,
+    "with_abstract_count": 46,
     "target_school_paper_count": 11,
     "weekly_period": "2026-W47",
-    "period_new_count": 5,
+    "period_new_count": 4,
     "weekly_new_count": 0,
     "weekly_new_quota": 0,
     "weekly_new_total": 10,
-    "kept_previous_count": 48,
-    "display_count": 48,
-    "archive_count": 48,
+    "kept_previous_count": 47,
+    "display_count": 47,
+    "archive_count": 47,
     "dropped_from_display_count": 0,
-    "duplicate_candidate_count": 38,
+    "duplicate_candidate_count": 37,
     "fresh_candidate_count": 19,
     "summary_jobs": 0,
     "summary_succeeded": 0,
     "summary_failed": 0,
-    "summary_cache_hits": 47,
+    "summary_cache_hits": 46,
     "preprint_checked": 0,
     "preprint_filled": 0,
     "preprint_cache_hits": 1,
     "max_stored_papers": 1200,
     "max_data_bytes": 12582912,
-    "data_bytes": 335821,
+    "data_bytes": 330425,
     "storage_trimmed_count": 0,
     "storage_trimmed_by_level": {
       "high": 0,
@@ -5156,6 +5074,6 @@
       "low": 0,
       "unknown": 0
     },
-    "paper_count": 48
+    "paper_count": 47
   }
 }

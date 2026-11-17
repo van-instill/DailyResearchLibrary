@@ -40,6 +40,11 @@
       "id": "2609.28678v2",
       "title": "Heterogeneous Policy Effects in Comparative Case Studies with Treated-Unit Microdata",
       "reason": "纯理论（政策效应识别框架，政策≠金融），用户 2026-10-30 确认移除"
+    },
+    {
+      "id": "openalex:W4324122991",
+      "title": "Synthetic Control as Online Linear Regression",
+      "reason": "用户在前端手动删除（2026/11/17）"
     }
   ]
 }
