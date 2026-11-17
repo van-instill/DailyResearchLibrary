@@ -292,11 +292,17 @@ curl "https://api.openalex.org/sources?filter=issn:0022-1082&select=id,display_n
 
 ## 删掉不想看的论文
 
-卡片右下角有「删除」按钮，点了立刻从列表消失。要让它在**仓库里也永久消失**，点顶栏的「已删除 N」→「同步到仓库」：
+卡片右下角有「删除」按钮，点了立刻从列表消失。要让它在**仓库里也永久消失**，点顶栏的「已删除 N」→「同步到仓库」，会弹出一个三步引导：
 
-1. 网页会打开一个标题为 **`Excluded Papers`** 的 GitHub 新建 issue，正文里是一段 JSON
-2. 你按下提交，Actions 检测到这条 issue，用 `scripts/sync_exclusions.py` 把里面的 id/标题合并进 `config/exclude.json`，顺手回一句评论并关掉 issue
-3. 同一次运行会重新生成数据，这几篇就被剔掉了；以后每周的候选池里也不会再出现
+1. 点「打开 GitHub 提交页」——新标签页里是一条标题为 **`Excluded Papers`** 的新建 issue，正文里是一段 JSON，**内容不用改**
+2. 在页面右下角按绿色 **Create**（手机上在最底部）
+3. 回到本页点「我已提交」，这条记录会被标成「已提交同步」
+
+之后 Actions 检测到这条 issue，用 `scripts/sync_exclusions.py` 把里面的 id/标题合并进 `config/exclude.json`，顺手回一句评论并关掉 issue；同一次运行会重新生成数据，这几篇就被剔掉了，以后每周的候选池里也不会再出现。
+
+> 为什么不能点一下就完事：网页是 GitHub Pages 上的纯静态文件，没有服务器，浏览器手里的页面没有写仓库的权限。issue 只是一个「给机器人递纸条」的通道，所以那一次 GitHub 提交绕不开。
+
+**懒得每次点 GitHub 的话**，在同一个引导弹窗里展开「嫌麻烦？配一次令牌」：去 [GitHub 令牌页](https://github.com/settings/personal-access-tokens/new) 建一个 fine-grained token，Repository access 只选本仓库，Permissions 只把 **Issues** 设为 Read and write，其他全留 No access。粘贴保存后，以后点「同步到仓库」就是真的点一下就发（直接走 GitHub API 建 issue），令牌只存在本机浏览器的 localStorage 里。
 
 所以删除是**两步**：本地立刻生效（存浏览器 localStorage），同步一次就永久生效。不同步的话，换设备或清缓存后会重新出现。
 

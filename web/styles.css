@@ -414,6 +414,11 @@ select:focus,
   outline-offset: 2px;
 }
 
+.paper-link:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
 .content {
   min-width: 0;
 }
@@ -1059,6 +1064,115 @@ select:focus,
 .sync-link {
   border-color: var(--teal);
   color: var(--teal);
+}
+
+.deleted-item small.is-synced {
+  color: var(--teal);
+}
+
+/* 同步引导：三步说明 + 可选的一键令牌 */
+.sync-guide {
+  z-index: 70;
+}
+
+.sync-card {
+  width: min(600px, 100%);
+  max-height: min(86vh, 780px);
+  overflow: auto;
+}
+
+.sync-steps {
+  margin: 0 0 4px;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 10px;
+}
+
+.sync-steps li {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--surface-2);
+  padding: 10px 12px;
+}
+
+.sync-steps b {
+  display: block;
+  font-size: 13px;
+  margin-bottom: 3px;
+}
+
+.sync-steps span {
+  display: block;
+  color: var(--muted);
+  font-size: 12.5px;
+  line-height: 1.6;
+}
+
+.sync-steps code {
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  background: var(--control-bg);
+  padding: 1px 5px;
+  font-size: 12px;
+}
+
+.sync-note {
+  margin: 12px 0 0;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface-2);
+  padding: 9px 11px;
+  font-size: 12.5px;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+.sync-note[data-tone="ok"] {
+  border-color: rgba(45, 212, 191, 0.45);
+  color: var(--teal);
+}
+
+.sync-note[data-tone="error"] {
+  border-color: rgba(251, 113, 133, 0.5);
+  color: var(--coral);
+}
+
+.sync-token {
+  margin-top: 14px;
+  border-top: 1px dashed var(--line);
+  padding-top: 12px;
+}
+
+.sync-token summary {
+  cursor: pointer;
+  font-size: 12.5px;
+  color: var(--muted);
+}
+
+.sync-token summary:hover {
+  color: var(--text);
+}
+
+.sync-token .deleted-hint a {
+  color: var(--teal);
+}
+
+.sync-token-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.sync-token-row input {
+  flex: 1 1 auto;
+  min-width: 0;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--control-bg);
+  color: var(--text);
+  padding: 7px 10px;
+  font-size: 12.5px;
 }
 
 .toast {

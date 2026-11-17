@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>金融计量论文周报 · Paper Radar</title>
-    <link rel="stylesheet" href="./styles.css?v=20261117-delete" />
+    <link rel="stylesheet" href="./styles.css?v=20261117-sync" />
     <link rel="stylesheet" href="./vendor/katex/katex.min.css" />
   </head>
   <body>
@@ -186,14 +186,61 @@
           <button id="deletedClose" class="icon-link" type="button" aria-label="关闭">×</button>
         </header>
         <p class="deleted-hint">
-          删除先在本机生效，这篇立刻从列表里消失。点「同步到仓库」会打开一个填好内容的 GitHub 页面，
-          你按下提交后，机器人会自动把它写进永久排除清单——以后每周筛选都不会再收进来。
+          删除先在本机生效，这篇立刻从列表里消失。点「同步到仓库」会一步步带你去 GitHub 提交一条填好的 issue，
+          按下绿色 Create 后机器人就把它写进永久排除清单——以后每周筛选都不会再收进来。
         </p>
         <ul id="deletedList" class="deleted-list"></ul>
         <footer class="deleted-foot">
           <button id="deletedSync" class="paper-link sync-link" type="button">同步到仓库</button>
           <button id="deletedClear" class="paper-link" type="button">全部恢复</button>
         </footer>
+      </div>
+    </div>
+
+    <div id="syncGuide" class="deleted-panel sync-guide" hidden>
+      <div class="deleted-card sync-card" role="dialog" aria-modal="true" aria-labelledby="syncGuideTitle">
+        <header class="deleted-head">
+          <h2 id="syncGuideTitle">同步到仓库</h2>
+          <button id="syncGuideClose" class="icon-link" type="button" aria-label="关闭">×</button>
+        </header>
+        <p class="deleted-hint">
+          这个网站是纯静态的，没有服务器帮忙写文件，所以「写进仓库」这一步要借 GitHub 的一条 issue 当传话筒。
+          跳过去是正常的，三步做完大概一分钟自动生效。
+        </p>
+        <ol class="sync-steps">
+          <li>
+            <b>① 打开 GitHub 提交页</b>
+            <span>点下面的按钮，新标签里会有一条已经填好内容的 issue，标题叫 <code>Excluded Papers</code>。</span>
+          </li>
+          <li>
+            <b>② 点绿色的「Create」</b>
+            <span>在页面右下角（手机上在最底部），正文一个字都不用改，直接创建。</span>
+          </li>
+          <li>
+            <b>③ 回来点「我已提交」</b>
+            <span>机器人会把这几篇写进永久排除清单，以后每周筛选都不再收。</span>
+          </li>
+        </ol>
+        <p id="syncNote" class="sync-note" hidden></p>
+        <footer class="deleted-foot">
+          <button id="syncGuideOpen" class="paper-link sync-link" type="button">打开 GitHub 提交页</button>
+          <button id="syncGuideDone" class="paper-link" type="button">我已提交</button>
+        </footer>
+        <details class="sync-token">
+          <summary>嫌麻烦？配一次令牌，以后真的点一下就同步</summary>
+          <p class="deleted-hint">
+            去
+            <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">GitHub 令牌页</a>
+            新建 fine-grained token：Repository access 选 Only select repositories → 本仓库；
+            Permissions 里只把 <b>Issues</b> 改成 Read and write，其余全部留 No access。
+            生成后粘到下面，只存在你自己这台电脑的浏览器里，不会上传到任何地方。
+          </p>
+          <div class="sync-token-row">
+            <input id="syncTokenInput" type="password" placeholder="github_pat_..." autocomplete="off" spellcheck="false" />
+            <button id="syncTokenSave" class="paper-link" type="button">保存并同步</button>
+          </div>
+          <p id="syncTokenNote" class="deleted-hint" hidden></p>
+        </details>
       </div>
     </div>
     <div id="toast" class="toast" hidden>
@@ -203,6 +250,6 @@
 
     <script defer src="./vendor/katex/katex.min.js"></script>
     <script defer src="./vendor/katex/auto-render.min.js"></script>
-    <script defer src="./app.js?v=20261117-delete"></script>
+    <script defer src="./app.js?v=20261117-sync"></script>
   </body>
 </html>

@@ -6,6 +6,10 @@ const THEMES = new Set(["dark", "light", "eye"]);
 // 以后每周筛选都不会再收这篇。
 const DELETED_STORAGE_KEY = "paper-radar-deleted";
 const DELETED_ISSUE_TITLE = "Excluded Papers";
+// 进阶用：填过一次 fine-grained token（只有 Issues 写权限），之后就能在页面里
+// 直接调 GitHub API 建 issue，不用每次跳到网页表单手动点 Create。
+// 只存在本机 localStorage，除了 api.github.com 不会发给任何人。
+const GH_TOKEN_STORAGE_KEY = "paper-radar-gh-token";
 
 const state = {
   datasets: {
@@ -58,6 +62,14 @@ const nodes = {
   deletedList: document.querySelector("#deletedList"),
   deletedSync: document.querySelector("#deletedSync"),
   deletedClear: document.querySelector("#deletedClear"),
+  syncGuide: document.querySelector("#syncGuide"),
+  syncGuideClose: document.querySelector("#syncGuideClose"),
+  syncGuideOpen: document.querySelector("#syncGuideOpen"),
+  syncGuideDone: document.querySelector("#syncGuideDone"),
+  syncNote: document.querySelector("#syncNote"),
+  syncTokenInput: document.querySelector("#syncTokenInput"),
+  syncTokenSave: document.querySelector("#syncTokenSave"),
+  syncTokenNote: document.querySelector("#syncTokenNote"),
   toast: document.querySelector("#toast"),
   toastText: document.querySelector("#toastText"),
   toastAction: document.querySelector("#toastAction"),
@@ -769,7 +781,10 @@ function renderDeletedPanel() {
     title.textContent = item.title || item.id;
     const meta = document.createElement("small");
     const when = item.at ? new Date(item.at).toLocaleDateString("zh-CN") : "";
-    meta.textContent = [item.venue, when && `删除于 ${when}`].filter(Boolean).join(" · ");
+    meta.textContent = [item.venue, when && `删除于 ${when}`, item.synced ? "已提交同步" : ""]
+      .filter(Boolean)
+      .join(" · ");
+    if (item.synced) meta.classList.add("is-synced");
     info.append(title, meta);
 
     const restore = document.createElement("button");
@@ -796,33 +811,145 @@ function closeDeletedPanel() {
   if (nodes.deletedPanel) nodes.deletedPanel.hidden = true;
 }
 
-// 生成一个预填好 JSON 的 GitHub 新建 issue 页面。Actions 会读这条 issue 的正文，
-// 把里面的 id/标题合并进 config/exclude.json，下次选稿就不会再收。
-function syncDeletedToRepo() {
+// 仓库里那条「Excluded Papers」issue 就是传话筒：Actions 读它的正文，把 id/标题
+// 合并进 config/exclude.json，下次选稿就不会再收。
+function excludedPayload() {
   const list = readDeleted();
-  if (!list.length) return;
-  const base = repoBaseUrl();
-  if (!base) {
-    showToast("本地打开时无法同步，请在线上页面操作");
-    return;
-  }
-  const payload = {
+  return {
     papers: list.map((item) => ({
       id: String(item.id),
       title: item.title || "",
       reason: `用户在前端手动删除（${item.at ? new Date(item.at).toLocaleDateString("zh-CN") : "近期"}）`,
     })),
   };
-  const body = [
+}
+
+function excludedIssueBody() {
+  return [
     "<!-- 机器人会解析下面这段 JSON 并写入 config/exclude.json，写完自动关闭本 issue。 -->",
     "",
     "```json",
-    JSON.stringify(payload, null, 2),
+    JSON.stringify(excludedPayload(), null, 2),
     "```",
   ].join("\n");
-  const url = `${base}/issues/new?title=${encodeURIComponent(DELETED_ISSUE_TITLE)}&body=${encodeURIComponent(body)}`;
-  window.open(url, "_blank", "noopener");
-  showToast("已打开 GitHub 新建页，点「Submit new issue」后约 1 分钟生效");
+}
+
+function excludedIssueUrl() {
+  const base = repoBaseUrl();
+  if (!base) return "";
+  const query = [
+    `title=${encodeURIComponent(DELETED_ISSUE_TITLE)}`,
+    `body=${encodeURIComponent(excludedIssueBody())}`,
+  ].join("&");
+  return `${base}/issues/new?${query}`;
+}
+
+function readToken() {
+  try {
+    return localStorage.getItem(GH_TOKEN_STORAGE_KEY) || "";
+  } catch {
+    return "";
+  }
+}
+
+function writeToken(token) {
+  try {
+    if (token) localStorage.setItem(GH_TOKEN_STORAGE_KEY, token);
+    else localStorage.removeItem(GH_TOKEN_STORAGE_KEY);
+  } catch {
+    // 隐私模式写不进去，忽略
+  }
+}
+
+function setSyncNote(target, message, tone = "") {
+  if (!target) return;
+  target.hidden = !message;
+  target.textContent = message || "";
+  target.dataset.tone = message ? tone : "";
+}
+
+function openSyncGuide(note = "") {
+  if (nodes.syncNote) setSyncNote(nodes.syncNote, note);
+  const has = readDeleted().length > 0;
+  if (nodes.syncGuideOpen) nodes.syncGuideOpen.disabled = !has;
+  if (nodes.syncGuideDone) nodes.syncGuideDone.disabled = !has;
+  if (nodes.syncGuide) nodes.syncGuide.hidden = false;
+  if (nodes.syncTokenInput && !nodes.syncTokenInput.value) nodes.syncTokenInput.value = readToken();
+}
+
+function closeSyncGuide() {
+  if (nodes.syncGuide) nodes.syncGuide.hidden = true;
+}
+
+// 标记为「已提交」：本机记住这批已经同步过，面板里会显示出来，
+// 等下一次流水线跑完、这几篇从数据里消失后，记录会被自动清掉。
+function markSynced() {
+  const at = new Date().toISOString();
+  writeDeleted(readDeleted().map((item) => ({ ...item, synced: true, syncedAt: at })));
+  renderDeletedPanel();
+}
+
+// 「同步到仓库」入口：没配令牌就走引导（三步，手动点 Create）；
+// 配过令牌就直接调 API，页面上一步到位。
+function syncDeletedToRepo() {
+  const list = readDeleted();
+  if (!list.length) return;
+  if (!repoBaseUrl()) {
+    showToast("本地打开时无法同步，请到线上页面操作");
+    return;
+  }
+  if (readToken()) {
+    syncViaToken();
+    return;
+  }
+  openSyncGuide();
+}
+
+async function syncViaToken() {
+  const list = readDeleted();
+  if (!list.length) return;
+  const token = readToken();
+  const base = repoBaseUrl();
+  if (!base) {
+    showToast("本地打开时无法同步，请到线上页面操作");
+    return;
+  }
+  const repo = base.replace(/^https:\/\/github\.com\//, "");
+  setSyncNote(nodes.syncNote, "正在提交到 GitHub…");
+  if (nodes.syncGuideDone) nodes.syncGuideDone.disabled = true;
+  if (nodes.syncTokenSave) nodes.syncTokenSave.disabled = true;
+  try {
+    const response = await fetch(`https://api.github.com/repos/${repo}/issues`, {
+      method: "POST",
+      headers: {
+        Accept: "application/vnd.github+json",
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+        "X-GitHub-Api-Version": "2022-11-28",
+      },
+      body: JSON.stringify({ title: DELETED_ISSUE_TITLE, body: excludedIssueBody() }),
+    });
+    if (!response.ok) {
+      const detail = await response.json().catch(() => ({}));
+      throw new Error(detail.message || `HTTP ${response.status}`);
+    }
+    markSynced();
+    closeSyncGuide();
+    closeDeletedPanel();
+    showToast(`已同步 ${list.length} 篇，约 1 分钟后这个页面会自动更新`);
+  } catch (error) {
+    const raw = String(error?.message || error);
+    const hint = /bad credentials|401|resource not accessible/i.test(raw)
+      ? `令牌没有权限或已过期（${raw}），重新生成一个再试`
+      : /Failed to fetch|NetworkError/i.test(raw)
+        ? "网络请求被拦住了，换用下面的「打开 GitHub 提交页」手动提交"
+        : raw;
+    setSyncNote(nodes.syncNote, `一键同步失败：${hint}`, "error");
+    showToast("一键同步失败，弹窗里有原因");
+  } finally {
+    if (nodes.syncGuideDone) nodes.syncGuideDone.disabled = false;
+    if (nodes.syncTokenSave) nodes.syncTokenSave.disabled = false;
+  }
 }
 
 function bindEvents() {
@@ -930,9 +1057,48 @@ function bindEvents() {
     if (event.target === nodes.deletedPanel) closeDeletedPanel();
   });
   document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape") closeDeletedPanel();
+    if (event.key !== "Escape") return;
+    if (nodes.syncGuide && !nodes.syncGuide.hidden) {
+      closeSyncGuide();
+      return;
+    }
+    closeDeletedPanel();
   });
   nodes.deletedSync?.addEventListener("click", syncDeletedToRepo);
+  nodes.syncGuideClose?.addEventListener("click", closeSyncGuide);
+  nodes.syncGuide?.addEventListener("click", (event) => {
+    if (event.target === nodes.syncGuide) closeSyncGuide();
+  });
+  nodes.syncGuideOpen?.addEventListener("click", () => {
+    const url = excludedIssueUrl();
+    if (!url) {
+      showToast("本地打开时无法同步，请到线上页面操作");
+      return;
+    }
+    const opened = window.open(url, "_blank", "noopener");
+    if (opened) {
+      setSyncNote(nodes.syncNote, "已在新标签打开。点页面底部绿色的 Create，再回来点「我已提交」。", "ok");
+    } else {
+      setSyncNote(nodes.syncNote, "浏览器把新标签拦了。允许本站弹出窗口后再点一次。", "error");
+    }
+  });
+  nodes.syncGuideDone?.addEventListener("click", () => {
+    const count = readDeleted().length;
+    if (!count) return;
+    markSynced();
+    closeSyncGuide();
+    showToast(`已记录提交（${count} 篇），约 1 分钟后生效`);
+  });
+  nodes.syncTokenSave?.addEventListener("click", () => {
+    const token = String(nodes.syncTokenInput?.value || "").trim();
+    if (!token) {
+      setSyncNote(nodes.syncTokenNote, "先把令牌粘贴进来。", "error");
+      return;
+    }
+    writeToken(token);
+    setSyncNote(nodes.syncTokenNote, "");
+    syncViaToken();
+  });
   nodes.deletedClear?.addEventListener("click", () => {
     const count = readDeleted().length;
     if (!count) return;
