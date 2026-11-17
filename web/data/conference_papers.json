@@ -1,6 +1,6 @@
 {
-  "generated_at": "Tue, 17 Nov 2026 07:49:13 +0000",
-  "generated_at_iso": "2026-11-17T07:49:13.164554+00:00",
+  "generated_at": "Tue, 17 Nov 2026 07:53:56 +0000",
+  "generated_at_iso": "2026-11-17T07:53:56.709641+00:00",
   "config_source": "file",
   "data_kind": "journal",
   "topics": [
@@ -3955,7 +3955,7 @@
       },
       "first_seen_at": "2026-11-17T07:49:13.164554+00:00",
       "last_seen_at": "2026-11-17T07:49:13.164554+00:00",
-      "retained_from_previous_run": false,
+      "retained_from_previous_run": true,
       "weekly_period": "2026-W47",
       "is_new_this_week": true,
       "chinese_summary": {
@@ -3966,7 +3966,9 @@
         "abstract_zh": "本文指出合成控制与在线学习之间的一个简单联系。具体而言，我们将合成控制识别为 Follow-The-Leader ($\\text{FTL}$) 的一个实例。在线凸优化的标准结果由此表明，即使结果由对手选择，合成控制对处理单元反事实结果的预测也几乎与对照单元结果的 oracle 加权平均一样好。对差分数据施加的合成控制几乎与 oracle 加权双重差分一样好，这可能使其在实践中成为有吸引力的选择。我们主张，这一观察进一步支持在比较案例研究中使用合成控制估计量。",
         "evidence": "Standard results in online convex optimization then imply that, even when outcomes are chosen by an adversary, synthetic control predictions of counterfactual outcomes for the treated unit perform almost as well as an oracle weighted average of control units' outcomes.",
         "why_relevant": "合成控制是因果识别的核心方法，本文给出其在线学习理论刻画。",
-        "v": 4
+        "v": 4,
+        "model": "",
+        "at": "2026-11-17T07:49:57+00:00"
       }
     },
     {
@@ -4045,7 +4047,7 @@
       },
       "first_seen_at": "2026-11-17T07:49:13.164554+00:00",
       "last_seen_at": "2026-11-17T07:49:13.164554+00:00",
-      "retained_from_previous_run": false,
+      "retained_from_previous_run": true,
       "weekly_period": "2026-W47",
       "is_new_this_week": true,
       "chinese_summary": {
@@ -4056,7 +4058,9 @@
         "abstract_zh": "我们提出一种新方法，用于估计同时拟合期望收益的时间序列和横截面的潜在资产定价因子。我们的估计器通过加入对期望收益定价误差的惩罚来推广主成分分析（$\\text{PCA}$）。我们的方法找到$\\text{PCA}$无法检测到的具有高夏普比率的弱因子。我们发现五个具有经济含义的因子，它们能很好地解释特征排序组合收益的横截面和时间序列。我们的因子的样本外最大夏普比率是$\\text{PCA}$的两倍，且定价误差显著更小。我们的因子意味着大量特征信息是冗余的。作者提供了互联网附录，可在牛津大学出版社网站最终发表论文链接旁获取。",
         "evidence": "The out-of-sample maximum Sharpe ratio of our factors is twice as large as with PCA with substantially smaller pricing errors.",
         "why_relevant": "直接研究因子模型与横截面收益，提出估计潜在定价因子的新方法。",
-        "v": 4
+        "v": 4,
+        "model": "",
+        "at": "2026-11-17T07:49:57+00:00"
       },
       "author_schools": [
         {
@@ -4146,7 +4150,7 @@
       },
       "first_seen_at": "2026-11-17T07:49:13.164554+00:00",
       "last_seen_at": "2026-11-17T07:49:13.164554+00:00",
-      "retained_from_previous_run": false,
+      "retained_from_previous_run": true,
       "weekly_period": "2026-W47",
       "is_new_this_week": true,
       "chinese_summary": {
@@ -4531,7 +4535,7 @@
       },
       "first_seen_at": "2026-11-17T07:49:13.164554+00:00",
       "last_seen_at": "2026-11-17T07:49:13.164554+00:00",
-      "retained_from_previous_run": false,
+      "retained_from_previous_run": true,
       "weekly_period": "2026-W47",
       "is_new_this_week": true,
       "chinese_summary": {
@@ -4542,7 +4546,9 @@
         "abstract_zh": "我们考察企业层面特质收益分布的尾部是否由共同冲击驱动。我们使用分位数因子分析提取这类具有非对称定价效应的共同特质分位数因子，并发现低尾因子创新的显著溢价：高暴露股票每年比低暴露股票高出约 $7\\%$–$8\\%$。即使控制标准因子、特质波动率和尾部风险度量，这一溢价仍然显著。当中介资本较弱且市场流动性较低时，下行因子增强，且相关风险上升可预测更高的总体市场超额收益。",
         "evidence": "We use quantile factor analysis to extract such common idiosyncratic quantile factors with asymmetric pricing effects, and we find a significant premium for innovations to the lower-tail factor: high-exposure stocks outperform low-exposure stocks by approximately 7%–8% per year.",
         "why_relevant": "直接涉及因子提取与横截面收益异象，属资产定价因子实证。",
-        "v": 4
+        "v": 4,
+        "model": "",
+        "at": "2026-11-17T07:49:59+00:00"
       }
     },
     {
@@ -4631,7 +4637,7 @@
       },
       "first_seen_at": "2026-11-17T07:49:13.164554+00:00",
       "last_seen_at": "2026-11-17T07:49:13.164554+00:00",
-      "retained_from_previous_run": false,
+      "retained_from_previous_run": true,
       "weekly_period": "2026-W47",
       "is_new_this_week": true,
       "chinese_summary": {
@@ -4642,7 +4648,9 @@
         "abstract_zh": "我们将高频股票收益与风险中性化相结合，以提取投资者在横截面上感知的尾部风险的每日共同成分。我们的尾部风险测度在短期显著预测股权溢价和方差风险溢价。此外，通过按股票近期对尾部风险的暴露进行排序构建的多空组合，相对于标准因子模型产生异常收益。通过风险中性化纳入投资者偏好对我们的发现至关重要：物理尾部风险的预测能力较弱，且通常被其风险中性对应物所涵盖。",
         "evidence": "Our tail risk measure significantly predicts the equity premium and variance risk premium at short horizons.",
         "why_relevant": "论文核心是尾部风险测度与定价，直接匹配风险测度与尾部风险研究方向。",
-        "v": 4
+        "v": 4,
+        "model": "",
+        "at": "2026-11-17T07:50:00+00:00"
       },
       "author_schools": [
         {
@@ -4996,7 +5004,16 @@
     "t:commonidiosyncraticquantilefactorsandassetprices": "2026-11-17T07:49:13.164554+00:00",
     "doi:10.1093/rof/rfag014": "2026-11-17T07:49:13.164554+00:00",
     "id:openalex:w4297910699": "2026-11-17T07:49:13.164554+00:00",
-    "t:tailriskandassetpricesintheshortterm": "2026-11-17T07:49:13.164554+00:00"
+    "t:tailriskandassetpricesintheshortterm": "2026-11-17T07:49:13.164554+00:00",
+    "openalex:w4324122991": "2026-11-17T07:49:13.164554+00:00",
+    "10.3982/ecta20720": "2026-11-17T07:49:13.164554+00:00",
+    "openalex:w3122402351": "2026-11-17T07:49:13.164554+00:00",
+    "10.1093/rfs/hhaa020": "2026-11-17T07:49:13.164554+00:00",
+    "openalex:w4213328821": "2026-11-17T07:49:13.164554+00:00",
+    "10.1093/rfs/hhac012": "2026-11-17T07:49:13.164554+00:00",
+    "10.1017/s002210902610307x": "2026-11-17T07:49:13.164554+00:00",
+    "openalex:w4297910699": "2026-11-17T07:49:13.164554+00:00",
+    "10.1093/rof/rfag014": "2026-11-17T07:49:13.164554+00:00"
   },
   "weekly_period": "2026-W47",
   "stats": {
@@ -5113,25 +5130,25 @@
     "target_school_paper_count": 11,
     "weekly_period": "2026-W47",
     "period_new_count": 5,
-    "weekly_new_count": 5,
-    "weekly_new_quota": 5,
+    "weekly_new_count": 0,
+    "weekly_new_quota": 0,
     "weekly_new_total": 10,
-    "kept_previous_count": 43,
+    "kept_previous_count": 48,
     "display_count": 48,
     "archive_count": 48,
     "dropped_from_display_count": 0,
-    "duplicate_candidate_count": 33,
-    "fresh_candidate_count": 24,
-    "summary_jobs": 4,
-    "summary_succeeded": 4,
+    "duplicate_candidate_count": 38,
+    "fresh_candidate_count": 19,
+    "summary_jobs": 0,
+    "summary_succeeded": 0,
     "summary_failed": 0,
-    "summary_cache_hits": 43,
-    "preprint_checked": 1,
+    "summary_cache_hits": 47,
+    "preprint_checked": 0,
     "preprint_filled": 0,
-    "preprint_cache_hits": 0,
+    "preprint_cache_hits": 1,
     "max_stored_papers": 1200,
     "max_data_bytes": 12582912,
-    "data_bytes": 334995,
+    "data_bytes": 335821,
     "storage_trimmed_count": 0,
     "storage_trimmed_by_level": {
       "high": 0,
