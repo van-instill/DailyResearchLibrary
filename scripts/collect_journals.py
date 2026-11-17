@@ -43,7 +43,14 @@ from collect_papers import (  # noqa: E402
     trim_papers_for_storage,
     write_json,
 )
-from weekly_select import load_seen, select_weekly, stored_period, window_start  # noqa: E402
+from weekly_select import (  # noqa: E402
+    load_excluded_keys,
+    load_seen,
+    select_weekly,
+    stored_period,
+    window_start,
+)
+from affiliations import enrich_papers  # noqa: E402
 
 OPENALEX_SOURCES_URL = "https://api.openalex.org/sources"
 OPENALEX_WORKS_URL = "https://api.openalex.org/works"
@@ -218,10 +225,20 @@ def paper_from_work(work: dict[str, Any], venue: dict[str, Any]) -> dict[str, An
     doi = str(work.get("doi") or "")
 
     authors = []
+    author_institutions = []
     for authorship in work.get("authorships") or []:
         name = normalize_space(str(((authorship or {}).get("author") or {}).get("display_name") or ""))
-        if name:
-            authors.append(name)
+        if not name:
+            continue
+        authors.append(name)
+        # 一作/二作的单位最有用（找导师就是看这个），最多留三位控制体积
+        if len(author_institutions) < 3:
+            institutions: list[str] = []
+            for institution in (authorship or {}).get("institutions") or []:
+                label = normalize_space(str((institution or {}).get("display_name") or ""))
+                if label and label not in institutions:
+                    institutions.append(label)
+            author_institutions.append({"name": name, "insts": institutions})
 
     primary = work.get("primary_location") or {}
     source_info = primary.get("source") or {}
@@ -246,7 +263,7 @@ def paper_from_work(work: dict[str, Any], venue: dict[str, Any]) -> dict[str, An
             pdf_url = str(candidate)
             break
 
-    return {
+    paper = {
         "id": f"openalex:{short_id}" if short_id else paper_url,
         "title": title,
         "authors": authors[:20],
@@ -267,6 +284,9 @@ def paper_from_work(work: dict[str, Any], venue: dict[str, Any]) -> dict[str, An
             "year": work_year(work.get("publication_date")),
         },
     }
+    if any(item["insts"] for item in author_institutions):
+        paper["author_institutions"] = author_institutions
+    return paper
 
 
 def fetch_venue_works(
@@ -937,6 +957,7 @@ def collect(
         seen=load_seen(existing),
         now=now,
         last_period=stored_period(existing),
+        excluded_keys=load_excluded_keys(),
     )
     merged = sort_papers(merged)
     # 先给没摘要的论文找 arXiv 预印本，再生成六段内容，否则这些论文只能出占位文案
@@ -948,6 +969,17 @@ def collect(
     for paper in merged:
         if not is_real_summary(paper.get("chinese_summary")):
             paper["chinese_summary"] = journal_fallback_summary(paper)
+
+    # 标出一作/二作来自目标院校的论文（找导师用）。顶刊的 authorships 已带 institutions，
+    # 这里基本是纯本地匹配，不会额外发请求。
+    school_stats = enrich_papers(
+        merged,
+        mailto=os.getenv("CONTACT_EMAIL") or os.getenv("OPENALEX_EMAIL") or "",
+        cache_path=os.getenv("AFFILIATION_CACHE_PATH", ".paper-cache/affiliations.json"),
+        delay=float(os.getenv("AFFILIATION_DELAY_SECONDS", "0.2")),
+        max_lookups=int(os.getenv("AFFILIATION_MAX_LOOKUPS", "300")),
+        logger=print,
+    )
 
     stats = {
         "candidate_paper_count": raw_count,
@@ -964,6 +996,7 @@ def collect(
         "collection_mode": "incremental",
         "high_count": sum(1 for paper in merged if str((paper.get("best_match") or {}).get("level")) == "high"),
         "with_abstract_count": sum(1 for paper in merged if has_meaningful_summary(paper)),
+        "target_school_paper_count": school_stats.get("matched", 0),
         **selection_stats,
         **summary_stats,
         **preprint_stats,

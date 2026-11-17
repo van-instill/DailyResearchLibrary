@@ -1,0 +1,82 @@
+{
+  "comment": "目标院校清单：用于判断一作/二作是否来自目标院校（申请找导师）。aliases 是对 OpenAlex institutions.display_name 的匹配词，按「整词」匹配，避免 Smithsonian 命中 mit 这类误判。aliases 里的短写（MIT/NYU/CMU）仅在机构名里单独成词时才算命中。",
+  "schools": [
+    {
+      "key": "princeton",
+      "en": "Princeton",
+      "zh": "普林斯顿大学",
+      "focus": "ORFE、Economics",
+      "aliases": ["Princeton University"]
+    },
+    {
+      "key": "mit",
+      "en": "MIT",
+      "zh": "麻省理工学院",
+      "focus": "OR、Statistics、Finance 相关",
+      "aliases": ["Massachusetts Institute of Technology", "MIT"]
+    },
+    {
+      "key": "stanford",
+      "en": "Stanford",
+      "zh": "斯坦福大学",
+      "focus": "Statistics、MS&E、Finance",
+      "aliases": ["Stanford University"]
+    },
+    {
+      "key": "chicago",
+      "en": "Chicago",
+      "zh": "芝加哥大学",
+      "focus": "Booth Econometrics & Statistics、Finance",
+      "aliases": ["University of Chicago", "Chicago Booth School of Business"]
+    },
+    {
+      "key": "nyu",
+      "en": "NYU",
+      "zh": "纽约大学",
+      "focus": "Stern、Statistics、Mathematics",
+      "aliases": ["New York University", "NYU"]
+    },
+    {
+      "key": "columbia",
+      "en": "Columbia",
+      "zh": "哥伦比亚大学",
+      "focus": "IEOR、Statistics、Economics",
+      "aliases": ["Columbia University"]
+    },
+    {
+      "key": "cornell",
+      "en": "Cornell",
+      "zh": "康奈尔大学",
+      "focus": "ORIE、Economics",
+      "aliases": ["Cornell University"]
+    },
+    {
+      "key": "berkeley",
+      "en": "UC Berkeley",
+      "zh": "加州大学伯克利分校",
+      "focus": "IEOR、Statistics",
+      "aliases": ["University of California, Berkeley", "University of California Berkeley", "UC Berkeley"]
+    },
+    {
+      "key": "cmu",
+      "en": "CMU",
+      "zh": "卡内基梅隆大学",
+      "focus": "Statistics & Data Science、OR",
+      "aliases": ["Carnegie Mellon University", "Carnegie Mellon"]
+    },
+    {
+      "key": "northwestern",
+      "en": "Northwestern",
+      "zh": "西北大学",
+      "focus": "Kellogg Finance",
+      "aliases": ["Northwestern University"]
+    },
+    {
+      "key": "duke",
+      "en": "Duke",
+      "zh": "杜克大学",
+      "focus": "Economics、Statistics",
+      "aliases": ["Duke University"]
+    }
+  ]
+}

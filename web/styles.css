@@ -373,7 +373,9 @@ a {
 
 .filters {
   display: grid;
-  grid-template-columns: minmax(130px, 0.7fr) minmax(160px, 1fr) minmax(120px, 0.6fr) minmax(220px, 1.4fr);
+  grid-template-columns:
+    minmax(130px, 0.7fr) minmax(160px, 1fr) minmax(120px, 0.6fr)
+    minmax(220px, 1.4fr) minmax(120px, 0.7fr);
   gap: 10px;
 }
 
@@ -855,4 +857,250 @@ select:focus,
 
 .load-more[hidden] {
   display: none;
+}
+
+/* ── 目标院校高亮 ──────────────────────────────────────────────
+   一作/二作来自目标院校时，名字加粗 + 后面跟一枚学校标签，
+   扫一眼就知道哪篇值得去联系导师。 */
+.target-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  min-height: 22px;
+  border: 1px solid var(--gold);
+  border-radius: 999px;
+  background: var(--tag-bg);
+  color: var(--tag-text);
+  padding: 2px 9px;
+  font-size: 12px;
+  font-weight: 750;
+}
+
+.target-badge[hidden] {
+  display: none;
+}
+
+.author-highlight {
+  color: var(--text);
+  font-weight: 800;
+}
+
+.school-tag {
+  display: inline-block;
+  margin: 0 2px 0 3px;
+  border: 1px solid var(--tag-line);
+  border-radius: 6px;
+  background: var(--tag-bg);
+  color: var(--tag-text);
+  padding: 0 5px;
+  font-size: 11px;
+  font-weight: 700;
+  white-space: nowrap;
+  vertical-align: 1px;
+}
+
+.target-filter {
+  align-self: end;
+  min-height: 38px;
+  border: 1px dashed var(--line);
+  border-radius: 8px;
+  background: var(--button-bg);
+  color: var(--muted);
+  padding: 0 12px;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.target-filter:hover,
+.target-filter:focus-visible {
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+.target-filter[aria-pressed="true"] {
+  border-style: solid;
+  border-color: var(--gold);
+  background: var(--tag-bg);
+  color: var(--tag-text);
+}
+
+/* ── 删除 ──────────────────────────────────────────────────── */
+.delete-link {
+  border-color: rgba(251, 113, 133, 0.4);
+  color: var(--coral);
+}
+
+.delete-link:hover,
+.delete-link:focus-visible {
+  border-color: var(--coral);
+  color: var(--coral);
+}
+
+/* 顶部「已删除 N」：只在有待同步条目时出现 */
+.pending-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 40px;
+  border: 1px solid rgba(251, 113, 133, 0.45);
+  border-radius: 8px;
+  background: var(--button-bg);
+  color: var(--coral);
+  padding: 0 12px;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 750;
+  cursor: pointer;
+}
+
+.pending-btn span {
+  display: inline-grid;
+  min-width: 20px;
+  height: 20px;
+  place-items: center;
+  border-radius: 999px;
+  background: var(--coral);
+  color: #fff;
+  font-size: 12px;
+}
+
+.pending-btn[hidden] {
+  display: none;
+}
+
+.deleted-panel {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: grid;
+  place-items: center;
+  background: rgba(10, 9, 8, 0.55);
+  padding: 20px;
+}
+
+.deleted-panel[hidden] {
+  display: none;
+}
+
+.deleted-card {
+  width: min(640px, 100%);
+  max-height: min(80vh, 720px);
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--card-bg);
+  box-shadow: var(--shadow);
+  padding: 18px;
+}
+
+.deleted-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.deleted-head h2 {
+  margin: 0;
+  font-size: 17px;
+}
+
+.deleted-hint {
+  margin: 10px 0 12px;
+  color: var(--muted);
+  font-size: 12.5px;
+  line-height: 1.6;
+}
+
+.deleted-list {
+  flex: 1 1 auto;
+  overflow: auto;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 8px;
+}
+
+.deleted-item {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 8px;
+  align-items: center;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface-2);
+  padding: 9px 11px;
+}
+
+.deleted-item p {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.deleted-item small {
+  display: block;
+  margin-top: 3px;
+  color: var(--muted);
+  font-size: 11.5px;
+}
+
+.deleted-foot {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.sync-link {
+  border-color: var(--teal);
+  color: var(--teal);
+}
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 26px;
+  z-index: 70;
+  transform: translateX(-50%);
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  max-width: min(560px, calc(100vw - 32px));
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface-3);
+  color: var(--text);
+  box-shadow: var(--shadow);
+  padding: 10px 16px;
+  font-size: 13px;
+}
+
+.toast[hidden] {
+  display: none;
+}
+
+.toast-action {
+  border: 0;
+  background: none;
+  color: var(--teal);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 800;
+  cursor: pointer;
+  padding: 0;
+}
+
+.toast-action[hidden] {
+  display: none;
+}
+
+@media (max-width: 640px) {
+  .deleted-item {
+    grid-template-columns: 1fr;
+  }
 }

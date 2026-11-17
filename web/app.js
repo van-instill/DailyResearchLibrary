@@ -1,6 +1,12 @@
 const THEME_STORAGE_KEY = "paper-daily-theme";
 const THEMES = new Set(["dark", "light", "eye"]);
 
+// 「不感兴趣」的删除记录放在本机：点了立刻从列表消失。真正写进仓库要靠
+// 「同步」——生成一个预填好的 GitHub issue，Actions 读它写进 config/exclude.json，
+// 以后每周筛选都不会再收这篇。
+const DELETED_STORAGE_KEY = "paper-radar-deleted";
+const DELETED_ISSUE_TITLE = "Excluded Papers";
+
 const state = {
   datasets: {
     daily: null,
@@ -8,6 +14,7 @@ const state = {
   },
   theme: "dark",
   page: 1,
+  deleted: new Set(),
   filters: {
     query: "",
     topic: "all",
@@ -15,6 +22,7 @@ const state = {
     collection: "daily",
     view: "all",
     date: "",
+    targetOnly: false,
   },
 };
 
@@ -42,6 +50,17 @@ const nodes = {
   tabs: document.querySelectorAll(".tab"),
   loadMore: document.querySelector("#loadMore"),
   template: document.querySelector("#paperTemplate"),
+  targetFilter: document.querySelector("#targetFilter"),
+  deletedBtn: document.querySelector("#deletedBtn"),
+  deletedCount: document.querySelector("#deletedCount"),
+  deletedPanel: document.querySelector("#deletedPanel"),
+  deletedClose: document.querySelector("#deletedClose"),
+  deletedList: document.querySelector("#deletedList"),
+  deletedSync: document.querySelector("#deletedSync"),
+  deletedClear: document.querySelector("#deletedClear"),
+  toast: document.querySelector("#toast"),
+  toastText: document.querySelector("#toastText"),
+  toastAction: document.querySelector("#toastAction"),
 };
 
 function activeData() {
@@ -144,6 +163,74 @@ function levelOf(paper) {
 // 相关度徽标和筛选下拉都说中文，别一半 high 一半 高
 const LEVEL_LABELS = { high: "高", medium: "中", low: "低" };
 
+// 只认一作/二作：找导师就是看这两位的单位，三作以后加粗反而干扰阅读
+function targetSchoolsOf(paper) {
+  return (paper.author_schools || []).filter((item) => Number(item?.i) < 2);
+}
+
+function readDeleted() {
+  try {
+    const raw = JSON.parse(localStorage.getItem(DELETED_STORAGE_KEY) || "[]");
+    return Array.isArray(raw) ? raw.filter((item) => item && item.id) : [];
+  } catch {
+    return [];
+  }
+}
+
+function writeDeleted(list) {
+  try {
+    localStorage.setItem(DELETED_STORAGE_KEY, JSON.stringify(list));
+  } catch {
+    // 隐私模式下 localStorage 可能不可写，忽略即可
+  }
+  state.deleted = new Set(list.map((item) => String(item.id)));
+}
+
+function findPaperById(paperId) {
+  if (!paperId) return null;
+  for (const key of ["daily", "conference"]) {
+    const hit = (state.datasets[key]?.papers || []).find((paper) => String(paper.id) === String(paperId));
+    if (hit) return hit;
+  }
+  return null;
+}
+
+// GitHub 仓库地址：线上是 <user>.github.io/<repo>，本地打开时就没有同步能力
+function repoBaseUrl() {
+  const match = location.hostname.match(/^([^.]+)\.github\.io$/);
+  if (!match) return "";
+  const parts = location.pathname.split("/").filter(Boolean);
+  const repo = parts[0] || `${match[1]}.github.io`;
+  return `https://github.com/${match[1]}/${repo}`;
+}
+
+let toastTimer = 0;
+
+function hideToast() {
+  if (nodes.toast) nodes.toast.hidden = true;
+  clearTimeout(toastTimer);
+}
+
+function showToast(text, action = null) {
+  if (!nodes.toast) return;
+  nodes.toastText.textContent = text;
+  if (action && nodes.toastAction) {
+    nodes.toastAction.hidden = false;
+    nodes.toastAction.textContent = action.label;
+    nodes.toastAction.onclick = () => {
+      action.run();
+      hideToast();
+    };
+  } else if (nodes.toastAction) {
+    nodes.toastAction.hidden = true;
+    nodes.toastAction.onclick = null;
+  }
+  nodes.toast.hidden = false;
+  clearTimeout(toastTimer);
+  // 给够时间点「撤销」，但别一直挡着视线
+  toastTimer = setTimeout(hideToast, 9000);
+}
+
 function textIncludes(paper, query) {
   if (!query) return true;
   const haystack = [
@@ -161,10 +248,16 @@ function textIncludes(paper, query) {
   return haystack.includes(query.toLowerCase());
 }
 
+// 已删除的先从集合里拿掉，后面的统计、视图计数、筛选都基于这份数据
+function collectionPapers() {
+  return (activeData().papers || []).filter((paper) => !state.deleted.has(String(paper.id)));
+}
+
 function matchesBaseFilters(paper) {
   if (!textIncludes(paper, state.filters.query)) return false;
   if (state.filters.topic !== "all" && paper.best_match?.topic_id !== state.filters.topic) return false;
   if (state.filters.level !== "all" && levelOf(paper) !== state.filters.level) return false;
+  if (state.filters.targetOnly && !targetSchoolsOf(paper).length) return false;
   return true;
 }
 
@@ -191,9 +284,7 @@ function sortPapers(list) {
 }
 
 function filteredPapers() {
-  return sortPapers(
-    (activeData().papers || []).filter((paper) => matchesBaseFilters(paper) && matchesView(paper))
-  );
+  return sortPapers(collectionPapers().filter((paper) => matchesBaseFilters(paper) && matchesView(paper)));
 }
 
 function setText(parent, selector, text) {
@@ -366,12 +457,51 @@ function tagParts(paper) {
   return { groups: groups.slice(0, 2), details: details.slice(0, 5) };
 }
 
+// 作者行要能标出「一作/二作是目标院校的谁」。用 DOM 拼而不是拼 HTML 字符串，
+// 作者名里带 < > 也不会破坏结构。
+function renderAuthors(node, paper) {
+  const container = node.querySelector(".paper-authors");
+  if (!container) return;
+  container.textContent = "";
+  const names = (paper.authors || []).slice(0, 8);
+  if (!names.length) {
+    container.textContent = "暂无";
+    return;
+  }
+  const byIndex = new Map();
+  for (const item of targetSchoolsOf(paper)) byIndex.set(Number(item.i), item);
+
+  names.forEach((name, index) => {
+    if (index) container.appendChild(document.createTextNode(", "));
+    const hit = byIndex.get(index);
+    if (!hit) {
+      container.appendChild(document.createTextNode(name));
+      return;
+    }
+    const strong = document.createElement("strong");
+    strong.className = "author-highlight";
+    strong.textContent = name;
+    container.appendChild(strong);
+
+    const tag = document.createElement("span");
+    tag.className = "school-tag";
+    tag.textContent = hit.school_zh || hit.school || "";
+    tag.title = hit.inst ? `${hit.inst}（第${index + 1}作者）` : "";
+    container.appendChild(tag);
+  });
+
+  if ((paper.authors || []).length > names.length) {
+    container.appendChild(document.createTextNode(" 等"));
+  }
+}
+
 function renderPaper(paper) {
   const node = nodes.template.content.firstElementChild.cloneNode(true);
   const best = paper.best_match || {};
   const summary = paper.chinese_summary || {};
   const badge = node.querySelector(".match-badge");
   const level = levelOf(paper);
+  node.dataset.paperId = String(paper.id || "");
 
   badge.textContent = `${LEVEL_LABELS[level] || level} ${scoreOf(paper).toFixed(2)}`;
   badge.classList.add(level);
@@ -389,7 +519,7 @@ function renderPaper(paper) {
     titleLink.removeAttribute("href");
     titleLink.classList.add("is-static");
   }
-  setText(node, ".paper-authors", (paper.authors || []).slice(0, 8).join(", "));
+  renderAuthors(node, paper);
   setText(node, ".summary-problem", summary.problem);
   setText(node, ".summary-method", summary.method);
   setText(node, ".summary-innovation", summary.innovation);
@@ -398,6 +528,16 @@ function renderPaper(paper) {
 
   const freshBadge = node.querySelector(".fresh-badge");
   if (freshBadge && paper.is_new_this_week) freshBadge.hidden = false;
+
+  const targetBadge = node.querySelector(".target-badge");
+  const schoolHits = targetSchoolsOf(paper);
+  if (targetBadge && schoolHits.length) {
+    targetBadge.hidden = false;
+    targetBadge.textContent = `${schoolHits[0].school_zh || schoolHits[0].school} · 第${Number(schoolHits[0].i) + 1}作者`;
+    targetBadge.title = schoolHits
+      .map((item) => `${item.name}：${item.inst || item.school_zh || item.school}（第${Number(item.i) + 1}作者）`)
+      .join("\n");
+  }
 
   hydrateAbstract(node, paper, summary);
 
@@ -470,8 +610,8 @@ function syncHash() {
 function viewLabels() {
   const date = selectedDate();
   const monthLabel = `${date.getFullYear()} 年 ${String(date.getMonth() + 1).padStart(2, "0")} 月`;
-  const total = (activeData().papers || []).length;
-  const fresh = (activeData().papers || []).filter((paper) => paper.is_new_this_week).length;
+  const total = collectionPapers().length;
+  const fresh = collectionPapers().filter((paper) => paper.is_new_this_week).length;
   return {
     all: [state.filters.collection === "conference" ? "顶刊精选" : "arXiv 论文", `已收录 ${total} 篇，按收录时间倒序`],
     latest: ["本期新增", `本期新增 ${fresh} 篇，旧论文不删除、留在归档里`],
@@ -541,7 +681,7 @@ function hydrateDateFilter() {
 }
 
 function updateStats() {
-  const papers = activeData().papers || [];
+  const papers = collectionPapers();
   const date = selectedDate();
   const fresh = papers.filter((paper) => paper.is_new_this_week).length;
   const monthPapers = papers.filter((paper) => inRange(collectionTime(paper), startOfMonth(date), endOfMonth(date)));
@@ -556,6 +696,133 @@ function updateStats() {
 function resetAndRender() {
   state.page = 1;
   render();
+}
+
+function updateDeletedButton() {
+  const count = readDeleted().length;
+  if (nodes.deletedCount) nodes.deletedCount.textContent = String(count);
+  if (nodes.deletedBtn) nodes.deletedBtn.hidden = count === 0;
+}
+
+function deletePaper(paper) {
+  const id = String(paper.id || "");
+  if (!id) return;
+  const list = readDeleted().filter((item) => String(item.id) !== id);
+  list.push({
+    id,
+    title: paper.title || "",
+    venue: paper.venue || paper.source || "",
+    at: new Date().toISOString(),
+  });
+  writeDeleted(list);
+  updateDeletedButton();
+  // 删掉当前页最后一篇后不要停在空白页
+  if ((state.page - 1) * PAGE_SIZE >= collectionPapers().length) state.page = 1;
+  render();
+  updateStats();
+  const short = String(paper.title || "").slice(0, 42);
+  showToast(`已删除：${short}${String(paper.title || "").length > 42 ? "…" : ""}`, {
+    label: "撤销",
+    run: () => restorePaper(id),
+  });
+}
+
+function restorePaper(id) {
+  const key = String(id);
+  const list = readDeleted().filter((item) => String(item.id) !== key);
+  writeDeleted(list);
+  updateDeletedButton();
+  renderDeletedPanel();
+  render();
+  updateStats();
+  showToast("已恢复");
+}
+
+// 数据里已经没有这条了（说明排除清单生效），本地记录就没必要留着
+function pruneDeletedEntries() {
+  const known = new Set();
+  for (const key of ["daily", "conference"]) {
+    for (const paper of state.datasets[key]?.papers || []) known.add(String(paper.id));
+  }
+  if (!known.size) return;
+  const list = readDeleted();
+  const kept = list.filter((item) => known.has(String(item.id)));
+  if (kept.length !== list.length) writeDeleted(kept);
+}
+
+function renderDeletedPanel() {
+  if (!nodes.deletedList) return;
+  const list = readDeleted().slice().reverse();
+  nodes.deletedList.textContent = "";
+  if (!list.length) {
+    const empty = document.createElement("li");
+    empty.className = "deleted-item";
+    empty.textContent = "还没有删除任何论文。";
+    nodes.deletedList.appendChild(empty);
+  }
+  for (const item of list) {
+    const row = document.createElement("li");
+    row.className = "deleted-item";
+
+    const info = document.createElement("div");
+    const title = document.createElement("p");
+    title.textContent = item.title || item.id;
+    const meta = document.createElement("small");
+    const when = item.at ? new Date(item.at).toLocaleDateString("zh-CN") : "";
+    meta.textContent = [item.venue, when && `删除于 ${when}`].filter(Boolean).join(" · ");
+    info.append(title, meta);
+
+    const restore = document.createElement("button");
+    restore.type = "button";
+    restore.className = "paper-link";
+    restore.textContent = "恢复";
+    restore.addEventListener("click", () => restorePaper(item.id));
+
+    row.append(info, restore);
+    nodes.deletedList.appendChild(row);
+  }
+  if (nodes.deletedSync) {
+    nodes.deletedSync.disabled = !list.length;
+    nodes.deletedSync.textContent = list.length ? `同步到仓库（${list.length} 篇）` : "同步到仓库";
+  }
+}
+
+function openDeletedPanel() {
+  renderDeletedPanel();
+  if (nodes.deletedPanel) nodes.deletedPanel.hidden = false;
+}
+
+function closeDeletedPanel() {
+  if (nodes.deletedPanel) nodes.deletedPanel.hidden = true;
+}
+
+// 生成一个预填好 JSON 的 GitHub 新建 issue 页面。Actions 会读这条 issue 的正文，
+// 把里面的 id/标题合并进 config/exclude.json，下次选稿就不会再收。
+function syncDeletedToRepo() {
+  const list = readDeleted();
+  if (!list.length) return;
+  const base = repoBaseUrl();
+  if (!base) {
+    showToast("本地打开时无法同步，请在线上页面操作");
+    return;
+  }
+  const payload = {
+    papers: list.map((item) => ({
+      id: String(item.id),
+      title: item.title || "",
+      reason: `用户在前端手动删除（${item.at ? new Date(item.at).toLocaleDateString("zh-CN") : "近期"}）`,
+    })),
+  };
+  const body = [
+    "<!-- 机器人会解析下面这段 JSON 并写入 config/exclude.json，写完自动关闭本 issue。 -->",
+    "",
+    "```json",
+    JSON.stringify(payload, null, 2),
+    "```",
+  ].join("\n");
+  const url = `${base}/issues/new?title=${encodeURIComponent(DELETED_ISSUE_TITLE)}&body=${encodeURIComponent(body)}`;
+  window.open(url, "_blank", "noopener");
+  showToast("已打开 GitHub 新建页，点「Submit new issue」后约 1 分钟生效");
 }
 
 function bindEvents() {
@@ -617,6 +884,13 @@ function bindEvents() {
     render();
   });
   nodes.paperList.addEventListener("click", (event) => {
+    const deleteButton = event.target.closest(".delete-link");
+    if (deleteButton) {
+      const card = deleteButton.closest(".paper-card");
+      const paper = findPaperById(card?.dataset.paperId);
+      if (paper) deletePaper(paper);
+      return;
+    }
     const tab = event.target.closest(".abstract-tab");
     if (tab) {
       const panel = tab.closest(".abstract-panel");
@@ -641,6 +915,33 @@ function bindEvents() {
   window.addEventListener("resize", () => {
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(refreshAllAbstracts, 150);
+  });
+
+  nodes.targetFilter?.addEventListener("click", () => {
+    state.filters.targetOnly = !state.filters.targetOnly;
+    nodes.targetFilter.setAttribute("aria-pressed", String(state.filters.targetOnly));
+    resetAndRender();
+  });
+
+  nodes.deletedBtn?.addEventListener("click", openDeletedPanel);
+  nodes.deletedClose?.addEventListener("click", closeDeletedPanel);
+  nodes.deletedPanel?.addEventListener("click", (event) => {
+    // 点遮罩关掉，点卡片内部不关
+    if (event.target === nodes.deletedPanel) closeDeletedPanel();
+  });
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") closeDeletedPanel();
+  });
+  nodes.deletedSync?.addEventListener("click", syncDeletedToRepo);
+  nodes.deletedClear?.addEventListener("click", () => {
+    const count = readDeleted().length;
+    if (!count) return;
+    writeDeleted([]);
+    updateDeletedButton();
+    renderDeletedPanel();
+    render();
+    updateStats();
+    showToast(`已恢复全部 ${count} 篇`);
   });
 }
 
@@ -667,20 +968,17 @@ function updateUpdatedAt(message = "") {
   const kind = state.filters.collection === "conference" ? "顶刊精选" : "arXiv 新论文";
   // 用论文上的标记数，不用 stats.weekly_new_count：同一周重跑时那次运行没选新论文，
   // stats 会记成 0，但本期的 5 篇标签还在，两边就对不上了。
-  const weekly = (data.papers || []).filter((paper) => paper.is_new_this_week).length;
+  const weekly = collectionPapers().filter((paper) => paper.is_new_this_week).length;
   const total = Number(stats.weekly_new_total || 0);
   const fresh = weekly ? ` · 本期新增 ${weekly} 篇${total ? `（两条线合计 ${total} 篇）` : ""}` : "";
   nodes.updatedAt.textContent = `${kind} · 更新于 ${formatDate(data.generated_at_iso)}${fresh} · ${mode} · ${stats.llm_enabled ? "LLM" : "基础"}`;
 }
 
 function resolveRepoLinks() {
-  const match = location.hostname.match(/^([^.]+)\.github\.io$/);
+  const base = repoBaseUrl();
   const settingsLink = document.querySelector(".repo-settings-link");
   const actionsLink = document.querySelector(".repo-actions-link");
-  if (!match || !settingsLink || !actionsLink) return;
-  const parts = location.pathname.split("/").filter(Boolean);
-  const repo = parts[0] || `${match[1]}.github.io`;
-  const base = `https://github.com/${match[1]}/${repo}`;
+  if (!base || !settingsLink || !actionsLink) return;
   settingsLink.href = `${base}/issues`;
   actionsLink.href = `${base}/actions`;
 }
@@ -688,6 +986,8 @@ function resolveRepoLinks() {
 async function main() {
   resolveRepoLinks();
   applyTheme(storedTheme());
+  writeDeleted(readDeleted());
+  updateDeletedButton();
   bindEvents();
   try {
     state.datasets.daily = await loadData();
@@ -709,6 +1009,8 @@ async function main() {
   }
 
   applyHash();
+  pruneDeletedEntries();
+  updateDeletedButton();
   updateUpdatedAt();
   hydrateTopicFilter();
   hydrateDateFilter();

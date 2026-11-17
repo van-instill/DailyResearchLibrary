@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>金融计量论文周报 · Paper Radar</title>
-    <link rel="stylesheet" href="./styles.css?v=20261018-tags" />
+    <link rel="stylesheet" href="./styles.css?v=20261117-delete" />
     <link rel="stylesheet" href="./vendor/katex/katex.min.css" />
   </head>
   <body>
@@ -17,6 +17,9 @@
         </div>
       </div>
       <nav class="top-actions" aria-label="页面操作">
+        <button id="deletedBtn" class="pending-btn" type="button" title="查看已删除的论文并同步到仓库" hidden>
+          已删除 <span id="deletedCount">0</span>
+        </button>
         <div class="theme-switcher" role="radiogroup" aria-label="选择网站背景主题">
           <button class="theme-option" type="button" role="radio" aria-checked="true" data-theme-option="dark" title="深色主题">
             <span class="theme-swatch dark-swatch"></span>
@@ -95,6 +98,9 @@
             <span>搜索</span>
             <input id="searchInput" type="search" placeholder="标题、作者、关键词" />
           </label>
+          <button id="targetFilter" class="target-filter" type="button" aria-pressed="false" title="只看一作或二作来自目标院校的论文">
+            ★ 目标院校
+          </button>
         </div>
       </section>
 
@@ -119,6 +125,7 @@
           <div class="paper-meta">
             <span class="match-badge"></span>
             <span class="fresh-badge" hidden>本周新增</span>
+            <span class="target-badge" hidden></span>
             <span class="paper-date"></span>
             <span class="paper-source"></span>
             <span class="paper-collected"></span>
@@ -166,13 +173,36 @@
             <a class="paper-link abs-link" target="_blank" rel="noreferrer">原文</a>
             <a class="paper-link pdf-link" target="_blank" rel="noreferrer">PDF</a>
             <a class="paper-link download-link">下载 PDF</a>
+            <button class="paper-link delete-link" type="button" title="不感兴趣，删除并不再收录">删除</button>
           </div>
         </footer>
       </article>
     </template>
 
+    <div id="deletedPanel" class="deleted-panel" hidden>
+      <div class="deleted-card" role="dialog" aria-modal="true" aria-labelledby="deletedTitle">
+        <header class="deleted-head">
+          <h2 id="deletedTitle">已删除的论文</h2>
+          <button id="deletedClose" class="icon-link" type="button" aria-label="关闭">×</button>
+        </header>
+        <p class="deleted-hint">
+          删除先在本机生效，这篇立刻从列表里消失。点「同步到仓库」会打开一个填好内容的 GitHub 页面，
+          你按下提交后，机器人会自动把它写进永久排除清单——以后每周筛选都不会再收进来。
+        </p>
+        <ul id="deletedList" class="deleted-list"></ul>
+        <footer class="deleted-foot">
+          <button id="deletedSync" class="paper-link sync-link" type="button">同步到仓库</button>
+          <button id="deletedClear" class="paper-link" type="button">全部恢复</button>
+        </footer>
+      </div>
+    </div>
+    <div id="toast" class="toast" hidden>
+      <span id="toastText"></span>
+      <button id="toastAction" class="toast-action" type="button" hidden>撤销</button>
+    </div>
+
     <script defer src="./vendor/katex/katex.min.js"></script>
     <script defer src="./vendor/katex/auto-render.min.js"></script>
-    <script defer src="./app.js?v=20261018-tags"></script>
+    <script defer src="./app.js?v=20261117-delete"></script>
   </body>
 </html>

@@ -26,6 +26,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from weekly_select import is_current_period, in_window, load_excluded_keys, load_seen, period_key, select_weekly, stored_period  # noqa: E402
 from latexify import latexify_summary, latexify_text  # noqa: E402
+from affiliations import enrich_papers  # noqa: E402
 
 
 ARXIV_API_URL = "https://export.arxiv.org/api/query"
@@ -2596,6 +2597,17 @@ def collect(
     trimmed_papers, storage_stats = trim_papers_for_storage(payload, max_stored_papers, max_data_bytes)
     trimmed_papers.sort(key=lambda p: (p["best_match"]["score"], p.get("published", "")), reverse=True)
     payload["papers"] = trimmed_papers
+    # 一作/二作来自目标院校的标出来（找导师用）。arXiv 的 API 不带单位，按 DOI 去
+    # OpenAlex 换一次，结果缓存在 .paper-cache/affiliations.json，同一篇不会重复查。
+    school_stats = enrich_papers(
+        trimmed_papers,
+        mailto=os.getenv("CONTACT_EMAIL") or os.getenv("OPENALEX_EMAIL") or "",
+        cache_path=os.getenv("AFFILIATION_CACHE_PATH", ".paper-cache/affiliations.json"),
+        delay=float(os.getenv("AFFILIATION_DELAY_SECONDS", "0.2")),
+        max_lookups=int(os.getenv("AFFILIATION_MAX_LOOKUPS", "300")),
+        logger=print,
+    )
+    payload["stats"]["target_school_paper_count"] = school_stats.get("matched", 0)
     payload["stats"].update(storage_stats)
     payload["stats"]["paper_count"] = len(trimmed_papers)
     payload["stats"]["data_bytes"] = json_size_bytes(payload)
