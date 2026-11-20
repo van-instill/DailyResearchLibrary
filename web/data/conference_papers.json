@@ -1,6 +1,6 @@
 {
-  "generated_at": "Tue, 17 Nov 2026 08:34:24 +0000",
-  "generated_at_iso": "2026-11-17T08:34:24.941563+00:00",
+  "generated_at": "Fri, 20 Nov 2026 07:56:20 +0000",
+  "generated_at_iso": "2026-11-20T07:56:20.834473+00:00",
   "config_source": "file",
   "data_kind": "journal",
   "topics": [
@@ -4935,16 +4935,16 @@
   },
   "weekly_period": "2026-W47",
   "stats": {
-    "candidate_paper_count": 932,
+    "candidate_paper_count": 935,
     "new_paper_count": 57,
-    "filtered_low_relevance_count": 391,
+    "filtered_low_relevance_count": 393,
     "venue_count": 19,
-    "lookback_days": 3242,
+    "lookback_days": 3245,
     "from_publication_date": "2018-01-01",
     "window_search_terms": 40,
     "llm_enabled": true,
     "screen_mode": "llm",
-    "screened_paper_count": 932,
+    "screened_paper_count": 935,
     "source_stats": {
       "Quarterly Journal of Economics": {
         "type": "openalex_journal",
@@ -5004,7 +5004,7 @@
       "Review of Finance": {
         "type": "openalex_journal",
         "source_id": "https://openalex.org/S131117787",
-        "fetched": 32
+        "fetched": 35
       },
       "Journal of Financial and Quantitative Analysis": {
         "type": "openalex_journal",
